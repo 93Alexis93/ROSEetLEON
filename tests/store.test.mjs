@@ -230,3 +230,22 @@ test("Stockage · un abonné défaillant ne fait pas diverger mémoire et sauveg
   assert.equal(store.getState().profiles.leon.sessions, 11);
   assert.equal(JSON.parse(values.get("rose-leon-data")).profiles.leon.sessions, 11);
 });
+
+test("Stockage · un abonné ne peut pas modifier la copie reçue par les autres", () => {
+  failWrites = false;
+  store.resetData();
+  const unsubscribeMutator = store.subscribe(snapshot => {
+    snapshot.profiles.leon.sessions = 999;
+  });
+  let secondSnapshot;
+  const unsubscribeObserver = store.subscribe(snapshot => {
+    secondSnapshot = snapshot;
+  });
+  store.update(state => {
+    state.profiles.leon.sessions = 12;
+  });
+  unsubscribeMutator();
+  unsubscribeObserver();
+  assert.equal(secondSnapshot.profiles.leon.sessions, 12);
+  assert.equal(store.getState().profiles.leon.sessions, 12);
+});
