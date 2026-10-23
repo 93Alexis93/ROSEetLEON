@@ -10,3 +10,4 @@
 - La porte parentale n'est pas une protection cryptographique.
 - Les fiches imprimables complètes viendront dans une phase ultérieure.
 - Activité d’écriture de Rose : composition tactile de « ROSE » avec modèle visible, encouragements et recommencement libre ; aucun score ni pénalité. La règle de validation du prénom est isolée pour être testée automatiquement.
+- Accessibilité mobile : les jeux de Rose exposent leur progression avec les attributs ARIA progressbar ; les tests contrôlent les cibles tactiles, le focus visible et la préférence de mouvement réduit.
