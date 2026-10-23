@@ -63,3 +63,16 @@ test("PWA · icône PNG déclarée, valide et précachée",()=>{
  const bytes=readFileSync(resolve(root,icon.src.slice(2)));
  assert.deepEqual([...bytes.subarray(0,8)],[137,80,78,71,13,10,26,10]);
 });
+
+
+test("PWA · les imports JavaScript des ressources précachées sont eux aussi précachés",()=>{
+  for(const asset of assets.filter(path=>path.endsWith(".js"))){
+    const source=readFileSync(resolve(root,asset.slice(2)),"utf8");
+    const imports=[...source.matchAll(/(?:from\\s*|import\\s*)["'](\\.[^"']+)["']/g)];
+    for(const match of imports){
+      const target="./"+relative(root,resolve(dirname(resolve(root,asset.slice(2))),match[1])).replaceAll("\\\\","/");
+      assert.ok(existsSync(resolve(root,target.slice(2))),"Import local absent : "+asset+" → "+match[1]);
+      assert.ok(assets.includes(target),"Import local absent du cache hors ligne : "+asset+" → "+target);
+    }
+  }
+});
