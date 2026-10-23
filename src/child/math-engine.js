@@ -171,7 +171,15 @@ export function adaptDifficulty(difficulty, correctStreak, errorStreak) {
 
 // Fonction pure : une question ne compte qu'une fois pour la progression adaptative.
 // Une réponse aidée reste dans les statistiques, mais ne fait ni monter ni baisser le niveau.
-export function updateMathProgress(progress, { correct, helped = false, firstTry = true } = {}) {
+export function updateMathProgress(progress, options = {}) {
+  if (options === null || typeof options !== "object" || Array.isArray(options)) {
+    throw new Error("Les options de progression sont invalides.");
+  }
+  const { correct, helped = false, firstTry = true } = options;
+  if (typeof correct !== "boolean") throw new Error("Le résultat de la réponse doit être un booléen.");
+  if (typeof helped !== "boolean") throw new Error("Le statut d’aide doit être un booléen.");
+  if (typeof firstTry !== "boolean") throw new Error("Le statut de première tentative doit être un booléen.");
+
   const next = {
     difficulty: Math.max(1, Math.min(3, Number(progress?.difficulty) || 1)),
     correctStreak: Math.max(0, Number(progress?.correctStreak) || 0),
