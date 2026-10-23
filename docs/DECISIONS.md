@@ -84,3 +84,5 @@
 - É16 : auditer la banque syllabique dans son ensemble plutôt que corriger uniquement les mots déjà signalés. Les tests vérifient désormais tous les mots et le nombre de syllabes attendu. Les découpages décrivent la prononciation usuelle retenue pour l’activité, et doivent rester validés à voix haute. Le test de cohérence PWA doit suivre la version courante du cache, pas une version historique.
 
 - É17 : la composition du prénom est comptabilisée comme une session uniquement lorsque ROSE est assemblé dans le bon ordre. Les erreurs de choix et les essais incomplets ne sont pas enregistrés comme session terminée. Le tableau de bord doit refléter les activités réellement achevées.
+
+- É18 : garder la documentation d’état synchronisée avec le service worker réellement présent dans `main`. Pour l’activité de syllabes de Rose, le nombre attendu doit être explicitement défini pour chaque mot et protégé par un test ; l’aide doit soutenir l’écoute (dire le mot lentement et taper les syllabes), et la session ne se termine qu’après le parcours prévu.
