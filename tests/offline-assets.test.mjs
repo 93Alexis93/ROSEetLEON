@@ -28,8 +28,12 @@ test("PWA · les fiches et leurs styles sont préchargés",()=>{
   assert.ok(assets.includes("./assets/css/print.css"));
 });
 
-test("PWA · le cache est incrémenté pour l’étape É10",()=>{
-  assert.match(worker,/const CACHE="rose-leon-v40"/,"L’ajout de l’icône doit accompagner le passage du cache v39 à v40.");
+test("PWA · le cache est incrémenté pour l’étape É11",()=>{
+  assert.match(worker,/const CACHE="rose-leon-v41"/,"Le module du tableau de bord doit accompagner le passage du cache v40 à v41.");
+});
+
+test("PWA · le module de statistiques parentales est préchargé hors ligne",()=>{
+  assert.ok(assets.includes("./src/parent/dashboard-stats.js"));
 });
 
 test("PWA · les ressources locales déclarées dans index.html existent et sont préchargées",()=>{
