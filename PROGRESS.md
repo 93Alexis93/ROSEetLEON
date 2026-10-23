@@ -265,3 +265,5 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - Une date de sauvegarde située dans le futur est désormais considérée comme suspecte et déclenche un rappel prudent.
 - Ajout d’un test ciblé sur cette situation inhabituelle ; aucune donnée utilisateur n’est envoyée ni modifiée.
 - CI et publication Pages à confirmer.
+
+E28 — Robustesse du stockage : un abonné UI qui lève une exception ne doit plus annuler en mémoire une écriture déjà persistée. Test de non-divergence mémoire/localStorage ajouté.
