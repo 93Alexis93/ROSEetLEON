@@ -135,3 +135,6 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Options de progression mathématique
 - `recordMathAnswer` accepte uniquement un objet d’options et des valeurs booléennes pour `firstTry` et `helped` lorsqu’elles sont présentes ; les appels invalides sont rejetés sans toucher aux données.
+
+## Validation du moteur adaptatif
+- `updateMathProgress` vérifie le format des options et les trois indicateurs booléens avant de calculer une progression ; les appels invalides échouent explicitement.
