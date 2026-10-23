@@ -28,8 +28,8 @@ test("PWA · les fiches et leurs styles sont préchargés",()=>{
   assert.ok(assets.includes("./assets/css/print.css"));
 });
 
-test("PWA · le cache est incrémenté pour l’étape É12",()=>{
-  assert.match(worker,/const CACHE="rose-leon-v42"/,"Les activités de calcul doivent accompagner le passage du cache v41 à v42.");
+test("PWA · le cache est renouvelé pour les dernières corrections de contenu",()=>{
+  assert.match(worker,/const CACHE="rose-leon-v46"/,"Les corrections de contenu doivent accompagner le renouvellement du cache PWA.");
 });
 
 test("PWA · les nouveaux modules de calcul sont préchargés hors ligne",()=>{
