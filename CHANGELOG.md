@@ -158,3 +158,5 @@
 
 ## E27 — Rappel de sauvegarde
 - Le rappel de sauvegarde ne se laisse plus désactiver par une date enregistrée dans le futur ; un test couvre cette incohérence d’horloge.
+
+- Robustesse du stockage : les exceptions des abonnés sont isolées après persistance, afin d’éviter une divergence entre l’état mémoire et localStorage. Test de régression ajouté.
