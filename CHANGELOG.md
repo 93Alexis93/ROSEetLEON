@@ -182,3 +182,6 @@
 
 ## Maintenance — 2026-10-24 (suite 4)
 - Validation stricte des options de la progression adaptative, y compris pour les appels directs au moteur ; tests de non-régression et cache PWA v55.
+
+## Maintenance — 2026-10-24 (suite 5)
+- Message d’erreur utilisateur clarifié lors de l’import d’un JSON invalide ; test de non-écrasement conservé et cache PWA v56.
