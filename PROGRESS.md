@@ -269,3 +269,5 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 E28 — Robustesse du stockage : un abonné UI qui lève une exception ne doit plus annuler en mémoire une écriture déjà persistée. Test de non-divergence mémoire/localStorage ajouté.
 
 E29 — Isolation des abonnés : chaque abonné reçoit désormais une copie indépendante de l’état ; test de régression contre les mutations accidentelles entre abonnés.
+
+E30 — Le mélange des choix de lecture utilise désormais Fisher–Yates plutôt qu’un comparateur aléatoire biaisé. Test déterministe ajouté pour vérifier l’ordre obtenu et la préservation de la banque d’origine.
