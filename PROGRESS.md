@@ -24,7 +24,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Cinq questions par session, indices progressifs et trois niveaux adaptatifs
 - [x] Progression locale par domaine et résumé dans l’espace parent
 - [x] Renouvellement du cache PWA pour les ressources de maths
-- [x] Contrôle automatique de 9 000 questions sans défaut détecté
+- [x] Contrôle automatique de 9 000 questions sans défaut détecté (résultat rapporté précédemment)
 - [x] L’utilisateur a confirmé sur iPhone que les six défis apparaissent après actualisation de l’URL
 - [ ] Lancer la suite `node --experimental-default-type=module --test tests/math-engine.test.mjs`
 - [ ] Tester chaque domaine jusqu’à la fin d’une session, la progression adaptative et le mode avion
@@ -36,9 +36,11 @@ Mis à jour le 23 octobre 2026.
 - [x] Réutiliser la voix iOS et proposer des indices doux
 - [x] Ajouter dans l’espace parent la gestion locale de mots personnalisés, intégrés aux jeux
 - [x] Ajouter le nouveau module au cache hors ligne
-- [x] Vérifier la syntaxe des fichiers modifiés : main.js, parent.js, reading.js et service-worker.js
+- [x] Corriger le compteur de « réponses du premier coup » : une réponse trouvée après un indice ou une erreur ne compte plus comme réussite au premier essai
+- [ ] Vérifier la syntaxe du correctif et lancer les tests automatisés disponibles
 - [ ] Tester le parcours lecture sur iPhone, la voix, l’ajout/suppression de mots et la sauvegarde/importation
 - [ ] Vérifier la qualité pédagogique des questions et corriger les éventuels défauts avant de considérer la phase terminée
+- Note de validation : le correctif de score est commité, mais le test navigateur réel n’a pas été réalisé dans cette étape.
 
 ## Phases suivantes prévues
 - Phase 4 : contenus de Rose, adaptés à la moyenne section
@@ -56,3 +58,4 @@ Mis à jour le 23 octobre 2026.
 - La porte parentale n’est pas une sécurité cryptographique.
 - Les fiches imprimables sont encore une coquille ; les générateurs A4 complets sont prévus en phase 6.
 - N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
+- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; la suite de tests Node n’a donc pas été lancée ici.
