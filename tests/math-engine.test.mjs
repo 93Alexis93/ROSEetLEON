@@ -99,3 +99,15 @@ test("une aide utilisée rend la réponse neutre pour la progression adaptative"
  assert.match(source,/helped:\s*hint\s*>\s*0/);
  assert.doesNotMatch(source,/helped:\s*hint\s*>=\s*2/);
 });
+
+test("Mesures · l’heure pile et la demi-heure gardent quatre choix distincts, même à 1 h",()=>{
+  for(const half of [false,true]){
+    const sequence=[0.99,0,half?0.9:0.1];
+    const q=createMathQuestion("measures",2,()=>sequence.length?sequence.shift():0.1);
+    assert.match(q.prompt,/Quelle heure est indiquée/);
+    assert.equal(q.choices.length,4);
+    assert.equal(new Set(q.choices).size,4);
+    assert.ok(q.choices.includes(q.answer));
+    assert.ok(q.choices.every(choice=>!/\\s\\(\\d+\\)$/.test(choice)),"pas de choix de secours artificiel");
+  }
+});
