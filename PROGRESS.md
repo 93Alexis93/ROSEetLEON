@@ -39,7 +39,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Questions de compréhension des phrases reformulées pour éviter une consigne ambiguë
 - [x] Tests unitaires ajoutés : 200 générations par format vérifient quatre choix distincts, présence de la réponse et contenu des consignes
 - [x] Workflow GitHub Actions configuré pour vérifier la syntaxe JavaScript et lancer les tests de maths et de lecture à chaque push sur main ou pull request
-- [x] Cache PWA passé à v6 après correction des choix de lecture
+- [x] Cache PWA initialement passé à v6 après correction des choix de lecture ; renouvelé ensuite à v8 pour les jeux de Rose
 - [x] GitHub Actions exécute le workflow ; une première exécution a révélé un défaut de choix multiples en lecture, corrigé ; les tests et la vérification de syntaxe ont passé sur plusieurs commits récents ; la dernière exécution est à confirmer après les ajouts à Rose
 - [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
 - [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
