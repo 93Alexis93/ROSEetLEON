@@ -68,7 +68,7 @@ function startRoseWritingActivity(){
    }
    chosen.push(letter);
    if(chosen.length===4){
-    if(isRoseNameComplete(chosen)){cheer(getState().settings.sounds);status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";speak("Bravo ! Tu as écrit Rose.",getState().settings.voice);}
+    if(isRoseNameComplete(chosen)){recordSession("rose");cheer(getState().settings.sounds);status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";speak("Bravo ! Tu as écrit Rose.",getState().settings.voice);}
     else {status.textContent="Bien essayé ! Regarde le modèle. Tu peux effacer et recommencer tranquillement.";}
    }else {cheer(getState().settings.sounds);status.textContent="Bien joué ! Quelle lettre vient ensuite ?";}
    draw();
