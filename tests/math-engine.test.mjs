@@ -108,6 +108,6 @@ test("Mesures · l’heure pile et la demi-heure gardent quatre choix distincts,
     assert.equal(q.choices.length,4);
     assert.equal(new Set(q.choices).size,4);
     assert.ok(q.choices.includes(q.answer));
-    assert.ok(q.choices.every(choice=>!/\\s\\(\\d+\\)$/.test(choice)),"pas de choix de secours artificiel");
+    assert.ok(q.choices.every(choice=>!/\s\(\d+\)$/.test(choice)),"pas de choix de secours artificiel");
   }
 });
