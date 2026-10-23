@@ -24,3 +24,9 @@
 ## 0.1.0 — 2026-10-23
 - Fondations PWA et modules natifs.
 - Première version navigable et activités de démonstration.
+
+## É5 — 2026-10-23
+- Amélioration de l’export JSON sur mobile : partage natif de fichier lorsque disponible, téléchargement de repli et copie du JSON.
+- Rappel de sauvegarde après 30 jours ou en l’absence de sauvegarde enregistrée.
+- Demande de stockage persistant facultative au moment d’une sauvegarde, sans bloquer si elle échoue.
+- Cache PWA renouvelé à v35.

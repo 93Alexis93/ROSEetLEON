@@ -2,6 +2,7 @@ import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, update, exportData, importData, resetData } from "../store.js";
 import { go, unlockParent, getParentLockoutUntil, setParentLockoutUntil } from "../router.js";
 import { MATH_DOMAINS } from "../child/math-engine.js";
+import { getLastBackupAt, markBackupCompleted, shouldRemindBackup } from "./backup.js";
 
 let failures = 0;
 let problem = null;
@@ -206,8 +207,23 @@ export function parentDashboard() {
     button("🫶 Crise en cours", () => go("crisis"), "button-warm"),
     button("📄 Fiches à imprimer", () => go("print"), "button-soft")
   ]);
+  const lastBackup = getLastBackupAt();
+  const backupReminder = shouldRemindBackup(lastBackup)
+    ? el("p", {
+      class: "small",
+      text: lastBackup
+        ? "Cela fait un moment depuis la dernière sauvegarde enregistrée. Pense à en refaire une."
+        : "Aucune sauvegarde enregistrée pour le moment. Exporte le fichier et conserve-le dans Fichiers ou iCloud Drive."
+    })
+    : el("p", {
+      class: "small",
+      text: "Dernière sauvegarde enregistrée : " +
+        new Date(lastBackup).toLocaleDateString("fr-FR") + "."
+    });
   const backup = section("Sauvegarde et réglages", [
-    button("Exporter la sauvegarde JSON", downloadBackup, "button-primary"),
+    backupReminder,
+    button("Exporter / partager la sauvegarde JSON", downloadBackup, "button-primary"),
+    button("Copier le JSON (solution de secours)", copyBackup, "button-soft"),
     el("label", { class: "field" }, [
       "Importer une sauvegarde JSON",
       el("input", {
@@ -290,14 +306,70 @@ export function parentDashboard() {
   }));
 }
 
-function downloadBackup() {
-  const blob = new Blob([exportData()], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = el("a", { href: url, download: "rose-leon-sauvegarde.json" });
-  document.body.append(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+async function downloadBackup() {
+  const json = exportData();
+  const filename = "rose-leon-sauvegarde.json";
+  const file = typeof File === "function"
+    ? new File([json], filename, { type: "application/json" })
+    : null;
+
+  try {
+    const persistence = navigator.storage?.persist?.();
+    if (persistence && typeof persistence.catch === "function") {
+      persistence.catch(() => {});
+    }
+  } catch {
+    // Le stockage persistant est une amélioration facultative.
+  }
+
+  if (
+    file &&
+    typeof navigator.share === "function" &&
+    typeof navigator.canShare === "function" &&
+    navigator.canShare({ files: [file] })
+  ) {
+    try {
+      await navigator.share({
+        files: [file],
+        title: "Sauvegarde Rose & Léon",
+        text: "Conserve ce fichier pour retrouver les progrès de Rose & Léon."
+      });
+      markBackupCompleted();
+      parentDashboard();
+      return;
+    } catch (error) {
+      if (error?.name === "AbortError") return;
+      // Si le partage échoue, proposer le téléchargement classique.
+    }
+  }
+
+  try {
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = el("a", { href: url, download: filename });
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    markBackupCompleted();
+    parentDashboard();
+  } catch {
+    alert("Export impossible dans ce navigateur. Essaie « Copier le JSON ».");
+  }
+}
+
+async function copyBackup() {
+  try {
+    if (!navigator.clipboard?.writeText) {
+      throw new Error("Presse-papiers indisponible");
+    }
+    await navigator.clipboard.writeText(exportData());
+    markBackupCompleted();
+    alert("Sauvegarde copiée. Colle le texte dans un fichier et conserve-le en lieu sûr.");
+    parentDashboard();
+  } catch {
+    alert("La copie n’est pas disponible ici. Essaie « Exporter / partager la sauvegarde JSON ».");
+  }
 }
 
 function importBackup(e) {

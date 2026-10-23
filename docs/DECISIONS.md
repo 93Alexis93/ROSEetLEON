@@ -53,3 +53,5 @@
 - Schéma de stockage 3 : les imports sont validés puis normalisés avant remplacement de l’état ; les versions futures, profils malformés et fichiers de plus de 2 Mio sont refusés. Les champs inconnus ne sont pas réinjectés dans l’état courant.
 - Le PIN parental ne figure pas dans les sauvegardes exportées. Lors d’un import, la configuration PIN de l’appareil est conservée et toute valeur de PIN contenue dans une ancienne sauvegarde est ignorée.
 - La migration du schéma 2 normalise les anciennes séries de progression pour éviter qu’un seuil déjà atteint ne déclenche une montée/descente supplémentaire à la première réponse après mise à jour.
+
+- É5 : la sauvegarde doit rester déclenchée par une action explicite. Préférer le partage natif de fichier quand il est disponible, conserver un téléchargement de repli et proposer la copie du JSON comme autre solution. Le rappel de sauvegarde est local à l’appareil, non intrusif, et n’atteste pas que l’utilisateur a effectivement conservé le fichier après téléchargement. La demande `navigator.storage.persist()` est facultative et ne doit jamais empêcher l’export.

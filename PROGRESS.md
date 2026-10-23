@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v34`.
+- Le service worker source utilise actuellement le cache `rose-leon-v35`.
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -70,7 +70,8 @@ Mis à jour le 23 octobre 2026.
 - [x] Le PIN n’est plus exporté en clair ; l’import conserve le PIN déjà configuré sur l’appareil et ignore celui présent dans les anciennes sauvegardes.
 - [x] Cache PWA renouvelé à `rose-leon-v34`.
 - [x] Tests GitHub Actions réussis sur le commit fonctionnel `c608a650e4bc4e8dd4ebfdbaa2fd6427384c9251` : 56 tests, 56 réussis, 0 échec ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40015344966)).
-- [ ] Déploiement Pages pour ce commit et essais import/export réels sur iPhone à confirmer.
+- [x] Déploiement Pages confirmé sur le commit final `80e240cb60b03816a2e30389931a9c88861cf88a` ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40015458093)).
+- [ ] Essais import/export réels sur iPhone à confirmer.
 
 ## Prochaines étapes proposées
 1. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
@@ -79,3 +80,12 @@ Mis à jour le 23 octobre 2026.
 
 ## Historique utile
 Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
+
+## Étape É5 — sauvegarde plus accessible sur iPhone (en cours)
+- [x] Préparation du module parent par un commit de formatage seul avant les modifications fonctionnelles.
+- [x] Partage natif du fichier JSON quand Safari/navigateur le prend en charge, avec repli vers téléchargement et bouton de copie du JSON.
+- [x] Rappel doux de sauvegarde si aucune sauvegarde n’est enregistrée ou si la dernière remonte à 30 jours.
+- [x] Demande facultative de stockage persistant lors d’une action explicite de sauvegarde ; son refus ou son indisponibilité ne bloque pas l’export.
+- [x] Le PIN reste exclu du JSON par la fonction d’export existante.
+- [ ] Tests CI et déploiement Pages du commit É5 à confirmer.
+- [ ] Tester sur iPhone : partage vers Fichiers/iCloud Drive, annulation du partage, téléchargement de repli, copie du JSON et réimport.
