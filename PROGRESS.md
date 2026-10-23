@@ -271,3 +271,5 @@ E28 — Robustesse du stockage : un abonné UI qui lève une exception ne doit p
 E29 — Isolation des abonnés : chaque abonné reçoit désormais une copie indépendante de l’état ; test de régression contre les mutations accidentelles entre abonnés.
 
 E30 — Le mélange des choix de lecture utilise désormais Fisher–Yates plutôt qu’un comparateur aléatoire biaisé. Test déterministe ajouté pour vérifier l’ordre obtenu et la préservation de la banque d’origine.
+
+E31 — Cache PWA incrémenté en v50 après correction du module de lecture, afin que les appareils rechargent bien les ressources précachées. Test offline ajusté.
