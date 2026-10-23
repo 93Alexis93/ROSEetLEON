@@ -1,6 +1,12 @@
 # Avancement — Rose & Léon
 Mis à jour le 23 octobre 2026.
 
+## Validation utilisateur et audit PWA — 23 octobre 2026
+- [x] Validation déclarée sur iPhone Safari : navigation, six défis de maths, quatre activités de lecture, jeux de Rose, conservation des progrès, mots personnalisés/sauvegardes, voix/sons, espace parent et fiches imprimables.
+- [ ] Mode hors ligne non testé par l’utilisateur ; ne pas le déclarer validé avant un essai en mode avion après chargement HTTPS.
+- [x] Audit du service worker : le nettoyage à l’activation supprimait auparavant tous les caches de l’origine `github.io`, y compris ceux d’autres applications éventuelles. Il est désormais limité aux caches dont le nom commence par `rose-leon-`.
+- [x] Cache PWA renouvelé à v26 ; test automatique ajouté pour empêcher la régression du nettoyage des caches.
+
 ## Phase 0 — Fondations
 - [x] Documentation pédagogique et décisions techniques
 - [x] Structure de base du dépôt
