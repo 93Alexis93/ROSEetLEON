@@ -5,7 +5,8 @@ export function shouldRemindBackup(lastBackup, now = Date.now()) {
   if (typeof lastBackup !== "string" || !lastBackup.trim()) return true;
   const timestamp = Date.parse(lastBackup);
   if (!Number.isFinite(timestamp)) return true;
-  return now - timestamp >= BACKUP_REMINDER_INTERVAL_MS;
+  const age = now - timestamp;
+  return age < 0 || age >= BACKUP_REMINDER_INTERVAL_MS;
 }
 
 export function getLastBackupAt() {
