@@ -98,6 +98,7 @@ export function startActivity(child, domain = null) {
   let tries = 0;
   let hint = 0;
   let question;
+  let progressRecorded = false;
   const target = 5;
   const initialState = getState();
   document.body.className = "theme-" + child;
@@ -105,6 +106,7 @@ export function startActivity(child, domain = null) {
   const generate = () => {
     tries = 0;
     hint = 0;
+    progressRecorded = false;
     if (child === "leon") {
       const progress = getState().profiles.leon.mathProgress?.[domain];
       question = createMathQuestion(domain, progress?.difficulty || 1);
@@ -210,7 +212,10 @@ export function startActivity(child, domain = null) {
   function answer(choice) {
     const ok = String(choice) === String(question.answer);
     recordAnswer(child, ok);
-    if (child === "leon") recordMathAnswer(domain, ok);
+    if (child === "leon" && !progressRecorded) {
+      recordMathAnswer(domain, ok, { firstTry: true, helped: hint >= 2 });
+      progressRecorded = true;
+    }
 
     if (ok) {
       score++;

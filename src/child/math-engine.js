@@ -152,11 +152,51 @@ export function createMathQuestion(domain = "mental", difficulty = 1, random = M
   return generators[domain](level, random);
 }
 
-// Adaptation douce : trois réussites consécutives font monter d'un niveau ; deux erreurs
-// consécutives font baisser d'un niveau. Le niveau reste toujours entre 1 et 3.
+// Adaptation douce : trois réussites autonomes font monter d'un niveau ; deux erreurs
+// autonomes font baisser d'un niveau. Le niveau reste toujours entre 1 et 3.
 export function adaptDifficulty(difficulty, correctStreak, errorStreak) {
   const level = Math.max(1, Math.min(3, Number(difficulty) || 1));
-  if (correctStreak === 3 && level < 3) return level + 1;
-  if (errorStreak === 2 && level > 1) return level - 1;
+  if (correctStreak >= 3 && level < 3) return level + 1;
+  if (errorStreak >= 2 && level > 1) return level - 1;
   return level;
+}
+
+// Fonction pure : une question ne compte qu'une fois pour la progression adaptative.
+// Une réponse aidée reste dans les statistiques, mais ne fait ni monter ni baisser le niveau.
+export function updateMathProgress(progress, { correct, helped = false, firstTry = true } = {}) {
+  const next = {
+    difficulty: Math.max(1, Math.min(3, Number(progress?.difficulty) || 1)),
+    correctStreak: Math.max(0, Number(progress?.correctStreak) || 0),
+    errorStreak: Math.max(0, Number(progress?.errorStreak) || 0),
+    attempts: Math.max(0, Number(progress?.attempts) || 0),
+    correct: Math.max(0, Number(progress?.correct) || 0)
+  };
+
+  if (!firstTry) return next;
+
+  next.attempts++;
+  if (correct) next.correct++;
+
+  if (helped) {
+    next.correctStreak = 0;
+    next.errorStreak = 0;
+    return next;
+  }
+
+  if (correct) {
+    next.correctStreak++;
+    next.errorStreak = 0;
+  } else {
+    next.correctStreak = 0;
+    next.errorStreak++;
+  }
+
+  const nextDifficulty = adaptDifficulty(next.difficulty, next.correctStreak, next.errorStreak);
+  if (nextDifficulty !== next.difficulty) {
+    next.difficulty = nextDifficulty;
+    next.correctStreak = 0;
+    next.errorStreak = 0;
+  }
+
+  return next;
 }
