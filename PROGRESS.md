@@ -27,5 +27,12 @@ Mis à jour le 23 octobre 2026.
 - La section fiches imprimables est une coquille ; les générateurs A4 complets sont prévus en phase 6.
 - Les SVG fonctionnent comme icône de manifest ; une icône PNG dédiée iOS pourra être ajoutée après validation sur appareil.
 
+## Phase 2 — En cours
+- Moteur de maths ajouté : six domaines, trois niveaux, indices progressifs et adaptation douce.
+- Progression locale par domaine et résumé dans l’espace parent.
+- Cache hors ligne renouvelé ; 9 000 questions contrôlées automatiquement sans défaut détecté.
+- Suite de tests ajoutée dans tests/math-engine.test.mjs.
+- À faire : lancer la suite sous Node, tester les six domaines et le mode hors ligne sur iPhone.
+
 ## Prochaine étape
-Activer Pages, charger l'application depuis Safari sur iPhone et remonter les problèmes observés avant de commencer la phase 2.
+Tester le parcours maths sur iPhone, corriger les problèmes observés et faire valider la phase 2 avant de commencer la suivante.
