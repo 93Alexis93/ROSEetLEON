@@ -45,7 +45,7 @@ test("PWA · les ressources locales déclarées dans index.html existent et sont
   const html=readFileSync(resolve(root,"index.html"),"utf8");
   const localRefs=[...html.matchAll(/(?:href|src)="(\.\/[^"]+)"/g)].map(match=>match[1]);
   for(const ref of localRefs){
-    assert.ok(existsSync(resolve(root,ref.slice(2)),"Ressource locale absente de index.html : "+ref);
+    assert.ok(existsSync(resolve(root,ref.slice(2))),"Ressource locale absente de index.html : "+ref);
     assert.ok(assets.includes(ref),"Ressource locale de démarrage absente du cache hors ligne : "+ref);
   }
 });
