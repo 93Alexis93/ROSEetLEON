@@ -28,7 +28,7 @@ replaceApp(screen(rose?"Bonjour Rose !":"Salut Léon !",content,{eyebrow:rose?"U
 speak(rose?"Bonjour Rose ! Choisis un petit jeu.":"Salut Léon ! Choisis ton défi penalty.",getState().settings.voice);
 }
 function render(route){
-if(route==="home"||route==="leon"||route==="rose")lockParent();
+if(route==="home"||route==="leon"||route==="rose"||route==="gate")lockParent();
 if(!canAccessRoute(route)){go("gate");return;}
 switch(route){case"home":home();
 break;
