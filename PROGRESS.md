@@ -67,8 +67,8 @@ Mis à jour le 23 octobre 2026.
 - [x] Une réponse après le deuxième indice ou la révélation de la solution compte dans les statistiques, mais ne fait pas monter ni baisser le niveau.
 - [x] Tests ajoutés pour les répétitions, les seuils de réussite/erreur et les réponses aidées.
 - [x] Cache PWA renouvelé à `rose-leon-v33` ; les trois modules modifiés sont déjà listés dans `ASSETS`.
-- [ ] Tests complets Node et résultat GitHub Actions pour le SHA final à confirmer ; ne pas annoncer la CI verte sans preuve.
-- [ ] Déploiement Pages et comportement réel sur iPhone à confirmer.
+- [x] Tests GitHub Actions réussis pour le commit fonctionnel `a3fd7df2a806704f0033bb86e640f68c670991f5` : 50 tests, 50 réussis, 0 échec ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40014851185)).
+- [ ] Déploiement Pages en cours de vérification ; comportement réel sur iPhone à confirmer.
 
 ## Prochaines étapes proposées
 1. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
