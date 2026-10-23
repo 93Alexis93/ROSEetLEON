@@ -175,7 +175,14 @@ function persist() {
   } catch {
     throw Error("Stockage indisponible : libère de l’espace ou exporte tes données.");
   }
-  listeners.forEach(listener => listener(getState()));
+  const snapshot = getState();
+  listeners.forEach(listener => {
+    try {
+      listener(snapshot);
+    } catch {
+      // Un abonné défaillant ne doit pas annuler une sauvegarde déjà persistée.
+    }
+  });
 }
 
 export function update(fn) {
