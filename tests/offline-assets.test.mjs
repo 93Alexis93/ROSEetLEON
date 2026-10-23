@@ -39,3 +39,9 @@ test("PWA · les ressources locales déclarées dans index.html existent et sont
     assert.ok(assets.includes(ref),"Ressource locale de démarrage absente du cache hors ligne : "+ref);
   }
 });
+
+
+test("PWA · l’activation ne supprime que les anciens caches de cette application",()=>{
+  assert.match(worker,/keys\.filter\(k=>k\.startsWith\("rose-leon-"\)&&k!==CACHE\)/,
+    "Le nettoyage doit préserver les caches d’autres applications hébergées sur la même origine.");
+});
