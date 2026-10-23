@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {createRoseQuestion} from "../src/child/rose-activities.js";
 import {createCountingQuestion} from "../src/child/activities.js";
 
-for(const mode of ["colors","shapes"]){
+for(const mode of ["colors","shapes","letters"]){
   test("Rose · "+mode+" : trois choix distincts et une réponse présente",()=>{
     for(let i=0;i<200;i++){
       const q=createRoseQuestion(mode);
@@ -30,5 +30,16 @@ test("Rose · comptage : trois réponses distinctes de 1 à 5",()=>{
     assert.ok(q.choices.includes(q.answer));
     assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=1&&n<=5));
     assert.ok(q.count>=1&&q.count<=5);
+  }
+});
+
+test("Rose · lettres : les réponses sont les lettres de son prénom",()=>{
+  for(let i=0;i<200;i++){
+    const q=createRoseQuestion("letters");
+    assert.ok(["R","O","S","E"].includes(q.answer));
+    assert.equal(q.choices.length,3);
+    assert.equal(new Set(q.choices).size,3);
+    assert.ok(q.choices.includes(q.answer));
+    assert.ok(q.choices.every(letter=>["R","O","S","E"].includes(letter)));
   }
 });
