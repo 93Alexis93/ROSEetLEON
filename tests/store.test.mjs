@@ -52,3 +52,23 @@ test("Sauvegarde · un échec du stockage pendant l’import conserve l’état 
   assert.equal(store.getState().profiles.leon.sessions,4);
   failWrites=false;
 });
+
+test("Sauvegarde · une modification refusée par le stockage ne change pas l’état en mémoire",()=>{
+  failWrites=false;
+  store.resetData();
+  store.update(state=>{state.profiles.leon.sessions=5;});
+  failWrites=true;
+  assert.throws(()=>store.update(state=>{state.profiles.leon.sessions=8;}),/Stockage indisponible/);
+  assert.equal(store.getState().profiles.leon.sessions,5);
+  failWrites=false;
+});
+
+test("Sauvegarde · une remise à zéro refusée par le stockage conserve les données",()=>{
+  failWrites=false;
+  store.resetData();
+  store.update(state=>{state.profiles.rose.sessions=6;});
+  failWrites=true;
+  assert.throws(()=>store.resetData(),/Stockage indisponible/);
+  assert.equal(store.getState().profiles.rose.sessions,6);
+  failWrites=false;
+});
