@@ -43,3 +43,9 @@ test("Rose · lettres : les réponses sont les lettres de son prénom",()=>{
     assert.ok(q.choices.every(letter=>["R","O","S","E"].includes(letter)));
   }
 });
+
+test("Rose · forme étoile : explication avec le bon article",()=>{
+  const q=createRoseQuestion("shapes",()=>0.99);
+  assert.equal(q.answer,"Étoile");
+  assert.ok(q.explanation.startsWith("C’est l’étoile"));
+});
