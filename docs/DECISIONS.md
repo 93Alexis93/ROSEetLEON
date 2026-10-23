@@ -67,3 +67,5 @@
 
 
 - É10 : l’icône PNG 512×512 est déclarée dans le manifeste PWA et comme `apple-touch-icon`, conservée en ressource locale précachée ; le cache est `rose-leon-v40`. La CI et GitHub Pages sont confirmés sur le commit `9b1caf7126c044c221152e37d3138b6690e4d3c3`. Le rendu réel de l’icône et le comportement hors ligne sur iPhone restent non testés.
+
+- É11 : la carte « Aujourd’hui » doit refléter la date locale de l’appareil et s’appuyer sur l’historique des sessions ; les compteurs cumulés restent explicitement identifiés comme tels. La progression positive montre les étoiles, réussites et essais sans comparaison entre enfants. Les réglages de durée inutilisés restent compatibles avec les anciennes sauvegardes et ne doivent pas être présentés comme un minuteur actif.
