@@ -252,3 +252,10 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - Le contrôle répète 1 200 générations pour augmenter les chances de repérer un défaut lié à une valeur particulière.
 - Correction de l’état documentaire : le cache hors ligne courant est `rose-leon-v49`, et non v47.
 - CI et publication Pages à confirmer sur le SHA final ; validation sur Safari iPhone toujours nécessaire pour les parcours non encore testés.
+
+
+### E26 — Vérification des dépendances hors ligne
+- Renforcement du test PWA : chaque import JavaScript relatif d’un module précaché doit lui-même exister et être inclus dans le cache hors ligne.
+- Ce contrôle vise à détecter les oublis de dépendances qui pourraient casser une activité après le premier chargement sans réseau.
+- Changement limité aux tests et à la documentation : aucun renouvellement du cache applicatif nécessaire.
+- CI et publication Pages à confirmer ; le parcours hors ligne réel reste à vérifier sur Safari iPhone.
