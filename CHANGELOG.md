@@ -144,3 +144,8 @@
 
 ## E24 — Couverture des multiplications
 - Les tests contrôlent maintenant la cohérence des produits et les tables autorisées aux trois niveaux de difficulté.
+
+
+## E25 — Nombre mystère
+- Ajout d’un test qui compare la réponse générée à l’indice de décomposition, de succession ou de prédécesseur.
+- Correction de la version du cache PWA indiquée dans l’état d’avancement : `rose-leon-v49`.
