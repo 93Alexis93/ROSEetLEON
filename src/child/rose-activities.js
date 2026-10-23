@@ -27,6 +27,7 @@ export function roseMenu(){
   card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître quatre formes."}),button("Jouer",()=>startRoseActivity("shapes"),"button-primary")]),
   card([el("h2",{text:"🔤 Les lettres de Rose"}),el("p",{class:"small",text:"Retrouver les lettres R, O, S et E."}),button("Jouer",()=>startRoseActivity("letters"),"button-primary")]),
   card([el("h2",{text:"🔡 Grandes et petites lettres"}),el("p",{class:"small",text:"Associer R, O, S, E aux lettres r, o, s, e."}),button("Jouer",()=>startRoseActivity("letter-pairs"),"button-primary")]),
+  card([el("h2",{text:"✍️ Je compose mon prénom"}),el("p",{class:"small",text:"Choisir les lettres pour écrire ROSE dans le bon ordre."}),button("Composer mon prénom",startRoseWritingActivity,"button-primary")]),
   button("⌂ Accueil",()=>go("home"),"icon-button"));
  replaceApp(screen("Bonjour Rose !",content,{eyebrow:"Univers licorne",home:()=>go("home")}));
  speak("Bonjour Rose ! Choisis un petit jeu.",getState().settings.voice);
@@ -40,4 +41,35 @@ function startRoseActivity(mode){
   const f=el("p",{class:"feedback",role:"status","aria-live":"polite"});c.append(answers,f,el("div",{class:"button-row"},[button("🔊 Réécouter",()=>speak(q.speakText,getState().settings.voice),"button-soft"),button("💡 Petit indice",()=>{hintCount++;f.textContent=hintCount===1?q.hint:q.explanation;},"button-soft")]),button("↩ Autres jeux",roseMenu,"button-soft"),button("⌂ Accueil",()=>go("home"),"icon-button"));replaceApp(screen(title,c,{eyebrow:"On apprend en jouant",home:()=>go("home")}));speak(q.speakText,getState().settings.voice);};
  const answer=choice=>{const ok=choice===q.answer;recordAnswer("rose",ok);const f=document.querySelector(".feedback");if(!ok){tries++;if(f)f.textContent=tries===1?"Presque ! Regarde encore et essaie tranquillement.":"Ce n’est pas grave, on peut chercher ensemble.";return;}cheer(getState().settings.sounds);round++;if(round>=5){finish();return;}generate();render();const next=document.querySelector(".feedback");if(next)next.textContent="Oui, bravo d’avoir regardé attentivement !";};
  generate();render();
+}
+
+function startRoseWritingActivity(){
+ document.body.className="theme-rose";
+ const model=el("div",{class:"prompt","aria-label":"Modèle du prénom Rose",text:"R O S E"});
+ const chosen=[];
+ const letters=["S","E","R","O"];
+ const content=card([el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour composer ton prénom."}),model]);
+ const status=el("p",{class:"feedback",role:"status","aria-live":"polite",text:"Choisis la première lettre."});
+ const sequence=el("div",{class:"answer-grid","aria-label":"Lettres choisies"});
+ const choices=el("div",{class:"answer-grid","aria-label":"Lettres à choisir"});
+ const draw=()=>{
+  sequence.replaceChildren();
+  sequence.append(...Array.from({length:4},(_,i)=>el("div",{class:"prompt",text:chosen[i]||"·","aria-label":chosen[i]||"Case vide"})));
+  choices.replaceChildren();
+  letters.filter(letter=>!chosen.includes(letter)).forEach(letter=>choices.append(button(letter,()=>{
+   chosen.push(letter);
+   if(chosen.length===4){
+    if(chosen.join("")==="ROSE"){status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";speak("Bravo ! Tu as écrit Rose.",getState().settings.voice);}
+    else {status.textContent="Bien essayé ! Regarde le modèle. Tu peux effacer et recommencer tranquillement.";}
+   }else status.textContent="Bien joué ! Quelle lettre vient ensuite ?";
+   draw();
+  },"button-soft")));
+  content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour composer ton prénom."}),model,sequence,choices,status,
+   button("↩ Effacer et recommencer",()=>{chosen.splice(0);status.textContent="Choisis la première lettre.";draw();},"button-soft"),
+   button("Autres jeux",roseMenu,"button-soft"),
+   button("⌂ Accueil",()=>go("home"),"icon-button"));
+ };
+ draw();
+ replaceApp(screen("Je compose mon prénom",content,{eyebrow:"Écriture en jouant",home:()=>go("home")}));
+ speak("Regarde le modèle : R O S E. Choisis les lettres dans le bon ordre.",getState().settings.voice);
 }
