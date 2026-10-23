@@ -26,6 +26,35 @@ test("chaque domaine et niveau produit quatre choix distincts contenant la répo
   }
 });
 
+test("Calcul mental · les résultats correspondent aux opérations affichées",()=>{
+  for(const domain of ["mental"]){
+    for(let difficulty=1;difficulty<=3;difficulty++){
+      for(let i=0;i<250;i++){
+        const q=createMathQuestion(domain,difficulty);
+        const match=q.prompt.match(/^(\d+) ([+−]) (\d+) = \?$/);
+        assert.ok(match, q.prompt);
+        const expected=match[2]==="+"?Number(match[1])+Number(match[3]):Number(match[1])-Number(match[3]);
+        assert.equal(Number(q.answer),expected,q.prompt);
+      }
+    }
+  }
+});
+
+test("Logique · le nombre attendu prolonge bien la suite",()=>{
+  for(let difficulty=1;difficulty<=3;difficulty++){
+    for(let i=0;i<250;i++){
+      const q=createMathQuestion("logic",difficulty);
+      const match=q.prompt.match(/^Complète la suite : (\d+) · (\d+) · (\d+) · (\d+) · \?$/);
+      assert.ok(match,q.prompt);
+      const values=match.slice(1).map(Number);
+      const step=values[1]-values[0];
+      assert.ok(step>0);
+      assert.ok(values.every((value,index)=>index===0||value-values[index-1]===step),q.prompt);
+      assert.equal(Number(q.answer),values[3]+step,q.prompt);
+    }
+  }
+});
+
 test("les tables proposées restent limitées à 2, 3, 4, 5 et 10",()=>{
   for(let i=0;i<200;i++){
     const q=createMathQuestion("multiplication",2);
