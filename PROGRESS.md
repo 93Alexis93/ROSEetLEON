@@ -76,7 +76,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Fiche Léon : trois petits problèmes additifs et multiplicatifs, avec espace pour dessiner et corrigé séparé
 - [x] Fiche Léon : cinq premiers mots anglais à relier à leur traduction, avec corrigé
 - [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne, version actuelle v20
+- [x] Nouveau module ajouté au cache hors ligne, version actuelle v21
 - [x] Corrigé des multiplications structuré en liste lisible pour l’impression
 - [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
 - [x] Test CI ajouté pour vérifier que toutes les ressources préchargées par le service worker existent, sans doublons, et que les fiches/styles sont bien inclus
@@ -97,3 +97,5 @@ Mis à jour le 23 octobre 2026.
 - Huit fiches A4 sont présentes ; le rendu physique sur Safari iPhone et imprimante reste à valider, mais le développement continue sans attendre cette validation à la demande de l’utilisateur.
 - N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
 - Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; le statut GitHub Actions a été confirmé via les outils disponibles ; les tests automatisés passent, mais les tests navigateur restent nécessaires.
+
+- [x] Phase 8 : le délai de sécurité de la porte parentale ne réaffiche plus son écran si l’utilisateur est parti sur une autre page ; test de non-régression ajouté.
