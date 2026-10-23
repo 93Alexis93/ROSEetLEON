@@ -280,3 +280,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 ## Maintenance — 24 octobre 2026 (suite)
 - Le suivi de progression refuse désormais tout domaine mathématique inconnu avant d’écrire dans le profil ; test de non-modification des données et cache PWA renouvelé à v52.
+
+## Maintenance — 24 octobre 2026 (suite 2)
+- Les enregistrements de réponses exigent désormais un résultat booléen explicite ; les valeurs ambiguës sont refusées avant modification des données. Test dédié, cache PWA v53.
