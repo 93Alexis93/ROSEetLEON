@@ -71,3 +71,6 @@
 - É11 : la carte « Aujourd’hui » doit refléter la date locale de l’appareil et s’appuyer sur l’historique des sessions ; les compteurs cumulés restent explicitement identifiés comme tels. La progression positive montre les étoiles, réussites et essais sans comparaison entre enfants. Les réglages de durée inutilisés restent compatibles avec les anciennes sauvegardes et ne doivent pas être présentés comme un minuteur actif.
 
 - É12 : les exercices de calcul mental et de petits problèmes sont générés localement, sans service externe. L’enfant saisit une réponse numérique, peut demander un indice ou réécouter la consigne et peut réessayer après une erreur. Une session est enregistrée après cinq réponses correctes. Les modes proposés couvrent les compléments à 10/100, doubles, moitiés, droite numérique et trois structures de problèmes. Les tests de générateurs ne remplacent pas la vérification de la pertinence pédagogique ni l’essai sur iPhone.
+
+
+- É13 : la banque du jeu des syllabes doit refléter le découpage oral usuel des mots. « tomate » se prononce en trois syllabes (to-ma-te) et « banane » en trois (ba-na-ne). Un test couvre explicitement les dix entrées afin d’éviter une régression. La validation automatisée ne remplace pas l’écoute et l’essai avec Rose.
