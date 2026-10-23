@@ -4,7 +4,9 @@ import {go} from "../router.js";
 const worksheets=[
  {id:"rose-letters",label:"Rose · Les lettres de mon prénom",description:"Reconnaître R, O, S et E, puis les retrouver dans une ligne de lettres."},
  {id:"rose-shapes",label:"Rose · Les formes",description:"Reconnaître cercle, carré, triangle et étoile."},
- {id:"leon-multiplication",label:"Léon · Les multiplications",description:"Petits calculs et stratégies sans chronomètre."}
+ {id:"rose-paths",label:"Rose · Je suis les chemins",description:"Préparer le geste du crayon en suivant des chemins simples."},
+ {id:"leon-multiplication",label:"Léon · Les multiplications",description:"Petits calculs et stratégies sans chronomètre."},
+ {id:"leon-problems",label:"Léon · Petits problèmes",description:"Trois petites histoires à résoudre en dessinant ou en calculant."}
 ];
 function text(tag,value,cls){return el(tag,{text:value,...(cls?{class:cls}:{})});}
 function worksheetRoseLetters(){
@@ -30,6 +32,21 @@ function worksheetRoseShapes(){
  ]),text("p","3. Je dessine ma forme préférée dans le cadre.","worksheet-instruction"),text("div"," ","drawing-frame"));
  return page;
 }
+function worksheetRosePaths(){
+ const page=el("article",{class:"print-page worksheet"});
+ page.append(text("p","ROSE & LÉON · PETITE FICHE POUR GRANDIR","worksheet-kicker"),text("h1","Je suis les chemins"),text("p","Prénom : ____________________     Date : ____________________","worksheet-meta"));
+ page.append(text("p","Avec ton doigt, puis avec un crayon, suis chaque chemin de gauche à droite. Tu peux recommencer autant que tu veux.","worksheet-instruction"));
+ const paths=[
+  ["1. Le chemin tout droit","Départ ●  · · · · · · · · · · · · · · ·  ★ Arrivée","path-straight"],
+  ["2. Le chemin des petites collines","Départ ●  ∿ ∿ ∿ ∿ ∿ ∿ ∿ ∿ ∿  ★ Arrivée","path-waves"],
+  ["3. Le chemin qui monte et descend","Départ ●  /\\/\\/\\/\\/\\/\\/\\  ★ Arrivée","path-zigzag"]
+ ];
+ page.append(el("div",{class:"trace-paths"},paths.map(([heading,line,cls])=>el("section",{class:"trace-path"},[
+  text("h2",heading),text("p",line,"trace-line "+cls)
+ ]))));
+ page.append(text("p","Je choisis mon chemin préféré et je le refais doucement.","worksheet-encouragement"));
+ return page;
+}
 function worksheetLeon(){
  const page=el("article",{class:"print-page worksheet"});
  page.append(text("p","ROSE & LÉON · PETITE FICHE POUR GRANDIR","worksheet-kicker"),text("h1","Je m’entraîne aux multiplications"),text("p","Prénom : ____________________     Date : ____________________","worksheet-meta"),text("p","Je peux dessiner des groupes ou compter par bonds. Je prends mon temps.","worksheet-instruction"));
@@ -40,11 +57,26 @@ function worksheetLeon(){
  page.append(text("p","Une stratégie qui m’a aidé : __________________________________________","worksheet-meta"));
  return page;
 }
+function worksheetLeonProblems(){
+ const page=el("article",{class:"print-page worksheet"});
+ page.append(text("p","ROSE & LÉON · PETITE FICHE POUR GRANDIR","worksheet-kicker"),text("h1","Trois petits problèmes"),text("p","Prénom : ____________________     Date : ____________________","worksheet-meta"),text("p","Lis chaque histoire. Tu peux dessiner, faire des groupes ou écrire un calcul.","worksheet-instruction"));
+ const qs=[
+  ["1. Les billes","Léon a 4 sachets. Dans chaque sachet, il y a 3 billes. Combien a-t-il de billes en tout ?"],
+  ["2. Les cartes","Rose a 5 cartes. Léon lui en donne 4 de plus. Combien Rose a-t-elle de cartes maintenant ?"],
+  ["3. Les équipes","Il y a 3 équipes de 4 enfants. Combien y a-t-il d’enfants en tout ?"]
+ ];
+ page.append(el("div",{class:"word-problems"},qs.map(([heading,question])=>el("section",{class:"word-problem"},[
+  text("h2",heading),text("p",question),text("p","Mon dessin ou mon calcul :","small"),text("div"," ","problem-space"),text("p","Ma réponse : ______________________________")
+ ]))));
+ return page;
+}
 function answerKey(id){
  const page=el("article",{class:"print-page worksheet answer-key"});
  page.append(text("p","POUR L’ADULTE · CORRIGÉ","worksheet-kicker"),text("h1","Repères de correction"));
  if(id==="rose-letters")page.append(text("p","Fiche « Les lettres de mon prénom » : les lettres attendues sont R, O, S et E. Dans la ligne, entourer R, O, S, E, R, O, S, E dans l’ordre où elles apparaissent."));
  else if(id==="rose-shapes")page.append(text("p","Fiche « Les formes magiques » : ● cercle ; ■ carré ; ▲ triangle ; ★ étoile. L’activité de liaison n’impose pas une façon unique de tracer les traits."));
+ else if(id==="rose-paths")page.append(text("p","Fiche « Je suis les chemins » : il n’y a pas de réponse unique. Valoriser le geste, l’essai et le fait de suivre le chemin à son rythme."));
+ else if(id==="leon-problems")page.append(el("ul",{class:"answer-list"},["1. 4 × 3 = 12 billes.","2. 5 + 4 = 9 cartes.","3. 3 × 4 = 12 enfants."].map(answer=>text("li",answer))));
  else page.append(el("ul",{class:"answer-list"},["1. 3 × 2 = 6","2. 4 × 5 = 20","3. 2 × 6 = 12","4. 5 × 3 = 15","5. 4 × 4 = 16","6. 3 × 7 = 21"].map(answer=>text("li",answer))));
  page.append(text("p","Privilégier l’explication et l’encouragement. L’enfant peut utiliser des dessins ou recompter."));
  return page;
@@ -68,7 +100,7 @@ function printPages(includeKey){
 function showWorksheet(id){
  const w=worksheets.find(x=>x.id===id);if(!w)return printComingSoon();
  document.body.className="theme-parent print-view";
- const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
+ const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:id==="rose-paths"?[worksheetRosePaths(),answerKey(id)]:id==="leon-problems"?[worksheetLeonProblems(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
  const wrapper=el("div",{class:"print-workspace"});
  const controls=el("div",{class:"no-print print-controls"},[
   button("🖨️ Imprimer la fiche seule",()=>printPages(false),"button-primary"),
