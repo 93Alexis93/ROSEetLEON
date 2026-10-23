@@ -63,3 +63,9 @@
 - Tests de cohérence du cache et de l’icône ajoutés.
 - Validation : tests automatisés réussis et déploiement GitHub Pages confirmé sur le commit `9b1caf7126c044c221152e37d3138b6690e4d3c3` ([tests](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113554), [publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113850)).
 - L’icône sur l’écran d’accueil et le comportement réel sur iPhone restent à tester.
+
+## É11 — 2026-10-23
+- Le tableau de bord parental distingue désormais les sessions du jour des totaux cumulés, à partir de l’historique local.
+- La section « Progression positive » affiche les étoiles gagnées, les réussites et les essais cumulés par enfant, sans classement.
+- Le calcul des statistiques est isolé et couvert par des tests ; le module est ajouté au précache et le cache passe à v41.
+- Validation CI, déploiement Pages et vérification iPhone à confirmer.
