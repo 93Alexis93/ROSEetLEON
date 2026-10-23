@@ -114,3 +114,8 @@
 - Contrôle de cohérence documentaire : la version du cache PWA dans `PROGRESS.md` était obsolète (v44 au lieu de v47) ; corrigée.
 - Revue du parcours « Les syllabes » et des contrôles automatiques existants : dix mots avec décompte explicite, choix 1–3, aide, verrouillage après bonne réponse et enregistrement de la session après cinq questions.
 - Les tests et la publication Pages du SHA final restent à confirmer via GitHub Actions.
+
+
+## É19 — 2026-10-23
+- Renforcement des tests du calcul mental : les réponses générées sont comparées aux nombres et opérations réellement affichés, y compris dans les trois familles de petits problèmes.
+- Pas de changement du code livré ni du cache PWA ; résultat CI à confirmer.
