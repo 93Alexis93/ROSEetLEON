@@ -47,3 +47,7 @@
 .word-problem p{margin:5px 0}
 .problem-space{height:48px;border-bottom:1px dashed #888;margin:4px 0}
 @media print{body.print-view .trace-path{break-inside:avoid}body.print-view .word-problem{break-inside:avoid}}
+
+.english-match{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin:20px 0}
+.english-word,.english-translation{border:1px solid #777;padding:12px;text-align:center;font-size:20px;min-height:48px}
+.english-word{font-weight:bold;letter-spacing:1px}
