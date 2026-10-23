@@ -26,7 +26,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Renouvellement du cache PWA pour les ressources de maths
 - [x] Contrôle automatique de 9 000 questions sans défaut détecté (résultat rapporté précédemment)
 - [x] L’utilisateur a confirmé sur iPhone que les six défis apparaissent après actualisation de l’URL
-- [ ] Lancer la suite `node --experimental-default-type=module --test tests/math-engine.test.mjs`
+- [ ] Lancer la suite `node --experimental-default-type=module --test tests/*.test.mjs`
 - [ ] Tester chaque domaine jusqu’à la fin d’une session, la progression adaptative et le mode avion
 - État : menu visible validé par l’utilisateur ; validation fonctionnelle complète encore à faire.
 
@@ -37,13 +37,14 @@ Mis à jour le 23 octobre 2026.
 - [x] Correction du compteur : une réponse trouvée après une erreur ne compte plus comme réussite du premier coup
 - [x] Consigne de chaque format lue par la voix française si elle est activée ; les mots-éclairs font entendre le mot cible
 - [x] Questions de compréhension des phrases reformulées pour éviter une consigne ambiguë
-- [x] Workflow GitHub Actions ajouté pour vérifier la syntaxe JavaScript et lancer les tests Node à chaque push sur main ou pull request
-- [x] Cache PWA passé de v3 à v4 pour que les appareils récupèrent le module de lecture corrigé au prochain renouvellement du service worker
+- [x] Tests unitaires ajoutés : 200 générations par format vérifient quatre choix distincts, présence de la réponse et contenu des consignes
+- [x] Workflow GitHub Actions configuré pour vérifier la syntaxe JavaScript et lancer les tests de maths et de lecture à chaque push sur main ou pull request
+- [x] Cache PWA passé à v5 pour inclure la version du module de lecture testable
 - [ ] Vérifier dans GitHub Actions que le workflow s’exécute et que tous les contrôles passent
 - [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
 - [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
 - [ ] Vérifier hors ligne après activation du service worker
-- État : correctifs committés ; les contrôles CI ne sont pas confirmés comme réussis et les tests navigateur restent nécessaires.
+- État : code et tests ajoutés sur main ; les tests n’ont pas encore été exécutés avec succès dans un environnement Node accessible et les tests navigateur restent nécessaires.
 
 ## Phases suivantes prévues
 - Phase 4 : contenus de Rose, adaptés à la moyenne section
@@ -61,4 +62,4 @@ Mis à jour le 23 octobre 2026.
 - La porte parentale n’est pas une sécurité cryptographique.
 - Les fiches imprimables sont encore une coquille ; les générateurs A4 complets sont prévus en phase 6.
 - N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
-- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; la suite de tests Node n’a donc pas été lancée dans l’environnement de travail.
+- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; le statut GitHub Actions n’a pas pu être confirmé via les outils disponibles.
