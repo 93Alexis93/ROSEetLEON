@@ -192,3 +192,12 @@ test("Mesures · l’heure pile et la demi-heure gardent quatre choix distincts,
     assert.ok(q.choices.every(choice=>!/\s\(\d+\)$/.test(choice)),"pas de choix de secours artificiel");
   }
 });
+
+
+test("la progression adaptative refuse des options invalides",()=>{
+  const base={difficulty:2,correctStreak:1,errorStreak:0,attempts:4,correct:3};
+  for(const options of [null,{}, {correct:"oui"}, {correct:true,helped:1}, {correct:false,firstTry:0}]){
+    assert.throws(()=>updateMathProgress(base,options));
+  }
+  assert.equal(updateMathProgress(base,{correct:true}).attempts,5);
+});
