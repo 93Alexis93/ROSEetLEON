@@ -179,3 +179,6 @@
 
 ## Maintenance — 2026-10-24 (suite 3)
 - Validation des options de progression mathématique pour rejeter les appels mal formés avant écriture ; tests dédiés et cache PWA v54.
+
+## Maintenance — 2026-10-24 (suite 4)
+- Validation stricte des options de la progression adaptative, y compris pour les appels directs au moteur ; tests de non-régression et cache PWA v55.
