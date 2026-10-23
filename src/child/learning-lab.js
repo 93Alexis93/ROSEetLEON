@@ -58,7 +58,7 @@ export const SYLLABLE_WORDS=[
  {word:"chapeau",picture:"👒",syllables:2}, {word:"canapé",picture:"🛋️",syllables:3},
  {word:"fourmi",picture:"🐜",syllables:2}, {word:"hibou",picture:"🦉",syllables:2},
  {word:"chaussette",picture:"🧦",syllables:2}, {word:"rivière",picture:"🏞️",syllables:2},
- {word:"poussin",picture:"🐥",syllables:2}
+ {word:"poussin",picture:"🐥",syllables:2}, {word:"bonnet",picture:"🧢",syllables:2}
 ];
 export function createSyllableQuestion(random=Math.random){
  const item=pick(SYLLABLE_WORDS,random);
