@@ -48,10 +48,10 @@ function childHome(child) {
   const content = card([
     el("p", {
       class: "lead",
-      text: rose ? "Choisissons un jeu magique !" : "Prêt pour un petit défi de calcul ?"
+      text: rose ? "Choisissons un jeu magique !" : "Prêt pour un petit défi ?"
     }),
     el("div", { class: "prompt", text: rose ? "🌈 🦄 ✨" : "⚽ 🥅 ⭐" }),
-    button(rose ? "Choisir un jeu" : "Défi penalty", () => {
+    button(rose ? "Choisir un jeu" : "Choisir un défi", () => {
       unlockAudio();
       if (rose) roseMenu();
       else startActivity(child);
@@ -78,8 +78,8 @@ function childHome(child) {
     button("🌿 Petite pause", () => guidedPause(child), "button-warm"),
     button("🔊 Réécouter", () => speak(
       rose
-        ? "Choisis un jeu : compter les licornes, les couleurs magiques ou les formes à retrouver."
-        : "Choisis les défis de maths ou les jeux de lecture.",
+        ? "Choisis un jeu : compter les licornes, les couleurs magiques, les formes, les lettres ou les syllabes."
+        : "Choisis un défi de maths, le nombre mystère, le plus grand nombre ou un jeu de lecture.",
       getState().settings.voice
     ), "button-soft"),
     button("⌂ Accueil", () => go("home"), "icon-button")
@@ -89,7 +89,7 @@ function childHome(child) {
     home: () => go("home")
   }));
   speak(
-    rose ? "Bonjour Rose ! Choisis un petit jeu." : "Salut Léon ! Choisis ton défi penalty.",
+    rose ? "Bonjour Rose ! Choisis un petit jeu." : "Salut Léon ! Choisis un défi : tu peux faire des maths ou lire.",
     getState().settings.voice
   );
 }
