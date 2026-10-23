@@ -1,5 +1,5 @@
 import {el,button,screen,card,replaceApp} from "./ui.js";
-import {setRenderer,startRouter,go} from "./router.js";
+import {setRenderer,startRouter,go,lockParent,canAccessRoute} from "./router.js";
 import {getState} from "./store.js";
 import {startActivity} from "./child/activities.js";
 import {readingMenu} from "./child/reading.js";
@@ -27,7 +27,10 @@ button("🔊 Réécouter",()=>speak(rose?"Choisis un jeu : compter les licornes,
 replaceApp(screen(rose?"Bonjour Rose !":"Salut Léon !",content,{eyebrow:rose?"Univers licorne":"Univers ballon",home:()=>go("home")}));
 speak(rose?"Bonjour Rose ! Choisis un petit jeu.":"Salut Léon ! Choisis ton défi penalty.",getState().settings.voice);
 }
-function render(route){switch(route){case"home":home();
+function render(route){
+if(route==="home"||route==="leon"||route==="rose")lockParent();
+if(!canAccessRoute(route)){go("gate");return;}
+switch(route){case"home":home();
 break;
 case"leon":childHome("leon");
 break;
