@@ -77,3 +77,6 @@
 
 
 - É14 : dans les défis adaptatifs de maths, utiliser une aide même une seule fois signifie que la réponse est accompagnée. Elle compte toujours dans les statistiques d’activité, mais ne doit pas être considérée comme une réussite ou une erreur autonome pour ajuster le niveau. Ce choix évite de faire monter ou descendre le niveau sur une réponse influencée par un indice.
+
+
+- É15 : dans les mots-mystères, les tirets doivent représenter le découpage oral entendu, pas une découpe mécanique des lettres. Les mots monosyllabiques comme « pomme », « poire » et « nuage » restent sans tiret ; les mots comme « maîtresse », « cartable », « étoile », « montagne », « girafe » et « valise » sont ramenés à deux syllabes orales. La banque exportée est testée sur un échantillon courant ; la validation finale se fait à voix haute avec l’enfant.
