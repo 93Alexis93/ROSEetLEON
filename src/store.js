@@ -175,10 +175,10 @@ function persist() {
   } catch {
     throw Error("Stockage indisponible : libère de l’espace ou exporte tes données.");
   }
-  const snapshot = getState();
   listeners.forEach(listener => {
     try {
-      listener(snapshot);
+      // Chaque abonné reçoit sa propre copie et ne peut pas altérer celle des autres.
+      listener(getState());
     } catch {
       // Un abonné défaillant ne doit pas annuler une sauvegarde déjà persistée.
     }
