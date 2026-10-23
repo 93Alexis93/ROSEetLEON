@@ -213,3 +213,10 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Ajout de tests qui vérifient que la réponse correspond à l’opération affichée pour les compléments à 10/100, doubles, moitiés, droite numérique et petits problèmes.
 - [x] Contrôle par génération répétée pour détecter les erreurs qui n’apparaissent que sur certaines valeurs aléatoires.
 - [ ] Résultat CI à confirmer ; ce changement ne modifie pas les ressources de l’application et ne nécessite donc pas de renouveler le cache PWA.
+
+
+## Étape É20 — correction du découpage oral de « nuage »
+- [x] Revue ciblée de la banque syllabique : « nuage » a deux syllabes orales dans la prononciation retenue (« nu-age »), et non une seule.
+- [x] Correction de l’indice affiché dans les mots-mystères et du décompte attendu dans les tests.
+- [x] Cache PWA renouvelé à `rose-leon-v48` et test de précache synchronisé.
+- [ ] Résultat CI et publication Pages à confirmer sur le SHA final ; essai oral avec Rose reste nécessaire.
