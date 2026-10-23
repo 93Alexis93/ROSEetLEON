@@ -52,10 +52,15 @@ const mathStats=section("Maths de Léon",MATH_DOMAINS.map(domain=>{const p=s.pro
 const wordInput=el("input",{type:"text",maxlength:"24",placeholder:"Ex. papillon", "aria-label":"Mot à ajouter à la lecture"});
 const addWord=button("Ajouter ce mot",()=>{const word=wordInput.value.trim();if(!/^[A-Za-zÀ-ÿ-]{2,24}$/.test(word)){alert("Entre un mot de 2 à 24 lettres, sans espace.");return;}update(x=>{const words=x.customWords.map(w=>(typeof w==="string"?w:w.word||"").toLocaleLowerCase("fr"));if(!words.includes(word.toLocaleLowerCase("fr")))x.customWords.push({word,createdAt:new Date().toISOString()});});parentDashboard();},"button-primary");
 const customWords=section("Mots de lecture de Léon",
-[el("p",{class:"small",text:"Ajoute des mots qui lui parlent. Ils seront proposés dans les jeux de lecture et conservés sur cet appareil."}),wordInput,addWord,...(s.customWords.length?s.customWords.map((entry,index)=>{const word=typeof entry==="string"?entry:entry.word||"";return el("div",{class:"button-row"},[el("p",{class:"stat",text:word}),button("Supprimer",()=>{update(x=>{x.customWords.splice(index,1);});parentDashboard();},"button-soft")]);}):[el("p",{class:"small",text:"Aucun mot personnalisé pour le moment."})])]);
+[el("p",{class:"small",text:"Ajoute des mots qui lui parlent. Ils seront proposés dans les jeux de lecture et conservés sur cet appareil."}),wordInput,addWord,...(s.customWords.length?s.customWords.map((entry,index)=>{const word=typeof entry==="string"?entry:entry.word||"";return el("div",{class:"button-row"},[
+ el("p",{class:"stat",text:word}),
+ button("Supprimer",()=>{update(x=>{x.customWords.splice(index,1);});parentDashboard();},"button-soft")]);}):[el("p",{class:"small",text:"Aucun mot personnalisé pour le moment."})])]);
 const tools=section("Outils parent",[button("🫶 Crise en cours",()=>go("crisis"),"button-warm"),button("📄 Fiches à imprimer",()=>go("print"),"button-soft")]);
 const backup=section("Sauvegarde et réglages",
-[button("Exporter la sauvegarde JSON",downloadBackup,"button-primary"),el("label",{class:"field"},["Importer une sauvegarde JSON",el("input",{type:"file",accept:"application/json",onchange:importBackup})]),el("label",{class:"field"},["Code PIN facultatif (4 chiffres)",el("input",{type:"password",inputmode:"numeric",maxlength:"4",value:s.settings.parentPin,placeholder:"Aucun PIN défini",onchange:e=>update(x=>x.settings.parentPin=e.target.value.replace(/\D/g,"").slice(0,4))})]),el("label",{class:"field"},["Voix",el("select",{onchange:e=>update(x=>x.settings.voice=e.target.value==="oui")},[el("option",{value:"oui",selected:s.settings.voice?"selected":null,text:"Activée"}),el("option",{value:"non",selected:!s.settings.voice?"selected":null,text:"Désactivée"})])]),el("label",{class:"field"},["Sons d’encouragement",el("select",{onchange:e=>update(x=>x.settings.sounds=e.target.value==="oui")},[el("option",{value:"oui",selected:s.settings.sounds?"selected":null,text:"Activés"}),el("option",{value:"non",selected:!s.settings.sounds?"selected":null,text:"Désactivés"})])]),button("Remettre à zéro",()=>{if(confirm("Effacer toutes les progressions et réglages sur cet appareil ?")){resetData();parentDashboard();}},"button-soft")]);
+[button("Exporter la sauvegarde JSON",downloadBackup,"button-primary"),
+el("label",{class:"field"},["Importer une sauvegarde JSON",el("input",{type:"file",accept:"application/json",onchange:importBackup})]),
+el("label",{class:"field"},["Code PIN facultatif (4 chiffres)",el("input",{type:"password",inputmode:"numeric",maxlength:"4",value:s.settings.parentPin,placeholder:"Aucun PIN défini",onchange:e=>update(x=>x.settings.parentPin=e.target.value.replace(/\D/g,"").slice(0,4))})]),
+el("label",{class:"field"},["Voix",el("select",{onchange:e=>update(x=>x.settings.voice=e.target.value==="oui")},[el("option",{value:"oui",selected:s.settings.voice?"selected":null,text:"Activée"}),el("option",{value:"non",selected:!s.settings.voice?"selected":null,text:"Désactivée"})])]),el("label",{class:"field"},["Sons d’encouragement",el("select",{onchange:e=>update(x=>x.settings.sounds=e.target.value==="oui")},[el("option",{value:"oui",selected:s.settings.sounds?"selected":null,text:"Activés"}),el("option",{value:"non",selected:!s.settings.sounds?"selected":null,text:"Désactivés"})])]),button("Remettre à zéro",()=>{if(confirm("Effacer toutes les progressions et réglages sur cet appareil ?")){resetData();parentDashboard();}},"button-soft")]);
 content.append(stats,mathStats,customWords,tools,backup,section("Progression positive",[el("p",{class:"small",text:"La V1 enregistre les essais et les sessions localement. Les conseils personnalisés seront enrichis dans les prochaines phases."})]));
 replaceApp(screen("Espace parent",content,{eyebrow:"Tableau de bord",home:()=>go("home")}));
 }
@@ -77,7 +82,11 @@ reader.readAsText(file);
 }
 export function crisis(){document.body.className="theme-parent";
 const steps=[
-["1. Respirer d’abord","Pose les pieds au sol. Inspire doucement, puis expire un peu plus longtemps."],["2. Sécuriser et ralentir","Baisse la voix, éloigne les objets dangereux et utilise peu de mots."],["3. Accueillir l’émotion","« Je vois que c’est très difficile. Tu as le droit d’être en colère. »"],["4. Proposer un petit choix","« Tu préfères un peu d’eau ou un moment tranquille près de moi ? »"],["5. Attendre","Pas besoin de régler le problème tout de suite. Reviens-y quand vous serez plus calmes."]
+ ["1. Respirer d’abord","Pose les pieds au sol. Inspire doucement, puis expire un peu plus longtemps."],
+ ["2. Sécuriser et ralentir","Baisse la voix, éloigne les objets dangereux et utilise peu de mots."],
+ ["3. Accueillir l’émotion","« Je vois que c’est très difficile. Tu as le droit d’être en colère. »"],
+ ["4. Proposer un petit choix","« Tu préfères un peu d’eau ou un moment tranquille près de moi ? »"],
+ ["5. Attendre","Pas besoin de régler le problème tout de suite. Reviens-y quand vous serez plus calmes."]
 ];
 const content=el("div",{class:"stack"});
 steps.forEach(([t,d])=>content.append(card([el("h2",{text:t}),el("p",{class:"lead",text:d})])));
