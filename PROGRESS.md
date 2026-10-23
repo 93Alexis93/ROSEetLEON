@@ -267,3 +267,5 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - CI et publication Pages à confirmer.
 
 E28 — Robustesse du stockage : un abonné UI qui lève une exception ne doit plus annuler en mémoire une écriture déjà persistée. Test de non-divergence mémoire/localStorage ajouté.
+
+E29 — Isolation des abonnés : chaque abonné reçoit désormais une copie indépendante de l’état ; test de régression contre les mutations accidentelles entre abonnés.
