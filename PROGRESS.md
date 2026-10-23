@@ -70,4 +70,4 @@ Mis à jour le 23 octobre 2026.
 - La porte parentale n’est pas une sécurité cryptographique.
 - Les fiches imprimables sont encore une coquille ; les générateurs A4 complets sont prévus en phase 6.
 - N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
-- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; le statut GitHub Actions n’a pas pu être confirmé via les outils disponibles.
+- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; le statut GitHub Actions a été confirmé via les outils disponibles ; les tests automatisés passent, mais les tests navigateur restent nécessaires.
