@@ -107,4 +107,6 @@ Mis à jour le 23 octobre 2026.
 
 - [x] Phase 8 : l’import de sauvegarde restaure l’état précédent si l’écriture dans le stockage local échoue ; test de régression avec quota simulé ajouté. Cache PWA passé à v24.
 
-- [x] Phase 8 : une modification ou une remise à zéro est annulée en mémoire si le stockage local refuse l’écriture ; tests de régression avec quota simulé ajoutés. Cache PWA v24.
+- [x] Phase 8 : une modification ou une remise à zéro est annulée en mémoire si le stockage local refuse l’écriture ; tests de régression avec quota simulé ajoutés. Cache PWA v25.
+
+- [x] Phase 8 : les sauvegardes dont les profils ou réglages sont des tableaux sont désormais refusées ; test de non-régression ajouté. Cache PWA v25.
