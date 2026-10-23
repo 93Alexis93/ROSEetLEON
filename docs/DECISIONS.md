@@ -59,3 +59,5 @@
 - É6 : les activités de lecture utilisent des contenus courts et originaux, avec des questions littérales faciles à repérer dans la phrase ou le mini-texte. La banque de mots est élargie tout en conservant les mots personnalisés de l’espace parent. Les tests vérifient que les contenus varient et que les réponses proposées restent distinctes ; l’adaptation réelle à Léon doit encore être confirmée sur iPhone.
 
 - É7 : la pause guidée est une activité facultative en trois étapes, sans compte à rebours, sans obligation de respirer d’une manière particulière, sans score et sans persistance. L’enfant progresse en touchant un bouton et peut arrêter à tout moment. Elle reste une proposition de recentrage simple, pas un outil de diagnostic ou de soin.
+
+- É8 : la progression de la pause guidée est exposée comme statut accessible avec annonce polie afin que les technologies d’assistance puissent signaler le changement d’étape sans interrompre inutilement la lecture. Le test source vérifie la présence de cette annonce, mais seul un essai réel avec VoiceOver sur iPhone peut confirmer l’expérience.

@@ -41,3 +41,8 @@
 - Accès depuis les écrans principaux de Léon et Rose ; cache PWA renouvelé à v37.
 
 - É7 validée par CI (65 tests réussis) et publiée sur GitHub Pages ; les essais réels sur iPhone restent à faire.
+
+## É8 — 2026-10-23
+- La pause guidée annonce désormais l’étape courante aux technologies d’assistance.
+- Ajout d’un test de non-régression pour l’annonce accessible et la possibilité d’arrêter la pause.
+- Cache PWA renouvelé à v38.

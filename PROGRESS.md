@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v36`.
+- Le service worker source utilise actuellement le cache `rose-leon-v38`.
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -74,9 +74,8 @@ Mis à jour le 23 octobre 2026.
 - [ ] Essais import/export réels sur iPhone à confirmer.
 
 ## Prochaines étapes proposées
-1. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
-2. É6 — enrichir les contenus de lecture.
-3. É7 — proposer une pause guidée douce.
+1. É8 — finition accessibilité et non-régression.
+2. Validation manuelle sur Safari iPhone des fonctions ajoutées aux étapes É5–É7.
 
 ## Historique utile
 Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
@@ -110,3 +109,11 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] 65 tests passent sur le commit `2fd100248ea1dd454f085ad75b1410818ec27d24` ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017274534)).
 - [x] Déploiement Pages réussi sur ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017273785)).
 - [ ] Vérifier sur iPhone le parcours tactile, la voix et le retour vers l’univers choisi.
+
+## Étape É8 — finition accessibilité et non-régression (en cours)
+- [x] Annonce accessible de l’étape courante dans la pause guidée avec `role="status"` et `aria-live="polite"`.
+- [x] Test de régression ajouté pour vérifier l’annonce de progression et la possibilité d’arrêter à tout moment.
+- [x] Cache PWA renouvelé à `rose-leon-v38` ; la ressource modifiée est déjà précachée.
+- [ ] Résultats CI du commit É8 à confirmer.
+- [ ] Déploiement GitHub Pages du commit É8 à confirmer.
+- [ ] Les tests automatisés ne remplacent pas les essais Safari iPhone : la voix, l’annonce par lecteur d’écran et la navigation tactile restent à vérifier sur appareil.

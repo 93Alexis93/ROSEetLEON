@@ -38,6 +38,8 @@ export function guidedPause(child = "leon") {
     const content = card([
       el("p", {
         class: "small",
+        role: "status",
+        "aria-live": "polite",
         text: "Étape " + (index + 1) + " sur " + PAUSE_STEPS.length + " · à ton rythme"
       }),
       el("h2", { text: step.title }),

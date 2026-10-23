@@ -28,3 +28,12 @@ test("Accessibilité · la progression du jeu de Rose est annoncée aux lecteurs
   assert.match(rose,/"aria-valuemin":"0","aria-valuemax":"5","aria-valuenow":String\(round\)/);
   assert.match(rose,/role:"status","aria-live":"polite"/);
 });
+
+const pause = readFileSync(resolve(root, "src/child/pause.js"), "utf8");
+
+test("Accessibilité · chaque étape de la pause est annoncée aux lecteurs d’écran", () => {
+  assert.match(pause, /role: "status"/);
+  assert.match(pause, /"aria-live": "polite"/);
+  assert.match(pause, /Étape /);
+  assert.match(pause, /Tu peux arrêter cette pause quand tu veux/);
+});
