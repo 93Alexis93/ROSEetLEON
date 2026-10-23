@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v43`.
+- Le service worker source utilise actuellement le cache `rose-leon-v44`.
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -166,3 +166,12 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Cache PWA renouvelé à `rose-leon-v43` ; le module reste précaché.
 - [ ] Confirmer les tests GitHub Actions et la publication Pages sur le SHA final.
 - [ ] Vérifier avec Rose que la consigne orale et le comptage en tapant dans les mains sont compréhensibles.
+
+
+## Étape É14 — progression adaptative après aide (code livré, validation à confirmer)
+- [x] Audit ciblé : dans les défis de maths de Léon, une réponse donnée après une seule aide pouvait encore être comptée comme autonome pour la progression de niveau.
+- [x] Correction : toute aide utilisée avant la réponse rend cette réponse neutre pour l’adaptation du niveau ; les statistiques générales d’essai/réussite restent enregistrées.
+- [x] Test de non-régression ajouté dans `tests/math-engine.test.mjs`.
+- [x] Cache PWA renouvelé à `rose-leon-v44`.
+- [ ] Confirmer tests GitHub Actions et déploiement Pages sur le SHA final.
+- [ ] Essai sur iPhone : répondre avec zéro aide, puis avec une aide, puis vérifier que seul le premier cas compte comme réponse autonome pour le niveau.
