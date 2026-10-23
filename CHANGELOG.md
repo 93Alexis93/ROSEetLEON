@@ -185,3 +185,6 @@
 
 ## Maintenance — 2026-10-24 (suite 5)
 - Message d’erreur utilisateur clarifié lors de l’import d’un JSON invalide ; test de non-écrasement conservé et cache PWA v56.
+
+## Maintenance — 2026-10-24 (suite 5)
+- La taille maximale des sauvegardes importées est contrôlée en octets UTF-8 ; test de non-régression et cache PWA v56.
