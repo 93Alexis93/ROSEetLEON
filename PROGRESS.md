@@ -74,8 +74,8 @@ Mis à jour le 23 octobre 2026.
 - [ ] Essais import/export réels sur iPhone à confirmer.
 
 ## Prochaines étapes proposées
-1. É8 — finition accessibilité et non-régression.
-2. Validation manuelle sur Safari iPhone des fonctions ajoutées aux étapes É5–É7.
+1. Vérifier sur iPhone les consignes « syllabes », les sons de bonne/mauvaise réponse et le menu de Léon.
+2. Valider sur Safari iPhone les fonctions précédentes, dont VoiceOver, la pause, les sauvegardes et le mode hors ligne.
 
 ## Historique utile
 Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
@@ -117,3 +117,14 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] 66 tests réussis sur le commit `b0ef7f9f48567857066b66ec2c2cd2af0fab4846` ([résultat CI](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017925754)).
 - [x] Déploiement GitHub Pages réussi pour ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017925063)).
 - [ ] Les tests automatisés ne remplacent pas les essais Safari iPhone : la voix, l’annonce par lecteur d’écran et la navigation tactile restent à vérifier sur appareil.
+
+
+## Étape É9 — retours sonores, vocabulaire et choix des défis (en attente de CI et de publication)
+- [x] Dans les jeux de Rose, remplacer « morceaux » par « syllabes » dans la consigne, les indices et les annonces vocales.
+- [x] Ajouter un son bref et doux en cas de mauvaise réponse, en respectant le réglage des sons ; conserver le son positif lors d’une bonne réponse, y compris après une première erreur.
+- [x] Appliquer les retours sonores aux défis de maths, aux jeux de Rose et aux jeux de lecture ; ajouter un son positif lors de la composition correcte du prénom.
+- [x] Ajouter le jeu des syllabes au menu principal des jeux de Rose.
+- [x] Remplacer « Défi penalty » par « Choisir un défi » et corriger l’annonce vocale d’accueil de Léon.
+- [x] Cache PWA renouvelé à `rose-leon-v39` ; les ressources modifiées sont déjà précachées.
+- [ ] Résultats des tests et publication Pages à confirmer sur le SHA final.
+- [ ] Essai iPhone : vérifier que les sons sont doux, non intrusifs et désactivables dans les réglages.
