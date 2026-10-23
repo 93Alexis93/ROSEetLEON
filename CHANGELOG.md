@@ -140,3 +140,7 @@
 
 ## E23 — Contrôle des énoncés mathématiques
 - Ajout de tests de cohérence pour la numération, les problèmes et les exercices de mesures, en complément du calcul mental et des suites logiques.
+
+
+## E24 — Couverture des multiplications
+- Les tests contrôlent maintenant la cohérence des produits et les tables autorisées aux trois niveaux de difficulté.
