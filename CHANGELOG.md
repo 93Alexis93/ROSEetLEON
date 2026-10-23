@@ -176,3 +176,6 @@
 
 ## Maintenance — 2026-10-24 (suite 2)
 - Validation stricte du résultat des réponses (`boolean`) dans le stockage commun ; test de non-modification des données et cache PWA v53.
+
+## Maintenance — 2026-10-24 (suite 3)
+- Validation des options de progression mathématique pour rejeter les appels mal formés avant écriture ; tests dédiés et cache PWA v54.
