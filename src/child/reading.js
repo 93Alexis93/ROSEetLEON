@@ -45,7 +45,7 @@ function startReading(mode){
    button("🔊 Écouter",()=>speak(q.speakText||q.prompt,getState().settings.voice),"button-soft"),
    button("💡 Indice",()=>{hintCount++;feedback.textContent=hintCount===1?q.hint:q.explanation;},"button-soft")
   ]),button("⌂ Accueil",()=>go("home"),"icon-button"),button("↩ Menu lecture",readingMenu,"button-soft"));
-  replaceApp(screen(labels[mode],content,{eyebrow:"Lecture sans pression",home:()=>go("home")}));
+  replaceApp(screen(labels[mode],content,{eyebrow:"Lecture sans pression",home:()=>go("home")}));\n  if(mode==="flash")speak(q.speakText,getState().settings.voice);
  };
  const answer=a=>{const ok=String(a)===String(q.answer);recordAnswer("leon",ok);const f=document.querySelector(".feedback");if(ok){score++;round++;if(round>=5){finish();return;}generate();render();const next=document.querySelector(".feedback");if(next)next.textContent="Bravo, tu as pris le temps de réfléchir !";}else if(f)f.textContent="Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.";};
  generate();render();
