@@ -2,12 +2,11 @@ import {el,button,screen,card,replaceApp} from "../ui.js";
 import {go} from "../router.js";
 
 const worksheets=[
- {id:"rose-letters",label:"Rose · Les lettres de mon prénom",description:"Reconnaître R, O, S et E, puis les retrouver dans une ligne de lettres.",child:"rose"},
- {id:"rose-shapes",label:"Rose · Les formes",description:"Reconnaître cercle, carré, triangle et étoile.",child:"rose"},
- {id:"leon-multiplication",label:"Léon · Les multiplications",description:"Petits calculs et stratégies sans chronomètre.",child:"leon"}
+ {id:"rose-letters",label:"Rose · Les lettres de mon prénom",description:"Reconnaître R, O, S et E, puis les retrouver dans une ligne de lettres."},
+ {id:"rose-shapes",label:"Rose · Les formes",description:"Reconnaître cercle, carré, triangle et étoile."},
+ {id:"leon-multiplication",label:"Léon · Les multiplications",description:"Petits calculs et stratégies sans chronomètre."}
 ];
 function text(tag,value,cls){return el(tag,{text:value,...(cls?{class:cls}:{})});}
-function line(label){return el("div",{class:"worksheet-line"},[text("span",label),text("span","________________________________")]);}
 function worksheetRoseLetters(){
  const page=el("article",{class:"print-page worksheet"});
  page.append(text("p","ROSE & LÉON · PETITE FICHE POUR GRANDIR","worksheet-kicker"),text("h1","Je reconnais les lettres de Rose"),text("p","Prénom : ____________________     Date : ____________________","worksheet-meta"));
@@ -46,7 +45,7 @@ function answerKey(id){
  page.append(text("p","POUR L’ADULTE · CORRIGÉ","worksheet-kicker"),text("h1","Repères de correction"));
  if(id==="rose-letters")page.append(text("p","Fiche « Les lettres de mon prénom » : les lettres attendues sont R, O, S et E. Dans la ligne, entourer R, O, S, E, R, O, S, E dans l’ordre où elles apparaissent."));
  else if(id==="rose-shapes")page.append(text("p","Fiche « Les formes magiques » : ● cercle ; ■ carré ; ▲ triangle ; ★ étoile. L’activité de liaison n’impose pas une façon unique de tracer les traits."));
- else page.append(text("ul","1. 6   ·   2. 20   ·   3. 12   ·   4. 15   ·   5. 16   ·   6. 21"));
+ else page.append(el("ul",{class:"answer-list"},["1. 3 × 2 = 6","2. 4 × 5 = 20","3. 2 × 6 = 12","4. 5 × 3 = 15","5. 4 × 4 = 16","6. 3 × 7 = 21"].map(answer=>text("li",answer))));
  page.append(text("p","Privilégier l’explication et l’encouragement. L’enfant peut utiliser des dessins ou recompter."));
  return page;
 }
