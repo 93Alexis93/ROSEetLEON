@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v47`.
+- Le service worker source utilise actuellement le cache `rose-leon-v49` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -245,3 +245,10 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - Étendu le test des multiplications aux trois niveaux de difficulté, et non plus au seul niveau intermédiaire.
 - Chaque énoncé est vérifié par recalcul du produit et contrôle des tables autorisées pour le niveau concerné.
 - La CI GitHub demeure à confirmer ; ces changements concernent uniquement les tests et la documentation.
+
+
+### E25 — Audit sémantique du nombre mystère
+- Ajout d’un test qui vérifie que la réponse du nombre mystère correspond à l’indice exact : décomposition en dizaines/unités, nombre suivant ou nombre précédent.
+- Le contrôle répète 1 200 générations pour augmenter les chances de repérer un défaut lié à une valeur particulière.
+- Correction de l’état documentaire : le cache hors ligne courant est `rose-leon-v49`, et non v47.
+- CI et publication Pages à confirmer sur le SHA final ; validation sur Safari iPhone toujours nécessaire pour les parcours non encore testés.
