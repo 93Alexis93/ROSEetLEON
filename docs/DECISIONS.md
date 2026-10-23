@@ -17,3 +17,6 @@
 - Import de sauvegarde : l’état en mémoire est restauré si la persistance échoue pendant l’import ; un test simule une erreur de stockage pour vérifier qu’aucune progression n’est perdue.
 - Stockage transactionnel : si localStorage refuse une modification, un import ou une remise à zéro, l’état en mémoire revient à la version précédente ; des tests simulent l’échec d’écriture.
 - Service worker PWA : lors de l’activation, ne supprimer que les caches préfixés `rose-leon-`. CacheStorage est partagé à l’échelle de l’origine, notamment sur `github.io` ; les caches d’autres applications doivent être préservés. Un test statique de non-régression couvre ce point.
+
+- Création pédagogique originale à partir de compétences de référence : « Nombre mystère » pour travailler la valeur des dizaines/unités et les nombres voisins en CE1 ; « Les syllabes dans les mots » pour écouter et segmenter des mots oraux en moyenne section. Les contenus des sites consultés servent de repères de compétences et de progressivité, sans recopier leurs fiches ni leurs jeux.
+- Les activités nouvelles doivent rester courtes, réécoutables, sans chronomètre, avec indices et retours encourageants ; les questions sont testées automatiquement et le module est inclus dans le cache local.
