@@ -33,7 +33,7 @@ test("Syllabes · chaque question possède une consigne et une réponse entre un
 test("Les deux activités sont accessibles depuis les menus enfants et incluses hors ligne",()=>{
  const main=readFileSync(resolve(root,"src/main.js"),"utf8");
  const worker=readFileSync(resolve(root,"service-worker.js"),"utf8");
- assert.match(main,/numberMystery,syllableGame/);
+ assert.match(main,/numberMystery,compareNumbers,syllableGame/);
  assert.match(main,/Nombre mystère/);
  assert.match(main,/compareNumbers/);
  assert.match(main,/Le plus grand nombre/);
