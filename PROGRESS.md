@@ -9,6 +9,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Thèmes CSS et icône SVG locale
 - [x] Application publiée sur GitHub Pages et ouverte sur iPhone Safari
 - [x] Test automatisé de cohérence de la liste de ressources hors ligne ajouté ; GitHub Actions passe
+- [x] Tests automatisés des sauvegardes : export/import, restauration des mots personnalisés et réglages, refus des JSON invalides sans écraser les données
 - [ ] Refaire un test complet du mode avion après les dernières évolutions
 
 ## Phase 1 — Squelette navigable
@@ -99,3 +100,5 @@ Mis à jour le 23 octobre 2026.
 - Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; le statut GitHub Actions a été confirmé via les outils disponibles ; les tests automatisés passent, mais les tests navigateur restent nécessaires.
 
 - [x] Phase 8 : le délai de sécurité de la porte parentale ne réaffiche plus son écran si l’utilisateur est parti sur une autre page ; test de non-régression ajouté.
+
+- [x] Phase 8 : tests automatisés de sauvegarde locale ajoutés avec stockage simulé ; vérification du cycle export/import et du refus des fichiers invalides sans perte des données en mémoire.
