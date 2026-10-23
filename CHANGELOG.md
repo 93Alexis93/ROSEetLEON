@@ -95,3 +95,10 @@
 - Audit du découpage oral dans les mots-mystères : corrections des mots dont les tirets suggéraient un nombre de syllabes inexact à l’oral.
 - Ajout d’un test explicite sur 21 mots courants pour protéger les découpages les plus sensibles.
 - Cache PWA renouvelé à v45 ; CI, publication Pages et essai oral avec Léon à confirmer.
+
+
+## É16 — 2026-10-23
+- Audit étendu des 45 mots de la banque de lecture ; correction du découpage de « lune » en une syllabe.
+- Test de non-régression élargi à l’ensemble de la banque syllabique.
+- Mise à jour du test PWA qui attendait encore l’ancienne version du cache v42 ; le contrôle suit maintenant v46.
+- Cache PWA renouvelé à v46 ; CI, publication Pages et validation orale avec Léon à confirmer.
