@@ -13,7 +13,15 @@ const BASE_WORDS = [
   "maillot", "tortue", "girafe", "poussin", "savon", "valise"
 ];
 const pick = items => items[Math.floor(Math.random() * items.length)];
-const shuffle = items => [...items].sort(() => Math.random() - 0.5);
+export function shuffleReadingItems(items, random = Math.random) {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+const shuffle = items => shuffleReadingItems(items);
 export const READING_SYLLABLES = {
   lapin: "la-pin",
   maison: "mai-son",
