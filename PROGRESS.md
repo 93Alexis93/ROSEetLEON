@@ -233,3 +233,9 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - Corrigé le contrôle qui repère les choix artificiels : son expression régulière était trop échappée et ne testait pas réellement le format attendu.
 - Ajouté des vérifications sémantiques répétées sur les calculs mentaux et les suites logiques, au-delà de la seule forme des questions et des choix.
 - Vérification CI et publication Pages : en attente côté GitHub au moment de cette mise à jour.
+
+
+### E23 — Vérification sémantique élargie des maths
+- Étendu les tests au-delà du calcul mental et de la logique : numération, problèmes écrits, conversions de longueurs, sommes d’argent et lecture de l’heure sont comparés à leur énoncé.
+- Les contrôles couvrent plusieurs centaines de questions générées par niveau pour repérer les incohérences entre la consigne et la réponse.
+- Les workflows GitHub étaient toujours en attente lors du dernier contrôle ; la validation automatique reste à confirmer.
