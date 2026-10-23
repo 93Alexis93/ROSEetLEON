@@ -249,3 +249,17 @@ test("Stockage · un abonné ne peut pas modifier la copie reçue par les autres
   assert.equal(secondSnapshot.profiles.leon.sessions, 12);
   assert.equal(store.getState().profiles.leon.sessions, 12);
 });
+
+
+test("Stockage · un identifiant enfant inconnu est refusé sans modifier les données", () => {
+  failWrites = false;
+  store.resetData();
+  store.update(state => {
+    state.profiles.leon.sessions = 13;
+    state.profiles.rose.attempts = 4;
+  });
+  const before = store.getState();
+  assert.throws(() => store.recordAnswer("inconnu", true), /Profil enfant inconnu/);
+  assert.throws(() => store.recordSession("inconnu"), /Profil enfant inconnu/);
+  assert.deepEqual(store.getState(), before);
+});
