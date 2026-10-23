@@ -56,6 +56,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Activité interactive « Je compose mon prénom » : composer ROSE en touchant les lettres, avec modèle visible, retour encourageant et possibilité de recommencer.
 - [x] Test ciblé de la règle de validation du prénom : bon ordre, ordre erroné, prénom incomplet, lettres en trop et type invalide.
 - [x] Si Rose touche une mauvaise lettre, l’activité l’invite doucement à regarder le modèle et à réessayer sans enregistrer cette lettre ; test automatisé de la lettre attendue à chaque étape.
+- [x] Phase 8 : progression des jeux de Rose annoncée comme barre de progression aux lecteurs d’écran ; tests de régression ajoutés pour cibles tactiles, focus visible et réduction des animations.
 - [x] Tests automatisés sur 600 générations couleurs/formes/lettres, 200 questions de comptage et les activités inconnues
 - [x] Cache PWA passé à v9 après ajout du jeu des lettres ; nouveau module inclus dans les ressources hors ligne
 - [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
@@ -75,7 +76,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Fiche Léon : trois petits problèmes additifs et multiplicatifs, avec espace pour dessiner et corrigé séparé
 - [x] Fiche Léon : cinq premiers mots anglais à relier à leur traduction, avec corrigé
 - [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne, version actuelle v19
+- [x] Nouveau module ajouté au cache hors ligne, version actuelle v20
 - [x] Corrigé des multiplications structuré en liste lisible pour l’impression
 - [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
 - [x] Test CI ajouté pour vérifier que toutes les ressources préchargées par le service worker existent, sans doublons, et que les fiches/styles sont bien inclus
