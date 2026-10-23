@@ -19,7 +19,11 @@ replaceApp(screen("Rose & Léon",content,{eyebrow:"Notre petit coin pour grandir
 }
 function childHome(child){document.body.className="theme-"+child;
 const rose=child==="rose";
-const content=card([el("p",{class:"lead",text:rose?"Choisissons un jeu magique !":"Prêt pour un petit défi de calcul ?"}),el("div",{class:"prompt",text:rose?"🌈 🦄 ✨":"⚽ 🥅 ⭐"}),button(rose?"Choisir un jeu":"Défi penalty",()=>{unlockAudio();if(rose)roseMenu();else startActivity(child);},"button-primary"),...(!rose?[button("📚 Lecture",()=>{unlockAudio();readingMenu();},"button-soft"),button("🔎 Nombre mystère",()=>{unlockAudio();numberMystery();},"button-soft"),button("⚖️ Le plus grand nombre",()=>{unlockAudio();compareNumbers();},"button-soft")]:[button("👏 Les syllabes",()=>{unlockAudio();syllableGame();},"button-soft")]),button("🔊 Réécouter",()=>speak(rose?"Choisis un jeu : compter les licornes, les couleurs magiques ou les formes à retrouver.":"Choisis les défis de maths ou les jeux de lecture.",getState().settings.voice),"button-soft"),button("⌂ Accueil",()=>go("home"),"icon-button")]);
+const content=card([el("p",{class:"lead",text:rose?"Choisissons un jeu magique !":"Prêt pour un petit défi de calcul ?"}),
+el("div",{class:"prompt",text:rose?"🌈 🦄 ✨":"⚽ 🥅 ⭐"}),
+button(rose?"Choisir un jeu":"Défi penalty",()=>{unlockAudio();if(rose)roseMenu();else startActivity(child);},"button-primary"),
+...(!rose?[button("📚 Lecture",()=>{unlockAudio();readingMenu();},"button-soft"),button("🔎 Nombre mystère",()=>{unlockAudio();numberMystery();},"button-soft"),button("⚖️ Le plus grand nombre",()=>{unlockAudio();compareNumbers();},"button-soft")]:[button("👏 Les syllabes",()=>{unlockAudio();syllableGame();},"button-soft")]),
+button("🔊 Réécouter",()=>speak(rose?"Choisis un jeu : compter les licornes, les couleurs magiques ou les formes à retrouver.":"Choisis les défis de maths ou les jeux de lecture.",getState().settings.voice),"button-soft"),button("⌂ Accueil",()=>go("home"),"icon-button")]);
 replaceApp(screen(rose?"Bonjour Rose !":"Salut Léon !",content,{eyebrow:rose?"Univers licorne":"Univers ballon",home:()=>go("home")}));
 speak(rose?"Bonjour Rose ! Choisis un petit jeu.":"Salut Léon ! Choisis ton défi penalty.",getState().settings.voice);
 }
