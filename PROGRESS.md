@@ -1,134 +1,52 @@
-# Avancement — Rose & Léon
+# Avancement — ROSEetLEON
 Mis à jour le 23 octobre 2026.
 
-## Jeux pédagogiques complémentaires — 23 octobre 2026
-- [x] Veille documentée : repères Éduscol maternelle/CE1 et ressources complémentaires dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
-- [x] Ajout du jeu « Nombre mystère » pour Léon : dizaines/unités, nombre précédent/suivant, indices et cinq questions.
-- [x] Ajout du jeu « Le plus grand nombre » : comparer deux nombres à deux chiffres, avec indices et retour explicatif.
-- [x] Ajout du jeu « Les syllabes » pour Rose : écoute, appui visuel et choix de 1 à 3 syllabes, cinq questions.
-- [x] Correction de la consigne visible du jeu des syllabes et ajout de tests ciblés ; cache hors ligne renouvelé à v29 après ajout du défi de comparaison.
-- [ ] Tester ces deux nouvelles activités sur iPhone Safari (voix, consigne, interactions et fin de session).
+## État actuel
 
-## Validation utilisateur et audit PWA — 23 octobre 2026
-- [x] Validation déclarée sur iPhone Safari : navigation, six défis de maths, quatre activités de lecture, jeux de Rose, conservation des progrès, mots personnalisés/sauvegardes, voix/sons, espace parent et fiches imprimables.
-- [ ] Mode hors ligne non testé par l’utilisateur ; ne pas le déclarer validé avant un essai en mode avion après chargement HTTPS.
-- [x] Audit du service worker : le nettoyage à l’activation supprimait auparavant tous les caches de l’origine `github.io`, y compris ceux d’autres applications éventuelles. Il est désormais limité aux caches dont le nom commence par `rose-leon-`.
-- [x] Cache PWA renouvelé à v26 ; test automatique ajouté pour empêcher la régression du nettoyage des caches.
+### Fonctionnalités présentes dans le dépôt
+- Application web statique, mobile-first, publiée sur GitHub Pages ; modules JavaScript natifs, sans framework ni dépendance de build.
+- Navigation des profils Léon et Rose.
+- Léon : six défis de maths, quatre formats de lecture, « Nombre mystère » et « Le plus grand nombre ».
+- Rose : comptage, couleurs, formes, lettres du prénom, composition tactile de ROSE, association majuscules/minuscules et jeu des syllabes.
+- Espace parent : porte par calcul, tableau de bord, réglages, mots personnalisés, sauvegarde JSON et fiches A4 avec repères de correction.
+- Outil parent « Crise en cours ».
+- Stockage local versionné et service worker avec cache hors ligne de ressources locales.
 
-## Phase 0 — Fondations
-- [x] Documentation pédagogique et décisions techniques
-- [x] Structure de base du dépôt
-- [x] HTML mobile-first, manifest PWA et service worker
-- [x] Stockage versionné, routeur, UI, voix et sons
-- [x] Thèmes CSS et icône SVG locale
-- [x] Application publiée sur GitHub Pages et ouverte sur iPhone Safari
-- [x] Test automatisé de cohérence de la liste de ressources hors ligne ajouté ; GitHub Actions passe
-- [x] Tests automatisés des sauvegardes : export/import, restauration des mots personnalisés et réglages, refus des JSON invalides sans écraser les données
-- [ ] Refaire un test complet du mode avion après les dernières évolutions
+### Validation réelle
+- **Validé par l’utilisateur sur iPhone Safari** : navigation, six défis de maths, quatre activités de lecture, jeux de Rose, persistance des progrès, mots personnalisés/sauvegardes, voix/sons, espace parent et affichage des fiches imprimables.
+- **Présent mais pas encore validé sur iPhone** : « Nombre mystère », « Le plus grand nombre » et « Les syllabes » ; vérifier consignes, interactions, voix et fin de session.
+- **Pas encore validé** : parcours complet de chaque activité, mode avion après chargement HTTPS, rendu/ impression A4 réels, export sur iPhone, comportement de l’application installée et voix/sons dans toutes les conditions.
 
-## Phase 1 — Squelette navigable
-- [x] Accueil et choix des profils Léon / Rose
-- [x] Porte parentale avec multiplication 6–9, verrouillage après trois erreurs et PIN facultatif
-- [x] Tableau de bord parent, réglages voix/sons, export/import JSON et remise à zéro
-- [x] Défi de calcul mental initial pour Léon et comptage de licornes pour Rose
-- [x] Encouragements, suivi local et écran de fin
-- [x] Outil parent « Crise en cours »
-- [ ] Tests navigateur complets et vérification de la voix iOS
+## Tests automatisés
+- Tests Node natifs présents dans `tests/*.test.mjs`, notamment moteurs de maths, lecture, stockage et cohérence des ressources hors ligne.
+- Le workflow GitHub Actions `.github/workflows/tests.yml` vérifie la syntaxe JavaScript et exécute les tests Node.
+- Des tests couvrent notamment les sauvegardes, les questions générées, les menus et le service worker.
+- **Ne pas déclarer les tests verts sans consulter le résultat Actions correspondant au SHA exact.** Le statut du dernier commit n’a pas été vérifié pendant l’audit É0.
+- Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
-## Phase 2 — Maths de Léon
-- [x] Moteur de questions dans six domaines : calcul mental, numération, tables, problèmes, logique et mesures
-- [x] Cinq questions par session, indices progressifs et trois niveaux adaptatifs
-- [x] Progression locale par domaine et résumé dans l’espace parent
-- [x] Renouvellement du cache PWA pour les ressources de maths
-- [x] Contrôle automatique de 9 000 questions sans défaut détecté (résultat rapporté précédemment)
-- [x] L’utilisateur a confirmé sur iPhone que les six défis apparaissent après actualisation de l’URL
-- [x] Suite `node --experimental-default-type=module --test tests/*.test.mjs` exécutée dans GitHub Actions ; les choix de secours numériques ont été corrigés et les tests automatisés passent
-- [ ] Tester chaque domaine jusqu’à la fin d’une session, la progression adaptative et le mode avion
-- État : menu visible validé par l’utilisateur ; tests automatisés des moteurs passés, parcours fonctionnel complet encore à vérifier.
+## Service worker et publication
+- Le service worker source utilise actuellement le cache `rose-leon-v29`.
+- La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
+- Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
+- Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
 
-## Phase 3 — Lecture de Léon (première version en cours)
-- [x] Menu lecture accessible depuis l’accueil de Léon
-- [x] Quatre formats : mots-éclairs, mots-mystères, phrases et mini-textes
-- [x] Gestion locale des mots personnalisés depuis l’espace parent
-- [x] Correction du compteur : une réponse trouvée après une erreur ne compte plus comme réussite du premier coup
-- [x] Consigne de chaque format lue par la voix française si elle est activée ; les mots-éclairs font entendre le mot cible
-- [x] Questions de compréhension des phrases reformulées pour éviter une consigne ambiguë
-- [x] Tests unitaires ajoutés : 200 générations par format vérifient quatre choix distincts, présence de la réponse et contenu des consignes
-- [x] Workflow GitHub Actions configuré pour vérifier la syntaxe JavaScript et lancer les tests de maths et de lecture à chaque push sur main ou pull request
-- [x] Cache PWA initialement passé à v6 après correction des choix de lecture ; renouvelé ensuite à v8 pour les jeux de Rose
-- [x] GitHub Actions exécute le workflow ; une première exécution a révélé un défaut de choix multiples en lecture, corrigé ; les tests et la vérification de syntaxe passent encore sur le commit `57fd361`
-- [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
-- [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
-- [ ] Vérifier hors ligne après activation du service worker
-- État : les tests automatisés passent sur le commit `57fd361`. Les tests navigateur et mode hors ligne restent à faire.
-
-## Phase 4 — Premiers jeux variés pour Rose (en cours)
-- [x] Menu de choix de jeux séparé du lancement direct du comptage
-- [x] Jeu de couleurs avec consigne vocale, trois choix et indice doux
-- [x] Jeu de formes (cercle, carré, triangle, étoile) avec consigne vocale, trois choix et indice
-- [x] Jeu des lettres R, O, S et E à partir du prénom Rose, avec consigne vocale et trois choix
-- [x] Jeu d’association majuscules/minuscules R/r, O/o, S/s et E/e avec consigne vocale, indice doux et trois choix
-- [x] Activité interactive « Je compose mon prénom » : composer ROSE en touchant les lettres, avec modèle visible, retour encourageant et possibilité de recommencer.
-- [x] Test ciblé de la règle de validation du prénom : bon ordre, ordre erroné, prénom incomplet, lettres en trop et type invalide.
-- [x] Si Rose touche une mauvaise lettre, l’activité l’invite doucement à regarder le modèle et à réessayer sans enregistrer cette lettre ; test automatisé de la lettre attendue à chaque étape.
-- [x] Phase 8 : progression des jeux de Rose annoncée comme barre de progression aux lecteurs d’écran ; tests de régression ajoutés pour cibles tactiles, focus visible et réduction des animations.
-- [x] Tests automatisés sur 600 générations couleurs/formes/lettres, 200 questions de comptage et les activités inconnues
-- [x] Cache PWA passé à v9 après ajout du jeu des lettres ; nouveau module inclus dans les ressources hors ligne
-- [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
-- [ ] Ajouter progressivement d’autres activités MS après contrôle de ces premiers jeux
-
-## Phase 5 — Outils parent
-- [x] Première boîte à outils « Crise en cours » avec étapes brèves, sécurité, accueil de l’émotion et choix simples
-- [ ] Enrichir les outils parent après retours d’usage, sans enregistrer de données sensibles sur les crises
-
-## Phase 6 — Premières fiches pédagogiques A4
-- [x] Menu de fiches imprimables depuis l’espace parent
-- [x] Fiche Rose : reconnaître les lettres de son prénom, avec repère de correction
-- [x] Fiche Rose : reconnaître et relier les formes, avec repère de correction
-- [x] Fiche Rose : chemins simples pour entraîner le geste du crayon, sans exigence de réussite
-- [x] Fiche Rose : petites situations pour parler des émotions, avec réponses ouvertes et sans émotion imposée
-- [x] Fiche Léon : six multiplications, stratégies dessin/compter par bonds, corrigé séparé
-- [x] Fiche Léon : trois petits problèmes additifs et multiplicatifs, avec espace pour dessiner et corrigé séparé
-- [x] Fiche Léon : cinq premiers mots anglais à relier à leur traduction, avec corrigé
-- [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne, version actuelle v23
-- [x] Corrigé des multiplications structuré en liste lisible pour l’impression
-- [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
-- [x] Test CI ajouté pour vérifier que toutes les ressources préchargées par le service worker existent, sans doublons, et que les fiches/styles sont bien inclus
-- [x] Trois nouvelles fiches ajoutées sans dépendances : motricité fine pour Rose, problèmes courts et premiers mots anglais pour Léon
-- [ ] Vérifier le rendu réel avec l’aperçu d’impression Safari iPhone et une impression A4
-
-## Phases suivantes prévues
-- Phase 7 : écriture, émotions, histoires sociales, logique et anglais (fiche émotions, fiche anglaise, suites logiques et association majuscules/minuscules ajoutées)
-- Phase 8 : finition, accessibilité, tests de non-régression et validation globale
-
-## Décisions et limites à respecter
-- Application statique : HTML/CSS/JavaScript natifs, modules ES, sans backend, framework, build, npm ni CDN.
-- Données locales dans le navigateur ; sauvegardes JSON importables/exportables.
+## Principes non négociables
+- Application statique : HTML, CSS et JavaScript natifs ; pas de framework, build, npm, backend ou CDN sans accord.
 - Priorité à Safari sur iPhone et au fonctionnement hors ligne après un premier chargement HTTPS.
-- Pédagogie positive : aucune punition, comparaison entre enfants, score anxiogène ou chronomètre stressant.
-- Les SVG servent d’icône web ; une icône PNG iOS pourra être ajoutée après validation sur appareil.
-- La porte parentale n’est pas une sécurité cryptographique.
-- Huit fiches A4 sont présentes ; le rendu physique sur Safari iPhone et imprimante reste à valider, mais le développement continue sans attendre cette validation à la demande de l’utilisateur.
-- N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
-- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; le statut GitHub Actions a été confirmé via les outils disponibles ; les tests automatisés passent, mais les tests navigateur restent nécessaires.
+- Données locales, sauvegardes JSON importables/exportables et migrations testées en cas d’évolution du schéma.
+- Pédagogie positive : pas de punition, comparaison entre enfants, score anxiogène ni chronomètre stressant. L’erreur doit permettre de recevoir de l’aide et de réessayer.
+- Ne pas enregistrer de données sensibles sur les crises et ne pas employer de diagnostic médical dans l’interface enfant.
+- A4 sobre, économe en encre et vérifié avant d’annoncer un rendu validé.
+- Distinguer dans la documentation les programmes officiels, les pratiques étayées et les propositions pédagogiques ; citer les sources précises lorsqu’une affirmation pédagogique importante est avancée.
+- La porte parentale est un filtre d’usage, pas une sécurité cryptographique.
+- Ne jamais présenter comme exécuté un test qui n’a pas réellement été lancé ; ne pas confondre présence du code, validation utilisateur, test automatisé et déploiement confirmé.
 
-- [x] Phase 8 : le délai de sécurité de la porte parentale ne réaffiche plus son écran si l’utilisateur est parti sur une autre page ; test de non-régression ajouté.
+## Prochaines étapes proposées
+1. É1 — remettre la documentation d’avancement et les décisions techniques en cohérence ; supprimer ensuite le code mort uniquement après vérification de ses références et selon la règle de formatage préalable.
+2. É2 — verrouillage cohérent de l’espace parent, des outils de crise et des fiches imprimables.
+3. É3 — fiabiliser la progression adaptative de Léon et la prise en compte des indices.
+4. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
+5. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
 
-- [x] Phase 8 : tests automatisés de sauvegarde locale ajoutés avec stockage simulé ; vérification du cycle export/import et du refus des fichiers invalides sans perte des données en mémoire.
-
-- [x] Phase 8 : la porte parentale accepte aussi la touche Entrée pour valider le calcul ; test de non-régression ajouté et cache PWA passé à v22.
-
-- [x] Phase 8 : l’import de sauvegarde restaure l’état précédent si l’écriture dans le stockage local échoue ; test de régression avec quota simulé ajouté. Cache PWA passé à v24.
-
-- [x] Phase 8 : une modification ou une remise à zéro est annulée en mémoire si le stockage local refuse l’écriture ; tests de régression avec quota simulé ajoutés. Cache PWA v25.
-
-- [x] Phase 8 : les sauvegardes dont les profils ou réglages sont des tableaux sont désormais refusées ; test de non-régression ajouté. Cache PWA v25.
-
-## Nouvelles activités issues de la veille pédagogique — 23 octobre 2026
-- [x] Création du jeu CE1 « Nombre mystère » : dizaines/unités, nombre précédent et suivant, indices progressifs, quatre choix et explication après réussite.
-- [x] Création du jeu MS « Les syllabes dans les mots » : écoute d’un mot courant, appui visuel, dénombrement de 1 à 3 syllabes, possibilité de réécouter et indice gestuel (taper dans les mains).
-- [x] Les deux jeux sont reliés aux menus de Léon et Rose, sans dépendance externe ; le module est préchargé pour le mode hors ligne.
-- [x] Tests automatisés ajoutés : 600 questions de numération, 300 questions de syllabes, unicité des choix, présence des réponses, intégration aux menus et cache PWA.
-- [ ] Vérifier sur iPhone l’usage des deux nouveaux jeux, notamment la prononciation vocale et la clarté des images pour la phonologie.
-- Sources pédagogiques consultées et principes retenus documentés dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
+## Historique utile
+Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
