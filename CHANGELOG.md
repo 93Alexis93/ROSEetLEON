@@ -188,3 +188,6 @@
 
 ## Maintenance — 2026-10-24 (suite 5)
 - La taille maximale des sauvegardes importées est contrôlée en octets UTF-8 ; test de non-régression et cache PWA v56.
+
+## Maintenance — 2026-10-24 (suite 6)
+- Le workflow de tests utilise un groupe de concurrence par référence et annule les exécutions obsolètes lors d’un nouveau commit pour réduire l’accumulation de jobs en attente.
