@@ -2,20 +2,30 @@
 Mis à jour le 23 octobre 2026.
 
 ## Phase 0 — Fondations
-- [x] Documentation et structure du projet
-- [x] HTML mobile-first, manifest et service worker
-- [x] Stockage versionné, routeur, interface, voix et sons
-- [ ] Confirmer GitHub Pages dans les paramètres
-- [ ] Tester cache hors ligne sur iPhone
+- [x] Documentation pédagogique et décisions techniques
+- [x] Structure de base du dépôt, avec emplacements pour modules futurs
+- [x] HTML mobile-first, manifest PWA et service worker
+- [x] Modules de stockage versionné, routeur, UI, voix et sons
+- [x] Thèmes CSS et icône SVG locale
+- [ ] Activer GitHub Pages dans Settings → Pages (action manuelle requise)
+- [ ] Tester le cache hors ligne sur un iPhone réel
 
-## Phase 1 — Squelette
-- [x] Accueil et choix de profil
-- [x] Porte parentale avec multiplication et verrouillage temporaire
-- [x] Espace parent, réglages, sauvegarde JSON
-- [x] Défi de calcul Léon et comptage Rose
-- [ ] Tester sur Safari iOS : voix, tactile, sauvegarde et mode avion
+## Phase 1 — Squelette navigable
+- [x] Accueil et choix des profils Léon / Rose
+- [x] Porte parentale avec multiplication 6–9, verrouillage après trois erreurs et PIN facultatif
+- [x] Tableau de bord parent, réglages voix/sons, export/import JSON et remise à zéro
+- [x] Défi de calcul mental pour Léon et comptage de licornes pour Rose
+- [x] Encouragements, suivi local et écran de fin « À demain ! »
+- [x] Outils parent : première trame « Crise en cours »
+- [ ] Exécuter des tests syntaxiques et fonctionnels automatisés dans un environnement navigateur
+- [ ] Tester les interactions, la voix iOS, la sauvegarde et le mode avion sur appareil réel
 
-## Décisions
-- localStorage versionné, données locales uniquement.
-- La porte parentale évite les sorties accidentelles, mais n'est pas une authentification forte.
-- Vérifier les fonctionnalités sur iPhone réel avant validation.
+## Limites connues
+- Le tableau de bord et les activités sont une première démonstration, pas encore la bibliothèque pédagogique complète.
+- La voix dépend de la disponibilité des voix françaises dans iOS ; les sons peuvent être désactivés.
+- La protection parentale réduit les sorties accidentelles mais ne constitue pas une sécurité forte.
+- La section fiches imprimables est une coquille ; les générateurs A4 complets sont prévus en phase 6.
+- Les SVG fonctionnent comme icône de manifest ; une icône PNG dédiée iOS pourra être ajoutée après validation sur appareil.
+
+## Prochaine étape
+Activer Pages, charger l'application depuis Safari sur iPhone et remonter les problèmes observés avant de commencer la phase 2.
