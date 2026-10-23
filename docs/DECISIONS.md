@@ -123,3 +123,6 @@ E29 — Les abonnés du store reçoivent chacun une copie distincte de l’état
 E30 — Le tri avec un comparateur aléatoire n’est pas un algorithme de mélange uniforme. Les choix de lecture utilisent maintenant Fisher–Yates, avec source injectable pour permettre un test déterministe sans aléa fragile.
 
 E31 — Toute modification d’un module précaché doit s’accompagner d’une révision du cache service worker : sans changement du script du worker, les installations existantes risquent de conserver l’ancien fichier. Cache v50 et assertion de test alignés.
+
+## Validation des opérations de stockage
+- Les opérations qui enregistrent une réponse ou une séance vérifient explicitement que l’identifiant correspond à `leon` ou `rose`, afin de refuser proprement les appels invalides.
