@@ -60,4 +60,6 @@
 ## É10 — 2026-10-23
 - Ajout d’une icône PNG 512×512 au manifeste PWA et d’un lien `apple-touch-icon` pour iOS ; favicon SVG conservé.
 - Cache PWA incrémenté de v39 à v40, avec l’icône PNG ajoutée au précache.
-- Tests de cohérence du cache et de l’icône ajoutés ; résultats CI et publication à confirmer.
+- Tests de cohérence du cache et de l’icône ajoutés.
+- Validation : tests automatisés réussis et déploiement GitHub Pages confirmé sur le commit `9b1caf7126c044c221152e37d3138b6690e4d3c3` ([tests](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113554), [publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113850)).
+- L’icône sur l’écran d’accueil et le comportement réel sur iPhone restent à tester.
