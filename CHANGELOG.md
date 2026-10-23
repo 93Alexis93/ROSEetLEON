@@ -54,4 +54,10 @@
 - Vocabulaire du jeu de Rose harmonisé autour du mot « syllabes » ; le jeu est également proposé dans son menu de jeux.
 - Ajout d’un petit signal sonore doux pour une réponse incorrecte et conservation du signal positif en cas de réussite, y compris après un premier essai incorrect ; réglage des sons respecté.
 - Léon voit désormais « Choisir un défi » plutôt que « Défi penalty » et entend une consigne qui reflète les différentes activités disponibles.
-- Cache PWA renouvelé à v39 ; CI, déploiement et vérification réelle sur iPhone à confirmer.
+- Cache PWA renouvelé à v39 ; tests automatisés et déploiement Pages réussis sur le commit `bb283a7c9c2e28ffc62af1a05ac86e912604230c` ([tests](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40019990840), [publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40019992611)).
+
+
+## É10 — 2026-10-23
+- Ajout d’une icône PNG 512×512 au manifeste PWA et d’un lien `apple-touch-icon` pour iOS ; favicon SVG conservé.
+- Cache PWA incrémenté de v39 à v40, avec l’icône PNG ajoutée au précache.
+- Tests de cohérence du cache et de l’icône ajoutés ; résultats CI et publication à confirmer.

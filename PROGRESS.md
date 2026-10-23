@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v38`.
+- Le service worker source utilise actuellement le cache `rose-leon-v40`.
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -119,12 +119,22 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [ ] Les tests automatisés ne remplacent pas les essais Safari iPhone : la voix, l’annonce par lecteur d’écran et la navigation tactile restent à vérifier sur appareil.
 
 
-## Étape É9 — retours sonores, vocabulaire et choix des défis (en attente de CI et de publication)
+## Étape É9 — retours sonores, vocabulaire et choix des défis (code livré, tests CI et déploiement réussis)
 - [x] Dans les jeux de Rose, remplacer « morceaux » par « syllabes » dans la consigne, les indices et les annonces vocales.
 - [x] Ajouter un son bref et doux en cas de mauvaise réponse, en respectant le réglage des sons ; conserver le son positif lors d’une bonne réponse, y compris après une première erreur.
 - [x] Appliquer les retours sonores aux défis de maths, aux jeux de Rose et aux jeux de lecture ; ajouter un son positif lors de la composition correcte du prénom.
 - [x] Ajouter le jeu des syllabes au menu principal des jeux de Rose.
 - [x] Remplacer « Défi penalty » par « Choisir un défi » et corriger l’annonce vocale d’accueil de Léon.
 - [x] Cache PWA renouvelé à `rose-leon-v39` ; les ressources modifiées sont déjà précachées.
-- [ ] Résultats des tests et publication Pages à confirmer sur le SHA final.
+- [x] Tests automatisés réussis sur le commit `bb283a7c9c2e28ffc62af1a05ac86e912604230c` ([tests](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40019990840)).
+- [x] Déploiement GitHub Pages réussi sur ce même commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40019992611)).
 - [ ] Essai iPhone : vérifier que les sons sont doux, non intrusifs et désactivables dans les réglages.
+
+
+## Étape É10 — icône PNG et vérification du cache PWA (en attente de CI et de publication)
+- [x] Ajout d’une icône PNG locale 512×512 pour le manifeste PWA et le raccourci iOS.
+- [x] Ajout de l’icône au manifeste et d’un lien `apple-touch-icon`, tout en conservant le favicon SVG.
+- [x] Icône ajoutée au précache et cache incrémenté de `rose-leon-v39` à `rose-leon-v40` dans le même commit.
+- [x] Tests ajoutés pour l’incrément v40, l’en-tête PNG, le manifeste et le précache.
+- [ ] CI et publication Pages à confirmer sur le SHA exact.
+- [ ] Essai iPhone : vérifier l’icône lors de l’ajout à l’écran d’accueil.

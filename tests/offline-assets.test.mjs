@@ -6,6 +6,7 @@ import {fileURLToPath} from "node:url";
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const worker=readFileSync(resolve(root,"service-worker.js"),"utf8");
+const manifest=JSON.parse(readFileSync(resolve(root,"manifest.webmanifest"),"utf8"));
 const match=worker.match(/const ASSETS=(\[[^;]+\]);/);
 assert.ok(match,"Le service worker doit déclarer la liste des ressources hors ligne.");
 const assets=JSON.parse(match[1]);
@@ -44,4 +45,14 @@ test("PWA · les ressources locales déclarées dans index.html existent et sont
 test("PWA · l’activation ne supprime que les anciens caches de cette application",()=>{
   assert.match(worker,/keys\.filter\(k=>k\.startsWith\("rose-leon-"\)&&k!==CACHE\)/,
     "Le nettoyage doit préserver les caches d’autres applications hébergées sur la même origine.");
+});
+
+
+test("PWA · icône PNG déclarée, valide et précachée",()=>{
+ const icon=manifest.icons.find(item=>item.src==="./assets/icons/icon-512.png");
+ assert.ok(icon,"Le manifeste doit déclarer l’icône PNG.");
+ assert.equal(icon.sizes,"512x512"); assert.equal(icon.type,"image/png");
+ assert.ok(assets.includes(icon.src),"L’icône doit être précachée.");
+ const bytes=readFileSync(resolve(root,icon.src.slice(2)));
+ assert.deepEqual([...bytes.subarray(0,8)],[137,80,78,71,13,10,26,10]);
 });

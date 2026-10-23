@@ -7,7 +7,7 @@
 - Service worker limité aux ressources locales nécessaires. À chaque ajout ou modification d’une ressource précachée, vérifier `ASSETS` et incrémenter `CACHE` dans le même changement.
 - À l’activation, le service worker ne supprime que les caches préfixés `rose-leon-`, car CacheStorage est partagé à l’échelle de l’origine.
 - Voix via `speechSynthesis` après interaction utilisateur, avec repli si indisponible ; sons générés avec Web Audio API.
-- Icône web SVG locale, sans logo protégé. Une icône PNG spécifique à iOS reste à étudier/valider sur appareil.
+- Icône web SVG locale et icône PNG 512×512 locales, sans logo protégé. L’icône PNG est déclarée dans le manifeste PWA et via `apple-touch-icon` ; son rendu réel lors de l’installation iOS reste à valider sur appareil.
 
 ## Données et sauvegardes
 - Données conservées localement dans le navigateur ; sauvegardes JSON importables et exportables.
