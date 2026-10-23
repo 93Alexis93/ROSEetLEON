@@ -166,3 +166,7 @@
 - Lecture : remplacement du tri à comparateur aléatoire par un mélange Fisher–Yates afin d’éviter un biais dans l’ordre des réponses.
 
 - PWA : cache incrémenté en v50 pour garantir le renouvellement des ressources hors ligne après les corrections de lecture.
+
+## Maintenance — 2026-10-24
+- Validation explicite de l’identifiant enfant dans l’enregistrement des réponses et des séances.
+- Test couvrant le refus sans modification des données et renouvellement du cache PWA à v51.
