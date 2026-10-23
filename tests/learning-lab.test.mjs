@@ -95,4 +95,5 @@ test("Syllabes · les mots connus ont un nombre de syllabes juste",()=>{
   assert.equal(item.syllables,expected[item.word],"Nombre de syllabes incorrect pour "+item.word);
  }
  assert.equal(SYLLABLE_WORDS.length,Object.keys(expected).length);
+ assert.ok(SYLLABLE_WORDS.length>=30,"La banque de Rose doit conserver au moins trente mots illustrés.");
 });
