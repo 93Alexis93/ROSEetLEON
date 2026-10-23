@@ -20,15 +20,22 @@ export function isParentUnlocked(){return parentUnlocked;}
 export function isProtectedParentRoute(route){return ["parent","crisis","print"].includes(route);}
 export function canAccessRoute(route){return !isProtectedParentRoute(route)||isParentUnlocked();}
 
+function availableStorages(){
+ const result=[];
+ for(const name of ["sessionStorage","localStorage"]){
+  try{if(globalThis[name])result.push(globalThis[name]);}catch{}
+ }
+ return result;
+}
 export function setParentLockoutUntil(timestamp){
  const value=String(Math.max(0,Number(timestamp)||0));
- for(const storage of [globalThis.sessionStorage,globalThis.localStorage]){
+ for(const storage of availableStorages()){
   try{storage?.setItem(LOCKOUT_KEY,value);}catch{}
  }
 }
 export function getParentLockoutUntil(){
  let until=0;
- for(const storage of [globalThis.sessionStorage,globalThis.localStorage]){
+ for(const storage of availableStorages()){
   try{
    const value=Number(storage?.getItem(LOCKOUT_KEY)||0);
    if(Number.isFinite(value))until=Math.max(until,value);
