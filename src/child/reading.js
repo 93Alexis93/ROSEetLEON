@@ -36,7 +36,7 @@ export const READING_SYLLABLES = {
   pirate: "pi-rate", robot: "ro-bot", cadeau: "ca-deau", pomme: "pomme",
   poire: "poire", poule: "poule", canard: "ca-nard", jardin: "jar-din",
   fleur: "fleur", maîtresse: "maî-tresse", cartable: "car-table",
-  crayon: "cra-yon", étoile: "é-toile", nuage: "nuage",
+  crayon: "cra-yon", étoile: "é-toile", nuage: "nu-age",
   montagne: "mon-tagne", musique: "mu-sique", maillot: "mail-lot",
   tortue: "tor-tue", girafe: "gi-rafe", poussin: "pou-ssin",
   savon: "sa-von", valise: "va-lise"
