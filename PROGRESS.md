@@ -46,8 +46,16 @@ Mis à jour le 23 octobre 2026.
 - [ ] Vérifier hors ligne après activation du service worker
 - État : les tests automatisés ont passé sur le commit `5fbb988`. Une première exécution a détecté un défaut de réponses multiples, corrigé. Une correction supplémentaire du générateur de choix mathématiques est maintenant testée ; tests navigateur et mode hors ligne restent à faire.
 
+## Phase 4 — Premiers jeux variés pour Rose (en cours)
+- [x] Menu de choix de jeux séparé du lancement direct du comptage
+- [x] Jeu de couleurs avec consigne vocale, trois choix et indice doux
+- [x] Jeu de formes (cercle, carré, triangle, étoile) avec consigne vocale, trois choix et indice
+- [x] Tests automatisés sur 400 générations de questions et les activités inconnues
+- [x] Cache PWA passé à v7 et nouveau module inclus dans les ressources hors ligne
+- [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
+- [ ] Ajouter progressivement d’autres activités MS après contrôle de ces premiers jeux
+
 ## Phases suivantes prévues
-- Phase 4 : contenus de Rose, adaptés à la moyenne section
 - Phase 5 : journal et outils parent pour les crises
 - Phase 6 : fiches pédagogiques A4 imprimables
 - Phase 7 : écriture, émotions, histoires sociales, logique et anglais
