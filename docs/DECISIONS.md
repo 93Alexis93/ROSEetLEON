@@ -86,3 +86,4 @@
 - É17 : la composition du prénom est comptabilisée comme une session uniquement lorsque ROSE est assemblé dans le bon ordre. Les erreurs de choix et les essais incomplets ne sont pas enregistrés comme session terminée. Le tableau de bord doit refléter les activités réellement achevées.
 
 - É18 : garder la documentation d’état synchronisée avec le service worker réellement présent dans `main`. Pour l’activité de syllabes de Rose, le nombre attendu doit être explicitement défini pour chaque mot et protégé par un test ; l’aide doit soutenir l’écoute (dire le mot lentement et taper les syllabes), et la session ne se termine qu’après le parcours prévu.
+- É19 : tester une activité aléatoire ne doit pas seulement vérifier que la réponse est un entier. Les tests contrôlent aussi la relation mathématique entre les valeurs affichées et la réponse, sur plusieurs centaines de générations par type, y compris les énoncés de problèmes.
