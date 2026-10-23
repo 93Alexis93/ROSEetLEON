@@ -60,7 +60,24 @@ const backup=section("Sauvegarde et réglages",
 [button("Exporter la sauvegarde JSON",downloadBackup,"button-primary"),
 el("label",{class:"field"},["Importer une sauvegarde JSON",el("input",{type:"file",accept:"application/json",onchange:importBackup})]),
 el("label",{class:"field"},["Code PIN facultatif (4 chiffres)",el("input",{type:"password",inputmode:"numeric",maxlength:"4",value:s.settings.parentPin,placeholder:"Aucun PIN défini",onchange:e=>update(x=>x.settings.parentPin=e.target.value.replace(/\D/g,"").slice(0,4))})]),
-el("label",{class:"field"},["Voix",el("select",{onchange:e=>update(x=>x.settings.voice=e.target.value==="oui")},[el("option",{value:"oui",selected:s.settings.voice?"selected":null,text:"Activée"}),el("option",{value:"non",selected:!s.settings.voice?"selected":null,text:"Désactivée"})])]),el("label",{class:"field"},["Sons d’encouragement",el("select",{onchange:e=>update(x=>x.settings.sounds=e.target.value==="oui")},[el("option",{value:"oui",selected:s.settings.sounds?"selected":null,text:"Activés"}),el("option",{value:"non",selected:!s.settings.sounds?"selected":null,text:"Désactivés"})])]),button("Remettre à zéro",()=>{if(confirm("Effacer toutes les progressions et réglages sur cet appareil ?")){resetData();parentDashboard();}},"button-soft")]);
+el("label",{class:"field"},["Voix",
+ el("select",{onchange:e=>update(x=>x.settings.voice=e.target.value==="oui")},[
+  el("option",{value:"oui",selected:s.settings.voice?"selected":null,text:"Activée"}),
+  el("option",{value:"non",selected:!s.settings.voice?"selected":null,text:"Désactivée"})
+ ])
+]),
+el("label",{class:"field"},["Sons d’encouragement",
+ el("select",{onchange:e=>update(x=>x.settings.sounds=e.target.value==="oui")},[
+  el("option",{value:"oui",selected:s.settings.sounds?"selected":null,text:"Activés"}),
+  el("option",{value:"non",selected:!s.settings.sounds?"selected":null,text:"Désactivés"})
+ ])
+]),
+button("Remettre à zéro",()=>{
+ if(confirm("Effacer toutes les progressions et réglages sur cet appareil ?")){
+  resetData();
+  parentDashboard();
+ }
+},"button-soft")]);
 content.append(stats,mathStats,customWords,tools,backup,section("Progression positive",[el("p",{class:"small",text:"La V1 enregistre les essais et les sessions localement. Les conseils personnalisés seront enrichis dans les prochaines phases."})]));
 replaceApp(screen("Espace parent",content,{eyebrow:"Tableau de bord",home:()=>go("home")}));
 }
