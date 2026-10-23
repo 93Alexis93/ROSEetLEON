@@ -207,3 +207,9 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Confirmation que les modules des activités enfant sont listés dans le précache du service worker.
 - [ ] CI et publication Pages à confirmer sur le SHA final.
 - [ ] Les parcours « Nombre mystère », « Le plus grand nombre » et « Les syllabes » restent à essayer en conditions réelles sur Safari iPhone.
+
+
+## Étape É19 — contrôle sémantique du calcul mental
+- [x] Ajout de tests qui vérifient que la réponse correspond à l’opération affichée pour les compléments à 10/100, doubles, moitiés, droite numérique et petits problèmes.
+- [x] Contrôle par génération répétée pour détecter les erreurs qui n’apparaissent que sur certaines valeurs aléatoires.
+- [ ] Résultat CI à confirmer ; ce changement ne modifie pas les ressources de l’application et ne nécessite donc pas de renouveler le cache PWA.
