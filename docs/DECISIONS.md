@@ -64,3 +64,6 @@
 
 
 - É9 : employer « syllabes » de façon cohérente dans l’activité d’écoute de Rose. Les sons de réponse sont courts, doux et subordonnés au réglage utilisateur ; une erreur déclenche un son discret plutôt qu’un buzzer punitif. La bonne réponse reste encouragée même si l’enfant s’est trompé avant. Le menu d’entrée de Léon doit annoncer un choix de défis, pas uniquement un penalty.
+
+
+- É10 : l’icône PNG 512×512 est déclarée dans le manifeste PWA et comme `apple-touch-icon`, conservée en ressource locale précachée ; le cache est `rose-leon-v40`. La CI et GitHub Pages sont confirmés sur le commit `9b1caf7126c044c221152e37d3138b6690e4d3c3`. Le rendu réel de l’icône et le comportement hors ligne sur iPhone restent non testés.
