@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v44`.
+- Le service worker source utilise actuellement le cache `rose-leon-v47`.
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -199,3 +199,11 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Test de non-régression ajouté pour le déclenchement de l’enregistrement à la réussite.
 - [x] Cache PWA renouvelé à `rose-leon-v47` et test de cache synchronisé.
 - [ ] Confirmer la CI et la publication Pages sur le SHA final.
+
+
+## Étape É18 — cohérence de l’état projet et audit de couverture (code livré, CI à confirmer)
+- [x] Correction de la version de cache indiquée dans l’état courant : la documentation mentionnait encore v44 alors que le service worker est en v47.
+- [x] Vérification du parcours syllabes : banque de 10 mots, choix 1–3, aide orale, réponse verrouillée après réussite et session enregistrée à la fin des cinq questions ; les tests dédiés contrôlent le nombre de syllabes de chaque mot.
+- [x] Confirmation que les modules des activités enfant sont listés dans le précache du service worker.
+- [ ] CI et publication Pages à confirmer sur le SHA final.
+- [ ] Les parcours « Nombre mystère », « Le plus grand nombre » et « Les syllabes » restent à essayer en conditions réelles sur Safari iPhone.
