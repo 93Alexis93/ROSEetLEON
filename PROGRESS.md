@@ -131,10 +131,11 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [ ] Essai iPhone : vérifier que les sons sont doux, non intrusifs et désactivables dans les réglages.
 
 
-## Étape É10 — icône PNG et vérification du cache PWA (en attente de CI et de publication)
+## Étape É10 — icône PNG et vérification du cache PWA (code livré, tests CI et déploiement réussis)
 - [x] Ajout d’une icône PNG locale 512×512 pour le manifeste PWA et le raccourci iOS.
 - [x] Ajout de l’icône au manifeste et d’un lien `apple-touch-icon`, tout en conservant le favicon SVG.
 - [x] Icône ajoutée au précache et cache incrémenté de `rose-leon-v39` à `rose-leon-v40` dans le même commit.
 - [x] Tests ajoutés pour l’incrément v40, l’en-tête PNG, le manifeste et le précache.
-- [ ] CI et publication Pages à confirmer sur le SHA exact.
+- [x] Tests automatisés réussis sur le commit `9b1caf7126c044c221152e37d3138b6690e4d3c3` ([résultat CI](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113554)).
+- [x] Déploiement GitHub Pages réussi sur ce même commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113850)).
 - [ ] Essai iPhone : vérifier l’icône lors de l’ajout à l’écran d’accueil.
