@@ -25,7 +25,7 @@ function makeQuestion(domain, difficulty, prompt, answer, distractors, hint, exp
   let choices = unique([correct, ...distractors]);
   let offset = 1;
   while (choices.length < 4) {
-    const numeric = correct.match(/^(-?\\d+)(.*)$/);
+    const numeric = correct.match(new RegExp("^(-?[0-9]+)(.*)$"));
     choices.push(numeric ? String(Number(numeric[1]) + offset) + numeric[2] : correct + " (" + offset + ")");
     offset++;
     choices = unique(choices);
