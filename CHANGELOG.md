@@ -131,3 +131,8 @@
 - Correction des propositions de réponse du domaine « Mesures » : plus de doublon entre la bonne réponse et un distracteur à 1 h pile.
 - Ajout d’un test de non-régression pour 1 h et 1 h 30 ; cache PWA renouvelé à v49.
 - CI et publication Pages à confirmer.
+
+
+## E22 — Fiabilité des tests mathématiques
+- Correction d’un test qui ne détectait pas correctement les choix de réponse artificiels.
+- Ajout de tests vérifiant que les résultats du calcul mental et les suites logiques correspondent réellement aux énoncés.
