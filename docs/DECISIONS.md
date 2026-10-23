@@ -99,3 +99,7 @@ Les tests vérifient à la fois la structure des questions (quatre choix distinc
 
 ### Couverture sémantique des exercices
 Les tests du moteur couvrent les six domaines : calcul mental, numération, multiplications, problèmes, logique et mesures. Lorsqu’un énoncé contient les données nécessaires, les tests recalculent indépendamment le résultat attendu au lieu de se limiter à vérifier que la réponse est présente parmi quatre choix distincts.
+
+
+### Multiplications par niveau
+La couverture de tests doit vérifier chaque niveau de difficulté, pas seulement un niveau intermédiaire. Pour les multiplications, chaque produit est recalculé à partir de l’énoncé et les tables disponibles sont contrôlées selon le niveau.
