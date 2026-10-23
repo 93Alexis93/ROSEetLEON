@@ -9,9 +9,10 @@ const COLORS=[["Rouge","🔴"],["Bleu","🔵"],["Jaune","🟡"],["Vert","🟢"],
 const SHAPES=[["Cercle","●","Le cercle est rond et n’a pas de coin."],["Carré","■","Le carré a quatre côtés."],["Triangle","▲","Le triangle a trois côtés et trois coins."],["Étoile","★","L’étoile a plusieurs pointes."]];
 const pick=(a,r)=>a[Math.floor(r()*a.length)];
 function shuffle(a,r){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function threeChoices(items,target,random){return shuffle([target,...shuffle(items.filter(x=>x!==target),random).slice(0,2)],random);}
 export function createRoseQuestion(mode,random=Math.random){
- if(mode==="colors"){const t=pick(COLORS,random);return {mode,answer:t[0],prompt:"Touche le cercle "+t[0].toLowerCase()+".",speakText:"Touche le cercle "+t[0].toLowerCase()+".",choices:shuffle(COLORS.map(x=>x[0]),random),hint:"Regarde la couleur du cercle.",explanation:"Le cercle recherché est "+t[0].toLowerCase()+" "+t[1]};}
- if(mode==="shapes"){const t=pick(SHAPES,random);return {mode,answer:t[0],prompt:"Trouve la forme : "+t[1],speakText:"Trouve la forme "+t[0].toLowerCase()+".",choices:shuffle(SHAPES.map(x=>x[0]),random),hint:t[2],explanation:"C’est le "+t[0].toLowerCase()+" "+t[1]};}
+ if(mode==="colors"){const t=pick(COLORS,random);return {mode,answer:t[0],prompt:"Touche le cercle "+t[0].toLowerCase()+".",speakText:"Touche le cercle "+t[0].toLowerCase()+".",choices:threeChoices(COLORS.map(x=>x[0]),t[0],random),hint:"Regarde la couleur du cercle.",explanation:"Le cercle recherché est "+t[0].toLowerCase()+" "+t[1]};}
+ if(mode==="shapes"){const t=pick(SHAPES,random);return {mode,answer:t[0],prompt:"Trouve la forme : "+t[1],speakText:"Trouve la forme "+t[0].toLowerCase()+".",choices:threeChoices(SHAPES.map(x=>x[0]),t[0],random),hint:t[2],explanation:"C’est le "+t[0].toLowerCase()+" "+t[1]};}
  throw new Error("Activité de Rose inconnue : "+mode);
 }
 export function roseMenu(){
