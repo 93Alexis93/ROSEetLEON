@@ -136,3 +136,7 @@
 ## E22 — Fiabilité des tests mathématiques
 - Correction d’un test qui ne détectait pas correctement les choix de réponse artificiels.
 - Ajout de tests vérifiant que les résultats du calcul mental et les suites logiques correspondent réellement aux énoncés.
+
+
+## E23 — Contrôle des énoncés mathématiques
+- Ajout de tests de cohérence pour la numération, les problèmes et les exercices de mesures, en complément du calcul mental et des suites logiques.
