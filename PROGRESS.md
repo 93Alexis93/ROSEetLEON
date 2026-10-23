@@ -116,3 +116,11 @@ Mis à jour le 23 octobre 2026.
 - [x] Phase 8 : une modification ou une remise à zéro est annulée en mémoire si le stockage local refuse l’écriture ; tests de régression avec quota simulé ajoutés. Cache PWA v25.
 
 - [x] Phase 8 : les sauvegardes dont les profils ou réglages sont des tableaux sont désormais refusées ; test de non-régression ajouté. Cache PWA v25.
+
+## Nouvelles activités issues de la veille pédagogique — 23 octobre 2026
+- [x] Création du jeu CE1 « Nombre mystère » : dizaines/unités, nombre précédent et suivant, indices progressifs, quatre choix et explication après réussite.
+- [x] Création du jeu MS « Les syllabes dans les mots » : écoute d’un mot courant, appui visuel, dénombrement de 1 à 3 syllabes, possibilité de réécouter et indice gestuel (taper dans les mains).
+- [x] Les deux jeux sont reliés aux menus de Léon et Rose, sans dépendance externe ; le module est préchargé pour le mode hors ligne.
+- [x] Tests automatisés ajoutés : 600 questions de numération, 300 questions de syllabes, unicité des choix, présence des réponses, intégration aux menus et cache PWA.
+- [ ] Vérifier sur iPhone l’usage des deux nouveaux jeux, notamment la prononciation vocale et la clarté des images pour la phonologie.
+- Sources pédagogiques consultées et principes retenus documentés dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
