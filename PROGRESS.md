@@ -102,5 +102,9 @@ Mis à jour le 23 octobre 2026.
 - [x] Phase 8 : le délai de sécurité de la porte parentale ne réaffiche plus son écran si l’utilisateur est parti sur une autre page ; test de non-régression ajouté.
 
 - [x] Phase 8 : tests automatisés de sauvegarde locale ajoutés avec stockage simulé ; vérification du cycle export/import et du refus des fichiers invalides sans perte des données en mémoire.
-\n- [x] Phase 8 : la porte parentale accepte aussi la touche Entrée pour valider le calcul ; test de non-régression ajouté et cache PWA passé à v22.\n
-- [x] Phase 8 : l’import de sauvegarde restaure l’état précédent si l’écriture dans le stockage local échoue ; test de régression avec quota simulé ajouté. Cache PWA passé à v23.
+
+- [x] Phase 8 : la porte parentale accepte aussi la touche Entrée pour valider le calcul ; test de non-régression ajouté et cache PWA passé à v22.
+
+- [x] Phase 8 : l’import de sauvegarde restaure l’état précédent si l’écriture dans le stockage local échoue ; test de régression avec quota simulé ajouté. Cache PWA passé à v24.
+
+- [x] Phase 8 : une modification ou une remise à zéro est annulée en mémoire si le stockage local refuse l’écriture ; tests de régression avec quota simulé ajoutés. Cache PWA v24.
