@@ -1,6 +1,7 @@
 import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
+import { cheer, gentleOops } from "../audio.js";
 import { go } from "../router.js";
 
 const BASE_WORDS = [
@@ -267,6 +268,7 @@ function startReading(mode) {
     recordAnswer("leon", correct);
     const feedback = document.querySelector(".feedback");
     if (correct) {
+      cheer(getState().settings.sounds);
       if (!questionHadError) score++;
       round++;
       if (round >= 5) {
@@ -278,6 +280,7 @@ function startReading(mode) {
       const nextFeedback = document.querySelector(".feedback");
       if (nextFeedback) nextFeedback.textContent = "Bravo, tu as pris le temps de réfléchir !";
     } else {
+      gentleOops(getState().settings.sounds);
       questionHadError = true;
       if (feedback) {
         feedback.textContent = "Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.";
