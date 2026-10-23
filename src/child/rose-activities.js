@@ -4,6 +4,7 @@ import {speak} from "../voice.js";
 import {cheer,gentleOops} from "../audio.js";
 import {go} from "../router.js";
 import {startActivity} from "./activities.js";
+import {syllableGame} from "./learning-lab.js";
 
 const COLORS=[["Rouge","🔴"],["Bleu","🔵"],["Jaune","🟡"],["Vert","🟢"],["Violet","🟣"]];
 const SHAPES=[["Cercle","●","Le cercle est rond et n’a pas de coin."],["Carré","■","Le carré a quatre côtés."],["Triangle","▲","Le triangle a trois côtés et trois coins."],["Étoile","★","L’étoile a plusieurs pointes."]];
@@ -29,7 +30,7 @@ export function roseMenu(){
   card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître quatre formes."}),button("Jouer",()=>startRoseActivity("shapes"),"button-primary")]),
   card([el("h2",{text:"🔤 Les lettres de Rose"}),el("p",{class:"small",text:"Retrouver les lettres R, O, S et E."}),button("Jouer",()=>startRoseActivity("letters"),"button-primary")]),
   card([el("h2",{text:"🔡 Grandes et petites lettres"}),el("p",{class:"small",text:"Associer R, O, S, E aux lettres r, o, s, e."}),button("Jouer",()=>startRoseActivity("letter-pairs"),"button-primary")]),
-  card([el("h2",{text:"👏 Les syllabes"}),el("p",{class:"small",text:"Écouter un mot et compter ses syllabes."}),button("Jouer",()=>import("./learning-lab.js").then(m=>m.syllableGame()),"button-primary")]),
+  card([el("h2",{text:"👏 Les syllabes"}),el("p",{class:"small",text:"Écouter un mot et compter ses syllabes."}),button("Jouer",syllableGame,"button-primary")]),
   card([el("h2",{text:"✍️ Je compose mon prénom"}),el("p",{class:"small",text:"Choisir les lettres pour écrire ROSE dans le bon ordre."}),button("Composer mon prénom",startRoseWritingActivity,"button-primary")]),
   button("⌂ Accueil",()=>go("home"),"icon-button"));
  replaceApp(screen("Bonjour Rose !",content,{eyebrow:"Univers licorne",home:()=>go("home")}));
