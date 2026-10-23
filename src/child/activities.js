@@ -213,7 +213,7 @@ export function startActivity(child, domain = null) {
     const ok = String(choice) === String(question.answer);
     recordAnswer(child, ok);
     if (child === "leon" && !progressRecorded) {
-      recordMathAnswer(domain, ok, { firstTry: true, helped: hint >= 2 });
+      recordMathAnswer(domain, ok, { firstTry: true, helped: hint > 0 });
       progressRecorded = true;
     }
 
