@@ -39,3 +39,5 @@
 ## É7 — 2026-10-23
 - Ajout d’une pause guidée facultative en trois étapes, sans chronomètre, score ni enregistrement.
 - Accès depuis les écrans principaux de Léon et Rose ; cache PWA renouvelé à v37.
+
+- É7 validée par CI (65 tests réussis) et publiée sur GitHub Pages ; les essais réels sur iPhone restent à faire.

@@ -101,11 +101,12 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Déploiement Pages réussi sur ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40016705010)).
 - [ ] Vérifier sur iPhone la lisibilité, la voix, la longueur des textes et la pertinence des réponses.
 
-## Étape É7 — pause guidée douce (en cours)
+## Étape É7 — pause guidée douce (code livré, tests CI et déploiement réussis)
 - [x] Point d’entrée `src/main.js` formaté dans un commit séparé avant ajout de fonctionnalité ; tests de régression adaptés au formatage.
 - [x] Pause facultative en trois étapes, avec progression uniquement au toucher et sans minuterie.
 - [x] Texte adapté aux enfants : se poser, observer sa respiration sans obligation, regarder autour de soi.
 - [x] Ajout d’un accès depuis les menus principaux de Léon et Rose ; aucun score ni enregistrement de la pause.
 - [x] Nouvelle ressource ajoutée au cache PWA, renouvelé à v37.
-- [ ] Tests CI et déploiement Pages de l’étape É7 à confirmer.
+- [x] 65 tests passent sur le commit `2fd100248ea1dd454f085ad75b1410818ec27d24` ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017274534)).
+- [x] Déploiement Pages réussi sur ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017273785)).
 - [ ] Vérifier sur iPhone le parcours tactile, la voix et le retour vers l’univers choisi.
