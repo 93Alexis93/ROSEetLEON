@@ -269,7 +269,7 @@ export function exportData() {
 }
 
 export function importData(text) {
-  if (typeof text !== "string" || text.length > MAX_BACKUP_BYTES) {
+  if (typeof text !== "string" || text.length > MAX_BACKUP_BYTES || new TextEncoder().encode(text).byteLength > MAX_BACKUP_BYTES) {
     throw Error("Fichier de sauvegarde trop volumineux ou invalide.");
   }
 
