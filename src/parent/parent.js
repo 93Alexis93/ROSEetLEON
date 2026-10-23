@@ -1,14 +1,25 @@
 import {el,button,screen,card,replaceApp} from "../ui.js";
 import {getState,update,exportData,importData,resetData} from "../store.js";
-import {go} from "../router.js";
+import {go,unlockParent,getParentLockoutUntil,setParentLockoutUntil} from "../router.js";
 import {MATH_DOMAINS} from "../child/math-engine.js";
-let failures=0,blockedUntil=0,problem=null;
+let failures=0,problem=null;
 const makeProblem=()=>{const a=6+Math.floor(Math.random()*4),b=6+Math.floor(Math.random()*4);
 problem={a,b,answer:a*b};
 };
-export function parentGate(){if(Date.now()<blockedUntil){replaceApp(screen("Espace parent",card([el("p",{class:"lead",text:"La porte se repose un instant. Réessaie dans quelques secondes."}),button("Retour à l’accueil",()=>go("home"))])));
-return;
-}makeProblem();
+export function parentGate(){
+const lockoutUntil=getParentLockoutUntil();
+if(Date.now()<lockoutUntil){
+ const gateScreen=document.querySelector("#app")?.firstElementChild;
+ replaceApp(screen("Espace parent",card([
+  el("p",{class:"lead",text:"La porte se repose un instant. Réessaie dans quelques secondes."}),
+  button("Retour à l’accueil",()=>go("home"))
+ ])));
+ setTimeout(()=>{
+  if(gateScreen&&document.querySelector("#app")?.firstElementChild===gateScreen)parentGate();
+ },Math.max(0,lockoutUntil-Date.now()));
+ return;
+}
+makeProblem();
 let value="";
 const display=el("div",{class:"prompt",text:problem.a+" × "+problem.b+" = ?"});
 const feedback=el("p",{class:"feedback",text:"Résous le calcul pour ouvrir la porte."});
@@ -18,7 +29,7 @@ const check=button("Ouvrir",verify);
 input.addEventListener("keydown",event=>{if(event.key==="Enter")verify();});
 for(let i=1;i<=9;i++)digits.append(button(String(i),()=>{input.value=(input.value+String(i)).slice(0,3)},"button-soft"));
 digits.append(button("⌫",()=>input.value=input.value.slice(0,-1),"button-soft"),button("0",()=>{input.value=(input.value+"0").slice(0,3)},"button-soft"));
-function verify(){if(Date.now()<blockedUntil){feedback.textContent="La porte se repose encore.";
+function verify(){if(Date.now()<getParentLockoutUntil()){feedback.textContent="La porte se repose encore.";
 return;
 }const s=getState();
 if(Number(input.value)===problem.answer){failures=0;
@@ -28,11 +39,12 @@ makeProblem();
 display.textContent=problem.a+" × "+problem.b+" = ?";
 input.value="";
 return;
-}go("parent");
+}unlockParent();
+go("parent");
 return;
 }failures++;
 feedback.textContent="Ce n’est pas grave. Respire et réessaie.";
-if(failures>=3){blockedUntil=Date.now()+30000;
+if(failures>=3){setParentLockoutUntil(Date.now()+30000);
 feedback.textContent="La porte fait une pause de 30 secondes.";
 const gateScreen=document.querySelector("#app")?.firstElementChild;
 setTimeout(()=>{if(gateScreen&&document.querySelector("#app")?.firstElementChild===gateScreen)parentGate();},30000);
