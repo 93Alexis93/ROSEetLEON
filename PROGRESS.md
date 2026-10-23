@@ -8,6 +8,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Stockage versionné, routeur, UI, voix et sons
 - [x] Thèmes CSS et icône SVG locale
 - [x] Application publiée sur GitHub Pages et ouverte sur iPhone Safari
+- [x] Test automatisé de cohérence de la liste de ressources hors ligne ajouté ; GitHub Actions passe
 - [ ] Refaire un test complet du mode avion après les dernières évolutions
 
 ## Phase 1 — Squelette navigable
@@ -66,9 +67,10 @@ Mis à jour le 23 octobre 2026.
 - [x] Fiche Rose : reconnaître et relier les formes, avec repère de correction
 - [x] Fiche Léon : six multiplications, stratégies dessin/compter par bonds, corrigé séparé
 - [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne v11
+- [x] Nouveau module ajouté au cache hors ligne, version actuelle v12
 - [x] Corrigé des multiplications structuré en liste lisible pour l’impression
 - [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
+- [x] Test CI ajouté pour vérifier que toutes les ressources préchargées par le service worker existent, sans doublons, et que les fiches/styles sont bien inclus
 - [ ] Vérifier le rendu réel avec l’aperçu d’impression Safari iPhone et une impression A4
 
 ## Phases suivantes prévues
