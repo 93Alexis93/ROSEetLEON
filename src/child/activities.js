@@ -39,10 +39,7 @@ export function startActivity(child,domain=null){
    const progress=getState().profiles.leon.mathProgress?.[domain];
    question=createMathQuestion(domain,progress?.difficulty||1);
   }else{
-   const count=1+Math.floor(Math.random()*5);
-   question={text:"Combien de licornes ?",answer:count,count,choices:[count,Math.max(1,count-1),Math.min(5,count+1),count===1?3:1]};
-   question.choices=[...new Set(question.choices)].sort(()=>Math.random()-.5);
-   while(question.choices.length<4)question.choices.push(question.answer+question.choices.length+1);
+   question=createCountingQuestion();
   }
  };
  generate();
