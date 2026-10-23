@@ -91,3 +91,7 @@
 - É20 : la banque des mots-mystères doit refléter le nombre de syllabes orales, même quand l’orthographe peut induire en erreur. « Nuage » est traité en deux syllabes (« nu-age ») ; le test vérifie explicitement ce choix. Un test automatisé protège le comptage, mais l’écoute réelle avec l’enfant reste le contrôle pédagogique final.
 
 - É21 : chaque question à choix multiples doit proposer quatre réponses distinctes et conserver la bonne réponse, sans distracteur de secours artificiel. Les questions d’horloge doivent rester correctes aux bornes (notamment 1 h pile et 1 h 30) ; ce cas est désormais couvert par un test ciblé.
+
+
+### Tests du moteur mathématique
+Les tests vérifient à la fois la structure des questions (quatre choix distincts, réponse présente) et leur cohérence mathématique : le calcul affiché doit donner la réponse attendue et une suite doit respecter son pas jusqu’au terme manquant. Les expressions régulières de test doivent être contrôlées comme du code exécutable, pas seulement comme du texte.
