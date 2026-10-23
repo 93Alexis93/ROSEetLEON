@@ -1,6 +1,13 @@
 # Avancement — Rose & Léon
 Mis à jour le 23 octobre 2026.
 
+## Jeux pédagogiques complémentaires — 23 octobre 2026
+- [x] Veille documentée : repères Éduscol maternelle/CE1 et ressources complémentaires dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
+- [x] Ajout du jeu « Nombre mystère » pour Léon : dizaines/unités, nombre précédent/suivant, indices et cinq questions.
+- [x] Ajout du jeu « Les syllabes » pour Rose : écoute, appui visuel et choix de 1 à 3 syllabes, cinq questions.
+- [x] Correction de la consigne visible du jeu des syllabes et ajout de tests ciblés ; cache hors ligne renouvelé à v28.
+- [ ] Tester ces deux nouvelles activités sur iPhone Safari (voix, consigne, interactions et fin de session).
+
 ## Validation utilisateur et audit PWA — 23 octobre 2026
 - [x] Validation déclarée sur iPhone Safari : navigation, six défis de maths, quatre activités de lecture, jeux de Rose, conservation des progrès, mots personnalisés/sauvegardes, voix/sons, espace parent et fiches imprimables.
 - [ ] Mode hors ligne non testé par l’utilisateur ; ne pas le déclarer validé avant un essai en mode avion après chargement HTTPS.
