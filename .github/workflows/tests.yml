@@ -22,7 +22,7 @@ jobs:
           node-version: 22
       - name: Vérifier la syntaxe JavaScript
         run: |
-          find src -name '*.js' -print0 | xargs -0 -n1 node --check
-          node --check service-worker.js
+          find src -name '*.js' -print0 | xargs -0 -n1 node --experimental-default-type=module --check
+          node --experimental-default-type=module --check service-worker.js
       - name: Tester le moteur de maths
         run: node --experimental-default-type=module --test tests/math-engine.test.mjs
