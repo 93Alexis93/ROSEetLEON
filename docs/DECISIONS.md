@@ -132,3 +132,6 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Validation des résultats pédagogiques
 - Les fonctions qui enregistrent une réponse exigent un booléen explicite pour éviter qu’une valeur arbitraire soit interprétée comme une réussite ou un échec.
+
+## Options de progression mathématique
+- `recordMathAnswer` accepte uniquement un objet d’options et des valeurs booléennes pour `firstTry` et `helped` lorsqu’elles sont présentes ; les appels invalides sont rejetés sans toucher aux données.
