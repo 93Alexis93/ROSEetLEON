@@ -74,3 +74,6 @@
 
 
 - É13 : la banque du jeu des syllabes doit refléter le découpage oral usuel des mots. « tomate » se prononce en trois syllabes (to-ma-te) et « banane » en trois (ba-na-ne). Un test couvre explicitement les dix entrées afin d’éviter une régression. La validation automatisée ne remplace pas l’écoute et l’essai avec Rose.
+
+
+- É14 : dans les défis adaptatifs de maths, utiliser une aide même une seule fois signifie que la réponse est accompagnée. Elle compte toujours dans les statistiques d’activité, mais ne doit pas être considérée comme une réussite ou une erreur autonome pour ajuster le niveau. Ce choix évite de faire monter ou descendre le niveau sur une réponse influencée par un indice.
