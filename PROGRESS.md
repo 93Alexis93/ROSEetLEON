@@ -52,6 +52,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Jeu de couleurs avec consigne vocale, trois choix et indice doux
 - [x] Jeu de formes (cercle, carré, triangle, étoile) avec consigne vocale, trois choix et indice
 - [x] Jeu des lettres R, O, S et E à partir du prénom Rose, avec consigne vocale et trois choix
+- [x] Jeu d’association majuscules/minuscules R/r, O/o, S/s et E/e avec consigne vocale, indice doux et trois choix
 - [x] Tests automatisés sur 600 générations couleurs/formes/lettres, 200 questions de comptage et les activités inconnues
 - [x] Cache PWA passé à v9 après ajout du jeu des lettres ; nouveau module inclus dans les ressources hors ligne
 - [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
@@ -70,7 +71,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Fiche Léon : trois petits problèmes additifs et multiplicatifs, avec espace pour dessiner et corrigé séparé
 - [x] Fiche Léon : cinq premiers mots anglais à relier à leur traduction, avec corrigé
 - [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne, version actuelle v14
+- [x] Nouveau module ajouté au cache hors ligne, version actuelle v15
 - [x] Corrigé des multiplications structuré en liste lisible pour l’impression
 - [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
 - [x] Test CI ajouté pour vérifier que toutes les ressources préchargées par le service worker existent, sans doublons, et que les fiches/styles sont bien inclus
@@ -78,7 +79,7 @@ Mis à jour le 23 octobre 2026.
 - [ ] Vérifier le rendu réel avec l’aperçu d’impression Safari iPhone et une impression A4
 
 ## Phases suivantes prévues
-- Phase 7 : écriture, émotions, histoires sociales, logique et anglais (première fiche anglaise ajoutée)
+- Phase 7 : écriture, émotions, histoires sociales, logique et anglais (première fiche anglaise et association majuscules/minuscules ajoutées)
 - Phase 8 : finition, accessibilité, tests de non-régression et validation globale
 
 ## Décisions et limites à respecter
