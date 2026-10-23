@@ -273,7 +273,12 @@ export function importData(text) {
     throw Error("Fichier de sauvegarde trop volumineux ou invalide.");
   }
 
-  const data = JSON.parse(text);
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw Error("Le fichier de sauvegarde n’est pas un JSON valide.");
+  }
   if (
     !isRecord(data) ||
     !isRecord(data.profiles) ||
