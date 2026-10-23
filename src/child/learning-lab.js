@@ -48,7 +48,17 @@ export const SYLLABLE_WORDS=[
  {word:"chocolat",picture:"🍫",syllables:3},
  {word:"maison",picture:"🏠",syllables:2},
  {word:"bateau",picture:"⛵",syllables:2},
- {word:"soleil",picture:"☀️",syllables:2}
+ {word:"soleil",picture:"☀️",syllables:2},
+ {word:"renard",picture:"🦊",syllables:2}, {word:"mouton",picture:"🐑",syllables:2},
+ {word:"orange",picture:"🍊",syllables:2}, {word:"fromage",picture:"🧀",syllables:2},
+ {word:"cabane",picture:"🛖",syllables:2}, {word:"camion",picture:"🚚",syllables:2},
+ {word:"domino",picture:"🎲",syllables:3}, {word:"éléphant",picture:"🐘",syllables:3},
+ {word:"crocodile",picture:"🐊",syllables:3}, {word:"dinosaure",picture:"🦕",syllables:3},
+ {word:"ananas",picture:"🍍",syllables:3}, {word:"fenêtre",picture:"🪟",syllables:2},
+ {word:"chapeau",picture:"👒",syllables:2}, {word:"canapé",picture:"🛋️",syllables:3},
+ {word:"fourmi",picture:"🐜",syllables:2}, {word:"hibou",picture:"🦉",syllables:2},
+ {word:"chaussette",picture:"🧦",syllables:2}, {word:"rivière",picture:"🏞️",syllables:2},
+ {word:"poussin",picture:"🐥",syllables:2}
 ];
 export function createSyllableQuestion(random=Math.random){
  const item=pick(SYLLABLE_WORDS,random);
