@@ -15,6 +15,12 @@
 - Seuils adaptatifs robustes et remise à zéro des séries après changement de niveau.
 - Cache PWA renouvelé à v33.
 
+## É4 — 2026-10-23
+- Migration du stockage au schéma 3 et assainissement des sauvegardes importées.
+- Refus des sauvegardes malformées, des versions futures et des fichiers trop volumineux.
+- Le PIN n’est plus inclus dans les exports ; un import conserve le PIN local.
+- Cache PWA renouvelé à v34 ; six tests de sauvegarde supplémentaires.
+
 ## 0.1.0 — 2026-10-23
 - Fondations PWA et modules natifs.
 - Première version navigable et activités de démonstration.

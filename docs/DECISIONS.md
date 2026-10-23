@@ -49,3 +49,7 @@
 - Une vérification de syntaxe ne remplace ni les tests unitaires ni un test navigateur. Ne jamais annoncer comme exécuté un test qui ne l’a pas été.
 
 - Progression adaptative de Léon : une seule contribution par question, à la première réponse. Les réponses après le deuxième indice ou la révélation de la solution alimentent les statistiques d’essai/réussite, mais restent neutres pour le niveau. Les séries sont remises à zéro après un changement de niveau pour éviter les montées ou baisses successives indues.
+
+- Schéma de stockage 3 : les imports sont validés puis normalisés avant remplacement de l’état ; les versions futures, profils malformés et fichiers de plus de 2 Mio sont refusés. Les champs inconnus ne sont pas réinjectés dans l’état courant.
+- Le PIN parental ne figure pas dans les sauvegardes exportées. Lors d’un import, la configuration PIN de l’appareil est conservée et toute valeur de PIN contenue dans une ancienne sauvegarde est ignorée.
+- La migration du schéma 2 normalise les anciennes séries de progression pour éviter qu’un seuil déjà atteint ne déclenche une montée/descente supplémentaire à la première réponse après mise à jour.
