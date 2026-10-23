@@ -175,3 +175,11 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Cache PWA renouvelé à `rose-leon-v44`.
 - [ ] Confirmer tests GitHub Actions et déploiement Pages sur le SHA final.
 - [ ] Essai sur iPhone : répondre avec zéro aide, puis avec une aide, puis vérifier que seul le premier cas compte comme réponse autonome pour le niveau.
+
+
+## Étape É15 — audit du découpage oral des mots (code livré, validation à confirmer)
+- [x] Audit de la banque des mots-mystères : correction de découpages qui pouvaient faire compter des syllabes écrites plutôt que les syllabes entendues (ex. « pomme », « poire », « nuage », « maîtresse », « cartable », « étoile », « montagne », « girafe », « valise »).
+- [x] Exposition de la banque de découpages pour la tester directement et ajout d’un test de non-régression sur 21 mots courants.
+- [x] Cache PWA renouvelé à `rose-leon-v45` ; le module `reading.js` reste précaché.
+- [ ] Confirmer CI et publication Pages sur le SHA final.
+- [ ] Écouter les mots avec Léon : la prononciation réelle peut varier selon les accents et certains découpages doivent rester un support oral, pas une règle orthographique.
