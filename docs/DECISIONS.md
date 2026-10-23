@@ -16,3 +16,4 @@
 - Accessibilité clavier : le calcul de la porte parentale peut être validé avec Entrée en plus du bouton tactile ; le comportement est couvert par un test automatisé.
 - Import de sauvegarde : l’état en mémoire est restauré si la persistance échoue pendant l’import ; un test simule une erreur de stockage pour vérifier qu’aucune progression n’est perdue.
 - Stockage transactionnel : si localStorage refuse une modification, un import ou une remise à zéro, l’état en mémoire revient à la version précédente ; des tests simulent l’échec d’écriture.
+- Service worker PWA : lors de l’activation, ne supprimer que les caches préfixés `rose-leon-`. CacheStorage est partagé à l’échelle de l’origine, notamment sur `github.io` ; les caches d’autres applications doivent être préservés. Un test statique de non-régression couvre ce point.
