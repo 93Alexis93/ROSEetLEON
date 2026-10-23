@@ -39,12 +39,12 @@ Mis à jour le 23 octobre 2026.
 - [x] Questions de compréhension des phrases reformulées pour éviter une consigne ambiguë
 - [x] Tests unitaires ajoutés : 200 générations par format vérifient quatre choix distincts, présence de la réponse et contenu des consignes
 - [x] Workflow GitHub Actions configuré pour vérifier la syntaxe JavaScript et lancer les tests de maths et de lecture à chaque push sur main ou pull request
-- [x] Cache PWA passé à v5 pour inclure la version du module de lecture testable
-- [ ] Vérifier dans GitHub Actions que le workflow s’exécute et que tous les contrôles passent
+- [x] Cache PWA passé à v6 après correction des choix de lecture
+- [x] Vérifier que GitHub Actions exécute le workflow ; une première exécution a révélé un défaut réel de choix multiples en lecture, corrigé sur `main` ; nouvelle exécution à confirmer
 - [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
 - [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
 - [ ] Vérifier hors ligne après activation du service worker
-- État : code et tests ajoutés sur main ; les tests n’ont pas encore été exécutés avec succès dans un environnement Node accessible et les tests navigateur restent nécessaires.
+- État : code et tests ajoutés sur main ; les tests s’exécutent désormais dans GitHub Actions ; la première exécution a détecté et permis de corriger un défaut de réponses multiples. La réussite de la nouvelle exécution et les tests navigateur restent à confirmer.
 
 ## Phases suivantes prévues
 - Phase 4 : contenus de Rose, adaptés à la moyenne section
