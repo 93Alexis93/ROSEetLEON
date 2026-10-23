@@ -20,7 +20,7 @@ test("Nombre mystère · les questions ont quatre choix distincts et une répons
  }
 });
 
-test("Syllabes · chaque question possède une consigne et une réponse entre une et trois syllabes",()=>{
+test("Nombre mystère · la réponse correspond exactement à l’indice",()=>{\n for(let i=0;i<1200;i++){\n  const q=createNumberMysteryQuestion();\n  const decomposition=q.prompt.match(/^Je suis (\d+) dizaines? et (\d+) unités?\. Qui suis-je \?$/);\n  const next=q.prompt.match(/^Quel nombre vient juste après (\d+) \?$/);\n  const previous=q.prompt.match(/^Quel nombre vient juste avant (\d+) \?$/);\n  if(decomposition) assert.equal(q.answer,Number(decomposition[1])*10+Number(decomposition[2]),q.prompt);\n  else if(next) assert.equal(q.answer,Number(next[1])+1,q.prompt);\n  else { assert.ok(previous,q.prompt); assert.equal(q.answer,Number(previous[1])-1,q.prompt); }\n }\n});\ntest("Syllabes · chaque question possède une consigne et une réponse entre une et trois syllabes",()=>{
  for(let i=0;i<300;i++){
   const q=createSyllableQuestion();
   assert.ok(q.word.length>0&&q.picture.length>0);
