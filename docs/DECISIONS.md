@@ -126,3 +126,6 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Validation des opérations de stockage
 - Les opérations qui enregistrent une réponse ou une séance vérifient explicitement que l’identifiant correspond à `leon` ou `rose`, afin de refuser proprement les appels invalides.
+
+## Progression mathématique
+- `recordMathAnswer` vérifie que le domaine appartient à la liste officielle avant toute modification, afin d’éviter les entrées de progression non reconnues lors d’une migration ultérieure.
