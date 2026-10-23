@@ -149,3 +149,8 @@
 ## E25 — Nombre mystère
 - Ajout d’un test qui compare la réponse générée à l’indice de décomposition, de succession ou de prédécesseur.
 - Correction de la version du cache PWA indiquée dans l’état d’avancement : `rose-leon-v49`.
+
+
+## E26 — Dépendances hors ligne
+- Ajout d’un test qui parcourt les imports JavaScript relatifs des modules précachés et vérifie que chaque dépendance existe et figure dans le précache PWA.
+- Aucun changement du code livré à l’application ; validation CI et publication toujours à confirmer.
