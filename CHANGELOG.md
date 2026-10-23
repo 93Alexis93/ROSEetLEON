@@ -154,3 +154,7 @@
 ## E26 — Dépendances hors ligne
 - Ajout d’un test qui parcourt les imports JavaScript relatifs des modules précachés et vérifie que chaque dépendance existe et figure dans le précache PWA.
 - Aucun changement du code livré à l’application ; validation CI et publication toujours à confirmer.
+
+
+## E27 — Rappel de sauvegarde
+- Le rappel de sauvegarde ne se laisse plus désactiver par une date enregistrée dans le futur ; un test couvre cette incohérence d’horloge.
