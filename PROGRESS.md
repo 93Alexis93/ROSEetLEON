@@ -192,3 +192,10 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Cache hors ligne renouvelé à `rose-leon-v46`.
 - [ ] Confirmer que le workflow de tests termine avec succès et que GitHub Pages publie le SHA final.
 - [ ] Validation orale finale avec Léon : le découpage dépend de la prononciation réelle et reste un support d’écoute.
+
+
+## Étape É17 — suivi de la composition du prénom de Rose (code livré, validation à confirmer)
+- [x] Une session est maintenant enregistrée lorsque Rose compose correctement ROSE dans le bon ordre ; les essais incomplets ou erronés ne créent pas de session.
+- [x] Test de non-régression ajouté pour le déclenchement de l’enregistrement à la réussite.
+- [x] Cache PWA renouvelé à `rose-leon-v47` et test de cache synchronisé.
+- [ ] Confirmer la CI et la publication Pages sur le SHA final.
