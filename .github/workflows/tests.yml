@@ -1,0 +1,28 @@
+name: Tests automatiques
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Vérifier la syntaxe JavaScript
+        run: |
+          find src -name '*.js' -print0 | xargs -0 -n1 node --check
+          node --check service-worker.js
+      - name: Tester le moteur de maths
+        run: node --experimental-default-type=module --test tests/math-engine.test.mjs
