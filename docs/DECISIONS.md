@@ -119,3 +119,5 @@ Une date de dernière sauvegarde située dans le futur peut résulter d’une ho
 E28 — Une exception levée par un abonné après écriture dans localStorage ne doit pas remonter jusqu’à update/reset/import et déclencher un rollback mémoire alors que les données persistées ont changé. Chaque abonné est isolé ; un test vérifie la cohérence mémoire/stockage.
 
 E29 — Les abonnés du store reçoivent chacun une copie distincte de l’état. Une interface ou un module qui modifie par erreur sa copie ne doit ni influencer les autres abonnés ni altérer l’état interne.
+
+E30 — Le tri avec un comparateur aléatoire n’est pas un algorithme de mélange uniforme. Les choix de lecture utilisent maintenant Fisher–Yates, avec source injectable pour permettre un test déterministe sans aléa fragile.
