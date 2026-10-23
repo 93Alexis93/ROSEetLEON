@@ -90,7 +90,7 @@ test("Les jeux de lecture sonnent aussi les erreurs et les réussites",()=>{
 
 
 test("Syllabes · les mots connus ont un nombre de syllabes juste",()=>{
- const expected={chat:1,"vélo":2,lapin:2,tomate:3,banane:3,papillon:3,chocolat:3,maison:2,bateau:2,soleil:2};
+ const expected={chat:1,"vélo":2,lapin:2,tomate:3,banane:3,papillon:3,chocolat:3,maison:2,bateau:2,soleil:2,renard:2,mouton:2,orange:2,fromage:2,cabane:2,camion:2,domino:3,"éléphant":3,crocodile:3,dinosaure:3,ananas:3,fenêtre:2,chapeau:2,canapé:3,fourmi:2,hibou:2,chaussette:2,rivière:2,poussin:2,bonnet:2};
  for(const item of SYLLABLE_WORDS){
   assert.equal(item.syllables,expected[item.word],"Nombre de syllabes incorrect pour "+item.word);
  }
