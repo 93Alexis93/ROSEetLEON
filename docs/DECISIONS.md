@@ -80,3 +80,5 @@
 
 
 - É15 : dans les mots-mystères, les tirets doivent représenter le découpage oral entendu, pas une découpe mécanique des lettres. Les mots monosyllabiques comme « pomme », « poire » et « nuage » restent sans tiret ; les mots comme « maîtresse », « cartable », « étoile », « montagne », « girafe » et « valise » sont ramenés à deux syllabes orales. La banque exportée est testée sur un échantillon courant ; la validation finale se fait à voix haute avec l’enfant.
+
+- É16 : auditer la banque syllabique dans son ensemble plutôt que corriger uniquement les mots déjà signalés. Les tests vérifient désormais tous les mots et le nombre de syllabes attendu. Les découpages décrivent la prononciation usuelle retenue pour l’activité, et doivent rester validés à voix haute. Le test de cohérence PWA doit suivre la version courante du cache, pas une version historique.
