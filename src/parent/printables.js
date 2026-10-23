@@ -5,6 +5,7 @@ const worksheets=[
  {id:"rose-letters",label:"Rose · Les lettres de mon prénom",description:"Reconnaître R, O, S et E, puis les retrouver dans une ligne de lettres."},
  {id:"rose-shapes",label:"Rose · Les formes",description:"Reconnaître cercle, carré, triangle et étoile."},
  {id:"rose-paths",label:"Rose · Je suis les chemins",description:"Préparer le geste du crayon en suivant des chemins simples."},
+ {id:"rose-emotions",label:"Rose · Les émotions en parlent",description:"Mettre des mots sur des situations, sans imposer une émotion ni une bonne réponse."},
  {id:"leon-multiplication",label:"Léon · Les multiplications",description:"Petits calculs et stratégies sans chronomètre."},
  {id:"leon-problems",label:"Léon · Petits problèmes",description:"Trois petites histoires à résoudre en dessinant ou en calculant."},
  {id:"leon-english",label:"Léon · Mes premiers mots en anglais",description:"Découvrir cinq mots simples et les relier à leur traduction française."},
@@ -32,6 +33,22 @@ function worksheetRoseShapes(){
   text("div","★","match-symbol"),text("div","Étoile","match-word"),
   text("div","■","match-symbol"),text("div","Carré","match-word")
  ]),text("p","3. Je dessine ma forme préférée dans le cadre.","worksheet-instruction"),text("div"," ","drawing-frame"));
+ return page;
+}
+function worksheetRoseEmotions(){
+ const page=el("article",{class:"print-page worksheet"});
+ page.append(text("p","ROSE & LÉON · PETITE FICHE POUR GRANDIR","worksheet-kicker"),text("h1","Et toi, qu’en penses-tu ?"),text("p","Prénom : ____________________     Date : ____________________","worksheet-meta"));
+ page.append(text("p","Regarde chaque petite histoire. Comment le personnage pourrait-il se sentir ? Plusieurs réponses sont possibles. Tu peux aussi ne pas savoir, ou ressentir autre chose.","worksheet-instruction"));
+ const qs=[
+  ["1. Le château de cubes","Un enfant construit une grande tour. Elle tombe juste avant qu’il ait fini.","🧱"],
+  ["2. Une nouvelle rencontre","Un enfant arrive dans un jeu où les autres jouent déjà.","👋"],
+  ["3. Le dessin surprise","Un enfant reçoit un dessin fait spécialement pour lui.","🎨"],
+  ["4. Le bruit inattendu","Un gros bruit retentit alors qu’un enfant joue tranquillement.","🔔"]
+ ];
+ page.append(el("div",{class:"word-problems"},qs.map(([heading,story,emoji])=>el("section",{class:"word-problem emotion-question"},[
+  text("h2",heading),text("p",emoji+"  "+story),text("p","Il ou elle pourrait se sentir : __________________________"),text("p","Qu’est-ce qui pourrait l’aider ? _______________________"),text("p","Et toi, comment te sentirais-tu ? (Tu peux passer cette question.)","small")
+ ]))));
+ page.append(text("p","Il n’y a pas une seule bonne réponse. On écoute, on demande et on respecte ce que chacun ressent.","worksheet-encouragement"));
  return page;
 }
 function worksheetRosePaths(){
@@ -107,6 +124,7 @@ function answerKey(id){
  if(id==="rose-letters")page.append(text("p","Fiche « Les lettres de mon prénom » : les lettres attendues sont R, O, S et E. Dans la ligne, entourer R, O, S, E, R, O, S, E dans l’ordre où elles apparaissent."));
  else if(id==="rose-shapes")page.append(text("p","Fiche « Les formes magiques » : ● cercle ; ■ carré ; ▲ triangle ; ★ étoile. L’activité de liaison n’impose pas une façon unique de tracer les traits."));
  else if(id==="rose-paths")page.append(text("p","Fiche « Je suis les chemins » : il n’y a pas de réponse unique. Valoriser le geste, l’essai et le fait de suivre le chemin à son rythme."));
+ else if(id==="rose-emotions")page.append(text("p","Fiche « Et toi, qu’en penses-tu ? » : il n’y a pas de corrigé attendu. Plusieurs émotions sont possibles pour une même situation. Écouter l’enfant, l’aider à préciser ses mots sans corriger son ressenti, et respecter son choix de ne pas répondre."));
  else if(id==="leon-problems")page.append(el("ul",{class:"answer-list"},["1. 4 × 3 = 12 billes.","2. 5 + 4 = 9 cartes.","3. 3 × 4 = 12 enfants."].map(answer=>text("li",answer))));
  else if(id==="leon-english")page.append(el("ul",{class:"answer-list"},["CAT = chat","SUN = soleil","BOOK = livre","DOG = chien","BALL = ballon"].map(answer=>text("li",answer))));
  else if(id==="leon-logic")page.append(el("ul",{class:"answer-list"},["1. 2, 4, 6, 8, 10 : on ajoute 2.","2. 5, 10, 15, 20, 25 : on ajoute 5.","3. 1, 2, 4, 8, 16 : on double à chaque étape."].map(answer=>text("li",answer))));
@@ -133,7 +151,7 @@ function printPages(includeKey){
 function showWorksheet(id){
  const w=worksheets.find(x=>x.id===id);if(!w)return printComingSoon();
  document.body.className="theme-parent print-view";
- const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:id==="rose-paths"?[worksheetRosePaths(),answerKey(id)]:id==="leon-problems"?[worksheetLeonProblems(),answerKey(id)]:id==="leon-english"?[worksheetLeonEnglish(),answerKey(id)]:id==="leon-logic"?[worksheetLeonLogic(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
+ const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:id==="rose-paths"?[worksheetRosePaths(),answerKey(id)]:id==="rose-emotions"?[worksheetRoseEmotions(),answerKey(id)]:id==="leon-problems"?[worksheetLeonProblems(),answerKey(id)]:id==="leon-english"?[worksheetLeonEnglish(),answerKey(id)]:id==="leon-logic"?[worksheetLeonLogic(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
  const wrapper=el("div",{class:"print-workspace"});
  const controls=el("div",{class:"no-print print-controls"},[
   button("🖨️ Imprimer la fiche seule",()=>printPages(false),"button-primary"),
