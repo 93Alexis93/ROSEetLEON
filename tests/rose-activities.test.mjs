@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createRoseQuestion,isRoseNameComplete} from "../src/child/rose-activities.js";
+import {createRoseQuestion,isRoseNameComplete,getNextRoseLetter} from "../src/child/rose-activities.js";
 import {createCountingQuestion} from "../src/child/activities.js";
 
 for(const mode of ["colors","shapes","letters","letter-pairs"]){
@@ -70,4 +70,13 @@ test("Rose · composer son prénom : seul ROSE dans le bon ordre est complet",()
   assert.equal(isRoseNameComplete(["R","O","S","E","R"]),false);
   assert.equal(isRoseNameComplete([]),false);
   assert.equal(isRoseNameComplete("ROSE"),false);
+});
+
+test("Rose · composition du prénom : donne la lettre attendue sans bloquer après une erreur",()=>{
+  assert.equal(getNextRoseLetter([]),"R");
+  assert.equal(getNextRoseLetter(["R"]),"O");
+  assert.equal(getNextRoseLetter(["R","O"]),"S");
+  assert.equal(getNextRoseLetter(["R","O","S"]),"E");
+  assert.equal(getNextRoseLetter(["R","O","S","E"]),null);
+  assert.equal(getNextRoseLetter(null),null);
 });
