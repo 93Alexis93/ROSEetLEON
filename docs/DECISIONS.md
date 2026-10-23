@@ -111,3 +111,7 @@ Le test du générateur doit vérifier le sens de l’indice et non uniquement l
 
 ### Vérification des dépendances hors ligne
 La liste de précache PWA doit inclure non seulement les pages et modules de démarrage, mais aussi chaque dépendance JavaScript locale importée par ces modules. Le test parcourt les imports relatifs et vérifie l’existence et la présence de chaque cible dans le précache. Ce test structurel ne remplace pas un essai hors réseau sur Safari iPhone.
+
+
+### Dates de sauvegarde incohérentes
+Une date de dernière sauvegarde située dans le futur peut résulter d’une horloge système incorrecte ou d’une donnée locale altérée. Elle doit déclencher un rappel prudent plutôt que repousser indéfiniment le prochain rappel.
