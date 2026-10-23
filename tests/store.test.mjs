@@ -263,3 +263,13 @@ test("Stockage · un identifiant enfant inconnu est refusé sans modifier les do
   assert.throws(() => store.recordSession("inconnu"), /Profil enfant inconnu/);
   assert.deepEqual(store.getState(), before);
 });
+
+
+test("Progression · un domaine mathématique inconnu est refusé sans modifier les données", () => {
+  failWrites = false;
+  store.resetData();
+  store.recordMathAnswer("mental", true);
+  const before = store.getState();
+  assert.throws(() => store.recordMathAnswer("inconnu", true), /Domaine mathématique inconnu/);
+  assert.deepEqual(store.getState(), before);
+});
