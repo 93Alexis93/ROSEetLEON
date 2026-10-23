@@ -7,7 +7,8 @@ const worksheets=[
  {id:"rose-paths",label:"Rose · Je suis les chemins",description:"Préparer le geste du crayon en suivant des chemins simples."},
  {id:"leon-multiplication",label:"Léon · Les multiplications",description:"Petits calculs et stratégies sans chronomètre."},
  {id:"leon-problems",label:"Léon · Petits problèmes",description:"Trois petites histoires à résoudre en dessinant ou en calculant."},
- {id:"leon-english",label:"Léon · Mes premiers mots en anglais",description:"Découvrir cinq mots simples et les relier à leur traduction française."}
+ {id:"leon-english",label:"Léon · Mes premiers mots en anglais",description:"Découvrir cinq mots simples et les relier à leur traduction française."},
+ {id:"leon-logic",label:"Léon · Suites logiques",description:"Trouver les nombres qui manquent dans trois suites progressives."}
 ];
 function text(tag,value,cls){return el(tag,{text:value,...(cls?{class:cls}:{})});}
 function worksheetRoseLetters(){
@@ -85,6 +86,21 @@ function worksheetLeonEnglish(){
  page.append(text("h2","Je choisis mon mot préféré"),text("p","Mon mot préféré est : ____________________","worksheet-meta"),text("p","Je peux le dessiner ici :","worksheet-instruction"),text("div"," ","drawing-frame"));
  return page;
 }
+function worksheetLeonLogic(){
+ const page=el("article",{class:"print-page worksheet"});
+ page.append(text("p","ROSE & LÉON · PETITE FICHE POUR GRANDIR","worksheet-kicker"),text("h1","Je continue les suites"),text("p","Prénom : ____________________     Date : ____________________","worksheet-meta"));
+ page.append(text("p","Observe les nombres. Trouve la règle, puis complète les cases. Tu peux expliquer comment tu as fait.","worksheet-instruction"));
+ const qs=[
+  ["1. Je compte de 2 en 2","2   ·   4   ·   6   ·   ____   ·   ____","path-straight"],
+  ["2. J’ajoute toujours 5","5   ·   10   ·   15   ·   ____   ·   ____","path-waves"],
+  ["3. Je double le nombre","1   ·   2   ·   4   ·   8   ·   ____","path-zigzag"]
+ ];
+ page.append(el("div",{class:"word-problems"},qs.map(([heading,line,cls])=>el("section",{class:"word-problem"},[
+  text("h2",heading),text("p",line,"trace-line "+cls),text("p","La règle que j’ai trouvée : __________________________","worksheet-meta"),text("div"," ","problem-space")
+ ]))));
+ page.append(text("p","Il peut y avoir plusieurs façons d’expliquer une suite. Montre ta stratégie.","worksheet-encouragement"));
+ return page;
+}
 function answerKey(id){
  const page=el("article",{class:"print-page worksheet answer-key"});
  page.append(text("p","POUR L’ADULTE · CORRIGÉ","worksheet-kicker"),text("h1","Repères de correction"));
@@ -93,6 +109,7 @@ function answerKey(id){
  else if(id==="rose-paths")page.append(text("p","Fiche « Je suis les chemins » : il n’y a pas de réponse unique. Valoriser le geste, l’essai et le fait de suivre le chemin à son rythme."));
  else if(id==="leon-problems")page.append(el("ul",{class:"answer-list"},["1. 4 × 3 = 12 billes.","2. 5 + 4 = 9 cartes.","3. 3 × 4 = 12 enfants."].map(answer=>text("li",answer))));
  else if(id==="leon-english")page.append(el("ul",{class:"answer-list"},["CAT = chat","SUN = soleil","BOOK = livre","DOG = chien","BALL = ballon"].map(answer=>text("li",answer))));
+ else if(id==="leon-logic")page.append(el("ul",{class:"answer-list"},["1. 2, 4, 6, 8, 10 : on ajoute 2.","2. 5, 10, 15, 20, 25 : on ajoute 5.","3. 1, 2, 4, 8, 16 : on double à chaque étape."].map(answer=>text("li",answer))));
  else page.append(el("ul",{class:"answer-list"},["1. 3 × 2 = 6","2. 4 × 5 = 20","3. 2 × 6 = 12","4. 5 × 3 = 15","5. 4 × 4 = 16","6. 3 × 7 = 21"].map(answer=>text("li",answer))));
  page.append(text("p","Privilégier l’explication et l’encouragement. L’enfant peut utiliser des dessins ou recompter."));
  return page;
@@ -116,7 +133,7 @@ function printPages(includeKey){
 function showWorksheet(id){
  const w=worksheets.find(x=>x.id===id);if(!w)return printComingSoon();
  document.body.className="theme-parent print-view";
- const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:id==="rose-paths"?[worksheetRosePaths(),answerKey(id)]:id==="leon-problems"?[worksheetLeonProblems(),answerKey(id)]:id==="leon-english"?[worksheetLeonEnglish(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
+ const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:id==="rose-paths"?[worksheetRosePaths(),answerKey(id)]:id==="leon-problems"?[worksheetLeonProblems(),answerKey(id)]:id==="leon-english"?[worksheetLeonEnglish(),answerKey(id)]:id==="leon-logic"?[worksheetLeonLogic(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
  const wrapper=el("div",{class:"print-workspace"});
  const controls=el("div",{class:"no-print print-controls"},[
   button("🖨️ Imprimer la fiche seule",()=>printPages(false),"button-primary"),
