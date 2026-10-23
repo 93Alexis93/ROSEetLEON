@@ -1,0 +1,11 @@
+# Décisions techniques
+- Hébergement statique GitHub Pages ; aucun backend.
+- HTML/CSS/JavaScript vanilla, modules ES, sans build ni dépendances.
+- Données locales et sauvegardes JSON versionnées.
+- localStorage pour la V1 ; exporter régulièrement les données.
+- Service worker limité aux ressources locales de même origine.
+- Voix via speechSynthesis après interaction utilisateur ; repli si indisponible.
+- Sons générés avec Web Audio API.
+- Icônes SVG maison, sans logos protégés.
+- La porte parentale n'est pas une protection cryptographique.
+- Les fiches imprimables complètes viendront dans une phase ultérieure.
