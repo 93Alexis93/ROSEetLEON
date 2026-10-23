@@ -144,3 +144,6 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Taille des sauvegardes importées
 - La limite de 2 Mio est vérifiée en octets UTF-8 en complément de la longueur de chaîne, car les caractères Unicode peuvent occuper plusieurs octets.
+
+## Exécutions CI redondantes
+- Les tests automatiques utilisent un groupe de concurrence par référence et annulent les exécutions précédentes du même groupe lorsqu’un nouveau commit arrive ; cela évite de gaspiller des runners sur des validations obsolètes sans prétendre résoudre une indisponibilité générale des runners.
