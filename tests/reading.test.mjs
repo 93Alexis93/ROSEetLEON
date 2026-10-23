@@ -72,6 +72,7 @@ test("tous les mots découpés ont un nombre de syllabes cohérent avec leur pro
     camion: 2, domino: 3, éléphant: 3, crocodile: 3, dinosaure: 3,
     ananas: 3, rivière: 2, fenêtre: 2, chaussette: 2, chapeau: 2,
     canapé: 3, fourmi: 2, hibou: 2, lapinou: 3
+  };
   assert.deepEqual(Object.keys(READING_SYLLABLES).sort(), Object.keys(expected).sort());
   for (const [word, count] of Object.entries(expected)) {
     assert.equal(READING_SYLLABLES[word].split("-").length, count, word);
