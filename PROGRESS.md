@@ -54,6 +54,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Jeu des lettres R, O, S et E à partir du prénom Rose, avec consigne vocale et trois choix
 - [x] Jeu d’association majuscules/minuscules R/r, O/o, S/s et E/e avec consigne vocale, indice doux et trois choix
 - [x] Activité interactive « Je compose mon prénom » : composer ROSE en touchant les lettres, avec modèle visible, retour encourageant et possibilité de recommencer.
+- [x] Test ciblé de la règle de validation du prénom : bon ordre, ordre erroné, prénom incomplet, lettres en trop et type invalide.
 - [x] Tests automatisés sur 600 générations couleurs/formes/lettres, 200 questions de comptage et les activités inconnues
 - [x] Cache PWA passé à v9 après ajout du jeu des lettres ; nouveau module inclus dans les ressources hors ligne
 - [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
