@@ -102,3 +102,9 @@
 - Test de non-régression élargi à l’ensemble de la banque syllabique.
 - Mise à jour du test PWA qui attendait encore l’ancienne version du cache v42 ; le contrôle suit maintenant v46.
 - Cache PWA renouvelé à v46 ; CI, publication Pages et validation orale avec Léon à confirmer.
+
+
+## É17 — 2026-10-23
+- Le jeu « Je compose mon prénom » enregistre maintenant une session quand ROSE est complété correctement, pour que le tableau de bord reflète cette activité.
+- Test de non-régression ajouté ; cache PWA renouvelé à v47.
+- CI et publication Pages à confirmer.
