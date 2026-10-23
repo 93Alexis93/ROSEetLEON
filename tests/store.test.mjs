@@ -216,3 +216,17 @@ test("Sauvegarde · les tableaux ne sont pas acceptés comme profils ou réglage
   assert.throws(() => store.importData(JSON.stringify({ profiles: {}, settings: [] })), /Fichier de sauvegarde non reconnu/);
   assert.equal(store.getState().profiles.rose.sessions, 7);
 });
+
+test("Stockage · un abonné défaillant ne fait pas diverger mémoire et sauvegarde", () => {
+  failWrites = false;
+  store.resetData();
+  const unsubscribe = store.subscribe(() => {
+    throw new Error("abonné défaillant");
+  });
+  assert.doesNotThrow(() => store.update(state => {
+    state.profiles.leon.sessions = 11;
+  }));
+  unsubscribe();
+  assert.equal(store.getState().profiles.leon.sessions, 11);
+  assert.equal(JSON.parse(values.get("rose-leon-data")).profiles.leon.sessions, 11);
+});
