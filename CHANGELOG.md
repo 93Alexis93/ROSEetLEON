@@ -108,3 +108,9 @@
 - Le jeu « Je compose mon prénom » enregistre maintenant une session quand ROSE est complété correctement, pour que le tableau de bord reflète cette activité.
 - Test de non-régression ajouté ; cache PWA renouvelé à v47.
 - CI et publication Pages à confirmer.
+
+
+## É18 — 2026-10-23
+- Contrôle de cohérence documentaire : la version du cache PWA dans `PROGRESS.md` était obsolète (v44 au lieu de v47) ; corrigée.
+- Revue du parcours « Les syllabes » et des contrôles automatiques existants : dix mots avec décompte explicite, choix 1–3, aide, verrouillage après bonne réponse et enregistrement de la session après cinq questions.
+- Les tests et la publication Pages du SHA final restent à confirmer via GitHub Actions.
