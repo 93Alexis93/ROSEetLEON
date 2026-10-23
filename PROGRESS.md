@@ -66,8 +66,9 @@ Mis à jour le 23 octobre 2026.
 - [x] Fiche Rose : reconnaître et relier les formes, avec repère de correction
 - [x] Fiche Léon : six multiplications, stratégies dessin/compter par bonds, corrigé séparé
 - [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne v10
+- [x] Nouveau module ajouté au cache hors ligne v11
 - [x] Corrigé des multiplications structuré en liste lisible pour l’impression
+- [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
 - [ ] Vérifier le rendu réel avec l’aperçu d’impression Safari iPhone et une impression A4
 
 ## Phases suivantes prévues
