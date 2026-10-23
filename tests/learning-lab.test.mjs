@@ -64,6 +64,7 @@ test("Retour sonore doux prévu pour les erreurs et branché sur les jeux",()=>{
  const audio=readFileSync(resolve(root,"src/audio.js"),"utf8");
  const activities=readFileSync(resolve(root,"src/child/activities.js"),"utf8");
  const rose=readFileSync(resolve(root,"src/child/rose-activities.js"),"utf8");
+ const reading=readFileSync(resolve(root,"src/child/reading.js"),"utf8");
  assert.match(audio,/export async function gentleOops/);
  assert.match(activities,/gentleOops\(getState\(\)\.settings\.sounds\)/);
  assert.match(rose,/gentleOops\(getState\(\)\.settings\.sounds\)/);
