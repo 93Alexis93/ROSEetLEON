@@ -9,6 +9,9 @@ const assertChild = child => {
 const assertMathDomain = domain => {
   if (!MATH_DOMAINS.some(item => item.id === domain)) throw Error("Domaine mathématique inconnu.");
 };
+const assertBoolean = (value, label) => {
+  if (typeof value !== "boolean") throw Error(`${label} doit être un booléen.`);
+};
 const WORD_PATTERN = /^[A-Za-zÀ-ÿ-]{2,24}$/;
 const MAX_BACKUP_BYTES = 2 * 1024 * 1024;
 
@@ -215,6 +218,7 @@ export function subscribe(fn) {
 
 export function recordAnswer(child, ok) {
   assertChild(child);
+  assertBoolean(ok, "Le résultat de la réponse");
   update(data => {
     const childProfile = data.profiles[child];
     childProfile.attempts++;
@@ -227,6 +231,7 @@ export function recordAnswer(child, ok) {
 
 export function recordMathAnswer(domain, ok, options = {}) {
   assertMathDomain(domain);
+  assertBoolean(ok, "Le résultat de la réponse");
   if (options.firstTry === false) return;
   update(data => {
     const childProfile = data.profiles.leon;
