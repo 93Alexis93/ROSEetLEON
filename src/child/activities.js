@@ -5,6 +5,12 @@ import {speak} from "../voice.js";
 import {cheer} from "../audio.js";
 import {go} from "../router.js";
 const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{const out=[...a];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;};
+export function createCountingQuestion(random=Math.random){
+ const count=1+Math.floor(random()*5);
+ const alternatives=shuffle([1,2,3,4,5].filter(n=>n!==count)).slice(0,2);
+ return {text:"Combien de licornes ?",answer:count,count,choices:shuffle([count,...alternatives])};
+}
 
 function mathMenu(){
  document.body.className="theme-leon";
