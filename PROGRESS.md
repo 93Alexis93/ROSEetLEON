@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v58` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
+- Le service worker source utilise actuellement le cache `rose-leon-v59` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
