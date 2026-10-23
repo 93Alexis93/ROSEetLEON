@@ -164,3 +164,5 @@
 - Isolation du stockage : les abonnés reçoivent des instantanés indépendants, empêchant l’un d’altérer les données vues par les autres.
 
 - Lecture : remplacement du tri à comparateur aléatoire par un mélange Fisher–Yates afin d’éviter un biais dans l’ordre des réponses.
+
+- PWA : cache incrémenté en v50 pour garantir le renouvellement des ressources hors ligne après les corrections de lecture.
