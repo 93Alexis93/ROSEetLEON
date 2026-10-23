@@ -3,36 +3,56 @@ Mis à jour le 23 octobre 2026.
 
 ## Phase 0 — Fondations
 - [x] Documentation pédagogique et décisions techniques
-- [x] Structure de base du dépôt, avec emplacements pour modules futurs
+- [x] Structure de base du dépôt
 - [x] HTML mobile-first, manifest PWA et service worker
-- [x] Modules de stockage versionné, routeur, UI, voix et sons
+- [x] Stockage versionné, routeur, UI, voix et sons
 - [x] Thèmes CSS et icône SVG locale
-- [ ] Activer GitHub Pages dans Settings → Pages (action manuelle requise)
-- [ ] Tester le cache hors ligne sur un iPhone réel
+- [x] Application publiée sur GitHub Pages et ouverte sur iPhone Safari
+- [ ] Refaire un test complet du mode avion après les dernières évolutions
 
 ## Phase 1 — Squelette navigable
 - [x] Accueil et choix des profils Léon / Rose
 - [x] Porte parentale avec multiplication 6–9, verrouillage après trois erreurs et PIN facultatif
 - [x] Tableau de bord parent, réglages voix/sons, export/import JSON et remise à zéro
-- [x] Défi de calcul mental pour Léon et comptage de licornes pour Rose
-- [x] Encouragements, suivi local et écran de fin « À demain ! »
-- [x] Outils parent : première trame « Crise en cours »
-- [ ] Exécuter des tests syntaxiques et fonctionnels automatisés dans un environnement navigateur
-- [ ] Tester les interactions, la voix iOS, la sauvegarde et le mode avion sur appareil réel
+- [x] Défi de calcul mental initial pour Léon et comptage de licornes pour Rose
+- [x] Encouragements, suivi local et écran de fin
+- [x] Outil parent « Crise en cours »
+- [ ] Tests navigateur complets et vérification de la voix iOS
 
-## Limites connues
-- Le tableau de bord et les activités sont une première démonstration, pas encore la bibliothèque pédagogique complète.
-- La voix dépend de la disponibilité des voix françaises dans iOS ; les sons peuvent être désactivés.
-- La protection parentale réduit les sorties accidentelles mais ne constitue pas une sécurité forte.
-- La section fiches imprimables est une coquille ; les générateurs A4 complets sont prévus en phase 6.
-- Les SVG fonctionnent comme icône de manifest ; une icône PNG dédiée iOS pourra être ajoutée après validation sur appareil.
+## Phase 2 — Maths de Léon
+- [x] Moteur de questions dans six domaines : calcul mental, numération, tables, problèmes, logique et mesures
+- [x] Cinq questions par session, indices progressifs et trois niveaux adaptatifs
+- [x] Progression locale par domaine et résumé dans l’espace parent
+- [x] Renouvellement du cache PWA pour les ressources de maths
+- [x] Contrôle automatique de 9 000 questions sans défaut détecté
+- [x] L’utilisateur a confirmé sur iPhone que les six défis apparaissent après actualisation de l’URL
+- [ ] Lancer la suite `node --experimental-default-type=module --test tests/math-engine.test.mjs`
+- [ ] Tester chaque domaine jusqu’à la fin d’une session, la progression adaptative et le mode avion
+- État : menu visible validé par l’utilisateur ; validation fonctionnelle complète encore à faire.
 
-## Phase 2 — En cours
-- Moteur de maths ajouté : six domaines, trois niveaux, indices progressifs et adaptation douce.
-- Progression locale par domaine et résumé dans l’espace parent.
-- Cache hors ligne renouvelé ; 9 000 questions contrôlées automatiquement sans défaut détecté.
-- Suite de tests ajoutée dans tests/math-engine.test.mjs.
-- À faire : lancer la suite sous Node, tester les six domaines et le mode hors ligne sur iPhone.
+## Phase 3 — Lecture de Léon (première version en cours)
+- [x] Ajouter un menu lecture accessible depuis l’accueil de Léon
+- [x] Ajouter quatre formats : mots-éclairs, mots-mystères, compréhension de phrases et mini-textes
+- [x] Réutiliser la voix iOS et proposer des indices doux
+- [x] Ajouter dans l’espace parent la gestion locale de mots personnalisés, intégrés aux jeux
+- [x] Ajouter le nouveau module au cache hors ligne
+- [x] Vérifier la syntaxe des fichiers modifiés : main.js, parent.js, reading.js et service-worker.js
+- [ ] Tester le parcours lecture sur iPhone, la voix, l’ajout/suppression de mots et la sauvegarde/importation
+- [ ] Vérifier la qualité pédagogique des questions et corriger les éventuels défauts avant de considérer la phase terminée
 
-## Prochaine étape
-Tester le parcours maths sur iPhone, corriger les problèmes observés et faire valider la phase 2 avant de commencer la suivante.
+## Phases suivantes prévues
+- Phase 4 : contenus de Rose, adaptés à la moyenne section
+- Phase 5 : journal et outils parent pour les crises
+- Phase 6 : fiches pédagogiques A4 imprimables
+- Phase 7 : écriture, émotions, histoires sociales, logique et anglais
+- Phase 8 : finition, accessibilité, tests de non-régression et validation globale
+
+## Décisions et limites à respecter
+- Application statique : HTML/CSS/JavaScript natifs, modules ES, sans backend, framework, build, npm ni CDN.
+- Données locales dans le navigateur ; sauvegardes JSON importables/exportables.
+- Priorité à Safari sur iPhone et au fonctionnement hors ligne après un premier chargement HTTPS.
+- Pédagogie positive : aucune punition, comparaison entre enfants, score anxiogène ou chronomètre stressant.
+- Les SVG servent d’icône web ; une icône PNG iOS pourra être ajoutée après validation sur appareil.
+- La porte parentale n’est pas une sécurité cryptographique.
+- Les fiches imprimables sont encore une coquille ; les générateurs A4 complets sont prévus en phase 6.
+- N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
