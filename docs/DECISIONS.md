@@ -89,3 +89,5 @@
 - É19 : tester une activité aléatoire ne doit pas seulement vérifier que la réponse est un entier. Les tests contrôlent aussi la relation mathématique entre les valeurs affichées et la réponse, sur plusieurs centaines de générations par type, y compris les énoncés de problèmes.
 
 - É20 : la banque des mots-mystères doit refléter le nombre de syllabes orales, même quand l’orthographe peut induire en erreur. « Nuage » est traité en deux syllabes (« nu-age ») ; le test vérifie explicitement ce choix. Un test automatisé protège le comptage, mais l’écoute réelle avec l’enfant reste le contrôle pédagogique final.
+
+- É21 : chaque question à choix multiples doit proposer quatre réponses distinctes et conserver la bonne réponse, sans distracteur de secours artificiel. Les questions d’horloge doivent rester correctes aux bornes (notamment 1 h pile et 1 h 30) ; ce cas est désormais couvert par un test ciblé.
