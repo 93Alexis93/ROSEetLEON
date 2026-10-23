@@ -227,3 +227,9 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Génération de distracteurs d’horloge uniques et exclusion systématique de la bonne réponse ; test ciblé pour 1 h pile et 1 h 30.
 - [x] Cache PWA renouvelé à `rose-leon-v49` et test hors ligne synchronisé.
 - [ ] Résultat CI et publication Pages à confirmer sur le SHA final.
+
+
+### E22 — Renforcement des tests du moteur mathématique
+- Corrigé le contrôle qui repère les choix artificiels : son expression régulière était trop échappée et ne testait pas réellement le format attendu.
+- Ajouté des vérifications sémantiques répétées sur les calculs mentaux et les suites logiques, au-delà de la seule forme des questions et des choix.
+- Vérification CI et publication Pages : en attente côté GitHub au moment de cette mise à jour.
