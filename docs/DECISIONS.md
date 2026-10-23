@@ -1,22 +1,44 @@
-# Décisions techniques
-- Hébergement statique GitHub Pages ; aucun backend.
-- HTML/CSS/JavaScript vanilla, modules ES, sans build ni dépendances.
-- Données locales et sauvegardes JSON versionnées.
-- localStorage pour la V1 ; exporter régulièrement les données.
-- Service worker limité aux ressources locales de même origine.
-- Voix via speechSynthesis après interaction utilisateur ; repli si indisponible.
-- Sons générés avec Web Audio API.
-- Icônes SVG maison, sans logos protégés.
-- La porte parentale n'est pas une protection cryptographique.
-- Les fiches imprimables complètes viendront dans une phase ultérieure.
-- Activité d’écriture de Rose : composition tactile de « ROSE » avec modèle visible, encouragements et recommencement libre ; aucun score ni pénalité. La règle de validation du prénom est isolée pour être testée automatiquement.
-- Accessibilité mobile : les jeux de Rose exposent leur progression avec les attributs ARIA progressbar ; les tests contrôlent les cibles tactiles, le focus visible et la préférence de mouvement réduit.
-- Porte parentale : le rafraîchissement après trois erreurs vérifie que l’écran de porte est toujours affiché, pour ne pas interrompre une navigation en cours.
-- Sauvegardes : les tests automatisés utilisent un stockage local simulé pour vérifier le cycle export/import et s'assurer qu'un JSON mal formé ou non reconnu ne remplace pas l'état courant.
-- Accessibilité clavier : le calcul de la porte parentale peut être validé avec Entrée en plus du bouton tactile ; le comportement est couvert par un test automatisé.
-- Import de sauvegarde : l’état en mémoire est restauré si la persistance échoue pendant l’import ; un test simule une erreur de stockage pour vérifier qu’aucune progression n’est perdue.
-- Stockage transactionnel : si localStorage refuse une modification, un import ou une remise à zéro, l’état en mémoire revient à la version précédente ; des tests simulent l’échec d’écriture.
-- Service worker PWA : lors de l’activation, ne supprimer que les caches préfixés `rose-leon-`. CacheStorage est partagé à l’échelle de l’origine, notamment sur `github.io` ; les caches d’autres applications doivent être préservés. Un test statique de non-régression couvre ce point.
+# Décisions techniques et pédagogiques
 
-- Création pédagogique originale à partir de compétences de référence : « Nombre mystère » pour travailler la valeur des dizaines/unités et les nombres voisins en CE1 ; « Les syllabes dans les mots » pour écouter et segmenter des mots oraux en moyenne section. Les contenus des sites consultés servent de repères de compétences et de progressivité, sans recopier leurs fiches ni leurs jeux.
-- Les activités nouvelles doivent rester courtes, réécoutables, sans chronomètre, avec indices et retours encourageants ; les questions sont testées automatiquement et le module est inclus dans le cache local.
+## Architecture
+- Hébergement statique via GitHub Pages ; aucun backend.
+- HTML, CSS et JavaScript natifs avec modules ES ; pas de framework, build, npm ou CDN sans accord explicite.
+- Priorité d’usage : Safari sur iPhone ; fonctionnement hors ligne attendu après un premier chargement HTTPS.
+- Service worker limité aux ressources locales nécessaires. À chaque ajout ou modification d’une ressource précachée, vérifier `ASSETS` et incrémenter `CACHE` dans le même changement.
+- À l’activation, le service worker ne supprime que les caches préfixés `rose-leon-`, car CacheStorage est partagé à l’échelle de l’origine.
+- Voix via `speechSynthesis` après interaction utilisateur, avec repli si indisponible ; sons générés avec Web Audio API.
+- Icône web SVG locale, sans logo protégé. Une icône PNG spécifique à iOS reste à étudier/valider sur appareil.
+
+## Données et sauvegardes
+- Données conservées localement dans le navigateur ; sauvegardes JSON importables et exportables.
+- Le schéma de stockage est versionné. Toute évolution doit inclure une migration compatible et des tests des anciennes sauvegardes.
+- Les imports doivent être validés avant de remplacer l’état courant ; un échec d’écriture doit laisser l’état précédent intact.
+- Ne pas exporter de secret ou de code PIN en clair. Les limites de sécurité de la porte parentale doivent rester explicites.
+- Tester les scénarios Safari iPhone, notamment export/import, stockage et éventuelle différence entre Safari et l’application installée.
+
+## Principes pédagogiques
+- Sessions courtes, consignes claires, indices progressifs et possibilité de réécouter.
+- Une erreur appelle une aide et une nouvelle tentative, sans punition, croix rouges, buzzer, classement entre enfants ni chronomètre stressant.
+- La difficulté doit respecter le rythme de l’enfant. Les réponses données après révélation ou aide ne doivent pas être assimilées automatiquement à une réussite autonome.
+- Les activités de Rose privilégient les interactions tactiles simples, les grands éléments visuels et la possibilité de recommencer sans pénalité.
+- Les affirmations pédagogiques importantes doivent distinguer clairement programme officiel, pratique étayée et proposition personnelle, avec sources précises. Les ressources consultées servent de repères ; les activités et textes doivent rester originaux.
+- Ne pas enregistrer de données sensibles sur les crises et ne pas employer de diagnostic médical dans l’interface enfant.
+
+## Accessibilité et impression
+- Cibles tactiles adaptées au mobile, focus visible, annonces accessibles de progression et respect de `prefers-reduced-motion`.
+- Les fiches A4 doivent rester sobres et économes en encre. Le rendu dans l’aperçu Safari et sur une imprimante réelle n’est pas réputé validé tant qu’un essai n’a pas été fait.
+- Les activités pour Rose doivent permettre l’accompagnement oral de l’adulte et ne pas exiger qu’elle sache écrire des phrases.
+
+## Décisions de conception déjà prises
+- L’activité de composition du prénom « ROSE » affiche un modèle visible, encourage les essais et permet de recommencer ; aucun score ni pénalité. La règle de validation est testée automatiquement.
+- Les jeux de Rose exposent leur progression aux lecteurs d’écran ; des tests couvrent les cibles tactiles, le focus visible et la réduction des animations.
+- La porte parentale vérifie, avant de se réafficher après un délai, que l’écran est toujours celui de la porte, pour ne pas interrompre une navigation.
+- La porte parentale accepte Entrée pour valider le calcul.
+- Les tests de stockage simulent les erreurs d’écriture pour vérifier le maintien de l’état précédent.
+- Les activités « Nombre mystère » et « Les syllabes dans les mots » sont des créations originales inspirées des compétences de référence : numération/nombres voisins en CE1 et segmentation orale en moyenne section. Elles doivent rester courtes, réécoutables, sans chronomètre et avec retour encourageant.
+
+## Validation et livraison
+- Distinguer systématiquement : code présent, test automatisé passé, validation par l’utilisateur sur iPhone et déploiement public confirmé.
+- Après chaque étape, consulter les tests GitHub Actions correspondant au SHA exact. En cas d’échec, corriger ou revenir en arrière avant de poursuivre.
+- Vérifier le déploiement Pages et le service worker public après toute modification du cache.
+- Une vérification de syntaxe ne remplace ni les tests unitaires ni un test navigateur. Ne jamais annoncer comme exécuté un test qui ne l’a pas été.
