@@ -61,3 +61,6 @@
 - É7 : la pause guidée est une activité facultative en trois étapes, sans compte à rebours, sans obligation de respirer d’une manière particulière, sans score et sans persistance. L’enfant progresse en touchant un bouton et peut arrêter à tout moment. Elle reste une proposition de recentrage simple, pas un outil de diagnostic ou de soin.
 
 - É8 : la progression de la pause guidée est exposée comme statut accessible avec annonce polie afin que les technologies d’assistance puissent signaler le changement d’étape sans interrompre inutilement la lecture. Le test source vérifie la présence de cette annonce, mais seul un essai réel avec VoiceOver sur iPhone peut confirmer l’expérience.
+
+
+- É9 : employer « syllabes » de façon cohérente dans l’activité d’écoute de Rose. Les sons de réponse sont courts, doux et subordonnés au réglage utilisateur ; une erreur déclenche un son discret plutôt qu’un buzzer punitif. La bonne réponse reste encouragée même si l’enfant s’est trompé avant. Le menu d’entrée de Léon doit annoncer un choix de défis, pas uniquement un penalty.
