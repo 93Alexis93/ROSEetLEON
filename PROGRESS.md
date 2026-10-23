@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v40`.
+- Le service worker source utilise actuellement le cache `rose-leon-v43`.
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -158,3 +158,11 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Tests de génération et de ressources hors ligne ajoutés.
 - [ ] Confirmer les tests automatisés et le déploiement GitHub Pages sur le SHA final.
 - [ ] Essai iPhone : saisie numérique, taille du clavier, annonces vocales, aides, session terminée et fonctionnement hors ligne.
+
+
+## Étape É13 — correction pédagogique des syllabes de Rose (code livré, validation à confirmer)
+- [x] Correction du nombre de syllabes de « tomate » (3 : to-ma-te) et « banane » (3 : ba-na-ne).
+- [x] Ajout d’un test ciblé sur les dix mots de la banque des syllabes.
+- [x] Cache PWA renouvelé à `rose-leon-v43` ; le module reste précaché.
+- [ ] Confirmer les tests GitHub Actions et la publication Pages sur le SHA final.
+- [ ] Vérifier avec Rose que la consigne orale et le comptage en tapant dans les mains sont compréhensibles.
