@@ -89,3 +89,9 @@
 - Progression adaptative de Léon : une réponse précédée de n’importe quelle aide ne contribue plus aux séries autonomes de montée/descente de niveau.
 - Les statistiques ordinaires de réponses continuent à être enregistrées.
 - Test de non-régression ajouté ; cache PWA renouvelé à v44. CI, publication Pages et test iPhone à confirmer.
+
+
+## É15 — 2026-10-23
+- Audit du découpage oral dans les mots-mystères : corrections des mots dont les tirets suggéraient un nombre de syllabes inexact à l’oral.
+- Ajout d’un test explicite sur 21 mots courants pour protéger les découpages les plus sensibles.
+- Cache PWA renouvelé à v45 ; CI, publication Pages et essai oral avec Léon à confirmer.
