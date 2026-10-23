@@ -25,7 +25,8 @@ function makeQuestion(domain, difficulty, prompt, answer, distractors, hint, exp
   let choices = unique([correct, ...distractors]);
   let offset = 1;
   while (choices.length < 4) {
-    choices.push(String(Number(correct) + offset));
+    const numeric = correct.match(/^(-?\\d+)(.*)$/);
+    choices.push(numeric ? String(Number(numeric[1]) + offset) + numeric[2] : correct + " (" + offset + ")");
     offset++;
     choices = unique(choices);
   }
@@ -69,7 +70,7 @@ function mental(d, random) {
     hint = "Calcule d'abord les dizaines, puis ajuste avec les unités.";
     explanation = `${a} ${add ? "+" : "−"} ${b} = ${answer}.`;
   }
-  return makeQuestion("mental", d, prompt, answer, [answer + 1, answer - 1, answer + (d === 1 ? 2 : 10)], hint, explanation, random);
+  return makeQuestion("mental", d, prompt, answer, [answer + 1, Math.max(0, answer - 1), answer + (d === 1 ? 2 : 10)], hint, explanation, random);
 }
 
 function numeration(d, random) {
@@ -155,7 +156,7 @@ export function createMathQuestion(domain = "mental", difficulty = 1, random = M
 // consécutives font baisser d'un niveau. Le niveau reste toujours entre 1 et 3.
 export function adaptDifficulty(difficulty, correctStreak, errorStreak) {
   const level = Math.max(1, Math.min(3, Number(difficulty) || 1));
-  if (correctStreak >= 3 && level < 3) return level + 1;
-  if (errorStreak >= 2 && level > 1) return level - 1;
+  if (correctStreak === 3 && level < 3) return level + 1;
+  if (errorStreak === 2 && level > 1) return level - 1;
   return level;
 }
