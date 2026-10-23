@@ -295,3 +295,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 ## Maintenance — 24 octobre 2026 (suite 5)
 - La limite des sauvegardes importées est désormais mesurée en octets UTF-8, et non en unités de chaîne JavaScript, pour éviter qu’un contenu Unicode dépasse la limite annoncée. Test dédié et cache PWA v56.
+
+## Maintenance — 24 octobre 2026 (suite 6)
+- Le workflow de tests annule désormais les exécutions précédentes de la même branche lorsqu’un nouveau commit arrive, afin de limiter la file d’attente des validations devenues obsolètes. Aucun résultat de test n’est considéré comme acquis tant que GitHub ne l’a pas exécuté.
