@@ -50,8 +50,9 @@ Mis à jour le 23 octobre 2026.
 - [x] Menu de choix de jeux séparé du lancement direct du comptage
 - [x] Jeu de couleurs avec consigne vocale, trois choix et indice doux
 - [x] Jeu de formes (cercle, carré, triangle, étoile) avec consigne vocale, trois choix et indice
-- [x] Tests automatisés sur 400 générations de questions et les activités inconnues
-- [x] Cache PWA passé à v8 et nouveau module inclus dans les ressources hors ligne
+- [x] Jeu des lettres R, O, S et E à partir du prénom Rose, avec consigne vocale et trois choix
+- [x] Tests automatisés sur 600 générations couleurs/formes/lettres, 200 questions de comptage et les activités inconnues
+- [x] Cache PWA passé à v9 après ajout du jeu des lettres ; nouveau module inclus dans les ressources hors ligne
 - [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
 - [ ] Ajouter progressivement d’autres activités MS après contrôle de ces premiers jeux
 
