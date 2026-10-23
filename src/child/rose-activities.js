@@ -15,6 +15,7 @@ export function createRoseQuestion(mode,random=Math.random){
  if(mode==="colors"){const t=pick(COLORS,random);return {mode,answer:t[0],prompt:"Touche le cercle "+t[0].toLowerCase()+".",speakText:"Touche le cercle "+t[0].toLowerCase()+".",choices:threeChoices(COLORS.map(x=>x[0]),t[0],random),hint:"Regarde la couleur du cercle.",explanation:"Le cercle recherché est "+t[0].toLowerCase()+" "+t[1]};}
  if(mode==="shapes"){const t=pick(SHAPES,random);return {mode,answer:t[0],prompt:"Trouve la forme : "+t[1],speakText:"Trouve la forme "+t[0].toLowerCase()+".",choices:threeChoices(SHAPES.map(x=>x[0]),t[0],random),hint:t[2],explanation:"C’est "+(t[0]==="Étoile"?"l"+String.fromCharCode(8217):"le ")+t[0].toLowerCase()+" "+t[1]};}
  if(mode==="letters"){const t=pick(LETTERS,random);return {mode,answer:t[0],prompt:"Touche la lettre "+t[0]+".",speakText:"Touche la lettre "+t[0]+".",choices:threeChoices(LETTERS.map(x=>x[0]),t[0],random),hint:"Regarde bien la forme de chaque lettre.",explanation:t[1]};}
+ if(mode==="letter-pairs"){const t=pick(LETTERS,random);const lower=t[0].toLowerCase();return {mode,answer:lower,prompt:"Trouve la petite lettre qui va avec "+t[0]+".",speakText:"Trouve la petite lettre qui va avec "+t[0]+".",choices:threeChoices(LETTERS.map(x=>x[0].toLowerCase()),lower,random),hint:"La petite lettre peut avoir une forme différente de la grande.",explanation:"La grande lettre "+t[0]+" et la petite lettre "+lower+" vont ensemble."};}
  throw new Error("Activité de Rose inconnue : "+mode);
 }
 export function roseMenu(){
