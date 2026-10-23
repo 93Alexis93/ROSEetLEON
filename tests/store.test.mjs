@@ -49,7 +49,7 @@ test("Sauvegarde · un JSON invalide est refusé sans écraser les données", ()
   store.update(state => {
     state.profiles.leon.sessions = 1;
   });
-  assert.throws(() => store.importData("{pas du json"), SyntaxError);
+  assert.throws(() => store.importData("{pas du json"), /JSON valide/);
   assert.equal(store.getState().profiles.leon.sessions, 1);
 });
 
