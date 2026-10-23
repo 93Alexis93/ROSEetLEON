@@ -11,7 +11,7 @@ const syllables={lapin:"la-pin",maison:"mai-son",ballon:"bal-lon",soleil:"so-lei
 function bank(){const custom=getState().customWords.map(x=>typeof x==="string"?x:x.word).filter(Boolean);return [...new Set([...BASE_WORDS,...custom.map(x=>x.trim().toLocaleLowerCase("fr")).filter(x=>/^[a-zà-ÿ-]{2,24}$/i.test(x))])];}
 function question(mode){
  const words=bank(),word=pick(words),others=shuffle(words.filter(w=>w!==word)).slice(0,3);
- if(mode==="flash")return {prompt:word,answer:word,choices:shuffle([word,...others]),hint:"Lis le mot doucement, puis repère-le parmi les propositions.",explanation:"Le mot était « "+word+" »."};
+ if(mode==="flash")return {prompt:"Écoute le mot, puis retrouve-le.",speakText:word,answer:word,choices:shuffle([word,...others]),hint:"Écoute encore une fois, puis compare les mots proposés.",explanation:"Le mot entendu était « "+word+" »."};
  if(mode==="mystery"){
   const parts=(syllables[word]||word.split("").join("-")).split("-");
   const shown=parts.length>1?parts.slice(0,-1).join("-")+"-…":word.slice(0,-1)+"…";
@@ -42,7 +42,7 @@ function startReading(mode){
   const content=card([]);content.append(el("p",{class:"small",text:"Jeu "+(round+1)+" sur 5"}),el("div",{class:"progress-track"},el("div",{class:"progress-fill",style:"width:"+(round/5*100)+"%"})),el("p",{class:"lead",text:"Prends ton temps. Tu peux écouter et demander un indice."}),el("div",{class:"prompt",text:q.prompt}));
   const answers=el("div",{class:"answer-grid"});q.choices.forEach(a=>answers.append(button(a,()=>answer(a),"button-soft")));content.append(answers);
   const feedback=el("p",{class:"feedback",role:"status","aria-live":"polite"});content.append(feedback,el("div",{class:"button-row"},[
-   button("🔊 Écouter",()=>speak(q.prompt,getState().settings.voice),"button-soft"),
+   button("🔊 Écouter",()=>speak(q.speakText||q.prompt,getState().settings.voice),"button-soft"),
    button("💡 Indice",()=>{hintCount++;feedback.textContent=hintCount===1?q.hint:q.explanation;},"button-soft")
   ]),button("⌂ Accueil",()=>go("home"),"icon-button"),button("↩ Menu lecture",readingMenu,"button-soft"));
   replaceApp(screen(labels[mode],content,{eyebrow:"Lecture sans pression",home:()=>go("home")}));
