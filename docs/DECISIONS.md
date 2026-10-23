@@ -129,3 +129,6 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Progression mathématique
 - `recordMathAnswer` vérifie que le domaine appartient à la liste officielle avant toute modification, afin d’éviter les entrées de progression non reconnues lors d’une migration ultérieure.
+
+## Validation des résultats pédagogiques
+- Les fonctions qui enregistrent une réponse exigent un booléen explicite pour éviter qu’une valeur arbitraire soit interprétée comme une réussite ou un échec.
