@@ -69,3 +69,10 @@ test("Retour sonore doux prévu pour les erreurs et branché sur les jeux",()=>{
  assert.match(activities,/gentleOops\(getState\(\)\.settings\.sounds\)/);
  assert.match(rose,/gentleOops\(getState\(\)\.settings\.sounds\)/);
 });
+
+
+test("Les jeux de lecture sonnent aussi les erreurs et les réussites",()=>{
+ const reading=readFileSync(resolve(root,"src/child/reading.js"),"utf8");
+ assert.match(reading,/gentleOops/);
+ assert.match(reading,/cheer/);
+});
