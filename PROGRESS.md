@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v35`.
+- Le service worker source utilise actuellement le cache `rose-leon-v36`.
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -81,11 +81,21 @@ Mis à jour le 23 octobre 2026.
 ## Historique utile
 Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
 
-## Étape É5 — sauvegarde plus accessible sur iPhone (en cours)
+## Étape É5 — sauvegarde plus accessible sur iPhone (code livré, tests CI et déploiement réussis)
 - [x] Préparation du module parent par un commit de formatage seul avant les modifications fonctionnelles.
 - [x] Partage natif du fichier JSON quand Safari/navigateur le prend en charge, avec repli vers téléchargement et bouton de copie du JSON.
 - [x] Rappel doux de sauvegarde si aucune sauvegarde n’est enregistrée ou si la dernière remonte à 30 jours.
 - [x] Demande facultative de stockage persistant lors d’une action explicite de sauvegarde ; son refus ou son indisponibilité ne bloque pas l’export.
 - [x] Le PIN reste exclu du JSON par la fonction d’export existante.
-- [ ] Tests CI et déploiement Pages du commit É5 à confirmer.
+- [x] 60 tests passent sur le commit `bfc7162ab888de65eddd302c4bdc8a9b441cdaa9` ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40016084267)).
+- [x] Déploiement Pages réussi sur ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40016083724)).
 - [ ] Tester sur iPhone : partage vers Fichiers/iCloud Drive, annulation du partage, téléchargement de repli, copie du JSON et réimport.
+
+## Étape É6 — enrichir les contenus de lecture (en cours)
+- [x] Formatage seul du module de lecture avant les changements fonctionnels ; les tests passent sur le commit `6aaaf2131e0860b416091970ad318ca6b0d570e7`.
+- [x] Enrichissement du vocabulaire pour les mots-éclairs et mots-mystères, en conservant les mots personnalisés.
+- [x] Passage de 4 à 10 phrases courtes et de 3 à 10 mini-textes originaux, avec questions de compréhension concrètes.
+- [x] Ajout de tests de variété des contenus et maintien de quatre choix distincts par question.
+- [x] Cache PWA renouvelé à v36.
+- [ ] Tests CI et déploiement Pages du commit fonctionnel É6 à confirmer.
+- [ ] Vérifier sur iPhone la lisibilité, la voix, la longueur des textes et la pertinence des réponses.

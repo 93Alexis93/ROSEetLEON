@@ -29,3 +29,19 @@ test("chaque format propose quatre réponses distinctes avec la bonne réponse",
 test("le format inconnu est signalé explicitement", () => {
   assert.throws(() => createReadingQuestion("inconnu"), /Format de lecture inconnu/);
 });
+
+test("les banques de phrases et de mini-textes proposent des situations variées", () => {
+  for (const mode of ["sentence", "text"]) {
+    const prompts = new Set();
+    for (let i = 0; i < 100; i++) prompts.add(createReadingQuestion(mode).prompt);
+    assert.ok(prompts.size >= 6, mode + " doit proposer plusieurs contenus distincts");
+  }
+});
+
+test("les mots-éclairs et mots-mystères couvrent un vocabulaire élargi", () => {
+  for (const mode of ["flash", "mystery"]) {
+    const answers = new Set();
+    for (let i = 0; i < 250; i++) answers.add(createReadingQuestion(mode).answer);
+    assert.ok(answers.size >= 12, mode + " doit proposer plusieurs mots distincts");
+  }
+});

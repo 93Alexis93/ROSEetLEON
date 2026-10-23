@@ -55,3 +55,5 @@
 - La migration du schéma 2 normalise les anciennes séries de progression pour éviter qu’un seuil déjà atteint ne déclenche une montée/descente supplémentaire à la première réponse après mise à jour.
 
 - É5 : la sauvegarde doit rester déclenchée par une action explicite. Préférer le partage natif de fichier quand il est disponible, conserver un téléchargement de repli et proposer la copie du JSON comme autre solution. Le rappel de sauvegarde est local à l’appareil, non intrusif, et n’atteste pas que l’utilisateur a effectivement conservé le fichier après téléchargement. La demande `navigator.storage.persist()` est facultative et ne doit jamais empêcher l’export.
+
+- É6 : les activités de lecture utilisent des contenus courts et originaux, avec des questions littérales faciles à repérer dans la phrase ou le mini-texte. La banque de mots est élargie tout en conservant les mots personnalisés de l’espace parent. Les tests vérifient que les contenus varient et que les réponses proposées restent distinctes ; l’adaptation réelle à Léon doit encore être confirmée sur iPhone.

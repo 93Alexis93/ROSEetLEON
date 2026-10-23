@@ -5,7 +5,11 @@ import { go } from "../router.js";
 
 const BASE_WORDS = [
   "lapin", "maison", "ballon", "soleil", "bateau", "papa", "maman", "vélo",
-  "école", "chat", "livre", "rose", "léon", "fusée", "forêt", "gâteau"
+  "école", "chat", "livre", "rose", "léon", "fusée", "forêt", "gâteau",
+  "ami", "lune", "moto", "tomate", "banane", "papillon", "chocolat", "pirate",
+  "robot", "cadeau", "pomme", "poire", "poule", "canard", "jardin", "fleur",
+  "maîtresse", "cartable", "crayon", "étoile", "nuage", "montagne", "musique",
+  "maillot", "tortue", "girafe", "poussin", "savon", "valise"
 ];
 const pick = items => items[Math.floor(Math.random() * items.length)];
 const shuffle = items => [...items].sort(() => Math.random() - 0.5);
@@ -25,7 +29,16 @@ const syllables = {
   léon: "lé-on",
   fusée: "fu-sée",
   forêt: "fo-rêt",
-  gâteau: "gâ-teau"
+  gâteau: "gâ-teau",
+  ami: "a-mi", lune: "lu-ne", moto: "mo-to", tomate: "to-ma-te",
+  banane: "ba-na-ne", papillon: "pa-pi-llon", chocolat: "cho-co-lat",
+  pirate: "pi-rate", robot: "ro-bot", cadeau: "ca-deau", pomme: "pom-me",
+  poire: "poi-re", poule: "pou-le", canard: "ca-nard", jardin: "jar-din",
+  fleur: "fleur", maîtresse: "maî-tres-se", cartable: "car-ta-ble",
+  crayon: "cra-yon", étoile: "é-toi-le", nuage: "nu-age",
+  montagne: "mon-ta-gne", musique: "mu-si-que", maillot: "mail-lot",
+  tortue: "tor-tue", girafe: "gi-ra-fe", poussin: "pou-ssin",
+  savon: "sa-von", valise: "va-li-se"
 };
 
 function bank() {
@@ -77,30 +90,16 @@ function question(mode) {
 
   if (mode === "sentence") {
     const sentences = [
-      {
-        text: "Le lapin saute dans le jardin.",
-        q: "De qui parle la phrase ?",
-        answer: "Le lapin",
-        choices: ["Le lapin", "Le bateau", "Le gâteau", "La forêt"]
-      },
-      {
-        text: "Maman lit un livre.",
-        q: "Que lit Maman ?",
-        answer: "un livre",
-        choices: ["un vélo", "un livre", "un ballon", "une fusée"]
-      },
-      {
-        text: "Le soleil brille.",
-        q: "Qu’est-ce qui brille ?",
-        answer: "Le soleil",
-        choices: ["La maison", "Le soleil", "La forêt", "Le bateau"]
-      },
-      {
-        text: "Rose roule à vélo.",
-        q: "Comment Rose se déplace-t-elle ?",
-        answer: "à vélo",
-        choices: ["à vélo", "à l’école", "dans l’eau", "en fusée"]
-      }
+      { text: "Le lapin saute dans le jardin.", q: "De qui parle la phrase ?", answer: "Le lapin", choices: ["Le lapin", "Le bateau", "Le gâteau", "La forêt"] },
+      { text: "Maman lit un livre.", q: "Que lit Maman ?", answer: "un livre", choices: ["un vélo", "un livre", "un ballon", "une fusée"] },
+      { text: "Le soleil brille.", q: "Qu’est-ce qui brille ?", answer: "Le soleil", choices: ["La maison", "Le soleil", "La forêt", "Le bateau"] },
+      { text: "Rose roule à vélo.", q: "Comment Rose se déplace-t-elle ?", answer: "à vélo", choices: ["à vélo", "à l’école", "dans l’eau", "en fusée"] },
+      { text: "Le chat dort sur le canapé.", q: "Où dort le chat ?", answer: "sur le canapé", choices: ["sur le canapé", "dans le jardin", "dans le bateau", "à l’école"] },
+      { text: "Lina plante une graine dans un pot.", q: "Que plante Lina ?", answer: "une graine", choices: ["une graine", "une fleur coupée", "un ballon", "un crayon"] },
+      { text: "Noé met son manteau car il fait froid.", q: "Pourquoi Noé met-il son manteau ?", answer: "car il fait froid", choices: ["car il fait froid", "car il a faim", "car il pleut du chocolat", "car il va dormir"] },
+      { text: "Dans la mare, trois canards nagent.", q: "Combien de canards nagent ?", answer: "trois", choices: ["deux", "trois", "quatre", "cinq"] },
+      { text: "Papa prépare une soupe avec des carottes.", q: "Avec quoi Papa prépare-t-il la soupe ?", answer: "des carottes", choices: ["des carottes", "des pommes", "des crayons", "des fleurs"] },
+      { text: "Mila range ses crayons dans la trousse.", q: "Où Mila range-t-elle ses crayons ?", answer: "dans la trousse", choices: ["dans la trousse", "dans le frigo", "sous la pluie", "dans la mare"] }
     ];
     const sentence = pick(sentences);
     return {
@@ -115,24 +114,16 @@ function question(mode) {
 
   if (mode === "text") {
     const texts = [
-      {
-        text: "Léon a un ballon rouge. Il joue dans le jardin.",
-        q: "Qu’a Léon ?",
-        a: "Un ballon rouge",
-        c: ["Un ballon rouge", "Un vélo bleu", "Un livre", "Un gâteau"]
-      },
-      {
-        text: "Rose voit un petit chat. Le chat dort sur le tapis.",
-        q: "Où dort le chat ?",
-        a: "Sur le tapis",
-        c: ["Dans le jardin", "Sur le tapis", "Dans la classe", "Dans le bateau"]
-      },
-      {
-        text: "Le matin, Mila va à l’école avec son sac.",
-        q: "Où va Mila ?",
-        a: "À l’école",
-        c: ["Au parc", "À l’école", "À la piscine", "À la forêt"]
-      }
+      { text: "Léon a un ballon rouge. Il joue dans le jardin.", q: "Qu’a Léon ?", a: "Un ballon rouge", c: ["Un ballon rouge", "Un vélo bleu", "Un livre", "Un gâteau"] },
+      { text: "Rose voit un petit chat. Le chat dort sur le tapis.", q: "Où dort le chat ?", a: "Sur le tapis", c: ["Dans le jardin", "Sur le tapis", "Dans la classe", "Dans le bateau"] },
+      { text: "Le matin, Mila va à l’école avec son sac.", q: "Où va Mila ?", a: "À l’école", c: ["Au parc", "À l’école", "À la piscine", "À la forêt"] },
+      { text: "Sam a planté une graine. Il l’arrose chaque matin. Une petite pousse apparaît.", q: "Que fait Sam chaque matin ?", a: "Il arrose la graine", c: ["Il arrose la graine", "Il peint le mur", "Il range ses chaussures", "Il nourrit un poisson"] },
+      { text: "Nina prépare son sac pour la piscine. Elle prend une serviette et un bonnet. Puis elle rejoint son papa.", q: "Que prend Nina ?", a: "Une serviette et un bonnet", c: ["Une serviette et un bonnet", "Un ballon et un livre", "Un manteau et des bottes", "Une poêle et une cuillère"] },
+      { text: "Le vent souffle fort. Les feuilles s’envolent et roulent sur le chemin. Hugo ferme son blouson.", q: "Que font les feuilles ?", a: "Elles s’envolent", c: ["Elles s’envolent", "Elles chantent", "Elles nagent", "Elles deviennent des pommes"] },
+      { text: "Au marché, Mamie choisit trois pommes et deux poires. Elle les met dans son panier.", q: "Combien de pommes Mamie choisit-elle ?", a: "Trois", c: ["Deux", "Trois", "Quatre", "Cinq"] },
+      { text: "Léo entend un bruit dans la cuisine. C’est le chat qui pousse sa gamelle vide. Léo lui donne ses croquettes.", q: "Pourquoi le chat pousse-t-il sa gamelle ?", a: "Elle est vide", c: ["Elle est vide", "Il veut sortir en fusée", "Elle est pleine d’eau", "Il cherche un crayon"] },
+      { text: "Après la pluie, Inès observe un escargot près du pot de fleurs. Elle le regarde sans le toucher, puis appelle son frère.", q: "Quel animal Inès observe-t-elle ?", a: "Un escargot", c: ["Un escargot", "Un papillon", "Un canard", "Un lapin"] },
+      { text: "Tom met ses bottes et son imperméable. Il sort avec sa sœur pour sauter dans les flaques.", q: "Pourquoi Tom met-il ses bottes ?", a: "Pour sortir sous la pluie", c: ["Pour aller dormir", "Pour sortir sous la pluie", "Pour faire un gâteau", "Pour nager dans la mer"] }
     ];
     const text = pick(texts);
     return {

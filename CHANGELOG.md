@@ -30,3 +30,8 @@
 - Rappel de sauvegarde après 30 jours ou en l’absence de sauvegarde enregistrée.
 - Demande de stockage persistant facultative au moment d’une sauvegarde, sans bloquer si elle échoue.
 - Cache PWA renouvelé à v35.
+
+## É6 — 2026-10-23
+- Enrichissement du vocabulaire des jeux « Mots-éclairs » et « Mots-mystères ».
+- Passage à 10 phrases et 10 mini-textes de compréhension originaux, avec questions explicites.
+- Ajout de tests de variété du contenu ; cache PWA renouvelé à v36.
