@@ -32,3 +32,4 @@
  body.print-view .letter-card{min-height:95px}
  body.print-view .no-print{display:none!important}
 }
+@media print{body.print-view.print-worksheet-only .answer-key{display:none!important}body.print-view.print-worksheet-only .worksheet:not(.answer-key){break-after:auto!important;page-break-after:auto!important}}
