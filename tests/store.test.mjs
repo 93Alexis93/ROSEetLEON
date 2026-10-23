@@ -287,3 +287,15 @@ test("Stockage · les résultats non booléens sont refusés sans modifier les d
   assert.throws(() => store.recordMathAnswer("mental", 1), /doit être un booléen/);
   assert.deepEqual(store.getState(), before);
 });
+
+
+test("Progression · les options mal formées sont refusées sans modifier les données", () => {
+  failWrites = false;
+  store.resetData();
+  store.recordMathAnswer("mental", true);
+  const before = store.getState();
+  assert.throws(() => store.recordMathAnswer("mental", true, null), /options de réponse sont invalides/);
+  assert.throws(() => store.recordMathAnswer("mental", true, { helped: "oui" }), /statut d’aide doit être un booléen/);
+  assert.throws(() => store.recordMathAnswer("mental", true, { firstTry: 0 }), /statut de première tentative doit être un booléen/);
+  assert.deepEqual(store.getState(), before);
+});
