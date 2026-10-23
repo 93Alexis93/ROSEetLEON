@@ -107,3 +107,7 @@ La couverture de tests doit vérifier chaque niveau de difficulté, pas seulemen
 
 ### Nombre mystère
 Le test du générateur doit vérifier le sens de l’indice et non uniquement la présence de quatre choix. Pour chaque type de question, la réponse est recalculée à partir des dizaines/unités, ou du nombre qui précède/suit celui affiché. Les contrôles automatisés complètent les essais réels sur Safari iPhone.
+
+
+### Vérification des dépendances hors ligne
+La liste de précache PWA doit inclure non seulement les pages et modules de démarrage, mais aussi chaque dépendance JavaScript locale importée par ces modules. Le test parcourt les imports relatifs et vérifie l’existence et la présence de chaque cible dans le précache. Ce test structurel ne remplace pas un essai hors réseau sur Safari iPhone.
