@@ -6,7 +6,8 @@ const worksheets=[
  {id:"rose-shapes",label:"Rose · Les formes",description:"Reconnaître cercle, carré, triangle et étoile."},
  {id:"rose-paths",label:"Rose · Je suis les chemins",description:"Préparer le geste du crayon en suivant des chemins simples."},
  {id:"leon-multiplication",label:"Léon · Les multiplications",description:"Petits calculs et stratégies sans chronomètre."},
- {id:"leon-problems",label:"Léon · Petits problèmes",description:"Trois petites histoires à résoudre en dessinant ou en calculant."}
+ {id:"leon-problems",label:"Léon · Petits problèmes",description:"Trois petites histoires à résoudre en dessinant ou en calculant."},
+ {id:"leon-english",label:"Léon · Mes premiers mots en anglais",description:"Découvrir cinq mots simples et les relier à leur traduction française."}
 ];
 function text(tag,value,cls){return el(tag,{text:value,...(cls?{class:cls}:{})});}
 function worksheetRoseLetters(){
@@ -70,6 +71,20 @@ function worksheetLeonProblems(){
  ]))));
  return page;
 }
+function worksheetLeonEnglish(){
+ const page=el("article",{class:"print-page worksheet"});
+ page.append(text("p","ROSE & LÉON · PETITE FICHE POUR GRANDIR","worksheet-kicker"),text("h1","My first English words"),text("p","Prénom : ____________________     Date : ____________________","worksheet-meta"));
+ page.append(text("p","Lis les mots anglais. Relie chaque mot à sa traduction française.","worksheet-instruction"));
+ page.append(el("div",{class:"english-match"},[
+  text("div","CAT","english-word"),text("div","soleil","english-translation"),
+  text("div","SUN","english-word"),text("div","livre","english-translation"),
+  text("div","BOOK","english-word"),text("div","chat","english-translation"),
+  text("div","DOG","english-word"),text("div","ballon","english-translation"),
+  text("div","BALL","english-word"),text("div","chien","english-translation")
+ ]));
+ page.append(text("h2","Je choisis mon mot préféré"),text("p","Mon mot préféré est : ____________________","worksheet-meta"),text("p","Je peux le dessiner ici :","worksheet-instruction"),text("div"," ","drawing-frame"));
+ return page;
+}
 function answerKey(id){
  const page=el("article",{class:"print-page worksheet answer-key"});
  page.append(text("p","POUR L’ADULTE · CORRIGÉ","worksheet-kicker"),text("h1","Repères de correction"));
@@ -77,6 +92,7 @@ function answerKey(id){
  else if(id==="rose-shapes")page.append(text("p","Fiche « Les formes magiques » : ● cercle ; ■ carré ; ▲ triangle ; ★ étoile. L’activité de liaison n’impose pas une façon unique de tracer les traits."));
  else if(id==="rose-paths")page.append(text("p","Fiche « Je suis les chemins » : il n’y a pas de réponse unique. Valoriser le geste, l’essai et le fait de suivre le chemin à son rythme."));
  else if(id==="leon-problems")page.append(el("ul",{class:"answer-list"},["1. 4 × 3 = 12 billes.","2. 5 + 4 = 9 cartes.","3. 3 × 4 = 12 enfants."].map(answer=>text("li",answer))));
+ else if(id==="leon-english")page.append(el("ul",{class:"answer-list"},["CAT = chat","SUN = soleil","BOOK = livre","DOG = chien","BALL = ballon"].map(answer=>text("li",answer))));
  else page.append(el("ul",{class:"answer-list"},["1. 3 × 2 = 6","2. 4 × 5 = 20","3. 2 × 6 = 12","4. 5 × 3 = 15","5. 4 × 4 = 16","6. 3 × 7 = 21"].map(answer=>text("li",answer))));
  page.append(text("p","Privilégier l’explication et l’encouragement. L’enfant peut utiliser des dessins ou recompter."));
  return page;
@@ -100,7 +116,7 @@ function printPages(includeKey){
 function showWorksheet(id){
  const w=worksheets.find(x=>x.id===id);if(!w)return printComingSoon();
  document.body.className="theme-parent print-view";
- const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:id==="rose-paths"?[worksheetRosePaths(),answerKey(id)]:id==="leon-problems"?[worksheetLeonProblems(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
+ const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:id==="rose-paths"?[worksheetRosePaths(),answerKey(id)]:id==="leon-problems"?[worksheetLeonProblems(),answerKey(id)]:id==="leon-english"?[worksheetLeonEnglish(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
  const wrapper=el("div",{class:"print-workspace"});
  const controls=el("div",{class:"no-print print-controls"},[
   button("🖨️ Imprimer la fiche seule",()=>printPages(false),"button-primary"),
