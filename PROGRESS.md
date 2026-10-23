@@ -26,9 +26,9 @@ Mis à jour le 23 octobre 2026.
 - [x] Renouvellement du cache PWA pour les ressources de maths
 - [x] Contrôle automatique de 9 000 questions sans défaut détecté (résultat rapporté précédemment)
 - [x] L’utilisateur a confirmé sur iPhone que les six défis apparaissent après actualisation de l’URL
-- [ ] Lancer la suite `node --experimental-default-type=module --test tests/*.test.mjs`
+- [x] Suite `node --experimental-default-type=module --test tests/*.test.mjs` exécutée dans GitHub Actions ; une correction complémentaire des choix de secours numériques est en cours de validation
 - [ ] Tester chaque domaine jusqu’à la fin d’une session, la progression adaptative et le mode avion
-- État : menu visible validé par l’utilisateur ; validation fonctionnelle complète encore à faire.
+- État : menu visible validé par l’utilisateur ; tests automatisés des moteurs passés, parcours fonctionnel complet encore à vérifier.
 
 ## Phase 3 — Lecture de Léon (première version en cours)
 - [x] Menu lecture accessible depuis l’accueil de Léon
@@ -44,7 +44,7 @@ Mis à jour le 23 octobre 2026.
 - [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
 - [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
 - [ ] Vérifier hors ligne après activation du service worker
-- État : code et tests ajoutés sur main ; les tests s’exécutent désormais dans GitHub Actions ; la première exécution a détecté et permis de corriger un défaut de réponses multiples. La réussite de la nouvelle exécution et les tests navigateur restent à confirmer.
+- État : les tests automatisés ont passé sur le commit `5fbb988`. Une première exécution a détecté un défaut de réponses multiples, corrigé. Une correction supplémentaire du générateur de choix mathématiques est maintenant testée ; tests navigateur et mode hors ligne restent à faire.
 
 ## Phases suivantes prévues
 - Phase 4 : contenus de Rose, adaptés à la moyenne section
