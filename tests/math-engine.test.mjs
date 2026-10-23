@@ -91,3 +91,10 @@ test("deux erreurs autonomes font baisser d'un niveau puis réinitialisent les s
 test("un domaine inconnu est signalé explicitement",()=>{
   assert.throws(()=>createMathQuestion("inconnu",1),/Domaine mathématique inconnu/);
 });
+
+
+test("une aide utilisée rend la réponse neutre pour la progression adaptative",()=>{
+ const source=readFileSync(new URL("../src/child/activities.js",import.meta.url),"utf8");
+ assert.match(source,/helped:\s*hint\s*>\s*0/);
+ assert.doesNotMatch(source,/helped:\s*hint\s*>=\s*2/);
+});
