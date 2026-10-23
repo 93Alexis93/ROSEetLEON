@@ -29,7 +29,7 @@ test("PWA · les fiches et leurs styles sont préchargés",()=>{
 });
 
 test("PWA · le cache est renouvelé pour les dernières corrections de contenu",()=>{
-  assert.match(worker,/const CACHE="rose-leon-v55"/,"Les corrections de contenu doivent accompagner le renouvellement du cache PWA.");
+  assert.match(worker,/const CACHE="rose-leon-v56"/,"Les corrections de contenu doivent accompagner le renouvellement du cache PWA.");
 });
 
 test("PWA · les nouveaux modules de calcul sont préchargés hors ligne",()=>{
