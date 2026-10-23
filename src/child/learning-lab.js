@@ -38,12 +38,12 @@ export function createCompareQuestion(random=Math.random){
  return {prompt:"Quel est le plus grand nombre : "+first+" ou "+second+" ?",answer,choices:shuffle(choices,random),hint:"Compare d’abord le chiffre des dizaines, puis celui des unités si besoin.",explanation:answer+" est plus grand que "+other+"."};
 }
 
-const SYLLABLE_WORDS=[
+export const SYLLABLE_WORDS=[
  {word:"chat",picture:"🐱",syllables:1},
  {word:"vélo",picture:"🚲",syllables:2},
  {word:"lapin",picture:"🐰",syllables:2},
- {word:"tomate",picture:"🍅",syllables:2},
- {word:"banane",picture:"🍌",syllables:2},
+ {word:"tomate",picture:"🍅",syllables:3},
+ {word:"banane",picture:"🍌",syllables:3},
  {word:"papillon",picture:"🦋",syllables:3},
  {word:"chocolat",picture:"🍫",syllables:3},
  {word:"maison",picture:"🏠",syllables:2},
