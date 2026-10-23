@@ -13,4 +13,4 @@
 - Accessibilité mobile : les jeux de Rose exposent leur progression avec les attributs ARIA progressbar ; les tests contrôlent les cibles tactiles, le focus visible et la préférence de mouvement réduit.
 - Porte parentale : le rafraîchissement après trois erreurs vérifie que l’écran de porte est toujours affiché, pour ne pas interrompre une navigation en cours.
 - Sauvegardes : les tests automatisés utilisent un stockage local simulé pour vérifier le cycle export/import et s'assurer qu'un JSON mal formé ou non reconnu ne remplace pas l'état courant.
-- Accessibilité clavier : le calcul de la porte parentale peut être validé avec Entrée en plus du bouton tactile ; le comportement est couvert par un test automatisé.\n
+- Accessibilité clavier : le calcul de la porte parentale peut être validé avec Entrée en plus du bouton tactile ; le comportement est couvert par un test automatisé.\n- Import de sauvegarde : l’état en mémoire est restauré si la persistance échoue pendant l’import ; un test simule une erreur de stockage pour vérifier qu’aucune progression n’est perdue.
