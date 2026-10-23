@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
 import {MATH_DOMAINS,createMathQuestion,adaptDifficulty,updateMathProgress} from "../src/child/math-engine.js";
 
 test("les six domaines sont disponibles",()=>{
