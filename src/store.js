@@ -70,11 +70,17 @@ function sanitizeMathProgress(value) {
 
 function sanitizeProfile(value) {
   const source = isRecord(value) ? value : {};
+  const attempts = integerInRange(source.attempts, 0, 1000000, 0);
+  const correct = Math.min(integerInRange(source.correct, 0, 1000000, 0), attempts);
+  const stickers = Math.min(
+    integerInRange(source.stickers, 0, 1000000, 0),
+    Math.floor(correct / 3)
+  );
   return {
     sessions: integerInRange(source.sessions, 0, 1000000, 0),
-    correct: integerInRange(source.correct, 0, 1000000, 0),
-    attempts: integerInRange(source.attempts, 0, 1000000, 0),
-    stickers: integerInRange(source.stickers, 0, 1000000, 0),
+    correct,
+    attempts,
+    stickers,
     mathProgress: sanitizeMathProgress(source.mathProgress)
   };
 }
@@ -263,7 +269,11 @@ export function importData(text) {
 
   // Le PIN ne vient jamais du fichier importé : on conserve celui de cet appareil.
   const previous = state;
-  state = migrate(data, previous.settings.parentPin);
+  const importable = {
+    ...data,
+    settings: { ...data.settings, parentPin: previous.settings.parentPin }
+  };
+  state = migrate(importable, previous.settings.parentPin);
   try {
     persist();
   } catch (error) {
