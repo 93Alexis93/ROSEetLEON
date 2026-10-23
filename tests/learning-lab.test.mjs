@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createNumberMysteryQuestion,createSyllableQuestion} from "../src/child/learning-lab.js";
+import {createNumberMysteryQuestion,createCompareQuestion,createSyllableQuestion} from "../src/child/learning-lab.js";
 import {readFileSync} from "node:fs";
 import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
@@ -35,6 +35,23 @@ test("Les deux activités sont accessibles depuis les menus enfants et incluses 
  const worker=readFileSync(resolve(root,"service-worker.js"),"utf8");
  assert.match(main,/numberMystery,syllableGame/);
  assert.match(main,/Nombre mystère/);
+ assert.match(main,/compareNumbers/);
+ assert.match(main,/Le plus grand nombre/);
  assert.match(main,/Les syllabes/);
  assert.ok(worker.includes("./src/child/learning-lab.js"));
+});
+
+test("Comparer les nombres · la réponse est le plus grand des deux nombres",()=>{
+ for(let i=0;i<600;i++){
+  const q=createCompareQuestion();
+  assert.match(q.prompt,/Quel est le plus grand nombre/);
+  const nums=[...q.prompt.matchAll(/\d+/g)].map(m=>Number(m[0]));
+  assert.equal(nums.length,2);
+  assert.equal(q.answer,Math.max(...nums));
+  assert.equal(q.choices.length,4);
+  assert.equal(new Set(q.choices).size,4);
+  assert.ok(q.choices.includes(q.answer));
+  assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=10&&n<=99));
+  assert.ok(q.hint.length>0&&q.explanation.length>0);
+ }
 });
