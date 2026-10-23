@@ -13,9 +13,10 @@ function question(mode){
  const words=bank(),word=pick(words),others=shuffle(words.filter(w=>w!==word)).slice(0,3);
  if(mode==="flash")return {prompt:"Écoute le mot, puis retrouve-le.",speakText:word,answer:word,choices:shuffle([word,...others]),hint:"Écoute encore une fois, puis compare les mots proposés.",explanation:"Le mot entendu était « "+word+" »."};
  if(mode==="mystery"){
-  const parts=(syllables[word]||word.split("").join("-")).split("-");
-  const shown=parts.length>1?parts.slice(0,-1).join("-")+"-…":word.slice(0,-1)+"…";
-  return {prompt:"Quel mot se cache derrière : "+shown+" ?",answer:word,choices:shuffle([word,...others]),hint:"Prononce les syllabes une à une, puis rassemble-les.",explanation:"Les syllabes réunies forment « "+word+" »."};
+  const known=Boolean(syllables[word]);
+  const parts=(syllables[word]||"").split("-");
+  const shown=known?(parts.length>1?parts.slice(0,-1).join("-")+"-…":word.slice(0,-1)+"…"):word.slice(0,Math.max(1,Math.floor(word.length/2)))+"…";
+  return {prompt:"Quel mot se cache derrière : "+shown+" ?",answer:word,choices:shuffle([word,...others]),hint:known?"Prononce les syllabes une à une, puis rassemble-les.":"Lis le début du mot, puis cherche celui qui correspond.",explanation:"Le mot recherché est « "+word+" »."};
  }
  if(mode==="sentence"){
   const sentences=[{text:"Le lapin saute dans le jardin.",answer:"Le lapin",choices:["Le lapin","Le bateau","Le gâteau"]},{text:"Maman lit un livre.",answer:"un livre",choices:["un vélo","un livre","un ballon"]},{text:"Le soleil brille.",answer:"Le soleil",choices:["La maison","Le soleil","La forêt"]},{text:"Rose roule à vélo.",answer:"à vélo",choices:["à vélo","à l’école","dans l’eau"]}];
