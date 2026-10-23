@@ -78,8 +78,8 @@ test("Problèmes · la réponse correspond à l’histoire",()=>{
   for(let difficulty=1;difficulty<=3;difficulty++){
     for(let i=0;i<250;i++){
       const q=createMathQuestion("problems",difficulty);
-      const add=q.prompt.match(/^Léon a (\d+) \w+\. Il en gagne (\d+)\. Combien en a-t-il maintenant\?$/);
-      const subtract=q.prompt.match(/^Léon a (\d+) \w+\. Il en donne (\d+)\. Combien lui en reste-t-il\?$/);
+      const add=q.prompt.match(/^Léon a (\d+) \w+\. Il en gagne (\d+)\. Combien en a-t-il maintenant \?$/);
+      const subtract=q.prompt.match(/^Léon a (\d+) \w+\. Il en donne (\d+)\. Combien lui en reste-t-il \?$/);
       assert.ok(add||subtract,q.prompt);
       const match=add||subtract;
       const expected=add?Number(match[1])+Number(match[2]):Number(match[1])-Number(match[2]);
@@ -93,7 +93,7 @@ test("Mesures · conversions et sommes d’argent donnent la bonne réponse",()=
     for(let i=0;i<300;i++){
       const q=createMathQuestion("measures",difficulty);
       const length=q.prompt.match(/^(\d+) m = combien de centimètres \?$/);
-      const money=q.prompt.match(/^Tu as (\d+) € et tu reçois encore (\d+) €\. Combien as-tu\?$/);
+      const money=q.prompt.match(/^Tu as (\d+) € et tu reçois encore (\d+) €\. Combien as-tu \?$/);
       const clock=q.prompt.match(/^Quelle heure est indiquée : (\d+) heures (et demie|pile) \?$/);
       if(length) assert.equal(q.answer,String(Number(length[1])*100)+" cm",q.prompt);
       else if(money) assert.equal(q.answer,String(Number(money[1])+Number(money[2]))+" €",q.prompt);
