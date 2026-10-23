@@ -3,6 +3,7 @@ import { getState, update, exportData, importData, resetData } from "../store.js
 import { go, unlockParent, getParentLockoutUntil, setParentLockoutUntil } from "../router.js";
 import { MATH_DOMAINS } from "../child/math-engine.js";
 import { getLastBackupAt, markBackupCompleted, shouldRemindBackup } from "./backup.js";
+import { summarizeDashboard } from "./dashboard-stats.js";
 
 let failures = 0;
 let problem = null;
@@ -129,6 +130,7 @@ function section(title, children) {
 export function parentDashboard() {
   document.body.className = "theme-parent";
   const s = getState();
+  const dashboard = summarizeDashboard(s);
   const content = el("div", { class: "parent-grid" });
   const stats = section("Aujourd’hui", [
     el("p", {
@@ -137,16 +139,16 @@ export function parentDashboard() {
     }),
     el("p", {
       class: "stat",
-      text: "Léon · " + s.profiles.leon.sessions + " défi(s) terminé(s)"
+      text: "Léon · " + dashboard.sessionsToday.leon + " session(s) aujourd’hui"
     }),
     el("p", {
       class: "stat",
-      text: "Rose · " + s.profiles.rose.sessions + " défi(s) terminé(s)"
+      text: "Rose · " + dashboard.sessionsToday.rose + " session(s) aujourd’hui"
     }),
     el("p", {
       class: "small",
-      text: "Réponses essayées : Léon " + s.profiles.leon.correct +
-        " réussites · Rose " + s.profiles.rose.correct + " réussites."
+      text: "Depuis le début : Léon " + dashboard.totalSessions.leon +
+        " session(s) · Rose " + dashboard.totalSessions.rose + " session(s)."
     })
   ]);
   const mathStats = section("Maths de Léon", MATH_DOMAINS.map(domain => {
@@ -295,8 +297,18 @@ export function parentDashboard() {
     backup,
     section("Progression positive", [
       el("p", {
+        class: "stat",
+        text: "Léon · " + dashboard.stickers.leon + " étoiles gagnées · " +
+          dashboard.correct.leon + " réussites sur " + dashboard.attempts.leon + " essais."
+      }),
+      el("p", {
+        class: "stat",
+        text: "Rose · " + dashboard.stickers.rose + " étoiles gagnées · " +
+          dashboard.correct.rose + " réussites sur " + dashboard.attempts.rose + " essais."
+      }),
+      el("p", {
         class: "small",
-        text: "La V1 enregistre les essais et les sessions localement. Les conseils personnalisés seront enrichis dans les prochaines phases."
+        text: "Les totaux sont conservés sur cet appareil. Chaque enfant avance à son rythme."
       })
     ])
   );
