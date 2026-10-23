@@ -139,3 +139,12 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Tests automatisés réussis sur le commit `9b1caf7126c044c221152e37d3138b6690e4d3c3` ([résultat CI](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113554)).
 - [x] Déploiement GitHub Pages réussi sur ce même commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40021113850)).
 - [ ] Essai iPhone : vérifier l’icône lors de l’ajout à l’écran d’accueil.
+
+## Étape É11 — tableau de bord parental (code livré, validation CI à confirmer)
+- [x] La carte « Aujourd’hui » distingue les sessions du jour des totaux cumulés, à partir de l’historique local horodaté.
+- [x] La carte « Progression positive » affiche les étoiles, réussites et essais cumulés pour chaque enfant, sans classement.
+- [x] Ajout d’un module pur de calcul des statistiques et de tests dédiés, y compris les dates hors du jour courant et les données absentes.
+- [x] Ajout du module au précache et incrément du cache PWA à `rose-leon-v41`.
+- [ ] Confirmer les tests automatisés et le déploiement GitHub Pages sur le SHA final.
+- [ ] Essai iPhone : vérifier que « Aujourd’hui » ne compte que les sessions du jour et que les totaux cumulés restent cohérents.
+- [ ] Les réglages `leonMinutes` et `roseMinutes` restent conservés pour compatibilité, mais ne pilotent pas encore de minuterie ; ils ne sont pas présentés comme une fonctionnalité active.
