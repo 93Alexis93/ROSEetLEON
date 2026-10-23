@@ -24,5 +24,5 @@ jobs:
         run: |
           find src -name '*.js' -print0 | xargs -0 -n1 node --experimental-default-type=module --check
           node --experimental-default-type=module --check service-worker.js
-      - name: Tester le moteur de maths
-        run: node --experimental-default-type=module --test tests/math-engine.test.mjs
+      - name: Tester les moteurs de maths et de lecture
+        run: node --experimental-default-type=module --test tests/*.test.mjs
