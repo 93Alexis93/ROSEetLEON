@@ -77,7 +77,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Fiche Léon : trois petits problèmes additifs et multiplicatifs, avec espace pour dessiner et corrigé séparé
 - [x] Fiche Léon : cinq premiers mots anglais à relier à leur traduction, avec corrigé
 - [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne, version actuelle v21
+- [x] Nouveau module ajouté au cache hors ligne, version actuelle v22
 - [x] Corrigé des multiplications structuré en liste lisible pour l’impression
 - [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
 - [x] Test CI ajouté pour vérifier que toutes les ressources préchargées par le service worker existent, sans doublons, et que les fiches/styles sont bien inclus
@@ -102,3 +102,4 @@ Mis à jour le 23 octobre 2026.
 - [x] Phase 8 : le délai de sécurité de la porte parentale ne réaffiche plus son écran si l’utilisateur est parti sur une autre page ; test de non-régression ajouté.
 
 - [x] Phase 8 : tests automatisés de sauvegarde locale ajoutés avec stockage simulé ; vérification du cycle export/import et du refus des fichiers invalides sans perte des données en mémoire.
+\n- [x] Phase 8 : la porte parentale accepte aussi la touche Entrée pour valider le calcul ; test de non-régression ajouté et cache PWA passé à v22.\n
