@@ -2,7 +2,7 @@ import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordMathAnswer, recordSession } from "../store.js";
 import { MATH_DOMAINS, createMathQuestion } from "./math-engine.js";
 import { speak } from "../voice.js";
-import { cheer } from "../audio.js";
+import { cheer, gentleOops } from "../audio.js";
 import { go } from "../router.js";
 
 const pick = items => items[Math.floor(Math.random() * items.length)];
@@ -232,6 +232,7 @@ export function startActivity(child, domain = null) {
       return;
     }
 
+    gentleOops(getState().settings.sounds);
     tries++;
     const feedback = document.querySelector(".feedback");
     if (feedback) {
