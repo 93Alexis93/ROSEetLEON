@@ -31,7 +31,7 @@ export const READING_SYLLABLES = {
   fusée: "fu-sée",
   forêt: "fo-rêt",
   gâteau: "gâ-teau",
-  ami: "a-mi", lune: "lu-ne", moto: "mo-to", tomate: "to-ma-te",
+  ami: "a-mi", lune: "lune", moto: "mo-to", tomate: "to-ma-te",
   banane: "ba-na-ne", papillon: "pa-pi-llon", chocolat: "cho-co-lat",
   pirate: "pi-rate", robot: "ro-bot", cadeau: "ca-deau", pomme: "pomme",
   poire: "poire", poule: "poule", canard: "ca-nard", jardin: "jar-din",
