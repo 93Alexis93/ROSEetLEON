@@ -40,11 +40,11 @@ Mis à jour le 23 octobre 2026.
 - [x] Tests unitaires ajoutés : 200 générations par format vérifient quatre choix distincts, présence de la réponse et contenu des consignes
 - [x] Workflow GitHub Actions configuré pour vérifier la syntaxe JavaScript et lancer les tests de maths et de lecture à chaque push sur main ou pull request
 - [x] Cache PWA initialement passé à v6 après correction des choix de lecture ; renouvelé ensuite à v8 pour les jeux de Rose
-- [x] GitHub Actions exécute le workflow ; une première exécution a révélé un défaut de choix multiples en lecture, corrigé ; les tests et la vérification de syntaxe ont passé sur plusieurs commits récents ; la dernière exécution est à confirmer après les ajouts à Rose
+- [x] GitHub Actions exécute le workflow ; une première exécution a révélé un défaut de choix multiples en lecture, corrigé ; les tests et la vérification de syntaxe passent encore sur le commit `57fd361`
 - [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
 - [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
 - [ ] Vérifier hors ligne après activation du service worker
-- État : les tests automatisés ont passé sur le commit `5fbb988`. Une première exécution a détecté un défaut de réponses multiples, corrigé. Une correction supplémentaire du générateur de choix mathématiques est maintenant testée ; tests navigateur et mode hors ligne restent à faire.
+- État : les tests automatisés passent sur le commit `57fd361`. Les tests navigateur et mode hors ligne restent à faire.
 
 ## Phase 4 — Premiers jeux variés pour Rose (en cours)
 - [x] Menu de choix de jeux séparé du lancement direct du comptage
