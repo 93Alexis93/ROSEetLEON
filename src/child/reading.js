@@ -20,18 +20,18 @@ function question(mode){
  }
  if(mode==="sentence"){
   const sentences=[
-   {text:"Le lapin saute dans le jardin.",q:"De qui parle la phrase ?",answer:"Le lapin",choices:["Le lapin","Le bateau","Le gâteau"]},
-   {text:"Maman lit un livre.",q:"Que lit Maman ?",answer:"un livre",choices:["un vélo","un livre","un ballon"]},
-   {text:"Le soleil brille.",q:"Qu’est-ce qui brille ?",answer:"Le soleil",choices:["La maison","Le soleil","La forêt"]},
-   {text:"Rose roule à vélo.",q:"Comment Rose se déplace-t-elle ?",answer:"à vélo",choices:["à vélo","à l’école","dans l’eau"]}
+   {text:"Le lapin saute dans le jardin.",q:"De qui parle la phrase ?",answer:"Le lapin",choices:["Le lapin","Le bateau","Le gâteau","La forêt"]},
+   {text:"Maman lit un livre.",q:"Que lit Maman ?",answer:"un livre",choices:["un vélo","un livre","un ballon","une fusée"]},
+   {text:"Le soleil brille.",q:"Qu’est-ce qui brille ?",answer:"Le soleil",choices:["La maison","Le soleil","La forêt","Le bateau"]},
+   {text:"Rose roule à vélo.",q:"Comment Rose se déplace-t-elle ?",answer:"à vélo",choices:["à vélo","à l’école","dans l’eau","en fusée"]}
   ];
   const s=pick(sentences);return {mode,prompt:"Lis : « "+s.text+" »\n"+s.q,answer:s.answer,choices:shuffle(s.choices),hint:"Relis la phrase et cherche les mots qui répondent à la question.",explanation:"La bonne réponse est « "+s.answer+" »."};
  }
  if(mode==="text"){
   const texts=[
-   {text:"Léon a un ballon rouge. Il joue dans le jardin.",q:"Qu’a Léon ?",a:"Un ballon rouge",c:["Un ballon rouge","Un vélo bleu","Un livre"]},
-   {text:"Rose voit un petit chat. Le chat dort sur le tapis.",q:"Où dort le chat ?",a:"Sur le tapis",c:["Dans le jardin","Sur le tapis","Dans la classe"]},
-   {text:"Le matin, Mila va à l’école avec son sac.",q:"Où va Mila ?",a:"À l’école",c:["Au parc","À l’école","À la piscine"]}
+   {text:"Léon a un ballon rouge. Il joue dans le jardin.",q:"Qu’a Léon ?",a:"Un ballon rouge",c:["Un ballon rouge","Un vélo bleu","Un livre","Un gâteau"]},
+   {text:"Rose voit un petit chat. Le chat dort sur le tapis.",q:"Où dort le chat ?",a:"Sur le tapis",c:["Dans le jardin","Sur le tapis","Dans la classe","Dans le bateau"]},
+   {text:"Le matin, Mila va à l’école avec son sac.",q:"Où va Mila ?",a:"À l’école",c:["Au parc","À l’école","À la piscine","À la forêt"]}
   ];
   const t=pick(texts);return {mode,prompt:t.text+"\n\n"+t.q,answer:t.a,choices:shuffle(t.c),hint:"Cherche dans le petit texte les mots qui répondent à la question.",explanation:"Le texte nous indique : "+t.a+"."};
  }
