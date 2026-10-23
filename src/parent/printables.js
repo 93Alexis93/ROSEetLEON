@@ -60,13 +60,19 @@ export function printComingSoon(){
  content.append(button("Retour au tableau de bord",()=>go("parent"),"button-soft"));
  replaceApp(screen("Fiches à imprimer",content,{eyebrow:"Fiches A4",home:()=>go("parent")}));
 }
+function printPages(includeKey){
+ document.body.classList.toggle("print-worksheet-only",!includeKey);
+ window.onafterprint=()=>document.body.classList.remove("print-worksheet-only");
+ window.print();
+}
 function showWorksheet(id){
  const w=worksheets.find(x=>x.id===id);if(!w)return printComingSoon();
  document.body.className="theme-parent print-view";
  const pages=id==="rose-letters"?[worksheetRoseLetters(),answerKey(id)]:id==="rose-shapes"?[worksheetRoseShapes(),answerKey(id)]:[worksheetLeon(),answerKey(id)];
  const wrapper=el("div",{class:"print-workspace"});
  const controls=el("div",{class:"no-print print-controls"},[
-  button("🖨️ Imprimer / enregistrer en PDF",()=>window.print(),"button-primary"),
+  button("🖨️ Imprimer la fiche seule",()=>printPages(false),"button-primary"),
+  button("🖨️ Fiche + corrigé",()=>printPages(true),"button-soft"),
   button("↩ Choisir une autre fiche",printComingSoon,"button-soft"),
   button("Tableau de bord parent",()=>go("parent"),"icon-button")
  ]);
