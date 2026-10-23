@@ -69,3 +69,11 @@
 - La section « Progression positive » affiche les étoiles gagnées, les réussites et les essais cumulés par enfant, sans classement.
 - Le calcul des statistiques est isolé et couvert par des tests ; le module est ajouté au précache et le cache passe à v41.
 - Validation CI, déploiement Pages et vérification iPhone à confirmer.
+
+
+## É12 — 2026-10-23
+- Ajout d’activités de calcul mental : compléments à 10 et 100, doubles, moitiés et droite numérique.
+- Ajout de petits problèmes de comparaison, de complément et de groupements, avec indice et explication.
+- Le menu de Léon propose le nouveau parcours ; les réponses peuvent être saisies au clavier numérique.
+- Cache PWA renouvelé à v42 ; tests de génération et de précache ajoutés.
+- Tests CI, publication Pages et essai iPhone à confirmer.
