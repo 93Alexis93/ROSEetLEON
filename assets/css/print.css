@@ -1,1 +1,34 @@
 @page{size:A4;margin:12mm}@media print{body{background:#fff!important;color:#000!important;padding:0}.screen{width:100%;padding:0}.no-print,button{display:none!important}.card{box-shadow:none;border:1px solid #999;background:#fff!important}.print-page{break-after:page}}
+.worksheet{background:#fff;color:#111;border:1px solid #bbb;border-radius:8px;padding:22px;margin:14px auto;max-width:800px;font-family:Arial,sans-serif;line-height:1.4}
+.worksheet h1{font-size:27px;text-align:center;margin:12px 0 18px}
+.worksheet h2{font-size:18px;margin:18px 0 8px}
+.worksheet-kicker{font-size:10px;letter-spacing:1px;text-align:center;font-weight:bold}
+.worksheet-meta,.worksheet-instruction{font-size:13px}
+.letter-cards,.shape-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 20px}
+.letter-card{border:2px solid #333;min-height:90px;display:grid;place-items:center;font-size:54px;font-weight:bold}
+.shape-card{border:2px solid #555;min-height:110px;white-space:pre-line;display:grid;place-items:center;text-align:center;font-size:28px;font-weight:bold}
+.letter-row{font-size:24px;letter-spacing:2px;line-height:2.2;border:1px dashed #777;padding:8px;text-align:center}
+.answer-space{margin-top:10px}
+.worksheet-encouragement{margin-top:28px;text-align:center;font-weight:bold}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;align-items:center;font-size:22px}
+.match-symbol{font-size:34px;text-align:center;border:1px solid #aaa;padding:5px}
+.match-word{border-bottom:1px solid #777;padding:10px}
+.drawing-frame{height:150px;border:2px solid #444;margin-top:10px}
+.math-worksheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.math-question{border:1px solid #555;padding:10px;min-height:112px}
+.math-question h2{margin:0 0 6px;font-size:22px}
+.answer-line{margin-top:14px}
+.answer-key{border:2px dashed #777}
+.print-controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+@media(max-width:480px){.worksheet{padding:14px}.worksheet h1{font-size:22px}.letter-card{font-size:38px;min-height:70px}.shape-card{font-size:22px}.letter-row{font-size:17px;letter-spacing:0}.math-worksheet-grid{grid-template-columns:1fr}}
+@media print{
+ body.print-view{background:#fff!important;padding:0!important}
+ body.print-view .screen{width:100%;max-width:none;padding:0;margin:0}
+ body.print-view .topbar{display:none!important}
+ body.print-view .print-workspace{display:block}
+ body.print-view .worksheet{margin:0;border:0;border-radius:0;max-width:none;padding:0;box-shadow:none;min-height:255mm;break-after:page;page-break-after:always}
+ body.print-view .worksheet:last-child{break-after:auto;page-break-after:auto}
+ body.print-view .worksheet h1{font-size:25px}
+ body.print-view .letter-card{min-height:95px}
+ body.print-view .no-print{display:none!important}
+}
