@@ -119,3 +119,9 @@
 ## É19 — 2026-10-23
 - Renforcement des tests du calcul mental : les réponses générées sont comparées aux nombres et opérations réellement affichés, y compris dans les trois familles de petits problèmes.
 - Pas de changement du code livré ni du cache PWA ; résultat CI à confirmer.
+
+
+## É20 — 2026-10-23
+- Correction du découpage syllabique de « nuage » : deux syllabes orales (« nu-age »).
+- Ajout de la vérification correspondante dans les tests de lecture.
+- Cache PWA renouvelé à v48 ; CI, publication Pages et validation orale à confirmer.
