@@ -95,3 +95,7 @@
 
 ### Tests du moteur mathématique
 Les tests vérifient à la fois la structure des questions (quatre choix distincts, réponse présente) et leur cohérence mathématique : le calcul affiché doit donner la réponse attendue et une suite doit respecter son pas jusqu’au terme manquant. Les expressions régulières de test doivent être contrôlées comme du code exécutable, pas seulement comme du texte.
+
+
+### Couverture sémantique des exercices
+Les tests du moteur couvrent les six domaines : calcul mental, numération, multiplications, problèmes, logique et mesures. Lorsqu’un énoncé contient les données nécessaires, les tests recalculent indépendamment le résultat attendu au lieu de se limiter à vérifier que la réponse est présente parmi quatre choix distincts.
