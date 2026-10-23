@@ -110,10 +110,10 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Déploiement Pages réussi sur ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017273785)).
 - [ ] Vérifier sur iPhone le parcours tactile, la voix et le retour vers l’univers choisi.
 
-## Étape É8 — finition accessibilité et non-régression (en cours)
+## Étape É8 — finition accessibilité et non-régression (code livré, CI et déploiement réussis)
 - [x] Annonce accessible de l’étape courante dans la pause guidée avec `role="status"` et `aria-live="polite"`.
 - [x] Test de régression ajouté pour vérifier l’annonce de progression et la possibilité d’arrêter à tout moment.
 - [x] Cache PWA renouvelé à `rose-leon-v38` ; la ressource modifiée est déjà précachée.
-- [ ] Résultats CI du commit É8 à confirmer.
-- [ ] Déploiement GitHub Pages du commit É8 à confirmer.
+- [x] 66 tests réussis sur le commit `b0ef7f9f48567857066b66ec2c2cd2af0fab4846` ([résultat CI](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017925754)).
+- [x] Déploiement GitHub Pages réussi pour ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017925063)).
 - [ ] Les tests automatisés ne remplacent pas les essais Safari iPhone : la voix, l’annonce par lecteur d’écran et la navigation tactile restent à vérifier sur appareil.
