@@ -147,3 +147,5 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Exécutions CI redondantes
 - Les tests automatiques utilisent un groupe de concurrence par référence et annulent les exécutions précédentes du même groupe lorsqu’un nouveau commit arrive ; cela évite de gaspiller des runners sur des validations obsolètes sans prétendre résoudre une indisponibilité générale des runners.
+
+- Les jeux de Rose proposent désormais huit couleurs et sept formes, tout en conservant les grandes cibles tactiles et les consignes orales simples.
