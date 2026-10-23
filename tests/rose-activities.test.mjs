@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createRoseQuestion} from "../src/child/rose-activities.js";
+import {createRoseQuestion,isRoseNameComplete} from "../src/child/rose-activities.js";
 import {createCountingQuestion} from "../src/child/activities.js";
 
 for(const mode of ["colors","shapes","letters","letter-pairs"]){
@@ -61,4 +61,13 @@ test("Rose · majuscules et minuscules : les trois choix sont des lettres minusc
     assert.match(q.prompt,/petite lettre/);
     assert.match(q.explanation,/grande lettre/);
   }
+});
+
+test("Rose · composer son prénom : seul ROSE dans le bon ordre est complet",()=>{
+  assert.equal(isRoseNameComplete(["R","O","S","E"]),true);
+  assert.equal(isRoseNameComplete(["R","O","S"]),false);
+  assert.equal(isRoseNameComplete(["R","S","O","E"]),false);
+  assert.equal(isRoseNameComplete(["R","O","S","E","R"]),false);
+  assert.equal(isRoseNameComplete([]),false);
+  assert.equal(isRoseNameComplete("ROSE"),false);
 });
