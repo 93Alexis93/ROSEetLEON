@@ -46,3 +46,5 @@
 - La pause guidée annonce désormais l’étape courante aux technologies d’assistance.
 - Ajout d’un test de non-régression pour l’annonce accessible et la possibilité d’arrêter la pause.
 - Cache PWA renouvelé à v38.
+- Validation : 66 tests réussis et déploiement GitHub Pages confirmé sur le commit fonctionnel `b0ef7f9f48567857066b66ec2c2cd2af0fab4846` ([tests](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017925754), [déploiement](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40017925063)).
+- Les essais réels sur iPhone avec Safari et VoiceOver restent à faire.
