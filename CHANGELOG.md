@@ -125,3 +125,9 @@
 - Correction du découpage syllabique de « nuage » : deux syllabes orales (« nu-age »).
 - Ajout de la vérification correspondante dans les tests de lecture.
 - Cache PWA renouvelé à v48 ; CI, publication Pages et validation orale à confirmer.
+
+
+## É21 — 2026-10-23
+- Correction des propositions de réponse du domaine « Mesures » : plus de doublon entre la bonne réponse et un distracteur à 1 h pile.
+- Ajout d’un test de non-régression pour 1 h et 1 h 30 ; cache PWA renouvelé à v49.
+- CI et publication Pages à confirmer.
