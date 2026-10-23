@@ -42,7 +42,7 @@ export function getParentLockoutUntil(){
   }catch{}
  }
  if(until<=Date.now()){
-  for(const storage of [globalThis.sessionStorage,globalThis.localStorage]){
+  for(const storage of availableStorages()){
    try{storage?.removeItem(LOCKOUT_KEY);}catch{}
   }
   return 0;
