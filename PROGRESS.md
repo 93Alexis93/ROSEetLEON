@@ -55,7 +55,8 @@ Mis à jour le 23 octobre 2026.
 - [x] Après trois réponses de calcul incorrectes, le blocage de 30 secondes est enregistré dans `sessionStorage` et `localStorage`, avec nettoyage à expiration.
 - [x] Tests automatisés ajoutés pour les routes, le déverrouillage et l’expiration du blocage.
 - [x] Cache PWA renouvelé à `rose-leon-v32` ; les ressources modifiées (`main.js`, `router.js`, `parent.js`) sont déjà dans `ASSETS`.
-- [ ] Les tests Node et le résultat GitHub Actions n’ont pas pu être exécutés/confirmés dans cet environnement : l’accès réseau à GitHub depuis le conteneur a échoué. Ne pas annoncer la CI verte.
+- [x] Quatre tests ciblés de la logique d’accès (routes protégées, déverrouillage/reverrouillage, persistance et expiration du blocage) passent dans un bac à sable Node isolé avec la logique actuelle reproduite.
+- [ ] Les tests complets du dépôt et le résultat GitHub Actions n’ont pas pu être confirmés : le clonage du dépôt a échoué faute d’accès réseau. Ne pas annoncer la CI verte.
 - [ ] Déploiement Pages et comportement réel sur iPhone non confirmés.
 - [ ] À tester sur iPhone : accès direct via `#parent`, `#crisis`, `#print` ; déverrouillage puis navigation entre outils ; retour accueil puis réouverture ; trois erreurs puis rechargement pendant le blocage.
 
