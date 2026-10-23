@@ -77,3 +77,9 @@
 - Le menu de Léon propose le nouveau parcours ; les réponses peuvent être saisies au clavier numérique.
 - Cache PWA renouvelé à v42 ; tests de génération et de précache ajoutés.
 - Tests CI, publication Pages et essai iPhone à confirmer.
+
+
+## É13 — 2026-10-23
+- Correction du comptage syllabique de « tomate » et « banane » : trois syllabes chacune.
+- Ajout d’un test de non-régression sur la banque des dix mots du jeu des syllabes.
+- Cache PWA renouvelé à v43 ; CI, publication Pages et essai réel avec Rose à confirmer.
