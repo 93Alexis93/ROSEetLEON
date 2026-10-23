@@ -12,6 +12,7 @@ const pick=(a,r)=>a[Math.floor(r()*a.length)];
 function shuffle(a,r){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function threeChoices(items,target,random){return shuffle([target,...shuffle(items.filter(x=>x!==target),random).slice(0,2)],random);}
 export function isRoseNameComplete(letters){return Array.isArray(letters)&&letters.join("")==="ROSE";}
+export function getNextRoseLetter(letters){return Array.isArray(letters)&&letters.length<4?"ROSE"[letters.length]:null;}
 export function createRoseQuestion(mode,random=Math.random){
  if(mode==="colors"){const t=pick(COLORS,random);return {mode,answer:t[0],prompt:"Touche le cercle "+t[0].toLowerCase()+".",speakText:"Touche le cercle "+t[0].toLowerCase()+".",choices:threeChoices(COLORS.map(x=>x[0]),t[0],random),hint:"Regarde la couleur du cercle.",explanation:"Le cercle recherché est "+t[0].toLowerCase()+" "+t[1]};}
  if(mode==="shapes"){const t=pick(SHAPES,random);return {mode,answer:t[0],prompt:"Trouve la forme : "+t[1],speakText:"Trouve la forme "+t[0].toLowerCase()+".",choices:threeChoices(SHAPES.map(x=>x[0]),t[0],random),hint:t[2],explanation:"C’est "+(t[0]==="Étoile"?"l"+String.fromCharCode(8217):"le ")+t[0].toLowerCase()+" "+t[1]};}
@@ -58,6 +59,10 @@ function startRoseWritingActivity(){
   sequence.append(...Array.from({length:4},(_,i)=>el("div",{class:"prompt",text:chosen[i]||"·","aria-label":chosen[i]||"Case vide"})));
   choices.replaceChildren();
   letters.filter(letter=>!chosen.includes(letter)).forEach(letter=>choices.append(button(letter,()=>{
+   if(letter!==getNextRoseLetter(chosen)){
+    status.textContent="Regarde le modèle : quelle lettre vient maintenant ? Tu peux essayer une autre lettre.";
+    return;
+   }
    chosen.push(letter);
    if(chosen.length===4){
     if(isRoseNameComplete(chosen)){status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";speak("Bravo ! Tu as écrit Rose.",getState().settings.voice);}
