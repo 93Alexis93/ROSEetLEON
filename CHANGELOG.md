@@ -170,3 +170,6 @@
 ## Maintenance — 2026-10-24
 - Validation explicite de l’identifiant enfant dans l’enregistrement des réponses et des séances.
 - Test couvrant le refus sans modification des données et renouvellement du cache PWA à v51.
+
+## Maintenance — 2026-10-24 (suite)
+- Le suivi de progression refuse les domaines mathématiques inconnus au lieu de créer une entrée non reconnue par la migration ; test dédié et cache PWA v52.
