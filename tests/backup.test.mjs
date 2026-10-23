@@ -22,3 +22,10 @@ test("Sauvegarde · un rappel apparaît au bout de 30 jours", () => {
   const lastBackup = new Date(now - BACKUP_REMINDER_INTERVAL_MS).toISOString();
   assert.equal(shouldRemindBackup(lastBackup, now), true);
 });
+
+
+test("Sauvegarde · une date future suspecte déclenche un rappel prudent", () => {
+  const now = Date.parse("2026-10-23T12:00:00.000Z");
+  const future = new Date(now + 24 * 60 * 60 * 1000).toISOString();
+  assert.equal(shouldRemindBackup(future, now), true);
+});
