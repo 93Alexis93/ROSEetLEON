@@ -139,7 +139,15 @@ function measures(d, random) {
   }
   const hours = int(1, 10, random), half = random() < 0.5, minutes = half ? 30 : 0;
   const answer = `${hours} h${minutes ? "30" : "00"}`;
-  const alternatives = [`${hours} h${minutes ? "00" : "30"}`, `${Math.min(12, hours + 1)} h${minutes ? "30" : "00"}`, `${Math.max(1, hours - 1)} h${minutes ? "30" : "00"}`];
+  const nextHour = hours === 12 ? 1 : hours + 1;
+  const previousHour = hours === 1 ? 12 : hours - 1;
+  const alternatives = unique([
+    `${hours} h${minutes ? "00" : "30"}`,
+    `${nextHour} h${minutes ? "30" : "00"}`,
+    `${previousHour} h${minutes ? "30" : "00"}`,
+    `${nextHour} h${minutes ? "00" : "30"}`,
+    `${previousHour} h${minutes ? "00" : "30"}`
+  ]).filter(choice => choice !== answer);
   return makeQuestion("measures", d, `Quelle heure est indiquée : ${hours} heures ${minutes ? "et demie" : "pile"} ?`, answer,
     alternatives, "Une heure et demie, c'est une heure plus 30 minutes.", `L'heure demandée s'écrit ${answer}.`, random);
 }
