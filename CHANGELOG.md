@@ -83,3 +83,9 @@
 - Correction du comptage syllabique de « tomate » et « banane » : trois syllabes chacune.
 - Ajout d’un test de non-régression sur la banque des dix mots du jeu des syllabes.
 - Cache PWA renouvelé à v43 ; CI, publication Pages et essai réel avec Rose à confirmer.
+
+
+## É14 — 2026-10-23
+- Progression adaptative de Léon : une réponse précédée de n’importe quelle aide ne contribue plus aux séries autonomes de montée/descente de niveau.
+- Les statistiques ordinaires de réponses continuent à être enregistrées.
+- Test de non-régression ajouté ; cache PWA renouvelé à v44. CI, publication Pages et test iPhone à confirmer.
