@@ -10,6 +10,7 @@ import { speak } from "./voice.js";
 import { unlockAudio } from "./audio.js";
 import { numberMystery, compareNumbers, syllableGame } from "./child/learning-lab.js";
 import { guidedPause } from "./child/pause.js";
+import { calculationMenu } from "./child/calcul.js";
 
 function home() {
   document.body.className = "";
@@ -68,6 +69,10 @@ function childHome(child) {
       button("⚖️ Le plus grand nombre", () => {
         unlockAudio();
         compareNumbers();
+      }, "button-soft"),
+      button("🧮 Calcul mental et problèmes", () => {
+        unlockAudio();
+        calculationMenu();
       }, "button-soft")
     ] : [
       button("👏 Les syllabes", () => {
@@ -79,7 +84,7 @@ function childHome(child) {
     button("🔊 Réécouter", () => speak(
       rose
         ? "Choisis un jeu : compter les licornes, les couleurs magiques, les formes, les lettres ou les syllabes."
-        : "Choisis un défi de maths, le nombre mystère, le plus grand nombre ou un jeu de lecture.",
+        : "Choisis un défi de maths, le nombre mystère, le plus grand nombre, le calcul mental ou la lecture.",
       getState().settings.voice
     ), "button-soft"),
     button("⌂ Accueil", () => go("home"), "icon-button")
