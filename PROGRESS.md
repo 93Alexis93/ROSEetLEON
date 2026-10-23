@@ -40,7 +40,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Tests unitaires ajoutés : 200 générations par format vérifient quatre choix distincts, présence de la réponse et contenu des consignes
 - [x] Workflow GitHub Actions configuré pour vérifier la syntaxe JavaScript et lancer les tests de maths et de lecture à chaque push sur main ou pull request
 - [x] Cache PWA passé à v6 après correction des choix de lecture
-- [x] Vérifier que GitHub Actions exécute le workflow ; une première exécution a révélé un défaut réel de choix multiples en lecture, corrigé sur `main` ; nouvelle exécution à confirmer
+- [x] GitHub Actions exécute le workflow ; une première exécution a révélé un défaut de choix multiples en lecture, corrigé ; les tests et la vérification de syntaxe passent sur le commit `ea461c5`
 - [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
 - [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
 - [ ] Vérifier hors ligne après activation du service worker
