@@ -67,11 +67,12 @@ Mis à jour le 23 octobre 2026.
 - [x] Fiche Rose : reconnaître les lettres de son prénom, avec repère de correction
 - [x] Fiche Rose : reconnaître et relier les formes, avec repère de correction
 - [x] Fiche Rose : chemins simples pour entraîner le geste du crayon, sans exigence de réussite
+- [x] Fiche Rose : petites situations pour parler des émotions, avec réponses ouvertes et sans émotion imposée
 - [x] Fiche Léon : six multiplications, stratégies dessin/compter par bonds, corrigé séparé
 - [x] Fiche Léon : trois petits problèmes additifs et multiplicatifs, avec espace pour dessiner et corrigé séparé
 - [x] Fiche Léon : cinq premiers mots anglais à relier à leur traduction, avec corrigé
 - [x] Styles d’impression A4 et boutons masqués à l’impression
-- [x] Nouveau module ajouté au cache hors ligne, version actuelle v16
+- [x] Nouveau module ajouté au cache hors ligne, version actuelle v17
 - [x] Corrigé des multiplications structuré en liste lisible pour l’impression
 - [x] Choix d’imprimer la fiche seule ou la fiche accompagnée du corrigé
 - [x] Test CI ajouté pour vérifier que toutes les ressources préchargées par le service worker existent, sans doublons, et que les fiches/styles sont bien inclus
@@ -79,7 +80,7 @@ Mis à jour le 23 octobre 2026.
 - [ ] Vérifier le rendu réel avec l’aperçu d’impression Safari iPhone et une impression A4
 
 ## Phases suivantes prévues
-- Phase 7 : écriture, émotions, histoires sociales, logique et anglais (fiche anglaise, suites logiques et association majuscules/minuscules ajoutées)
+- Phase 7 : écriture, émotions, histoires sociales, logique et anglais (fiche émotions, fiche anglaise, suites logiques et association majuscules/minuscules ajoutées)
 - Phase 8 : finition, accessibilité, tests de non-régression et validation globale
 
 ## Décisions et limites à respecter
@@ -89,6 +90,6 @@ Mis à jour le 23 octobre 2026.
 - Pédagogie positive : aucune punition, comparaison entre enfants, score anxiogène ou chronomètre stressant.
 - Les SVG servent d’icône web ; une icône PNG iOS pourra être ajoutée après validation sur appareil.
 - La porte parentale n’est pas une sécurité cryptographique.
-- Sept fiches A4 sont présentes ; le rendu physique sur Safari iPhone et imprimante reste à valider, mais le développement continue sans attendre cette validation à la demande de l’utilisateur.
+- Huit fiches A4 sont présentes ; le rendu physique sur Safari iPhone et imprimante reste à valider, mais le développement continue sans attendre cette validation à la demande de l’utilisateur.
 - N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
 - Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; le statut GitHub Actions a été confirmé via les outils disponibles ; les tests automatisés passent, mais les tests navigateur restent nécessaires.
