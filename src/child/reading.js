@@ -3,7 +3,7 @@ import {getState,recordAnswer,recordSession} from "../store.js";
 import {speak} from "../voice.js";
 import {go} from "../router.js";
 
-const BASE_WORDS=["lapin","maison"," ballon","soleil","bateau","papa","maman","vélo","école","chat","livre","rose","léon","fusée","forêt","gâteau"].map(x=>x.trim());
+const BASE_WORDS=["lapin","maison","ballon","soleil","bateau","papa","maman","vélo","école","chat","livre","rose","léon","fusée","forêt","gâteau"];
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const shuffle=a=>[...a].sort(()=>Math.random()-.5);
 const syllables={lapin:"la-pin",maison:"mai-son",ballon:"bal-lon",soleil:"so-leil",bateau:"ba-teau",papa:"pa-pa",maman:"ma-man",vélo:"vé-lo",école:"é-cole",chat:"chat",livre:"livre",rose:"rose",léon:"lé-on",fusée:"fu-sée",forêt:"fo-rêt",gâteau:"gâ-teau"};
@@ -19,10 +19,19 @@ function question(mode){
   return {prompt:"Quel mot se cache derrière : "+shown+" ?",answer:word,choices:shuffle([word,...others]),hint:known?"Prononce les syllabes une à une, puis rassemble-les.":"Lis le début du mot, puis cherche celui qui correspond.",explanation:"Le mot recherché est « "+word+" »."};
  }
  if(mode==="sentence"){
-  const sentences=[{text:"Le lapin saute dans le jardin.",answer:"Le lapin",choices:["Le lapin","Le bateau","Le gâteau"]},{text:"Maman lit un livre.",answer:"un livre",choices:["un vélo","un livre","un ballon"]},{text:"Le soleil brille.",answer:"Le soleil",choices:["La maison","Le soleil","La forêt"]},{text:"Rose roule à vélo.",answer:"à vélo",choices:["à vélo","à l’école","dans l’eau"]}];
-  const s=pick(sentences);return {prompt:"Lis : « "+s.text+" »\nQue fait-on / de quoi parle la phrase ?",answer:s.answer,choices:shuffle(s.choices),hint:"Relis la phrase et cherche les mots qui donnent l'information.",explanation:"La bonne réponse est « "+s.answer+" »."};
+  const sentences=[
+   {text:"Le lapin saute dans le jardin.",q:"De qui parle la phrase ?",answer:"Le lapin",choices:["Le lapin","Le bateau","Le gâteau"]},
+   {text:"Maman lit un livre.",q:"Que lit Maman ?",answer:"un livre",choices:["un vélo","un livre","un ballon"]},
+   {text:"Le soleil brille.",q:"Qu’est-ce qui brille ?",answer:"Le soleil",choices:["La maison","Le soleil","La forêt"]},
+   {text:"Rose roule à vélo.",q:"Comment Rose se déplace-t-elle ?",answer:"à vélo",choices:["à vélo","à l’école","dans l’eau"]}
+  ];
+  const s=pick(sentences);return {prompt:"Lis : « "+s.text+" »\n"+s.q,answer:s.answer,choices:shuffle(s.choices),hint:"Relis la phrase et cherche les mots qui répondent à la question.",explanation:"La bonne réponse est « "+s.answer+" »."};
  }
- const texts=[{text:"Léon a un ballon rouge. Il joue dans le jardin.",q:"Qu’a Léon ?",a:"Un ballon rouge",c:["Un ballon rouge","Un vélo bleu","Un livre"]},{text:"Rose voit un petit chat. Le chat dort sur le tapis.",q:"Où dort le chat ?",a:"Sur le tapis",c:["Dans le jardin","Sur le tapis","Dans la classe"]},{text:"Le matin, Mila va à l’école avec son sac.",q:"Où va Mila ?",a:"À l’école",c:["Au parc","À l’école","À la piscine"]}];
+ const texts=[
+  {text:"Léon a un ballon rouge. Il joue dans le jardin.",q:"Qu’a Léon ?",a:"Un ballon rouge",c:["Un ballon rouge","Un vélo bleu","Un livre"]},
+  {text:"Rose voit un petit chat. Le chat dort sur le tapis.",q:"Où dort le chat ?",a:"Sur le tapis",c:["Dans le jardin","Sur le tapis","Dans la classe"]},
+  {text:"Le matin, Mila va à l’école avec son sac.",q:"Où va Mila ?",a:"À l’école",c:["Au parc","À l’école","À la piscine"]}
+ ];
  const t=pick(texts);return {prompt:t.text+"\n\n"+t.q,answer:t.a,choices:shuffle(t.c),hint:"Cherche dans le petit texte les mots qui répondent à la question.",explanation:"Le texte nous indique : "+t.a+"."};
 }
 
@@ -47,7 +56,8 @@ function startReading(mode){
    button("💡 Indice",()=>{hintCount++;feedback.textContent=hintCount===1?q.hint:q.explanation;},"button-soft")
   ]),button("⌂ Accueil",()=>go("home"),"icon-button"),button("↩ Menu lecture",readingMenu,"button-soft"));
   replaceApp(screen(labels[mode],content,{eyebrow:"Lecture sans pression",home:()=>go("home")}));
-  if(mode==="flash")speak(q.speakText,getState().settings.voice);
+  // Le lancement du jeu suit un appui utilisateur : la voix peut être débloquée sur iOS.
+  speak(q.speakText||q.prompt,getState().settings.voice);
  };
  const answer=a=>{const ok=String(a)===String(q.answer);recordAnswer("leon",ok);const f=document.querySelector(".feedback");if(ok){if(!questionHadError)score++;round++;if(round>=5){finish();return;}generate();render();const next=document.querySelector(".feedback");if(next)next.textContent="Bravo, tu as pris le temps de réfléchir !";}else{questionHadError=true;if(f)f.textContent="Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.";}}; 
  generate();render();
