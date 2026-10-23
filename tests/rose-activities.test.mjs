@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {createRoseQuestion} from "../src/child/rose-activities.js";
+import {createCountingQuestion} from "../src/child/activities.js";
 
 for(const mode of ["colors","shapes"]){
   test("Rose · "+mode+" : trois choix distincts et une réponse présente",()=>{
@@ -19,4 +20,15 @@ for(const mode of ["colors","shapes"]){
 }
 test("une activité inconnue de Rose est signalée",()=>{
   assert.throws(()=>createRoseQuestion("inconnue"),/Activité de Rose inconnue/);
+});
+
+test("Rose · comptage : trois réponses distinctes de 1 à 5",()=>{
+  for(let i=0;i<200;i++){
+    const q=createCountingQuestion();
+    assert.equal(q.choices.length,3);
+    assert.equal(new Set(q.choices).size,3);
+    assert.ok(q.choices.includes(q.answer));
+    assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=1&&n<=5));
+    assert.ok(q.count>=1&&q.count<=5);
+  }
 });
