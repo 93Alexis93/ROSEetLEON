@@ -43,7 +43,7 @@ test("l’adaptation augmente après trois réussites et baisse après deux erre
   assert.equal(adaptDifficulty(2,0,2),1);
   assert.equal(adaptDifficulty(1,0,2),1);
   assert.equal(adaptDifficulty(2,4,0),3);
-  assert.equal(adaptDifficulty(2,0,3),2);
+  assert.equal(adaptDifficulty(2,0,3),1);
 });
 
 
