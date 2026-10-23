@@ -55,6 +55,56 @@ test("Logique · le nombre attendu prolonge bien la suite",()=>{
   }
 });
 
+test("Numération · la valeur demandée correspond bien au nombre",()=>{
+  for(const difficulty of [1,2]){
+    for(let i=0;i<250;i++){
+      const q=createMathQuestion("numeration",difficulty);
+      const match=q.prompt.match(/^Dans (\d+), quelle est la valeur du chiffre des (dizaines|centaines) \?$/);
+      assert.ok(match,q.prompt);
+      const n=Number(match[1]);
+      const expected=difficulty===1?Math.floor(n/10)%10*10:Math.floor(n/100)*100;
+      assert.equal(Number(q.answer),expected,q.prompt);
+    }
+  }
+  for(let i=0;i<250;i++){
+    const q=createMathQuestion("numeration",3);
+    const match=q.prompt.match(/^Quel nombre obtient-on avec (\d+) centaine\(s\), (\d+) dizaine\(s\) et (\d+) unité\(s\) \?$/);
+    assert.ok(match,q.prompt);
+    assert.equal(Number(q.answer),Number(match[1])*100+Number(match[2])*10+Number(match[3]),q.prompt);
+  }
+});
+
+test("Problèmes · la réponse correspond à l’histoire",()=>{
+  for(let difficulty=1;difficulty<=3;difficulty++){
+    for(let i=0;i<250;i++){
+      const q=createMathQuestion("problems",difficulty);
+      const add=q.prompt.match(/^Léon a (\d+) \w+\. Il en gagne (\d+)\. Combien en a-t-il maintenant\?$/);
+      const subtract=q.prompt.match(/^Léon a (\d+) \w+\. Il en donne (\d+)\. Combien lui en reste-t-il\?$/);
+      assert.ok(add||subtract,q.prompt);
+      const match=add||subtract;
+      const expected=add?Number(match[1])+Number(match[2]):Number(match[1])-Number(match[2]);
+      assert.equal(Number(q.answer),expected,q.prompt);
+    }
+  }
+});
+
+test("Mesures · conversions et sommes d’argent donnent la bonne réponse",()=>{
+  for(let difficulty=1;difficulty<=3;difficulty++){
+    for(let i=0;i<300;i++){
+      const q=createMathQuestion("measures",difficulty);
+      const length=q.prompt.match(/^(\d+) m = combien de centimètres \?$/);
+      const money=q.prompt.match(/^Tu as (\d+) € et tu reçois encore (\d+) €\. Combien as-tu\?$/);
+      const clock=q.prompt.match(/^Quelle heure est indiquée : (\d+) heures (et demie|pile) \?$/);
+      if(length) assert.equal(q.answer,String(Number(length[1])*100)+" cm",q.prompt);
+      else if(money) assert.equal(q.answer,String(Number(money[1])+Number(money[2]))+" €",q.prompt);
+      else {
+        assert.ok(clock,q.prompt);
+        assert.equal(q.answer,String(clock[1])+" h"+(clock[2]==="et demie"?"30":"00"),q.prompt);
+      }
+    }
+  }
+});
+
 test("les tables proposées restent limitées à 2, 3, 4, 5 et 10",()=>{
   for(let i=0;i<200;i++){
     const q=createMathQuestion("multiplication",2);
