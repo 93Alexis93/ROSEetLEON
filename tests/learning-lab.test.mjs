@@ -24,7 +24,8 @@ test("Syllabes · chaque question possède une consigne et une réponse entre un
  for(let i=0;i<300;i++){
   const q=createSyllableQuestion();
   assert.ok(q.word.length>0&&q.picture.length>0);
-  assert.match(q.prompt,/Combien de morceaux/);
+  assert.match(q.prompt,/Combien de syllabes/);
+  assert.doesNotMatch(q.prompt,/morceaux?/i);
   assert.ok([1,2,3].includes(q.answer));
   assert.deepEqual([...q.choices].sort(),[1,2,3]);
  }
@@ -38,6 +39,8 @@ test("Les deux activités sont accessibles depuis les menus enfants et incluses 
  assert.match(main,/compareNumbers/);
  assert.match(main,/Le plus grand nombre/);
  assert.match(main,/Les syllabes/);
+ assert.match(main,/Choisir un défi/);
+ assert.doesNotMatch(main,/Défi penalty/);
  assert.ok(worker.includes("./src/child/learning-lab.js"));
 });
 
@@ -54,4 +57,14 @@ test("Comparer les nombres · la réponse est le plus grand des deux nombres",()
   assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=10&&n<=99));
   assert.ok(q.hint.length>0&&q.explanation.length>0);
  }
+});
+
+
+test("Retour sonore doux prévu pour les erreurs et branché sur les jeux",()=>{
+ const audio=readFileSync(resolve(root,"src/audio.js"),"utf8");
+ const activities=readFileSync(resolve(root,"src/child/activities.js"),"utf8");
+ const rose=readFileSync(resolve(root,"src/child/rose-activities.js"),"utf8");
+ assert.match(audio,/export async function gentleOops/);
+ assert.match(activities,/gentleOops\(getState\(\)\.settings\.sounds\)/);
+ assert.match(rose,/gentleOops\(getState\(\)\.settings\.sounds\)/);
 });
