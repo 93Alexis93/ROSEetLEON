@@ -41,12 +41,19 @@ Mis à jour le 23 octobre 2026.
 - La porte parentale est un filtre d’usage, pas une sécurité cryptographique.
 - Ne jamais présenter comme exécuté un test qui n’a pas réellement été lancé ; ne pas confondre présence du code, validation utilisateur, test automatisé et déploiement confirmé.
 
+## Étape É1 — terminée le 23 octobre 2026
+- [x] Remplacement de la chronologie contradictoire par un état courant, une liste claire des validations et les contrôles restant à faire.
+- [x] Mise à jour des décisions techniques et pédagogiques, notamment sur l’impression, les sauvegardes, le service worker et la validation des livraisons.
+- [x] Suppression de l’ancienne fonction `printComingSoon` de `src/parent/parent.js` après vérification : l’application importe l’écran d’impression depuis `src/parent/printables.js`.
+- [x] Le module parent a d’abord reçu un commit de formatage seul avant la suppression du code inutilisé.
+- [ ] Résultat Actions pour le SHA final non accessible via les outils consultés ; ne pas considérer la CI comme confirmée verte.
+- [ ] Vérification du déploiement Pages après les commits non confirmée.
+
 ## Prochaines étapes proposées
-1. É1 — remettre la documentation d’avancement et les décisions techniques en cohérence ; supprimer ensuite le code mort uniquement après vérification de ses références et selon la règle de formatage préalable.
-2. É2 — verrouillage cohérent de l’espace parent, des outils de crise et des fiches imprimables.
-3. É3 — fiabiliser la progression adaptative de Léon et la prise en compte des indices.
-4. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
-5. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
+1. É2 — verrouillage cohérent de l’espace parent, des outils de crise et des fiches imprimables.
+2. É3 — fiabiliser la progression adaptative de Léon et la prise en compte des indices.
+3. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
+4. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
 
 ## Historique utile
 Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
