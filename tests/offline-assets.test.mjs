@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync, existsSync} from "node:fs";
-import {resolve, dirname} from "node:path";
+import {resolve, dirname, relative} from "node:path";
 import {fileURLToPath} from "node:url";
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"..");
