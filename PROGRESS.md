@@ -277,3 +277,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 ## Maintenance — 24 octobre 2026
 - Le stockage refuse explicitement les identifiants enfant inconnus lors de l’enregistrement d’une réponse ou d’une séance, plutôt que de provoquer une erreur indirecte.
 - Test de non-modification des données en cas d’identifiant invalide ; cache PWA renouvelé à v51.
+
+## Maintenance — 24 octobre 2026 (suite)
+- Le suivi de progression refuse désormais tout domaine mathématique inconnu avant d’écrire dans le profil ; test de non-modification des données et cache PWA renouvelé à v52.
