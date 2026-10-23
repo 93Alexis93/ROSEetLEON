@@ -80,6 +80,3 @@ steps.forEach(([t,d])=>content.append(card([el("h2",{text:t}),el("p",{class:"lea
 content.append(button("Retour au tableau de bord",()=>go("parent")));
 replaceApp(screen("Crise en cours",content,{eyebrow:"Boîte à outils parent",home:()=>go("parent")}));
 }
-export function printComingSoon(){const c=card([el("p",{class:"lead",text:"Les fiches A4 économes en encre arrivent dans une prochaine phase."}),el("p",{class:"small",text:"Tu pourras générer des activités, les imprimer depuis Safari et obtenir un corrigé séparé."}),button("Imprimer cette page",()=>window.print(),"button-soft"),button("Retour",()=>go("parent"))]);
-replaceApp(screen("Fiches à imprimer",c,{home:()=>go("parent")}));
-}
