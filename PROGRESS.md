@@ -183,3 +183,12 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Cache PWA renouvelé à `rose-leon-v45` ; le module `reading.js` reste précaché.
 - [ ] Confirmer CI et publication Pages sur le SHA final.
 - [ ] Écouter les mots avec Léon : la prononciation réelle peut varier selon les accents et certains découpages doivent rester un support oral, pas une règle orthographique.
+
+
+## Étape É16 — audit complet de la banque syllabique et cohérence CI (code livré, validation à confirmer)
+- [x] Audit des 45 mots de la banque de lecture : correction de « lune », qui s’entend en une syllabe dans la prononciation usuelle retenue ici.
+- [x] Test étendu à l’ensemble de la banque : chaque mot attendu est contrôlé, ainsi que son nombre de syllabes.
+- [x] Correction d’un test PWA ancien qui attendait encore le cache `v42` alors que le projet avait avancé ; il attend désormais `v46`.
+- [x] Cache hors ligne renouvelé à `rose-leon-v46`.
+- [ ] Confirmer que le workflow de tests termine avec succès et que GitHub Pages publie le SHA final.
+- [ ] Validation orale finale avec Léon : le découpage dépend de la prononciation réelle et reste un support d’écoute.
