@@ -37,12 +37,13 @@ Mis à jour le 23 octobre 2026.
 - [x] Correction du compteur : une réponse trouvée après une erreur ne compte plus comme réussite du premier coup
 - [x] Consigne de chaque format lue par la voix française si elle est activée ; les mots-éclairs font entendre le mot cible
 - [x] Questions de compréhension des phrases reformulées pour éviter une consigne ambiguë
-- [x] Ajout d’un workflow GitHub Actions pour vérifier la syntaxe JavaScript et lancer les tests Node à chaque push sur main ou pull request
+- [x] Workflow GitHub Actions ajouté pour vérifier la syntaxe JavaScript et lancer les tests Node à chaque push sur main ou pull request
+- [x] Cache PWA passé de v3 à v4 pour que les appareils récupèrent le module de lecture corrigé au prochain renouvellement du service worker
 - [ ] Vérifier dans GitHub Actions que le workflow s’exécute et que tous les contrôles passent
 - [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
 - [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
 - [ ] Vérifier hors ligne après activation du service worker
-- État : correctifs committés ; les contrôles CI n’ont pas encore été confirmés comme réussis et les tests navigateur restent nécessaires.
+- État : correctifs committés ; les contrôles CI ne sont pas confirmés comme réussis et les tests navigateur restent nécessaires.
 
 ## Phases suivantes prévues
 - Phase 4 : contenus de Rose, adaptés à la moyenne section
