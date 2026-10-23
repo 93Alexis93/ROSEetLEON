@@ -239,3 +239,9 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - Étendu les tests au-delà du calcul mental et de la logique : numération, problèmes écrits, conversions de longueurs, sommes d’argent et lecture de l’heure sont comparés à leur énoncé.
 - Les contrôles couvrent plusieurs centaines de questions générées par niveau pour repérer les incohérences entre la consigne et la réponse.
 - Les workflows GitHub étaient toujours en attente lors du dernier contrôle ; la validation automatique reste à confirmer.
+
+
+### E24 — Vérification des tables de multiplication
+- Étendu le test des multiplications aux trois niveaux de difficulté, et non plus au seul niveau intermédiaire.
+- Chaque énoncé est vérifié par recalcul du produit et contrôle des tables autorisées pour le niveau concerné.
+- La CI GitHub demeure à confirmer ; ces changements concernent uniquement les tests et la documentation.
