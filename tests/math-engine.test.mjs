@@ -105,13 +105,15 @@ test("Mesures · conversions et sommes d’argent donnent la bonne réponse",()=
   }
 });
 
-test("les tables proposées restent limitées à 2, 3, 4, 5 et 10",()=>{
-  for(let i=0;i<200;i++){
-    const q=createMathQuestion("multiplication",2);
-    const match=q.prompt.match(/^(\d+) × (\d+) = \?$/);
-    assert.ok(match);
-    assert.ok([2,3,4,5,10].includes(Number(match[1])));
-    assert.equal(Number(match[1])*Number(match[2]),Number(q.answer));
+test("les tables proposées restent limitées et les produits sont exacts à chaque niveau",()=>{
+  for(let difficulty=1;difficulty<=3;difficulty++){
+    for(let i=0;i<200;i++){
+      const q=createMathQuestion("multiplication",difficulty);
+      const match=q.prompt.match(/^(\d+) × (\d+) = \?$/);
+      assert.ok(match,q.prompt);
+      assert.ok((difficulty===1?[2,5,10]:[2,3,4,5,10]).includes(Number(match[1])),q.prompt);
+      assert.equal(Number(match[1])*Number(match[2]),Number(q.answer),q.prompt);
+    }
   }
 });
 
