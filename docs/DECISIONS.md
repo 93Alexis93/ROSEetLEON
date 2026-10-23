@@ -141,3 +141,6 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Erreurs d’import de sauvegarde
 - Les erreurs de syntaxe JSON sont interceptées et reformulées dans un message compréhensible ; l’import s’arrête avant toute modification de l’état.
+
+## Taille des sauvegardes importées
+- La limite de 2 Mio est vérifiée en octets UTF-8 en complément de la longueur de chaîne, car les caractères Unicode peuvent occuper plusieurs octets.
