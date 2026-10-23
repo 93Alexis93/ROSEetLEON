@@ -67,8 +67,11 @@ test("tous les mots découpés ont un nombre de syllabes cohérent avec leur pro
     papillon: 3, chocolat: 3, pirate: 2, robot: 2, cadeau: 2, pomme: 1,
     poire: 1, poule: 1, canard: 2, jardin: 2, fleur: 1, maîtresse: 2,
     cartable: 2, crayon: 2, étoile: 2, nuage: 2, montagne: 2, musique: 2,
-    maillot: 2, tortue: 2, girafe: 2, poussin: 2, savon: 2, valise: 2
-  };
+    maillot: 2, tortue: 2, girafe: 2, poussin: 2, savon: 2, valise: 2,
+    renard: 2, mouton: 2, orange: 2, fromage: 2, cabane: 2, bonnet: 2,
+    camion: 2, domino: 3, éléphant: 3, crocodile: 3, dinosaure: 3,
+    ananas: 3, rivière: 2, fenêtre: 2, chaussette: 2, chapeau: 2,
+    canapé: 3, fourmi: 2, hibou: 2, lapinou: 3
   assert.deepEqual(Object.keys(READING_SYLLABLES).sort(), Object.keys(expected).sort());
   for (const [word, count] of Object.entries(expected)) {
     assert.equal(READING_SYLLABLES[word].split("-").length, count, word);
