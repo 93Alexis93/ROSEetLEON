@@ -138,3 +138,6 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 
 ## Validation du moteur adaptatif
 - `updateMathProgress` vérifie le format des options et les trois indicateurs booléens avant de calculer une progression ; les appels invalides échouent explicitement.
+
+## Erreurs d’import de sauvegarde
+- Les erreurs de syntaxe JSON sont interceptées et reformulées dans un message compréhensible ; l’import s’arrête avant toute modification de l’état.
