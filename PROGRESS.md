@@ -292,3 +292,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 ## Maintenance — 24 octobre 2026 (suite 5)
 - L’import d’une sauvegarde contenant du JSON mal formé affiche désormais un message explicite en français plutôt qu’une erreur technique du parseur. Test mis à jour ; cache PWA v56.
+
+## Maintenance — 24 octobre 2026 (suite 5)
+- La limite des sauvegardes importées est désormais mesurée en octets UTF-8, et non en unités de chaîne JavaScript, pour éviter qu’un contenu Unicode dépasse la limite annoncée. Test dédié et cache PWA v56.
