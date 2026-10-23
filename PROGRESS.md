@@ -56,9 +56,20 @@ Mis à jour le 23 octobre 2026.
 - [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
 - [ ] Ajouter progressivement d’autres activités MS après contrôle de ces premiers jeux
 
+## Phase 5 — Outils parent
+- [x] Première boîte à outils « Crise en cours » avec étapes brèves, sécurité, accueil de l’émotion et choix simples
+- [ ] Enrichir les outils parent après retours d’usage, sans enregistrer de données sensibles sur les crises
+
+## Phase 6 — Premières fiches pédagogiques A4
+- [x] Menu de fiches imprimables depuis l’espace parent
+- [x] Fiche Rose : reconnaître les lettres de son prénom, avec repère de correction
+- [x] Fiche Rose : reconnaître et relier les formes, avec repère de correction
+- [x] Fiche Léon : six multiplications, stratégies dessin/compter par bonds, corrigé séparé
+- [x] Styles d’impression A4 et boutons masqués à l’impression
+- [x] Nouveau module ajouté au cache hors ligne v10
+- [ ] Vérifier le rendu réel avec l’aperçu d’impression Safari iPhone et une impression A4
+
 ## Phases suivantes prévues
-- Phase 5 : journal et outils parent pour les crises
-- Phase 6 : fiches pédagogiques A4 imprimables
 - Phase 7 : écriture, émotions, histoires sociales, logique et anglais
 - Phase 8 : finition, accessibilité, tests de non-régression et validation globale
 
