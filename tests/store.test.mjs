@@ -273,3 +273,17 @@ test("Progression · un domaine mathématique inconnu est refusé sans modifier 
   assert.throws(() => store.recordMathAnswer("inconnu", true), /Domaine mathématique inconnu/);
   assert.deepEqual(store.getState(), before);
 });
+
+
+test("Stockage · les résultats non booléens sont refusés sans modifier les données", () => {
+  failWrites = false;
+  store.resetData();
+  store.update(state => {
+    state.profiles.leon.attempts = 2;
+    state.profiles.leon.correct = 1;
+  });
+  const before = store.getState();
+  assert.throws(() => store.recordAnswer("leon", "oui"), /doit être un booléen/);
+  assert.throws(() => store.recordMathAnswer("mental", 1), /doit être un booléen/);
+  assert.deepEqual(store.getState(), before);
+});
