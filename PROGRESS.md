@@ -51,7 +51,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Jeu de couleurs avec consigne vocale, trois choix et indice doux
 - [x] Jeu de formes (cercle, carré, triangle, étoile) avec consigne vocale, trois choix et indice
 - [x] Tests automatisés sur 400 générations de questions et les activités inconnues
-- [x] Cache PWA passé à v7 et nouveau module inclus dans les ressources hors ligne
+- [x] Cache PWA passé à v8 et nouveau module inclus dans les ressources hors ligne
 - [ ] Vérifier l’expérience tactile et la voix sur Safari iPhone
 - [ ] Ajouter progressivement d’autres activités MS après contrôle de ces premiers jeux
 
