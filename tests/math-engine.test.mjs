@@ -17,7 +17,7 @@ test("chaque domaine et niveau produit quatre choix distincts contenant la répo
         assert.equal(q.choices.length,4);
         assert.equal(new Set(q.choices).size,4);
         assert.ok(q.choices.includes(q.answer));
-        assert.ok(q.choices.every(choice => !/\\s\\(\\d+\\)$/.test(choice)), "aucun choix de secours artificiel");
+        assert.ok(q.choices.every(choice => !/\s\(\d+\)$/.test(choice)), "aucun choix de secours artificiel");
         assert.ok(q.prompt.length>0);
         assert.ok(q.hint.length>0);
         assert.ok(q.explanation.length>0);
