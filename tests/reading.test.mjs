@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createReadingQuestion, READING_SYLLABLES } from "../src/child/reading.js";
+import { createReadingQuestion, READING_SYLLABLES, shuffleReadingItems } from "../src/child/reading.js";
 
 const modes = ["flash", "mystery", "sentence", "text"];
 
@@ -73,4 +73,13 @@ test("tous les mots découpés ont un nombre de syllabes cohérent avec leur pro
   for (const [word, count] of Object.entries(expected)) {
     assert.equal(READING_SYLLABLES[word].split("-").length, count, word);
   }
+});
+
+test("Lecture · le mélange conserve chaque choix et utilise un tirage borné", () => {
+  const input = ["a", "b", "c", "d"];
+  const draws = [0, 0, 0];
+  const shuffled = shuffleReadingItems(input, () => draws.shift());
+  assert.deepEqual(shuffled, ["b", "c", "d", "a"]);
+  assert.deepEqual(input, ["a", "b", "c", "d"]);
+  assert.equal(new Set(shuffled).size, input.length);
 });
