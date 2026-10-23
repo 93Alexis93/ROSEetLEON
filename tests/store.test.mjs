@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-const values=new Map();\nlet failWrites=false;
+const values=new Map();
+let failWrites=false;
 globalThis.localStorage={
   getItem(key){return values.has(key)?values.get(key):null;},
   setItem(key,value){if(failWrites)throw new Error("quota simulé");values.set(key,String(value));},
