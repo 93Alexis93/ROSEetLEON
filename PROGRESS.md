@@ -286,3 +286,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 ## Maintenance — 24 octobre 2026 (suite 3)
 - Les options de progression mathématique sont maintenant vérifiées (objet et booléens attendus) avant toute écriture ; tests de non-modification des données et cache PWA v54.
+
+## Maintenance — 24 octobre 2026 (suite 4)
+- Le moteur adaptatif vérifie désormais les options de réponse même lorsqu’il est appelé directement : résultat, aide et première tentative doivent être booléens. Tests dédiés et cache PWA v55.
