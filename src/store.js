@@ -3,6 +3,9 @@ import { MATH_DOMAINS, updateMathProgress } from "./child/math-engine.js";
 const KEY = "rose-leon-data";
 export const SCHEMA_VERSION = 3;
 const CHILDREN = ["leon", "rose"];
+const assertChild = child => {
+  if (!CHILDREN.includes(child)) throw Error("Profil enfant inconnu.");
+};
 const WORD_PATTERN = /^[A-Za-zÀ-ÿ-]{2,24}$/;
 const MAX_BACKUP_BYTES = 2 * 1024 * 1024;
 
@@ -208,6 +211,7 @@ export function subscribe(fn) {
 }
 
 export function recordAnswer(child, ok) {
+  assertChild(child);
   update(data => {
     const childProfile = data.profiles[child];
     childProfile.attempts++;
@@ -238,6 +242,7 @@ export function recordMathAnswer(domain, ok, options = {}) {
 }
 
 export function recordSession(child) {
+  assertChild(child);
   update(data => {
     data.profiles[child].sessions++;
     data.history.push({ child, date: new Date().toISOString() });
