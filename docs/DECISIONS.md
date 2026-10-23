@@ -47,3 +47,5 @@
 - Après chaque étape, consulter les tests GitHub Actions correspondant au SHA exact. En cas d’échec, corriger ou revenir en arrière avant de poursuivre.
 - Vérifier le déploiement Pages et le service worker public après toute modification du cache.
 - Une vérification de syntaxe ne remplace ni les tests unitaires ni un test navigateur. Ne jamais annoncer comme exécuté un test qui ne l’a pas été.
+
+- Progression adaptative de Léon : une seule contribution par question, à la première réponse. Les réponses après le deuxième indice ou la révélation de la solution alimentent les statistiques d’essai/réussite, mais restent neutres pour le niveau. Les séries sont remises à zéro après un changement de niveau pour éviter les montées ou baisses successives indues.

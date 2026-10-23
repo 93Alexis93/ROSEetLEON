@@ -60,10 +60,20 @@ Mis à jour le 23 octobre 2026.
 - [ ] Déploiement Pages et comportement réel sur iPhone non confirmés.
 - [ ] À tester sur iPhone : accès direct via `#parent`, `#crisis`, `#print` ; déverrouillage puis navigation entre outils ; retour accueil puis réouverture ; trois erreurs puis rechargement pendant le blocage.
 
+## Étape É3 — progression adaptative de Léon (code livré, validation en attente)
+- [x] Ajout d’une fonction pure `updateMathProgress` pour calculer la progression sans modifier l’état d’entrée.
+- [x] Les séries sont réinitialisées quand le niveau change ; les seuils fonctionnent même si une série dépasse le seuil.
+- [x] Chaque question ne contribue qu’une fois à la progression adaptative ; les clics de réessai n’ajoutent pas de nouvelle erreur de progression.
+- [x] Une réponse après le deuxième indice ou la révélation de la solution compte dans les statistiques, mais ne fait pas monter ni baisser le niveau.
+- [x] Tests ajoutés pour les répétitions, les seuils de réussite/erreur et les réponses aidées.
+- [x] Cache PWA renouvelé à `rose-leon-v33` ; les trois modules modifiés sont déjà listés dans `ASSETS`.
+- [ ] Tests complets Node et résultat GitHub Actions pour le SHA final à confirmer ; ne pas annoncer la CI verte sans preuve.
+- [ ] Déploiement Pages et comportement réel sur iPhone à confirmer.
+
 ## Prochaines étapes proposées
-1. É3 — fiabiliser la progression adaptative de Léon et la prise en compte des indices.
-2. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
-3. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
+1. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
+2. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
+3. É6 — enrichir les contenus de lecture.
 
 ## Historique utile
 Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
