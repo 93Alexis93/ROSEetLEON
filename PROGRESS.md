@@ -220,3 +220,10 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Correction de l’indice affiché dans les mots-mystères et du décompte attendu dans les tests.
 - [x] Cache PWA renouvelé à `rose-leon-v48` et test de précache synchronisé.
 - [ ] Résultat CI et publication Pages à confirmer sur le SHA final ; essai oral avec Rose reste nécessaire.
+
+
+## Étape É21 — choix de réponses fiables pour les heures
+- [x] Audit du générateur de mesures : à 1 h pile, un distracteur pouvait être identique à la bonne réponse, ce qui réduisait le nombre de choix distincts et faisait apparaître un choix de secours artificiel.
+- [x] Génération de distracteurs d’horloge uniques et exclusion systématique de la bonne réponse ; test ciblé pour 1 h pile et 1 h 30.
+- [x] Cache PWA renouvelé à `rose-leon-v49` et test hors ligne synchronisé.
+- [ ] Résultat CI et publication Pages à confirmer sur le SHA final.
