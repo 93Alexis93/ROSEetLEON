@@ -121,3 +121,5 @@ E28 — Une exception levée par un abonné après écriture dans localStorage n
 E29 — Les abonnés du store reçoivent chacun une copie distincte de l’état. Une interface ou un module qui modifie par erreur sa copie ne doit ni influencer les autres abonnés ni altérer l’état interne.
 
 E30 — Le tri avec un comparateur aléatoire n’est pas un algorithme de mélange uniforme. Les choix de lecture utilisent maintenant Fisher–Yates, avec source injectable pour permettre un test déterministe sans aléa fragile.
+
+E31 — Toute modification d’un module précaché doit s’accompagner d’une révision du cache service worker : sans changement du script du worker, les installations existantes risquent de conserver l’ancien fichier. Cache v50 et assertion de test alignés.
