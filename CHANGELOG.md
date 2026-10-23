@@ -173,3 +173,6 @@
 
 ## Maintenance — 2026-10-24 (suite)
 - Le suivi de progression refuse les domaines mathématiques inconnus au lieu de créer une entrée non reconnue par la migration ; test dédié et cache PWA v52.
+
+## Maintenance — 2026-10-24 (suite 2)
+- Validation stricte du résultat des réponses (`boolean`) dans le stockage commun ; test de non-modification des données et cache PWA v53.
