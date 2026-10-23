@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {createRoseQuestion} from "../src/child/rose-activities.js";
 import {createCountingQuestion} from "../src/child/activities.js";
 
-for(const mode of ["colors","shapes","letters"]){
+for(const mode of ["colors","shapes","letters","letter-pairs"]){
   test("Rose · "+mode+" : trois choix distincts et une réponse présente",()=>{
     for(let i=0;i<200;i++){
       const q=createRoseQuestion(mode);
@@ -48,4 +48,17 @@ test("Rose · forme étoile : explication avec le bon article",()=>{
   const q=createRoseQuestion("shapes",()=>0.99);
   assert.equal(q.answer,"Étoile");
   assert.ok(q.explanation.startsWith("C’est l’étoile"));
+});
+
+test("Rose · majuscules et minuscules : les trois choix sont des lettres minuscules distinctes",()=>{
+  for(let i=0;i<200;i++){
+    const q=createRoseQuestion("letter-pairs");
+    assert.equal(q.choices.length,3);
+    assert.equal(new Set(q.choices).size,3);
+    assert.ok(q.choices.includes(q.answer));
+    assert.ok(["r","o","s","e"].includes(q.answer));
+    assert.ok(q.choices.every(letter=>["r","o","s","e"].includes(letter)));
+    assert.match(q.prompt,/petite lettre/);
+    assert.match(q.explanation,/grande lettre/);
+  }
 });
