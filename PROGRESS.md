@@ -259,3 +259,9 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - Ce contrôle vise à détecter les oublis de dépendances qui pourraient casser une activité après le premier chargement sans réseau.
 - Changement limité aux tests et à la documentation : aucun renouvellement du cache applicatif nécessaire.
 - CI et publication Pages à confirmer ; le parcours hors ligne réel reste à vérifier sur Safari iPhone.
+
+
+### E27 — Robustesse du rappel de sauvegarde
+- Une date de sauvegarde située dans le futur est désormais considérée comme suspecte et déclenche un rappel prudent.
+- Ajout d’un test ciblé sur cette situation inhabituelle ; aucune donnée utilisateur n’est envoyée ni modifiée.
+- CI et publication Pages à confirmer.
