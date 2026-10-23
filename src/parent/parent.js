@@ -9,11 +9,11 @@ problem={a,b,answer:a*b};
 export function parentGate(){
 const lockoutUntil=getParentLockoutUntil();
 if(Date.now()<lockoutUntil){
- const gateScreen=document.querySelector("#app")?.firstElementChild;
  replaceApp(screen("Espace parent",card([
   el("p",{class:"lead",text:"La porte se repose un instant. Réessaie dans quelques secondes."}),
   button("Retour à l’accueil",()=>go("home"))
  ])));
+ const gateScreen=document.querySelector("#app")?.firstElementChild;
  setTimeout(()=>{
   if(gateScreen&&document.querySelector("#app")?.firstElementChild===gateScreen)parentGate();
  },Math.max(0,lockoutUntil-Date.now()));
