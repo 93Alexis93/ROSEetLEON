@@ -106,7 +106,7 @@ function problems(d, random) {
   let b = int(d === 1 ? 2 : 5, d === 1 ? 9 : 27, random);
   if (!add && b > a) b = int(2, a, random);
   const answer = add ? a + b : a - b;
-  const items = ["vignettes", "billes", "cartes", "points"];
+  const items = ["vignettes", "billes", "cartes", "points", "coquillages", "autocollants", "livres", "jetons", "crayons", "figurines", "fleurs", "pommes"];
   const item = items[int(0, items.length - 1, random)];
   const prompt = add
     ? `Léon a ${a} ${item}. Il en gagne ${b}. Combien en a-t-il maintenant ?`
