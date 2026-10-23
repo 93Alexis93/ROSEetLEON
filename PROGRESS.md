@@ -283,3 +283,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 ## Maintenance — 24 octobre 2026 (suite 2)
 - Les enregistrements de réponses exigent désormais un résultat booléen explicite ; les valeurs ambiguës sont refusées avant modification des données. Test dédié, cache PWA v53.
+
+## Maintenance — 24 octobre 2026 (suite 3)
+- Les options de progression mathématique sont maintenant vérifiées (objet et booléens attendus) avant toute écriture ; tests de non-modification des données et cache PWA v54.
