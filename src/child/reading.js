@@ -35,9 +35,9 @@ export function readingMenu(){
  replaceApp(screen("Lecture avec Léon",content,{eyebrow:"Univers ballon",home:()=>go("home")}));
 }
 function startReading(mode){
- let round=0,score=0,hintCount=0,q;
+ let round=0,score=0,hintCount=0,questionHadError=false,q;
  const labels={flash:"Mots-éclairs",mystery:"Mots-mystères",sentence:"Phrases à comprendre",text:"Mini-textes"};
- const generate=()=>{q=question(mode);hintCount=0;};
+ const generate=()=>{q=question(mode);hintCount=0;questionHadError=false;};
  const finish=()=>{recordSession("leon");const c=card([el("p",{class:"prompt",text:"🌟 Bravo pour tes efforts !"}),el("p",{class:"lead",text:"Tu as terminé ce petit moment de lecture."}),el("p",{class:"lead",text:"Tu as trouvé "+score+" réponse(s) du premier coup sur "+round+". Chaque essai t’aide à progresser."}),el("p",{class:"small",text:"On peut recommencer un autre jour : pas besoin d’aller vite."}),button("Autres jeux de lecture",readingMenu,"button-primary"),button("Autres défis de Léon",()=>go("leon"),"button-soft")]);replaceApp(screen("Bien joué !",c,{eyebrow:"Lecture",home:()=>go("home")}));};
  const render=()=>{
   const content=card([]);content.append(el("p",{class:"small",text:"Jeu "+(round+1)+" sur 5"}),el("div",{class:"progress-track"},el("div",{class:"progress-fill",style:"width:"+(round/5*100)+"%"})),el("p",{class:"lead",text:"Prends ton temps. Tu peux écouter et demander un indice."}),el("div",{class:"prompt",text:q.prompt}));
@@ -46,9 +46,9 @@ function startReading(mode){
    button("🔊 Écouter",()=>speak(q.speakText||q.prompt,getState().settings.voice),"button-soft"),
    button("💡 Indice",()=>{hintCount++;feedback.textContent=hintCount===1?q.hint:q.explanation;},"button-soft")
   ]),button("⌂ Accueil",()=>go("home"),"icon-button"),button("↩ Menu lecture",readingMenu,"button-soft"));
-  replaceApp(screen(labels[mode],content,{eyebrow:"Lecture sans pression",home:()=>go("home")})); 
+  replaceApp(screen(labels[mode],content,{eyebrow:"Lecture sans pression",home:()=>go("home")}));
   if(mode==="flash")speak(q.speakText,getState().settings.voice);
  };
- const answer=a=>{const ok=String(a)===String(q.answer);recordAnswer("leon",ok);const f=document.querySelector(".feedback");if(ok){score++;round++;if(round>=5){finish();return;}generate();render();const next=document.querySelector(".feedback");if(next)next.textContent="Bravo, tu as pris le temps de réfléchir !";}else if(f)f.textContent="Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.";};
+ const answer=a=>{const ok=String(a)===String(q.answer);recordAnswer("leon",ok);const f=document.querySelector(".feedback");if(ok){if(!questionHadError)score++;round++;if(round>=5){finish();return;}generate();render();const next=document.querySelector(".feedback");if(next)next.textContent="Bravo, tu as pris le temps de réfléchir !";}else{questionHadError=true;if(f)f.textContent="Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.";}}; 
  generate();render();
 }
