@@ -273,3 +273,7 @@ E29 — Isolation des abonnés : chaque abonné reçoit désormais une copie ind
 E30 — Le mélange des choix de lecture utilise désormais Fisher–Yates plutôt qu’un comparateur aléatoire biaisé. Test déterministe ajouté pour vérifier l’ordre obtenu et la préservation de la banque d’origine.
 
 E31 — Cache PWA incrémenté en v50 après correction du module de lecture, afin que les appareils rechargent bien les ressources précachées. Test offline ajusté.
+
+## Maintenance — 24 octobre 2026
+- Le stockage refuse explicitement les identifiants enfant inconnus lors de l’enregistrement d’une réponse ou d’une séance, plutôt que de provoquer une erreur indirecte.
+- Test de non-modification des données en cas d’identifiant invalide ; cache PWA renouvelé à v51.
