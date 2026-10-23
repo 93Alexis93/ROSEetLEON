@@ -3,6 +3,7 @@ import {setRenderer,startRouter,go} from "./router.js";
 import {getState} from "./store.js";
 import {startActivity} from "./child/activities.js";
 import {readingMenu} from "./child/reading.js";
+import {roseMenu} from "./child/rose-activities.js";
 import {parentGate,parentDashboard,crisis,printComingSoon} from "./parent/parent.js";
 import {speak} from "./voice.js";
 import {unlockAudio} from "./audio.js";
