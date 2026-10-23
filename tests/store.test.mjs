@@ -299,3 +299,10 @@ test("Progression · les options mal formées sont refusées sans modifier les d
   assert.throws(() => store.recordMathAnswer("mental", true, { firstTry: 0 }), /statut de première tentative doit être un booléen/);
   assert.deepEqual(store.getState(), before);
 });
+
+
+test("Sauvegarde · la limite de taille tient compte des octets UTF-8", () => {
+  const oversized = JSON.stringify({ profiles: {}, settings: {}, padding: "😀".repeat(600000) });
+  assert.ok(oversized.length < 2 * 1024 * 1024, "la longueur UTF-16 seule reste sous la limite");
+  assert.throws(() => store.importData(oversized), /trop volumineux ou invalide/);
+});
