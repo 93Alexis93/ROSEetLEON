@@ -1,7 +1,7 @@
 import {el,button,screen,card,replaceApp} from "../ui.js";
 import {getState,recordAnswer,recordSession} from "../store.js";
 import {speak} from "../voice.js";
-import {cheer} from "../audio.js";
+import {cheer,gentleOops} from "../audio.js";
 import {go} from "../router.js";
 
 const pick=(items,random=Math.random)=>items[Math.floor(random()*items.length)];
@@ -52,7 +52,7 @@ const SYLLABLE_WORDS=[
 ];
 export function createSyllableQuestion(random=Math.random){
  const item=pick(SYLLABLE_WORDS,random);
- return {word:item.word,picture:item.picture,prompt:"Combien de morceaux entends-tu dans ce mot ?",answer:item.syllables,choices:shuffle([1,2,3],random)};
+ return {word:item.word,picture:item.picture,prompt:"Combien de syllabes entends-tu dans ce mot ?",answer:item.syllables,choices:shuffle([1,2,3],random)};
 }
 
 function launch(child,mode="default"){
@@ -67,18 +67,18 @@ function launch(child,mode="default"){
   const content=card([]);
   content.append(el("p",{class:"small",text:"Défi "+(round+1)+" sur "+total}),
    el("div",{class:"progress-track",role:"progressbar","aria-label":"Progression du défi","aria-valuemin":"0","aria-valuemax":String(total),"aria-valuenow":String(round)},el("div",{class:"progress-fill",style:"width:"+(round/total*100)+"%"})),
-   el("p",{class:"lead",text:isRose?"Écoute le mot. Tape le nombre de morceaux que tu entends.":(isCompare?"Compare les deux nombres. Tu peux utiliser l’aide !":"Lis l’indice et trouve le nombre. Tu peux utiliser l’aide !")}));
+   el("p",{class:"lead",text:isRose?"Écoute le mot. Tape le nombre de syllabes que tu entends.":(isCompare?"Compare les deux nombres. Tu peux utiliser l’aide !":"Lis l’indice et trouve le nombre. Tu peux utiliser l’aide !")}));
   if(isRose){
    const picture=el("div",{class:"prompt",text:question.picture,"aria-label":"Image pour écouter un mot"});
    picture.style.fontSize="4rem";content.append(picture);
   }
   content.append(el("div",{class:"prompt",text:question.prompt}));
   const answers=el("div",{class:"answer-grid"});
-  question.choices.forEach(choice=>answers.append(button(isRose?String(choice)+" syllab"+(choice>1?"es":"e"):String(choice),()=>answer(choice),"button-soft")));
+  question.choices.forEach(choice=>answers.append(button(isRose?String(choice)+" syllabe"+(choice>1?"s":""):String(choice),()=>answer(choice),"button-soft")));
   const feedback=el("p",{class:"feedback",role:"status","aria-live":"polite"});
   content.append(answers,feedback,
    button("🔊 Réécouter",()=>speak(isRose?"Écoute le mot "+question.word+". "+question.word+". "+question.prompt:question.prompt,getState().settings.voice),"button-soft"),
-   button("💡 Petit indice",()=>{if(hintUsed){feedback.textContent=isRose?"Dis le mot lentement en tapant doucement dans tes mains.":(isCompare?"Regarde d’abord le chiffre des dizaines.":"Une dizaine, c’est un groupe de dix unités.");return;}hintUsed=true;feedback.textContent=isRose?"Dis le mot lentement et tape dans tes mains pour chaque morceau.":(isCompare?"Compare les dizaines, puis les unités si les dizaines sont égales.":"Une dizaine vaut dix unités. Décompose le nombre en dizaines et unités.");if(isRose)speak("Écoute bien : "+question.word+".",getState().settings.voice);},"button-soft"),
+   button("💡 Petit indice",()=>{if(hintUsed){feedback.textContent=isRose?"Dis le mot lentement en tapant doucement dans tes mains.":(isCompare?"Regarde d’abord le chiffre des dizaines.":"Une dizaine, c’est un groupe de dix unités.");return;}hintUsed=true;feedback.textContent=isRose?"Dis le mot lentement et tape dans tes mains pour chaque syllabe.":(isCompare?"Compare les dizaines, puis les unités si les dizaines sont égales.":"Une dizaine vaut dix unités. Décompose le nombre en dizaines et unités.");if(isRose)speak("Écoute bien : "+question.word+".",getState().settings.voice);},"button-soft"),
    button("⌂ Accueil",()=>go("home"),"icon-button"));
   replaceApp(screen(isRose?"Les syllabes dans les mots":(isCompare?"Le plus grand nombre":"Le nombre mystère"),content,{eyebrow:isRose?"Jeu d’écoute · Rose":(isCompare?"Comparer les nombres · Léon":"Numération · Léon"),home:()=>go("home")}));
   speak(isRose?"Écoute le mot "+question.word+". Combien de syllabes entends-tu ?":question.prompt,getState().settings.voice);
@@ -86,7 +86,7 @@ function launch(child,mode="default"){
  function answer(choice){
   if(locked)return;
   const feedback=document.querySelector(".feedback");
-  if(Number(choice)!==question.answer){recordAnswer(child,false);if(feedback)feedback.textContent=isRose?"On réécoute et on essaie de découper le mot doucement.":"Pas tout à fait. Regarde l’indice et essaie encore.";return;}
+  if(Number(choice)!==question.answer){recordAnswer(child,false);gentleOops(getState().settings.sounds);if(feedback)feedback.textContent=isRose?"On réécoute et on essaie de découper le mot en syllabes doucement.":"Pas tout à fait. Regarde l’indice et essaie encore.";return;}
   locked=true;recordAnswer(child,true);cheer(getState().settings.sounds);
   if(feedback)feedback.textContent=isRose?"Oui ! "+question.word+" : "+question.answer+" syllabe"+(question.answer>1?"s":"")+".": "Bien trouvé ! "+question.explanation;
   const buttons=[...document.querySelectorAll(".answer-grid button")];buttons.forEach(b=>b.disabled=true);
