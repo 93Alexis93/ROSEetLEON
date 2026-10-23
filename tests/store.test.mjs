@@ -72,3 +72,12 @@ test("Sauvegarde · une remise à zéro refusée par le stockage conserve les do
   assert.equal(store.getState().profiles.rose.sessions,6);
   failWrites=false;
 });
+
+test("Sauvegarde · les tableaux ne sont pas acceptés comme profils ou réglages",()=>{
+  failWrites=false;
+  store.resetData();
+  store.update(state=>{state.profiles.rose.sessions=7;});
+  assert.throws(()=>store.importData(JSON.stringify({profiles:[],settings:{}})),/Fichier de sauvegarde non reconnu/);
+  assert.throws(()=>store.importData(JSON.stringify({profiles:{},settings:[]})),/Fichier de sauvegarde non reconnu/);
+  assert.equal(store.getState().profiles.rose.sessions,7);
+});
