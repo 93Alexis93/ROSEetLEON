@@ -14,7 +14,7 @@ const BASE_WORDS = [
 ];
 const pick = items => items[Math.floor(Math.random() * items.length)];
 const shuffle = items => [...items].sort(() => Math.random() - 0.5);
-const syllables = {
+export const READING_SYLLABLES = {
   lapin: "la-pin",
   maison: "mai-son",
   ballon: "bal-lon",
@@ -33,13 +33,13 @@ const syllables = {
   gâteau: "gâ-teau",
   ami: "a-mi", lune: "lu-ne", moto: "mo-to", tomate: "to-ma-te",
   banane: "ba-na-ne", papillon: "pa-pi-llon", chocolat: "cho-co-lat",
-  pirate: "pi-rate", robot: "ro-bot", cadeau: "ca-deau", pomme: "pom-me",
-  poire: "poi-re", poule: "pou-le", canard: "ca-nard", jardin: "jar-din",
-  fleur: "fleur", maîtresse: "maî-tres-se", cartable: "car-ta-ble",
-  crayon: "cra-yon", étoile: "é-toi-le", nuage: "nu-age",
-  montagne: "mon-ta-gne", musique: "mu-si-que", maillot: "mail-lot",
-  tortue: "tor-tue", girafe: "gi-ra-fe", poussin: "pou-ssin",
-  savon: "sa-von", valise: "va-li-se"
+  pirate: "pi-rate", robot: "ro-bot", cadeau: "ca-deau", pomme: "pomme",
+  poire: "poire", poule: "poule", canard: "ca-nard", jardin: "jar-din",
+  fleur: "fleur", maîtresse: "maî-tresse", cartable: "car-table",
+  crayon: "cra-yon", étoile: "é-toile", nuage: "nuage",
+  montagne: "mon-tagne", musique: "mu-sique", maillot: "mail-lot",
+  tortue: "tor-tue", girafe: "gi-rafe", poussin: "pou-ssin",
+  savon: "sa-von", valise: "va-lise"
 };
 
 function bank() {
@@ -72,8 +72,8 @@ function question(mode) {
   }
 
   if (mode === "mystery") {
-    const known = Boolean(syllables[word]);
-    const parts = (syllables[word] || "").split("-");
+    const known = Boolean(READING_SYLLABLES[word]);
+    const parts = (READING_SYLLABLES[word] || "").split("-");
     const shown = known
       ? (parts.length > 1 ? parts.slice(0, -1).join("-") + "-…" : word.slice(0, -1) + "…")
       : word.slice(0, Math.max(1, Math.floor(word.length / 2))) + "…";
