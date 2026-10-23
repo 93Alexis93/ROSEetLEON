@@ -6,6 +6,9 @@ const CHILDREN = ["leon", "rose"];
 const assertChild = child => {
   if (!CHILDREN.includes(child)) throw Error("Profil enfant inconnu.");
 };
+const assertMathDomain = domain => {
+  if (!MATH_DOMAINS.some(item => item.id === domain)) throw Error("Domaine mathématique inconnu.");
+};
 const WORD_PATTERN = /^[A-Za-zÀ-ÿ-]{2,24}$/;
 const MAX_BACKUP_BYTES = 2 * 1024 * 1024;
 
@@ -223,6 +226,7 @@ export function recordAnswer(child, ok) {
 }
 
 export function recordMathAnswer(domain, ok, options = {}) {
+  assertMathDomain(domain);
   if (options.firstTry === false) return;
   update(data => {
     const childProfile = data.profiles.leon;
