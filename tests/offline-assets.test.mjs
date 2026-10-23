@@ -28,11 +28,16 @@ test("PWA · les fiches et leurs styles sont préchargés",()=>{
   assert.ok(assets.includes("./assets/css/print.css"));
 });
 
-test("PWA · le cache est incrémenté pour l’étape É11",()=>{
-  assert.match(worker,/const CACHE="rose-leon-v41"/,"Le module du tableau de bord doit accompagner le passage du cache v40 à v41.");
+test("PWA · le cache est incrémenté pour l’étape É12",()=>{
+  assert.match(worker,/const CACHE="rose-leon-v42"/,"Les activités de calcul doivent accompagner le passage du cache v41 à v42.");
 });
 
-test("PWA · le module de statistiques parentales est préchargé hors ligne",()=>{
+test("PWA · les nouveaux modules de calcul sont préchargés hors ligne",()=>{
+  assert.ok(assets.includes("./src/child/calcul-engine.js"));
+  assert.ok(assets.includes("./src/child/calcul.js"));
+});
+
+test("PWA · le module de statistiques parentales reste préchargé",()=>{
   assert.ok(assets.includes("./src/parent/dashboard-stats.js"));
 });
 
@@ -40,17 +45,15 @@ test("PWA · les ressources locales déclarées dans index.html existent et sont
   const html=readFileSync(resolve(root,"index.html"),"utf8");
   const localRefs=[...html.matchAll(/(?:href|src)="(\.\/[^"]+)"/g)].map(match=>match[1]);
   for(const ref of localRefs){
-    assert.ok(existsSync(resolve(root,ref.slice(2))),"Ressource locale absente de index.html : "+ref);
+    assert.ok(existsSync(resolve(root,ref.slice(2)),"Ressource locale absente de index.html : "+ref);
     assert.ok(assets.includes(ref),"Ressource locale de démarrage absente du cache hors ligne : "+ref);
   }
 });
-
 
 test("PWA · l’activation ne supprime que les anciens caches de cette application",()=>{
   assert.match(worker,/keys\.filter\(k=>k\.startsWith\("rose-leon-"\)&&k!==CACHE\)/,
     "Le nettoyage doit préserver les caches d’autres applications hébergées sur la même origine.");
 });
-
 
 test("PWA · icône PNG déclarée, valide et précachée",()=>{
  const icon=manifest.icons.find(item=>item.src==="./assets/icons/icon-512.png");
