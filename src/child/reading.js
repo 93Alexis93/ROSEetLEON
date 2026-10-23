@@ -10,7 +10,10 @@ const BASE_WORDS = [
   "ami", "lune", "moto", "tomate", "banane", "papillon", "chocolat", "pirate",
   "robot", "cadeau", "pomme", "poire", "poule", "canard", "jardin", "fleur",
   "maîtresse", "cartable", "crayon", "étoile", "nuage", "montagne", "musique",
-  "maillot", "tortue", "girafe", "poussin", "savon", "valise"
+  "maillot", "tortue", "girafe", "poussin", "savon", "valise",
+  "renard", "mouton", "orange", "fromage", "cabane", "bonnet", "camion",
+  "domino", "éléphant", "crocodile", "dinosaure", "ananas", "rivière",
+  "fenêtre", "chaussette", "chapeau", "canapé", "fourmi", "hibou", "lapinou"
 ];
 const pick = items => items[Math.floor(Math.random() * items.length)];
 export function shuffleReadingItems(items, random = Math.random) {
@@ -47,7 +50,13 @@ export const READING_SYLLABLES = {
   crayon: "cra-yon", étoile: "é-toile", nuage: "nu-age",
   montagne: "mon-tagne", musique: "mu-sique", maillot: "mail-lot",
   tortue: "tor-tue", girafe: "gi-rafe", poussin: "pou-ssin",
-  savon: "sa-von", valise: "va-lise"
+  savon: "sa-von", valise: "va-lise", renard: "re-nard", mouton: "mou-ton",
+  orange: "o-range", fromage: "fro-mage", cabane: "ca-bane", bonnet: "bon-net",
+  camion: "ca-mion", domino: "do-mi-no", éléphant: "é-lé-phant",
+  crocodile: "cro-co-dile", dinosaure: "di-no-saure", ananas: "a-na-nas",
+  rivière: "ri-vière", fenêtre: "fe-nêtre", chaussette: "chaus-sette",
+  chapeau: "cha-peau", canapé: "ca-na-pé", fourmi: "four-mi", hibou: "hi-bou",
+  lapinou: "la-pi-nou"
 };
 
 function bank() {
@@ -108,7 +117,12 @@ function question(mode) {
       { text: "Noé met son manteau car il fait froid.", q: "Pourquoi Noé met-il son manteau ?", answer: "car il fait froid", choices: ["car il fait froid", "car il a faim", "car il pleut du chocolat", "car il va dormir"] },
       { text: "Dans la mare, trois canards nagent.", q: "Combien de canards nagent ?", answer: "trois", choices: ["deux", "trois", "quatre", "cinq"] },
       { text: "Papa prépare une soupe avec des carottes.", q: "Avec quoi Papa prépare-t-il la soupe ?", answer: "des carottes", choices: ["des carottes", "des pommes", "des crayons", "des fleurs"] },
-      { text: "Mila range ses crayons dans la trousse.", q: "Où Mila range-t-elle ses crayons ?", answer: "dans la trousse", choices: ["dans la trousse", "dans le frigo", "sous la pluie", "dans la mare"] }
+      { text: "Mila range ses crayons dans la trousse.", q: "Où Mila range-t-elle ses crayons ?", answer: "dans la trousse", choices: ["dans la trousse", "dans le frigo", "sous la pluie", "dans la mare"] },
+      { text: "Le renard avance doucement près du poulailler. Il entend un bruit et se cache derrière un buisson.", q: "Où le renard se cache-t-il ?", answer: "derrière un buisson", choices: ["derrière un buisson", "dans la maison", "sous la table", "dans la rivière"] },
+      { text: "À la bibliothèque, Zoé choisit un album sur les dinosaures. Elle s’installe dans un fauteuil pour le regarder.", q: "Quel livre Zoé choisit-elle ?", answer: "un album sur les dinosaures", choices: ["un album sur les dinosaures", "un livre de cuisine", "un cahier de calcul", "une carte au trésor"] },
+      { text: "Le jardinier arrose les salades tôt le matin. À midi, la terre est encore humide.", q: "Que fait le jardinier le matin ?", answer: "Il arrose les salades", choices: ["Il arrose les salades", "Il ramasse la neige", "Il peint la clôture", "Il prépare un bateau"] },
+      { text: "Lina fabrique un moulinet avec du papier jaune. Dehors, le vent le fait tourner.", q: "Que fait le vent ?", answer: "Il fait tourner le moulinet", choices: ["Il fait tourner le moulinet", "Il gonfle un ballon rouge", "Il ferme le livre", "Il éteint la lampe"] },
+      { text: "Pour le goûter, Sami coupe une pomme en quatre morceaux et partage avec ses amis.", q: "En combien de morceaux Sami coupe-t-il la pomme ?", answer: "Quatre", choices: ["Deux", "Trois", "Quatre", "Cinq"] }
     ];
     const sentence = pick(sentences);
     return {
@@ -132,7 +146,12 @@ function question(mode) {
       { text: "Au marché, Mamie choisit trois pommes et deux poires. Elle les met dans son panier.", q: "Combien de pommes Mamie choisit-elle ?", a: "Trois", c: ["Deux", "Trois", "Quatre", "Cinq"] },
       { text: "Léo entend un bruit dans la cuisine. C’est le chat qui pousse sa gamelle vide. Léo lui donne ses croquettes.", q: "Pourquoi le chat pousse-t-il sa gamelle ?", a: "Elle est vide", c: ["Elle est vide", "Il veut sortir en fusée", "Elle est pleine d’eau", "Il cherche un crayon"] },
       { text: "Après la pluie, Inès observe un escargot près du pot de fleurs. Elle le regarde sans le toucher, puis appelle son frère.", q: "Quel animal Inès observe-t-elle ?", a: "Un escargot", c: ["Un escargot", "Un papillon", "Un canard", "Un lapin"] },
-      { text: "Tom met ses bottes et son imperméable. Il sort avec sa sœur pour sauter dans les flaques.", q: "Pourquoi Tom met-il ses bottes ?", a: "Pour sortir sous la pluie", c: ["Pour aller dormir", "Pour sortir sous la pluie", "Pour faire un gâteau", "Pour nager dans la mer"] }
+      { text: "Tom met ses bottes et son imperméable. Il sort avec sa sœur pour sauter dans les flaques.", q: "Pourquoi Tom met-il ses bottes ?", a: "Pour sortir sous la pluie", c: ["Pour aller dormir", "Pour sortir sous la pluie", "Pour faire un gâteau", "Pour nager dans la mer"] },
+      { text: "Léo construit une cabane avec des coussins. Son chat s’installe à l’intérieur pendant qu’il lit une histoire.", q: "Qui s’installe dans la cabane ?", a: "Son chat", c: ["Son chat", "Son voisin", "Un renard", "Un poisson"] },
+      { text: "La classe part observer les arbres du parc. Les enfants dessinent une feuille, puis la rendent à l’arbre.", q: "Que dessinent les enfants ?", a: "Une feuille", c: ["Une feuille", "Un bateau", "Une chaussure", "Un gâteau"] },
+      { text: "Maya prépare une salade de fruits avec une banane, une pomme et deux poires. Elle mélange le tout dans un grand saladier.", q: "Combien de poires utilise Maya ?", a: "Deux", c: ["Une", "Deux", "Trois", "Quatre"] },
+      { text: "Le petit bateau quitte le port quand le soleil se lève. Un marin regarde les mouettes voler au-dessus de l’eau.", q: "Que regarde le marin ?", a: "Les mouettes", c: ["Les mouettes", "Les voitures", "Les écureuils", "Les papillons dans la maison"] },
+      { text: "Avant de dormir, Inès choisit son pyjama, pose son livre sur la table de nuit et dit bonne nuit à son ours en peluche.", q: "Où Inès pose-t-elle son livre ?", a: "Sur la table de nuit", c: ["Sur la table de nuit", "Dans le jardin", "Dans le four", "Sous la baignoire"] }
     ];
     const text = pick(texts);
     return {
