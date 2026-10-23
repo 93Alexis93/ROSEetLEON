@@ -103,3 +103,7 @@ Les tests du moteur couvrent les six domaines : calcul mental, numération, mult
 
 ### Multiplications par niveau
 La couverture de tests doit vérifier chaque niveau de difficulté, pas seulement un niveau intermédiaire. Pour les multiplications, chaque produit est recalculé à partir de l’énoncé et les tables disponibles sont contrôlées selon le niveau.
+
+
+### Nombre mystère
+Le test du générateur doit vérifier le sens de l’indice et non uniquement la présence de quatre choix. Pour chaque type de question, la réponse est recalculée à partir des dizaines/unités, ou du nombre qui précède/suit celui affiché. Les contrôles automatisés complètent les essais réels sur Safari iPhone.
