@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createNumberMysteryQuestion,createCompareQuestion,createSyllableQuestion} from "../src/child/learning-lab.js";
+import {createNumberMysteryQuestion,createCompareQuestion,createSyllableQuestion,SYLLABLE_WORDS} from "../src/child/learning-lab.js";
 import {readFileSync} from "node:fs";
 import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
@@ -75,4 +75,13 @@ test("Les jeux de lecture sonnent aussi les erreurs et les réussites",()=>{
  const reading=readFileSync(resolve(root,"src/child/reading.js"),"utf8");
  assert.match(reading,/gentleOops/);
  assert.match(reading,/cheer/);
+});
+
+
+test("Syllabes · les mots connus ont un nombre de syllabes juste",()=>{
+ const expected={chat:1,"vélo":2,lapin:2,tomate:3,banane:3,papillon:3,chocolat:3,maison:2,bateau:2,soleil:2};
+ for(const item of SYLLABLE_WORDS){
+  assert.equal(item.syllables,expected[item.word],"Nombre de syllabes incorrect pour "+item.word);
+ }
+ assert.equal(SYLLABLE_WORDS.length,Object.keys(expected).length);
 });
