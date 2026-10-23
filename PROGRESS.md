@@ -31,16 +31,18 @@ Mis à jour le 23 octobre 2026.
 - État : menu visible validé par l’utilisateur ; validation fonctionnelle complète encore à faire.
 
 ## Phase 3 — Lecture de Léon (première version en cours)
-- [x] Ajouter un menu lecture accessible depuis l’accueil de Léon
-- [x] Ajouter quatre formats : mots-éclairs, mots-mystères, compréhension de phrases et mini-textes
-- [x] Réutiliser la voix iOS et proposer des indices doux
-- [x] Ajouter dans l’espace parent la gestion locale de mots personnalisés, intégrés aux jeux
-- [x] Ajouter le nouveau module au cache hors ligne
-- [x] Corriger le compteur de « réponses du premier coup » : une réponse trouvée après un indice ou une erreur ne compte plus comme réussite au premier essai
-- [ ] Vérifier la syntaxe du correctif et lancer les tests automatisés disponibles
-- [ ] Tester le parcours lecture sur iPhone, la voix, l’ajout/suppression de mots et la sauvegarde/importation
-- [ ] Vérifier la qualité pédagogique des questions et corriger les éventuels défauts avant de considérer la phase terminée
-- Note de validation : le correctif de score est commité, mais le test navigateur réel n’a pas été réalisé dans cette étape.
+- [x] Menu lecture accessible depuis l’accueil de Léon
+- [x] Quatre formats : mots-éclairs, mots-mystères, phrases et mini-textes
+- [x] Gestion locale des mots personnalisés depuis l’espace parent
+- [x] Correction du compteur : une réponse trouvée après une erreur ne compte plus comme réussite du premier coup
+- [x] Consigne de chaque format lue par la voix française si elle est activée ; les mots-éclairs font entendre le mot cible
+- [x] Questions de compréhension des phrases reformulées pour éviter une consigne ambiguë
+- [x] Ajout d’un workflow GitHub Actions pour vérifier la syntaxe JavaScript et lancer les tests Node à chaque push sur main ou pull request
+- [ ] Vérifier dans GitHub Actions que le workflow s’exécute et que tous les contrôles passent
+- [ ] Tester le parcours complet de lecture sur iPhone, y compris voix, indices, fin de session et navigation
+- [ ] Tester ajout/suppression de mots, réutilisation dans les jeux de mots, persistance après rechargement et sauvegardes JSON
+- [ ] Vérifier hors ligne après activation du service worker
+- État : correctifs committés ; les contrôles CI n’ont pas encore été confirmés comme réussis et les tests navigateur restent nécessaires.
 
 ## Phases suivantes prévues
 - Phase 4 : contenus de Rose, adaptés à la moyenne section
@@ -58,4 +60,4 @@ Mis à jour le 23 octobre 2026.
 - La porte parentale n’est pas une sécurité cryptographique.
 - Les fiches imprimables sont encore une coquille ; les générateurs A4 complets sont prévus en phase 6.
 - N’annoncer comme exécutés que les tests réellement lancés. Les vérifications de syntaxe ne remplacent pas un test navigateur.
-- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; la suite de tests Node n’a donc pas été lancée ici.
+- Limite de cette session : le clonage du dépôt pour exécuter Node localement a échoué faute de résolution réseau ; la suite de tests Node n’a donc pas été lancée dans l’environnement de travail.
