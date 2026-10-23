@@ -25,6 +25,19 @@ export function createNumberMysteryQuestion(random=Math.random){
  return {prompt,answer,choices:shuffle(choices,random),hint,explanation};
 }
 
+export function createCompareQuestion(random=Math.random){
+ const first=10+Math.floor(random()*90);
+ const rawSecond=10+Math.floor(random()*89);
+ const second=rawSecond>=first?rawSecond+1:rawSecond;
+ const answer=Math.max(first,second),other=Math.min(first,second);
+ const choices=[answer,other];
+ for(const candidate of shuffle([answer-1,answer+1,answer-2,answer+2],random)){
+  if(candidate>=10&&candidate<=99&&!choices.includes(candidate)&&choices.length<4)choices.push(candidate);
+ }
+ while(choices.length<4){const candidate=10+Math.floor(random()*90);if(!choices.includes(candidate))choices.push(candidate);}
+ return {prompt:"Quel est le plus grand nombre : "+first+" ou "+second+" ?",answer,choices:shuffle(choices,random),hint:"Compare d’abord le chiffre des dizaines, puis celui des unités si besoin.",explanation:answer+" est plus grand que "+other+"."};
+}
+
 const SYLLABLE_WORDS=[
  {word:"chat",picture:"🐱",syllables:1},
  {word:"vélo",picture:"🚲",syllables:2},
@@ -42,18 +55,19 @@ export function createSyllableQuestion(random=Math.random){
  return {word:item.word,picture:item.picture,prompt:"Combien de morceaux entends-tu dans ce mot ?",answer:item.syllables,choices:shuffle([1,2,3],random)};
 }
 
-function launch(child){
+function launch(child,mode="default"){
  const isRose=child==="rose";
+ const isCompare=mode==="compare";
  document.body.className="theme-"+child;
  let round=0,question,locked=false,hintUsed=false;
  const total=5;
- const generate=()=>{question=isRose?createSyllableQuestion():createNumberMysteryQuestion();locked=false;hintUsed=false;};
+ const generate=()=>{question=isRose?createSyllableQuestion():(isCompare?createCompareQuestion():createNumberMysteryQuestion());locked=false;hintUsed=false;};
  generate();
  function render(){
   const content=card([]);
   content.append(el("p",{class:"small",text:"Défi "+(round+1)+" sur "+total}),
    el("div",{class:"progress-track",role:"progressbar","aria-label":"Progression du défi","aria-valuemin":"0","aria-valuemax":String(total),"aria-valuenow":String(round)},el("div",{class:"progress-fill",style:"width:"+(round/total*100)+"%"})),
-   el("p",{class:"lead",text:isRose?"Écoute le mot. Tape le nombre de morceaux que tu entends.":"Lis l’indice et trouve le nombre. Tu peux utiliser l’aide !"}));
+   el("p",{class:"lead",text:isRose?"Écoute le mot. Tape le nombre de morceaux que tu entends.":(isCompare?"Compare les deux nombres. Tu peux utiliser l’aide !":"Lis l’indice et trouve le nombre. Tu peux utiliser l’aide !")}));
   if(isRose){
    const picture=el("div",{class:"prompt",text:question.picture,"aria-label":"Image pour écouter un mot"});
    picture.style.fontSize="4rem";content.append(picture);
@@ -64,9 +78,9 @@ function launch(child){
   const feedback=el("p",{class:"feedback",role:"status","aria-live":"polite"});
   content.append(answers,feedback,
    button("🔊 Réécouter",()=>speak(isRose?"Écoute le mot "+question.word+". "+question.word+". "+question.prompt:question.prompt,getState().settings.voice),"button-soft"),
-   button("💡 Petit indice",()=>{if(hintUsed){feedback.textContent=isRose?"Dis le mot lentement en tapant doucement dans tes mains.":"Une dizaine, c’est un groupe de dix unités.";return;}hintUsed=true;feedback.textContent=isRose?"Dis le mot lentement et tape dans tes mains pour chaque morceau.":"Une dizaine vaut dix unités. Décompose le nombre en dizaines et unités.";if(isRose)speak("Écoute bien : "+question.word+".",getState().settings.voice);},"button-soft"),
+   button("💡 Petit indice",()=>{if(hintUsed){feedback.textContent=isRose?"Dis le mot lentement en tapant doucement dans tes mains.":(isCompare?"Regarde d’abord le chiffre des dizaines.":"Une dizaine, c’est un groupe de dix unités.");return;}hintUsed=true;feedback.textContent=isRose?"Dis le mot lentement et tape dans tes mains pour chaque morceau.":(isCompare?"Compare les dizaines, puis les unités si les dizaines sont égales.":"Une dizaine vaut dix unités. Décompose le nombre en dizaines et unités.");if(isRose)speak("Écoute bien : "+question.word+".",getState().settings.voice);},"button-soft"),
    button("⌂ Accueil",()=>go("home"),"icon-button"));
-  replaceApp(screen(isRose?"Les syllabes dans les mots":"Le nombre mystère",content,{eyebrow:isRose?"Jeu d’écoute · Rose":"Numération · Léon",home:()=>go("home")}));
+  replaceApp(screen(isRose?"Les syllabes dans les mots":(isCompare?"Le plus grand nombre":"Le nombre mystère"),content,{eyebrow:isRose?"Jeu d’écoute · Rose":(isCompare?"Comparer les nombres · Léon":"Numération · Léon"),home:()=>go("home")}));
   speak(isRose?"Écoute le mot "+question.word+". Combien de syllabes entends-tu ?":question.prompt,getState().settings.voice);
  }
  function answer(choice){
@@ -86,4 +100,5 @@ function launch(child){
  render();
 }
 export function numberMystery(){launch("leon");}
+export function compareNumbers(){launch("leon","compare");}
 export function syllableGame(){launch("rose");}
