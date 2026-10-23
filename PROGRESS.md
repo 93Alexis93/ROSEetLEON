@@ -148,3 +148,13 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [ ] Confirmer les tests automatisés et le déploiement GitHub Pages sur le SHA final.
 - [ ] Essai iPhone : vérifier que « Aujourd’hui » ne compte que les sessions du jour et que les totaux cumulés restent cohérents.
 - [ ] Les réglages `leonMinutes` et `roseMinutes` restent conservés pour compatibilité, mais ne pilotent pas encore de minuterie ; ils ne sont pas présentés comme une fonctionnalité active.
+
+
+## Étape É12 — calcul mental et petits problèmes pour Léon (code livré, validation à confirmer)
+- [x] Ajout de générateurs de questions pour les compléments à 10/100, doubles, moitiés, droite numérique et petits problèmes de comparaison, complément et groupements.
+- [x] Ajout d’un menu de calcul, d’une réponse numérique saisie au clavier, d’un indice, d’une réécoute et d’un retour accessible annoncé poliment.
+- [x] Les réponses erronées invitent à réessayer sans pénalité ; une session est enregistrée à la fin des cinq questions.
+- [x] Nouveaux modules ajoutés au précache ; cache PWA incrémenté à `rose-leon-v42`.
+- [x] Tests de génération et de ressources hors ligne ajoutés.
+- [ ] Confirmer les tests automatisés et le déploiement GitHub Pages sur le SHA final.
+- [ ] Essai iPhone : saisie numérique, taille du clavier, annonces vocales, aides, session terminée et fonctionnement hors ligne.
