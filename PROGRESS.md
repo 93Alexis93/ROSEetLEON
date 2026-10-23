@@ -26,7 +26,7 @@ Mis à jour le 23 octobre 2026.
 - [x] Renouvellement du cache PWA pour les ressources de maths
 - [x] Contrôle automatique de 9 000 questions sans défaut détecté (résultat rapporté précédemment)
 - [x] L’utilisateur a confirmé sur iPhone que les six défis apparaissent après actualisation de l’URL
-- [x] Suite `node --experimental-default-type=module --test tests/*.test.mjs` exécutée dans GitHub Actions ; une correction complémentaire des choix de secours numériques est en cours de validation
+- [x] Suite `node --experimental-default-type=module --test tests/*.test.mjs` exécutée dans GitHub Actions ; les choix de secours numériques ont été corrigés et les tests automatisés passent
 - [ ] Tester chaque domaine jusqu’à la fin d’une session, la progression adaptative et le mode avion
 - État : menu visible validé par l’utilisateur ; tests automatisés des moteurs passés, parcours fonctionnel complet encore à vérifier.
 
