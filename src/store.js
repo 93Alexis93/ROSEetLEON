@@ -232,6 +232,9 @@ export function recordAnswer(child, ok) {
 export function recordMathAnswer(domain, ok, options = {}) {
   assertMathDomain(domain);
   assertBoolean(ok, "Le résultat de la réponse");
+  if (!isRecord(options)) throw Error("Les options de réponse sont invalides.");
+  if (options.firstTry !== undefined) assertBoolean(options.firstTry, "Le statut de première tentative");
+  if (options.helped !== undefined) assertBoolean(options.helped, "Le statut d’aide");
   if (options.firstTry === false) return;
   update(data => {
     const childProfile = data.profiles.leon;
