@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+import {fileURLToPath} from "node:url";
+import {dirname,resolve} from "node:path";
 import {createRoseQuestion,isRoseNameComplete,getNextRoseLetter} from "../src/child/rose-activities.js";
 import {createCountingQuestion} from "../src/child/activities.js";
 
@@ -79,4 +82,9 @@ test("Rose · composition du prénom : donne la lettre attendue sans bloquer apr
   assert.equal(getNextRoseLetter(["R","O","S"]),"E");
   assert.equal(getNextRoseLetter(["R","O","S","E"]),null);
   assert.equal(getNextRoseLetter(null),null);
+});
+
+test("Rose · la composition du prénom enregistre une session seulement à la réussite complète", () => {
+  const source = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
+  assert.match(source, /if\(isRoseNameComplete\(chosen\)\)\{recordSession\("rose"\)/);
 });
