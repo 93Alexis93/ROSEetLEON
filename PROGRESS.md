@@ -49,11 +49,20 @@ Mis à jour le 23 octobre 2026.
 - [ ] Résultat Actions pour le SHA final non accessible via les outils consultés ; ne pas considérer la CI comme confirmée verte.
 - [ ] Vérification du déploiement Pages après les commits non confirmée.
 
+## Étape É2 — protection des routes parentales (code livré, validation en attente)
+- [x] Les routes `parent`, `crisis` et `print` sont refusées tant que l’état de déverrouillage en mémoire est fermé ; la navigation redirige vers la porte parentale.
+- [x] La porte se referme lors du retour à l’accueil, aux profils enfants ou à l’écran de porte ; la réussite du calcul et du PIN facultatif (si défini) déverrouille l’espace pour la navigation parentale.
+- [x] Après trois réponses de calcul incorrectes, le blocage de 30 secondes est enregistré dans `sessionStorage` et `localStorage`, avec nettoyage à expiration.
+- [x] Tests automatisés ajoutés pour les routes, le déverrouillage et l’expiration du blocage.
+- [x] Cache PWA renouvelé à `rose-leon-v32` ; les ressources modifiées (`main.js`, `router.js`, `parent.js`) sont déjà dans `ASSETS`.
+- [ ] Les tests Node et le résultat GitHub Actions n’ont pas pu être exécutés/confirmés dans cet environnement : l’accès réseau à GitHub depuis le conteneur a échoué. Ne pas annoncer la CI verte.
+- [ ] Déploiement Pages et comportement réel sur iPhone non confirmés.
+- [ ] À tester sur iPhone : accès direct via `#parent`, `#crisis`, `#print` ; déverrouillage puis navigation entre outils ; retour accueil puis réouverture ; trois erreurs puis rechargement pendant le blocage.
+
 ## Prochaines étapes proposées
-1. É2 — verrouillage cohérent de l’espace parent, des outils de crise et des fiches imprimables.
-2. É3 — fiabiliser la progression adaptative de Léon et la prise en compte des indices.
-3. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
-4. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
+1. É3 — fiabiliser la progression adaptative de Léon et la prise en compte des indices.
+2. É4 — valider/sécuriser l’import de sauvegarde et tester la migration du schéma.
+3. É5 — améliorer l’export et les rappels de sauvegarde sur iPhone.
 
 ## Historique utile
 Les anciennes listes de phases et de validations ont été consolidées ici afin d’éviter les répétitions et les statuts contradictoires. Les détails des choix techniques sont consignés dans `docs/DECISIONS.md`, les changements livrés dans `CHANGELOG.md` et les repères pédagogiques dans `docs/RESSOURCES_PEDAGOGIQUES.md`.
