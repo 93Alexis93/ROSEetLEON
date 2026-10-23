@@ -37,6 +37,11 @@
 - Les tests de stockage simulent les erreurs d’écriture pour vérifier le maintien de l’état précédent.
 - Les activités « Nombre mystère » et « Les syllabes dans les mots » sont des créations originales inspirées des compétences de référence : numération/nombres voisins en CE1 et segmentation orale en moyenne section. Elles doivent rester courtes, réécoutables, sans chronomètre et avec retour encourageant.
 
+
+- Les routes parentales `parent`, `crisis` et `print` sont gardées par une vérification commune au moment du rendu, et non seulement par les boutons visibles. L’état de déverrouillage reste en mémoire et se referme au retour à l’accueil, aux profils enfants ou à l’écran de porte.
+- Le blocage de 30 secondes après trois erreurs de calcul est horodaté dans `sessionStorage` et `localStorage` pour survivre à un rechargement ; les accès au stockage tolèrent les restrictions du navigateur.
+- Cette porte est une barrière de navigation destinée à éviter l’accès accidentel des enfants, pas une authentification sécurisée contre une personne techniquement déterminée.
+
 ## Validation et livraison
 - Distinguer systématiquement : code présent, test automatisé passé, validation par l’utilisateur sur iPhone et déploiement public confirmé.
 - Après chaque étape, consulter les tests GitHub Actions correspondant au SHA exact. En cas d’échec, corriger ou revenir en arrière avant de poursuivre.
