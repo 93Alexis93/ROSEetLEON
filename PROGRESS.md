@@ -91,11 +91,21 @@ Les anciennes listes de phases et de validations ont été consolidées ici afin
 - [x] Déploiement Pages réussi sur ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40016083724)).
 - [ ] Tester sur iPhone : partage vers Fichiers/iCloud Drive, annulation du partage, téléchargement de repli, copie du JSON et réimport.
 
-## Étape É6 — enrichir les contenus de lecture (en cours)
+## Étape É6 — enrichir les contenus de lecture (code livré, tests CI et déploiement réussis)
 - [x] Formatage seul du module de lecture avant les changements fonctionnels ; les tests passent sur le commit `6aaaf2131e0860b416091970ad318ca6b0d570e7`.
 - [x] Enrichissement du vocabulaire pour les mots-éclairs et mots-mystères, en conservant les mots personnalisés.
 - [x] Passage de 4 à 10 phrases courtes et de 3 à 10 mini-textes originaux, avec questions de compréhension concrètes.
 - [x] Ajout de tests de variété des contenus et maintien de quatre choix distincts par question.
 - [x] Cache PWA renouvelé à v36.
-- [ ] Tests CI et déploiement Pages du commit fonctionnel É6 à confirmer.
+- [x] 62 tests passent sur le commit `47d0cecf6d4357afa123a930d1980744e438aecb` ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40016705869)).
+- [x] Déploiement Pages réussi sur ce commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40016705010)).
 - [ ] Vérifier sur iPhone la lisibilité, la voix, la longueur des textes et la pertinence des réponses.
+
+## Étape É7 — pause guidée douce (en cours)
+- [x] Point d’entrée `src/main.js` formaté dans un commit séparé avant ajout de fonctionnalité ; tests de régression adaptés au formatage.
+- [x] Pause facultative en trois étapes, avec progression uniquement au toucher et sans minuterie.
+- [x] Texte adapté aux enfants : se poser, observer sa respiration sans obligation, regarder autour de soi.
+- [x] Ajout d’un accès depuis les menus principaux de Léon et Rose ; aucun score ni enregistrement de la pause.
+- [x] Nouvelle ressource ajoutée au cache PWA, renouvelé à v37.
+- [ ] Tests CI et déploiement Pages de l’étape É7 à confirmer.
+- [ ] Vérifier sur iPhone le parcours tactile, la voix et le retour vers l’univers choisi.

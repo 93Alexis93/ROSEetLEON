@@ -9,6 +9,7 @@ import { printComingSoon } from "./parent/printables.js";
 import { speak } from "./voice.js";
 import { unlockAudio } from "./audio.js";
 import { numberMystery, compareNumbers, syllableGame } from "./child/learning-lab.js";
+import { guidedPause } from "./child/pause.js";
 
 function home() {
   document.body.className = "";
@@ -74,6 +75,7 @@ function childHome(child) {
         syllableGame();
       }, "button-soft")
     ]),
+    button("🌿 Petite pause", () => guidedPause(child), "button-warm"),
     button("🔊 Réécouter", () => speak(
       rose
         ? "Choisis un jeu : compter les licornes, les couleurs magiques ou les formes à retrouver."

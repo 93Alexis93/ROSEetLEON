@@ -35,3 +35,7 @@
 - Enrichissement du vocabulaire des jeux « Mots-éclairs » et « Mots-mystères ».
 - Passage à 10 phrases et 10 mini-textes de compréhension originaux, avec questions explicites.
 - Ajout de tests de variété du contenu ; cache PWA renouvelé à v36.
+
+## É7 — 2026-10-23
+- Ajout d’une pause guidée facultative en trois étapes, sans chronomètre, score ni enregistrement.
+- Accès depuis les écrans principaux de Léon et Rose ; cache PWA renouvelé à v37.
