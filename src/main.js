@@ -14,32 +14,43 @@ import { calculationMenu } from "./child/calcul.js";
 
 function home() {
   document.body.className = "";
-  const content = el("div", { class: "stack" });
-  content.append(el("p", {
-    class: "lead",
-    text: "Deux petits univers pour apprendre, essayer et recommencer à son rythme."
-  }));
-  const choices = el("div", { class: "choices" });
+  const content = el("div", { class: "stack home-stack" });
+  const welcome = el("section", { class: "home-hero", "aria-labelledby": "home-welcome" }, [
+    el("div", { class: "home-sparkles", "aria-hidden": "true", text: "✨ ⭐ ✨" }),
+    el("p", { class: "home-kicker", text: "Bienvenue dans votre terrain de jeu !" }),
+    el("h2", { id: "home-welcome", class: "home-title", text: "À toi de jouer !" }),
+    el("p", {
+      class: "home-description",
+      text: "Des défis rigolos, des découvertes et plein de petites victoires. Choisis ton univers !"
+    }),
+    el("div", { class: "home-trail", "aria-hidden": "true", text: "🎈　🌈　🚀　🪄" })
+  ]);
+  const choices = el("div", { class: "choices home-choices", "aria-label": "Choisis ton univers" });
   choices.append(
-    button("⚽ Léon · Défis ballon", () => {
+    button("⚽\nLéon\nLes défis champions", () => {
       unlockAudio();
       go("leon");
-    }, "big-choice"),
-    button("🦄 Rose · Jeux magiques", () => {
+    }, "big-choice home-leon"),
+    button("🦄\nRose\nLes jeux enchantés", () => {
       unlockAudio();
       go("rose");
-    }, "big-choice")
+    }, "big-choice home-rose")
   );
+  const promise = el("div", { class: "home-promise" }, [
+    el("span", { class: "home-promise-icon", "aria-hidden": "true", text: "💛" }),
+    el("p", { text: "Ici, on essaie, on apprend et on recommence. Chaque petit progrès compte !" })
+  ]);
   content.append(
+    welcome,
     choices,
-    el("p", {
-      class: "small",
-      text: "Des sessions courtes, sans classement et sans pression."
-    }),
-    button("🔒 Espace parent", () => go("gate"), "icon-button")
+    promise,
+    el("div", { class: "home-footer" }, [
+      el("span", { class: "small", text: "🌱 À ton rythme · Sans compétition" }),
+      button("🔒 Espace parent", () => go("gate"), "icon-button")
+    ])
   );
   replaceApp(screen("Rose & Léon", content, {
-    eyebrow: "Notre petit coin pour grandir"
+    eyebrow: "Le club des petits explorateurs"
   }));
 }
 
