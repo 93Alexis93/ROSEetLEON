@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {fileURLToPath} from "node:url";
 import {dirname,resolve} from "node:path";
-import {createRoseQuestion,isRoseNameComplete,getNextRoseLetter} from "../src/child/rose-activities.js";
+import {createRoseQuestion,isRoseNameComplete,getNextRoseLetter,FAMILY_WORDS,shuffleFamilyLetters} from "../src/child/rose-activities.js";
 import {createCountingQuestion} from "../src/child/activities.js";
 
 for(const mode of ["colors","shapes","letters","letter-pairs"]){
@@ -144,4 +144,24 @@ test("Rose · les sept jeux à choix multiples utilisent le même parcours de va
   assert.match(source, /const answer=\(choice,cardEl,answerGrid,feedback\)=>/);
   assert.match(source, /const next=button\(round\+1>=5\?"Terminer":"Question suivante"/);
   assert.match(source, /generate\(\);render\(\)/);
+});
+
+test("Rose · le son des lettres : l’aide révèle uniquement la petite lettre",()=>{
+ const source=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
+ assert.match(source,/mode==="letter-sounds"\?"La petite lettre est « "\+q.answer.toLowerCase\(\)\+" »\."/);
+ assert.match(source,/Écoute le son, puis retrouve la lettre/);
+});
+
+test("Rose · reconstitue les prénoms : tous les mots familiaux sont disponibles",()=>{
+ assert.deepEqual(FAMILY_WORDS,["ROSE","LÉON","PAPA","MAMAN","ALEXIS","PAULINE","MAMI"]);
+ for(const word of FAMILY_WORDS){
+  const shuffled=shuffleFamilyLetters(word,()=>0.37);
+  assert.equal(shuffled.length,word.length);
+  assert.deepEqual(shuffled.map(x=>x.letter).sort(),[...word].sort());
+  assert.equal(new Set(shuffled.map(x=>x.id)).size,word.length);
+ }
+ const source=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
+ assert.match(source,/Reconstitue les prénoms/);
+ assert.match(source,/Réessayer \(mélanger les lettres\)/);
+ assert.match(source,/tokens=shuffleFamilyLetters\(target\)/);
 });
