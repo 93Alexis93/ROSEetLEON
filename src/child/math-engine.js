@@ -131,7 +131,7 @@ function problems(d, random) {
     add ? a + b + b : a - b - b,
     add ? a + 1 : Math.max(0, a - b + 1),
     add ? answer + 1 : Math.max(0, answer - 1)
-  ]).filter(value => Number(value) !== answer);
+  ]).filter(value => Number(value) >= 0 && Number(value) !== answer);
   return makeQuestion(
     "problems",
     d,
