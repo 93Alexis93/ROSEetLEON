@@ -119,7 +119,7 @@ test("Rose · les sept jeux à choix multiples utilisent le même parcours de va
     assert.ok(source.includes('startRoseActivity("' + mode + '")') || source.includes('mode === "' + mode + '"') || source.includes('mode==="'+mode+'"'),
       "Le mode " + mode + " doit être relié à son parcours de jeu.");
   }
-  assert.match(source, /const answer=choice=>/);
+  assert.match(source, /const answer=\(choice,cardEl,answerGrid,feedback\)=>/);
   assert.match(source, /const next=button\(round\+1>=5\?"Terminer":"Question suivante"/);
   assert.match(source, /generate\(\);render\(\)/);
 });
