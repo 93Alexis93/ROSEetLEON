@@ -74,18 +74,30 @@ test("Numération · la valeur demandée correspond bien au nombre",()=>{
   }
 });
 
-test("Problèmes · la réponse correspond à l’histoire",()=>{
+test("Problèmes · les six formulations donnent le bon résultat",()=>{
+  const seen = new Set();
   for(let difficulty=1;difficulty<=3;difficulty++){
-    for(let i=0;i<250;i++){
+    for(let i=0;i<500;i++){
       const q=createMathQuestion("problems",difficulty);
-      const add=q.prompt.match(/^Léon a (\d+) \w+\. Il en gagne (\d+)\. Combien en a-t-il maintenant \?$/);
-      const subtract=q.prompt.match(/^Léon a (\d+) \w+\. Il en donne (\d+)\. Combien lui en reste-t-il \?$/);
-      assert.ok(add||subtract,q.prompt);
-      const match=add||subtract;
-      const expected=add?Number(match[1])+Number(match[2]):Number(match[1])-Number(match[2]);
+      const patterns=[
+        {kind:"add",regex:/^Léon a (\d+) .+?\. Il en gagne (\d+)\./,id:"gagne"},
+        {kind:"add",regex:/^Léon possède (\d+) .+?\. On lui en donne (\d+) de plus\./,id:"donne"},
+        {kind:"add",regex:/^Dans une boîte, il y a (\d+) .+?\. On en ajoute (\d+)\./,id:"ajoute"},
+        {kind:"sub",regex:/^Léon a (\d+) .+?\. Il en donne (\d+)\./,id:"donne-retire"},
+        {kind:"sub",regex:/^Léon possède (\d+) .+?\. Il en offre (\d+)\./,id:"offre"},
+        {kind:"sub",regex:/^Dans un panier, il y a (\d+) .+?\. On en retire (\d+)\./,id:"retire"}
+      ];
+      const matched=patterns.map(pattern=>({pattern,match:q.prompt.match(pattern.regex)})).find(item=>item.match);
+      assert.ok(matched,"Formulation reconnue : "+q.prompt);
+      seen.add(matched.pattern.id);
+      const a=Number(matched.match[1]), b=Number(matched.match[2]);
+      const expected=matched.pattern.kind==="add"?a+b:a-b;
       assert.equal(Number(q.answer),expected,q.prompt);
+      assert.ok(q.explanation.includes(String(expected)),q.explanation);
+      assert.ok(q.hint.length>10);
     }
   }
+  assert.equal(seen.size,6,"les six formulations doivent apparaître au fil des tirages");
 });
 
 test("Mesures · conversions et sommes d’argent donnent la bonne réponse",()=>{
