@@ -161,7 +161,7 @@ function question(mode) {
       speakText: word,
       answer: String(count),
       choices: shuffle([String(count), ...alternatives]),
-      hint: "Dis le mot lentement et frappe doucement dans tes mains à chaque morceau entendu.",
+      hint: "Dis le mot lentement et frappe doucement dans tes mains à chaque syllabe entendue.",
       explanation: "« " + word + " » se découpe ainsi : " + READING_SYLLABLES[word] + " (" + count + " syllabe(s))."
     };
   }
@@ -264,7 +264,7 @@ export function readingMenu() {
     ["sentence", "💬 Phrases à comprendre", "Lire une phrase et trouver l’information"],
     ["text", "📖 Mini-textes", "Lire quelques lignes et comprendre"],
     ["rhyme", "🎵 Chasse aux rimes", "Écouter les sons à la fin des mots"],
-    ["syllables", "👏 Syllabes en rythme", "Découper les mots en morceaux à l’oral"]
+    ["syllables", "👏 Syllabes en rythme", "Découper les mots en syllabes à l’oral"]
   ];
   modes.forEach(([id, label, description]) => {
     content.append(card([
