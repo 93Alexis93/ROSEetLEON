@@ -16,8 +16,8 @@ const shuffle = (items, random = Math.random) => {
 };
 
 export function createCountingQuestion(random = Math.random) {
-  const count = 1 + Math.floor(random() * 5);
-  const alternatives = shuffle([1, 2, 3, 4, 5].filter(n => n !== count), random).slice(0, 2);
+  const count = 1 + Math.floor(random() * 8);
+  const alternatives = shuffle([1, 2, 3, 4, 5, 6, 7, 8].filter(n => n !== count), random).slice(0, 2);
   return {
     text: "Combien de licornes ?",
     answer: count,
