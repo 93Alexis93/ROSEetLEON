@@ -39,16 +39,20 @@ export function createNumberMysteryQuestion(random=Math.random){
  return {prompt,answer,choices:shuffle(choices,random),hint,explanation};
 }
 export function createCompareQuestion(random=Math.random){
- const first=10+Math.floor(random()*90);
- const rawSecond=10+Math.floor(random()*89);
- const second=rawSecond>=first?rawSecond+1:rawSecond;
+ // La plupart des questions restent à deux chiffres ; certaines passent à trois chiffres
+ // pour obliger à comparer les centaines avant les dizaines et les unités.
+ const threeDigits=random()<0.35;
+ const min=threeDigits?100:10, max=threeDigits?999:99;
+ const first=min+Math.floor(random()*(max-min+1));
+ let second=min+Math.floor(random()*(max-min+1));
+ if(second===first) second=second===max?second-1:second+1;
  const answer=Math.max(first,second),other=Math.min(first,second);
+ const distractors=shuffle([answer-1,answer+1,answer-10,answer+10,other-1,other+1],random)
+  .filter(n=>n>=min&&n<=max&&n!==answer&&n!==other);
  const choices=[answer,other];
- for(const candidate of shuffle([answer-1,answer+1,answer-2,answer+2],random)){
-  if(candidate>=10&&candidate<=99&&!choices.includes(candidate)&&choices.length<4)choices.push(candidate);
- }
- while(choices.length<4){const candidate=10+Math.floor(random()*90);if(!choices.includes(candidate))choices.push(candidate);}
- return {prompt:"Quel est le plus grand nombre : "+first+" ou "+second+" ?",answer,choices:shuffle(choices,random),hint:"Compare d’abord le chiffre des dizaines, puis celui des unités si besoin.",explanation:answer+" est plus grand que "+other+"."};
+ for(const candidate of distractors){if(choices.length===4)break;if(!choices.includes(candidate))choices.push(candidate);}
+ while(choices.length<4){const candidate=min+Math.floor(random()*(max-min+1));if(!choices.includes(candidate))choices.push(candidate);}
+ return {prompt:"Quel est le plus grand nombre : "+first+" ou "+second+" ?",answer,choices:shuffle(choices,random),hint:threeDigits?"Compare les centaines d’abord. Si elles sont égales, regarde les dizaines, puis les unités.":"Compare d’abord le chiffre des dizaines, puis celui des unités si besoin.",explanation:answer+" est plus grand que "+other+"."};
 }
 
 export const SYLLABLE_WORDS=[
