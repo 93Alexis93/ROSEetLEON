@@ -23,10 +23,10 @@ test("Nombre mystère · les questions ont quatre choix distincts et une répons
 test("Nombre mystère · la réponse correspond exactement à l’indice",()=>{
  for(let i=0;i<1200;i++){
   const q=createNumberMysteryQuestion();
-  const decomposition=q.prompt.match(/^Je suis (\\d+) centaines?, (\\d+) dizaines? et (\\d+) unités?\\. Qui suis-je \\?$/);
-  const next=q.prompt.match(/^Quel nombre vient juste après (\\d+) \\?$/);
-  const previous=q.prompt.match(/^Quel nombre vient juste avant (\\d+) \\?$/);
-  const jump=q.prompt.match(/^Quel nombre vient (\\d+) (après|avant) (\\d+) \\?$/);
+  const decomposition=q.prompt.match(/^Je suis (\d+) centaines?, (\d+) dizaines? et (\d+) unités?\. Qui suis-je \?$/);
+  const next=q.prompt.match(/^Quel nombre vient juste après (\d+) \?$/);
+  const previous=q.prompt.match(/^Quel nombre vient juste avant (\d+) \?$/);
+  const jump=q.prompt.match(/^Quel nombre vient (\d+) (après|avant) (\d+) \?$/);
   if(decomposition) assert.equal(q.answer,Number(decomposition[1])*100+Number(decomposition[2])*10+Number(decomposition[3]),q.prompt);
   else if(next) assert.equal(q.answer,Number(next[1])+1,q.prompt);
   else if(previous) assert.equal(q.answer,Number(previous[1])-1,q.prompt);
