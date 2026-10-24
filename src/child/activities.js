@@ -2,7 +2,7 @@ import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordMathAnswer, recordSession } from "../store.js";
 import { MATH_DOMAINS, createMathQuestion } from "./math-engine.js";
 import { speak } from "../voice.js";
-import { cheer, gentleOops, successPraise } from "../audio.js";
+import { cheer, gentleOops, successPraise, sessionPraise } from "../audio.js";
 import { go } from "../router.js";
 
 const pick = items => items[Math.floor(Math.random() * items.length)];
@@ -77,6 +77,7 @@ function mathMenu() {
 
 function finish(child, score, total) {
   recordSession(child);
+  sessionPraise(child,getState().settings.voice);
   const body = card([
     el("div", { class: "prompt", text: child === "leon" ? "⚽ Bien joué !" : "🦄 Bravo !" }),
     el("p", { class: "lead", text: "Tu as persévéré et tu as appris quelque chose." }),
