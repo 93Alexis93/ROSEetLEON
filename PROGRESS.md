@@ -413,3 +413,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Aide vocale après deux erreurs dans la géométrie, l’aventure de football et l’aventure magique : la réponse est également lue à voix haute si la voix est activée (cache v94).
 
 - Défis de Léon enrichis : davantage de motifs visuels possibles pour les suites logiques (sport, animaux, véhicules, fruits), sans changer les règles ni la durée courte de la séance (cache v95).
+
+- Aventure de Rose : deux formulations d’histoire possibles pour chacune des cinq étapes, choisies au lancement de chaque étape ; les lettres et les réponses attendues restent identiques (cache v96).
