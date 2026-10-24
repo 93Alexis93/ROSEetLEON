@@ -442,3 +442,8 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - La référence effective de travail est le `main` actuel au commit `0e038184eb42e8ed3c91c8f3c9c007777cdfb966`.
 - La branche `refonte-ux-ui-impro-lab` est basée directement sur cette référence, sans commit de retard ; les anciens identifiants `6eef26ef` et `a1c13d2f` ne sont pas présents dans l’historique accessible du dépôt.
 - Le travail reste dans la branche et la PR brouillon #1. Aucun changement n’a été fusionné dans `main` ni redéployé dans cette étape.
+
+## Voix des encouragements — 24 octobre 2026
+- La fonction de félicitations accepte maintenant le texte réellement affiché à l’enfant : la voix prononce le feedback visible au lieu d’ajouter une seconde phrase aléatoire.
+- Correction appliquée aux réussites de comptage, lecture, calcul mental et construction de phrases ; cache PWA renouvelé en `rose-leon-v107`.
+- Tests automatisés adaptés pour vérifier ce comportement. Résultat GitHub Actions et essai Safari iPhone à confirmer avant de déclarer la correction validée.
