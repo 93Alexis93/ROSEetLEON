@@ -359,3 +359,12 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Les compléments à 100 mélangent désormais nombres ronds et nombres avec unités (par exemple 37, 64 ou 82), avec un indice adapté pour passer par la dizaine suivante.
 - L’unicité est garantie au niveau d’une série de jeu, pas entre toutes les sessions futures ni sur tous les appareils.
 - Icône iPhone : la photo exacte approuvée précédemment n’est pas disponible comme fichier source récupérable. Le PNG vectoriel actuel n’est donc pas garanti identique à cette photo ; demander à l’utilisateur de renvoyer l’image avant de prétendre à une correspondance exacte.
+
+
+## Ordre des retours vocaux et guide de choix — 24 octobre 2026
+- [x] Après une bonne réponse, les défis de maths, lecture et jeux de Rose gardent la question terminée à l’écran et annoncent le bravo avant de proposer « Question suivante » ou « Terminer ».
+- [x] Les réponses de la question terminée sont désactivées après réussite pour éviter les doubles validations.
+- [x] Ajout d’un guide vocal accessible depuis les espaces de Léon et Rose : le guide lit les choix, puis l’enfant choisit entre trois familles d’activités adaptées à son univers.
+- [x] Les retours vocaux des éléments détachés de l’écran sont ignorés pour éviter qu’un ancien bravo soit annoncé après une nouvelle question.
+- [x] Cache PWA renouvelé en `rose-leon-v70`.
+- [ ] Résultat des tests GitHub Actions à confirmer ; essai audio réel sur Safari iPhone nécessaire pour vérifier le rythme et la voix.
