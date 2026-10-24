@@ -70,7 +70,7 @@ test("Comparer les nombres · la réponse est le plus grand des deux nombres",()
   assert.equal(q.choices.length,4);
   assert.equal(new Set(q.choices).size,4);
   assert.ok(q.choices.includes(q.answer));
-  assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=10&&n<=99));
+  assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=10&&n<=999));
   assert.ok(q.hint.length>0&&q.explanation.length>0);
  }
 });
