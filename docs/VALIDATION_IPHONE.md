@@ -6,7 +6,8 @@ Cette liste complète les tests automatisés. Cocher les points uniquement aprè
 - [ ] Ouvrir l’application dans Safari et entrer dans l’univers de Rose.
 - [ ] Lancer successivement couleurs, formes, lettres, sons des lettres, majuscules/minuscules, suites et syllabes.
 - [ ] Pour chaque activité à choix : répondre juste, vérifier le bravo vocal et visible, puis toucher « Question suivante ».
-- [ ] Vérifier que l’image et les choix de la nouvelle question apparaissent et que les anciens choix sont désactivés.
+- [ ] Vérifier que le nouvel énoncé et les nouveaux choix apparaissent et que les anciens choix sont désactivés.
+- [ ] Les visuels actuels sont des emojis et symboles Unicode (pas des images distantes téléchargées) : vérifier leur rendu réel sur iPhone, en particulier les couleurs, formes et suites.
 - [ ] Terminer une série complète et vérifier le message de récompense final.
 - [ ] Répondre faux une fois puis deux fois : vérifier l’aide douce, la réponse expliquée et la possibilité de continuer.
 
