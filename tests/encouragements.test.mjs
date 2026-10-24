@@ -15,7 +15,7 @@ test("Les encouragements vocaux sont variés et personnalisés pour chaque enfan
  assert.ok(rose,"La banque d'encouragements de Rose existe");
  assert.ok((leon[1].match(/"/g)||[]).length/2>=15,"Léon doit avoir au moins 15 messages variés");
  assert.ok((rose[1].match(/"/g)||[]).length/2>=15,"Rose doit avoir au moins 15 messages variés");
- for(const word of ["Mbappé","football","cerveau"]) assert.ok(leon[1].toLocaleLowerCase("fr").includes(word.toLocaleLowerCase("fr")),"Référence attendue pour Léon : "+word);
+ for(const word of ["Mbappé","ballon","cerveau"]) assert.ok(leon[1].toLocaleLowerCase("fr").includes(word.toLocaleLowerCase("fr")),"Référence attendue pour Léon : "+word);
  for(const word of ["licorne","paillettes","princesse","magique"]) assert.ok(rose[1].toLocaleLowerCase("fr").includes(word.toLocaleLowerCase("fr")),"Référence attendue pour Rose : "+word);
  assert.match(audio,/export function sessionPraise\(child,enabled=true\)/);
 });
