@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createNumberMysteryQuestion,createCompareQuestion,createSyllableQuestion,SYLLABLE_WORDS} from "../src/child/learning-lab.js";
+import {createNumberMysteryQuestion,createCompareQuestion,createSyllableQuestion,SYLLABLE_WORDS,createProgrammingQuestion} from "../src/child/learning-lab.js";
 import {readFileSync} from "node:fs";
 import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
@@ -139,4 +139,47 @@ test("Syllabes · les consignes et aides parlent de syllabes, pas de morceaux", 
  assert.match(reading,/à chaque syllabe entendue/);
  assert.match(reading,/Découper les mots en syllabes à l’oral/);
  assert.match(lab,/On cherche ensemble les syllabes du mot/);
+});
+
+
+test("Mini-programmation · les commandes mènent exactement à l’étoile et les choix sont distincts",()=>{
+ for(let i=0;i<500;i++){
+  const q=createProgrammingQuestion();
+  assert.ok(q.target.x>=1&&q.target.x<=2);
+  assert.ok(q.target.y>=1&&q.target.y<=2);
+  assert.equal(q.choices.length,3);
+  assert.equal(new Set(q.choices).size,3);
+  assert.ok(q.choices.includes(q.answer));
+  const route=q.answer.split(" ");
+  let x=0,y=0;
+  for(const symbol of route){
+   if(symbol==="➡️")x++;
+   else if(symbol==="⬇️")y++;
+   else if(symbol==="⬅️")x--;
+   else if(symbol==="⬆️")y--;
+   else assert.fail("Commande inconnue : "+symbol);
+   assert.ok(x>=0&&x<=2&&y>=0&&y<=2,"Le robot reste dans la grille.");
+  }
+  assert.deepEqual({x,y},q.target);
+  for(const option of q.choices.filter(item=>item!==q.answer)){
+   let ox=0,oy=0;
+   for(const symbol of option.split(" ")){
+    if(symbol==="➡️")ox++;
+    else if(symbol==="⬇️")oy++;
+    else if(symbol==="⬅️")ox--;
+    else if(symbol==="⬆️")oy--;
+   }
+   assert.notDeepEqual({x:ox,y:oy},q.target,"Un distracteur ne doit pas aussi atteindre l’étoile.");
+  }
+  assert.ok(q.hint.length>0&&q.explanation.length>0);
+ }
+});
+test("Mini-programmation · jeu branché dans le menu de Léon et précaché hors ligne",()=>{
+ const main=readFileSync(resolve(root,"src/main.js"),"utf8");
+ const worker=readFileSync(resolve(root,"service-worker.js"),"utf8");
+ const lab=readFileSync(resolve(root,"src/child/learning-lab.js"),"utf8");
+ assert.match(main,/programmingGame/);
+ assert.match(main,/Le petit robot programmeur/);
+ assert.match(lab,/export function programmingGame/);
+ assert.ok(worker.includes("./src/child/learning-lab.js"));
 });

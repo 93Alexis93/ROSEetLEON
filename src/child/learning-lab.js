@@ -230,3 +230,102 @@ export function roseMagicAdventure(){
  function answer(choice){if(locked)return;const scene=scenes[round],feedback=document.querySelector(".feedback");if(choice!==scene.answer){recordAnswer("rose",false);attempts++;gentleOops(getState().settings.sounds);if(feedback)feedback.textContent=attempts>=2?"La réponse magique est : "+scene.answer+". Tu peux la choisir, petite magicienne ! ✨":"Ce n’est pas grave, petite magicienne ! Écoute l’indice et essaie encore.";if(attempts>=2)speak("La réponse magique est "+scene.answer+". Tu peux la choisir, petite magicienne.",getState().settings.voice);return;}locked=true;recordAnswer("rose",true);cheer(getState().settings.sounds);if(feedback)feedback.textContent="Bravo Rose ! La magie avance grâce à toi ! ✨";successPraise("rose",getState().settings.voice,feedback?.textContent||"Bravo Rose !");document.querySelectorAll(".answer-grid button").forEach(b=>b.disabled=true);feedback?.after(button(round===total-1?"Découvrir la magie":"Continuer",()=>{round++;if(round>=total){recordSession("rose");sessionPraise("rose",getState().settings.voice);const done=card([el("div",{class:"prompt",text:"🌈 🦄 ✨"}),el("h2",{text:"Le royaume est illuminé !"}),el("p",{class:"lead",text:"Tu as retrouvé les lettres, compté les étoiles et aidé tes amis magiques."}),el("p",{class:"small",text:"✨ Badge magique de la partie : Gardienne des étoiles !" }),el("p",{class:"lead",text:pick(["🌟 Surprise magique : les étoiles dansent pour toi !","🦄 Bonus enchanté : ton imagination fait briller le royaume !","🐱 Le chat magique ronronne : mission merveilleuse !"])}),button("Rejouer l’aventure",()=>roseMagicAdventure(),"button-primary"),button("⌂ Accueil",()=>go("home"),"button-soft")]);replaceApp(screen("Bravo, Rose !",done,{home:()=>go("home")}));return;}render();},"button-primary"));}
  render();
 }
+
+
+const PROGRAM_COMMANDS = [
+ {id:"right",symbol:"➡️",dx:1,dy:0},
+ {id:"down",symbol:"⬇️",dx:0,dy:1},
+ {id:"left",symbol:"⬅️",dx:-1,dy:0},
+ {id:"up",symbol:"⬆️",dx:0,dy:-1}
+];
+function validRoutes(length){
+ const found=[];
+ function walk(route,x,y){
+  if(route.length===length){found.push({route:[...route],x,y});return;}
+  for(const command of PROGRAM_COMMANDS){
+   const nx=x+command.dx,ny=y+command.dy;
+   if(nx>=0&&nx<=2&&ny>=0&&ny<=2)walk([...route,command.id],nx,ny);
+  }
+ }
+ walk([],0,0);
+ return found;
+}
+export function createProgrammingQuestion(random=Math.random){
+ const targetX=1+Math.floor(random()*2),targetY=1+Math.floor(random()*2);
+ const correct=shuffle([...Array(targetX).fill("right"),...Array(targetY).fill("down")],random);
+ const length=correct.length;
+ const alternatives=validRoutes(length).filter(item=>item.x!==targetX||item.y!==targetY);
+ const distractors=[];
+ while(alternatives.length&&distractors.length<2){
+  const index=Math.min(alternatives.length-1,Math.floor(random()*alternatives.length));
+  const candidate=alternatives.splice(index,1)[0];
+  if(candidate.route.join(",")!==correct.join(",")&&!distractors.some(item=>item.join(",")===candidate.route.join(",")))distractors.push(candidate.route);
+ }
+ for(const item of validRoutes(length)){
+  if(distractors.length===2)break;
+  if((item.x!==targetX||item.y!==targetY)&&item.route.join(",")!==correct.join(",")&&!distractors.some(route=>route.join(",")===item.route.join(",")))distractors.push(item.route);
+ }
+ const label=route=>route.map(id=>PROGRAM_COMMANDS.find(item=>item.id===id).symbol).join(" ");
+ return {
+  target:{x:targetX,y:targetY},
+  prompt:"Le robot part de la case verte. Quelle suite de commandes l’amène sur l’étoile ?",
+  answer:label(correct),
+  choices:shuffle([correct,...distractors],random).map(label),
+  hint:"Compte les cases : va à droite pour avancer en largeur et en bas pour descendre.",
+  explanation:"Le robot doit avancer de "+targetX+" case"+(targetX>1?"s":"")+" à droite et descendre de "+targetY+" case"+(targetY>1?"s":"")+"."
+ };
+}
+export function programmingGame(){
+ document.body.className="theme-leon";
+ let round=0,locked=false,attempts=0,question;
+ const total=4,seen=new Set();
+ function generate(){
+  locked=false;attempts=0;
+  let candidate,tries=0;
+  do{candidate=createProgrammingQuestion();tries++;}
+  while(seen.has(candidate.target.x+","+candidate.target.y)&&tries<30);
+  question=candidate;seen.add(question.target.x+","+question.target.y);
+ }
+ function render(){
+  const content=card([]);
+  content.append(el("p",{class:"small",text:"Mission code "+(round+1)+" sur "+total+" · Des flèches, de la logique et pas de pression !"}));
+  content.append(el("div",{class:"progress-track",role:"progressbar","aria-label":"Progression du jeu de programmation","aria-valuemin":"0","aria-valuemax":String(total),"aria-valuenow":String(round)},el("div",{class:"progress-fill",style:"width:"+(round/total*100)+"%"})));
+  const cells=[];
+  for(let y=0;y<3;y++)for(let x=0;x<3;x++){
+   const isStart=x===0&&y===0,isTarget=x===question.target.x&&y===question.target.y;
+   cells.push(el("div",{class:"programming-cell",style:"min-height:54px;display:grid;place-items:center;border:2px solid "+(isStart?"#16865c":isTarget?"#d9a400":"#d9e2ec")+";border-radius:14px;background:"+(isStart?"#d8f7e7":isTarget?"#fff2b8":"#f4f7fb")+";font-size:26px",text:isStart?"🤖":isTarget?"⭐":"·","aria-label":isStart?"Départ":isTarget?"Étoile à atteindre":"Case vide"}));
+  }
+  content.append(el("div",{class:"programming-grid",style:"display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;max-width:230px;margin:12px auto",role:"group","aria-label":"Grille du robot"},cells));
+  content.append(el("p",{class:"lead",text:question.prompt}));
+  const answers=el("div",{class:"answer-grid"});
+  question.choices.forEach(choice=>answers.append(button(choice,()=>answer(choice),"button-soft")));
+  const feedback=el("p",{class:"feedback",role:"status","aria-live":"polite"});
+  content.append(answers,feedback,button("💡 Indice du robot",()=>{feedback.textContent=question.hint;speak(question.hint,getState().settings.voice);},"button-soft"),button("⌂ Accueil",()=>go("home"),"icon-button"));
+  replaceApp(screen("Le petit robot programmeur",content,{eyebrow:"Logique · commandes · repérage",home:()=>go("home")}));
+  speak(question.prompt,getState().settings.voice);
+ }
+ function answer(choice){
+  if(locked)return;
+  const feedback=document.querySelector(".feedback");
+  if(choice!==question.answer){
+   recordAnswer("leon",false);attempts++;gentleOops(getState().settings.sounds);
+   if(feedback)feedback.textContent=attempts>=2?"Le bon programme est : "+question.answer+". Observe le départ et l’étoile, puis choisis-le. 🤖":"Bien essayé ! Imagine le robot qui suit chaque flèche, puis recommence.";
+   speak(attempts>=2?"Le bon programme est "+question.answer+". Choisis-le pour continuer.":"Bien essayé ! Observe la grille et recommence.",getState().settings.voice);
+   return;
+  }
+  locked=true;recordAnswer("leon",true);cheer(getState().settings.sounds);
+  if(feedback)feedback.textContent="Bravo ! "+question.explanation+" 🤖";
+  successPraise("leon",getState().settings.voice,feedback?.textContent||"Bravo ! Le robot a trouvé son chemin.");
+  document.querySelectorAll(".answer-grid button").forEach(b=>b.disabled=true);
+  feedback?.after(button(round===total-1?"Terminer la mission":"Mission suivante",()=>{
+   round++;
+   if(round>=total){
+    recordSession("leon");sessionPraise("leon",getState().settings.voice);
+    const done=card([el("div",{class:"prompt",text:"🤖 ⭐ 🏆"}),el("h2",{text:"Mission code réussie !"}),el("p",{class:"lead",text:"Tu as utilisé des instructions, observé une grille et trouvé des chemins."}),el("p",{class:"small",text:"Badge de la partie : Petit programmeur !"}),button("Rejouer",()=>programmingGame(),"button-primary"),button("⌂ Accueil",()=>go("home"),"button-soft")]);
+    replaceApp(screen("Bravo, programmeur !",done,{home:()=>go("home")}));return;
+   }
+   generate();render();
+  },"button-primary"));
+ }
+ generate();render();
+}

@@ -8,7 +8,7 @@ import { parentGate, parentDashboard, crisis } from "./parent/parent.js";
 import { printComingSoon } from "./parent/printables.js";
 import { speak } from "./voice.js";
 import { unlockAudio } from "./audio.js";
-import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame, footballAdventure, roseMagicAdventure } from "./child/learning-lab.js";
+import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame, footballAdventure, roseMagicAdventure, programmingGame } from "./child/learning-lab.js";
 import { guidedPause } from "./child/pause.js";
 import { calculationMenu } from "./child/calcul.js";
 import { sentenceBuilder } from "./child/sentence-builder.js";
@@ -76,7 +76,8 @@ function guidedChoice(child) {
   ] : [
     ["⚽ Je veux réfléchir", "Défis de maths", () => startActivity("leon")],
     ["📚 Je veux lire", "Mots, phrases et histoires", () => readingMenu()],
-    ["🧮 Je veux calculer", "Calcul mental et petits problèmes", () => calculationMenu()]
+    ["🧮 Je veux calculer", "Calcul mental et petits problèmes", () => calculationMenu()],
+    ["🤖 Je veux programmer", "Guider un robot avec des flèches", () => programmingGame()]
   ];
   options.forEach(([label, description, action]) => content.append(card([
     el("h2", { text: label }),
@@ -105,6 +106,7 @@ const EXERCISES = [
   {child:"leon",name:"Comparer les nombres",keywords:"plus grand petit comparer centaines dizaines",stars:2,description:"Comparer des nombres à deux ou trois chiffres.",run:()=>compareNumbers()},
   {child:"leon",name:"Suites logiques",keywords:"logique suite motif symbole nombres régularité",stars:2,description:"Repérer une règle et trouver le symbole ou le nombre suivant.",run:()=>sequenceGame()},
   {child:"leon",name:"Géométrie des champions",keywords:"géométrie formes côtés triangle carré cercle rectangle segment règle",stars:1,description:"Reconnaître les formes et découvrir comment tracer un segment.",run:()=>geometryGame()},
+  {child:"leon",name:"Le petit robot programmeur",keywords:"programmation coder robot flèches commandes logique",stars:2,description:"Donner des instructions au robot pour atteindre une étoile.",run:()=>programmingGame()},
   {child:"leon",name:"L’aventure du match",keywords:"football histoire lecture compréhension aventure équipe but",stars:2,description:"Lis une aventure de football et fais avancer l’histoire avec tes réponses.",run:()=>footballAdventure()},
   {child:"leon",name:"Phrases à reconstruire",keywords:"lecture mots phrase syntaxe remettre ordre",stars:2,description:"Remets les mots dans l’ordre pour former une phrase.",run:()=>sentenceBuilder()},
   {child:"leon",name:"Calcul mental",keywords:"calcul additions soustractions compléments problèmes",stars:2,description:"Calculer et résoudre des petits problèmes.",run:()=>calculationMenu()},
@@ -192,6 +194,7 @@ function childHome(child) {
       }), "child-tile child-tile-alt"),
       button("🔢\nSuites logiques\nTrouve le prochain symbole ou nombre", chooseExercise("Léon, observe les suites et trouve le prochain symbole ou nombre.", () => { unlockAudio(); sequenceGame(); }), "child-tile child-tile-alt"),
       button("📐\nGéométrie des champions\nFormes, côtés et règle", chooseExercise("Léon, observe les formes, compte leurs côtés et découvre comment tracer un segment avec une règle.", () => { unlockAudio(); geometryGame(); }), "child-tile child-tile-alt"),
+      button("🤖\nPetit robot programmeur\nDonne les bonnes instructions", chooseExercise("Léon, observe la grille et choisis les flèches qui guident le robot jusqu’à l’étoile.", () => { unlockAudio(); programmingGame(); }), "child-tile child-tile-alt"),
       button("🏆\nL’aventure du match\nLis et fais avancer ton équipe", chooseExercise("Léon, lis une aventure de football et choisis les bonnes décisions pour aider ton équipe.", () => { unlockAudio(); footballAdventure(); }), "child-tile child-tile-alt"),
       button("🧩\nPhrases à reconstruire\nRemets les mots dans le bon ordre", chooseExercise("Léon, remets les mots dans le bon ordre pour former une phrase.", () => { unlockAudio(); sentenceBuilder(); }), "child-tile child-tile-alt"),
       button("🧮\nCalcul mental\nCalculs et problèmes à résoudre", chooseExercise("Léon, fais les calculs dans ta tête et résous les petits problèmes.", () => {

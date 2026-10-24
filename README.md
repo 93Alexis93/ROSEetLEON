@@ -11,4 +11,4 @@ Dans le dépôt : Settings → Pages → Build and deployment : Deploy from a br
 Données stockées dans le navigateur. Aucun compte, serveur applicatif, CDN, traceur ni publicité. Exporter régulièrement la sauvegarde JSON depuis l'espace parent.
 
 ## Technique
-HTML, CSS et JavaScript natifs en modules ES. Aucun build ni dépendance npm. Le mode hors ligne nécessite un premier chargement en HTTPS.
+HTML, CSS et JavaScript natifs en modules ES. Aucun build ni dépendance npm. Jeux : maths, lecture, aventures, robot programmeur et fiches A4. Hors ligne après un premier chargement HTTPS.

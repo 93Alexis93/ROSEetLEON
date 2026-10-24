@@ -438,10 +438,10 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Cache PWA : `rose-leon-v105`.
 
 
-## Référence Git — 24 octobre 2026
-- La référence effective de travail est le `main` actuel au commit `0e038184eb42e8ed3c91c8f3c9c007777cdfb966`.
-- La branche `refonte-ux-ui-impro-lab` est basée directement sur cette référence, sans commit de retard ; les anciens identifiants `6eef26ef` et `a1c13d2f` ne sont pas présents dans l’historique accessible du dépôt.
-- Le travail reste dans la branche et la PR brouillon #1. Aucun changement n’a été fusionné dans `main` ni redéployé dans cette étape.
+## Référence Git — état corrigé au 24 octobre 2026
+- La PR #1 a été squash-fusionnée dans `main` au commit `c11868ce53e72c053220e0093ceaac349fe0cb07` ; les modifications de validation ultérieures sont aussi directement sur `main`.
+- Aucun nouveau travail n’est à faire dans une branche : la référence active est `main`.
+- Le déploiement Pages est confirmé au commit `9b5aab72faac2793bf6a3a631a4e70befc67e1fe` (run 643). Les validations manuelles sur iPhone restent séparées de la CI.
 
 ## Voix des encouragements — 24 octobre 2026
 - La fonction de félicitations accepte maintenant le texte réellement affiché à l’enfant : la voix prononce le feedback visible au lieu d’ajouter une seconde phrase aléatoire.
@@ -466,3 +466,13 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [ ] Contrôle d’impression A4 depuis Safari : fiche seule, fiche + corrigé, marges et absence de pages blanches.
 - [ ] Ces vérifications nécessitent un navigateur/appareil réel ; la CI ne les simule pas et elles ne sont pas déclarées effectuées.
 - Liste pratique : `docs/VALIDATION_IPHONE.md`.
+
+
+## Lot complémentaire — mini-programmation et contrôle final (24 octobre 2026)
+- Ajout d’un jeu court de programmation visuelle pour Léon : guider un robot sur une grille 3×3 à l’aide de flèches, avec quatre missions, trois propositions distinctes, indice et aide après deux erreurs.
+- Le jeu utilise les données et la voix déjà présentes ; aucune ressource distante ni dépendance nouvelle. Il est accessible depuis le menu de recherche d’exercices, le menu de défis et le guide vocal, et reste inclus hors ligne dans le module de laboratoire.
+- Tests ajoutés pour vérifier sur des centaines de questions que le bon parcours atteint l’étoile, reste dans la grille et qu’aucun distracteur n’atteint aussi la cible.
+- README maintenu à 15 lignes maximum.
+- Cache PWA renouvelé en `rose-leon-v109`.
+- Les tests et le déploiement de cette livraison doivent être vérifiés sur le SHA produit avant de considérer la livraison automatisée terminée.
+- À faire impérativement sur iPhone : parcours réel des activités, voix/sons, persistance, mode avion après premier chargement HTTPS, impression A4 et rendu de l’icône ; voir [la checklist](docs/VALIDATION_IPHONE.md).
