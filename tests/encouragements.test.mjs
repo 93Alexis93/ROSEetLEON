@@ -59,12 +59,20 @@ test("Les encouragements affichés sont lus à voix haute", () => {
  const calcul = readFileSync(resolve(root, "src/child/calcul.js"), "utf8");
  assert.match(rose, /speak\(f\.textContent,getState\(\)\.settings\.voice\)/,
   "Les retours affichés dans les jeux de Rose doivent être prononcés");
- assert.match(rose, /speak\(praise,getState\(\)\.settings\.voice\)/,
-  "La félicitation affichée à Rose doit être prononcée");
- assert.match(reading, /speak\(feedbackText, getState\(\)\.settings\.voice\)/,
-  "Les encouragements de lecture doivent être prononcés");
- assert.match(phrases, /speak\(feedback\.textContent, getState\(\)\.settings\.voice\)/,
-  "Les encouragements de phrases doivent être prononcés");
- assert.match(calcul, /speak\(feedback\.textContent, getState\(\)\.settings\.voice\)/,
-  "Les encouragements de calcul doivent être prononcés");
+ assert.match(rose, /successPraise\("rose",getState\(\)\.settings\.voice,praise\)/,
+  "La félicitation affichée à Rose doit être prononcée sans ajouter un second message");
+ assert.match(reading, /successPraise\(child, getState\(\)\.settings\.voice, feedbackText\)/,
+  "Le message de lecture affiché doit être prononcé");
+ assert.match(phrases, /successPraise\("leon", getState\(\)\.settings\.voice, feedback\.textContent\)/,
+  "Le message de phrase affiché doit être prononcé");
+ assert.match(calcul, /successPraise\("leon", getState\(\)\.settings\.voice, feedback\.textContent\)/,
+  "Le message de calcul affiché doit être prononcé");
+});
+
+
+test("La réussite lit le message affiché sans lancer une deuxième félicitation", () => {
+ const activities = readFileSync(resolve(root, "src/child/activities.js"), "utf8");
+ assert.match(audio, /visibleMessage=null/);
+ assert.match(activities, /successPraise\(child, getState\(\)\.settings\.voice, feedback\?\.textContent/);
+ assert.doesNotMatch(activities, /successPraise\(child,getState\(\)\.settings\.voice\);[\s\S]{0,500}speak\(feedback/);
 });
