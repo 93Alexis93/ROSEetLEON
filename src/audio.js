@@ -16,7 +16,7 @@ function chooseFreshPraise(list,last,key){
  last[key]=index;
  return list[index];
 }
-export function successPraise(child,enabled=true,visibleMessage=null){const key=child==="rose"?"rose":"leon";const list=key==="rose"?ROSE_PRAISES:LEON_PRAISES;const message=typeof visibleMessage==="string"&&visibleMessage.trim()?visibleMessage:chooseFreshPraise(list,lastPraise,key);speak(message,enabled);return message;}
+export function successPraise(child,enabled=true,visibleMessage=null){const key=child==="rose"?"rose":"leon";const list=key==="rose"?ROSE_PRAISES:LEON_PRAISES;const message=typeof visibleMessage==="string"&&visibleMessage.trim()?visibleMessage:chooseFreshPraise(list,lastPraise,key);const brief=message.split(/(?<=[.!?])\\s+/)[0].trim();const words=brief.split(/\\s+/);speak(words.length>9?words.slice(0,9).join(" "):brief,enabled);return message;}
 const LEON_SESSION_PRAISES=[
 "Bien joué, Léon ! Fin du match : tu as entraîné ton cerveau comme un champion. Le plus important, c’est d’avoir cherché !",
 "Le coach est fier de toi : tu as testé des idées et gardé le cap jusqu’au coup de sifflet final !",
