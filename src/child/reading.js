@@ -279,6 +279,7 @@ function startReading(mode) {
   let hintCount = 0;
   let questionHadError = false;
   let currentQuestion;
+  const seenQuestions = new Set();
   const labels = {
     flash: "Mots-éclairs",
     mystery: "Mots-mystères",
@@ -289,7 +290,11 @@ function startReading(mode) {
   };
 
   const generate = () => {
-    currentQuestion = question(mode);
+    let candidate, attempts = 0;
+    do { candidate = question(mode); attempts++; }
+    while (seenQuestions.has(candidate.prompt) && attempts < 100);
+    currentQuestion = candidate;
+    seenQuestions.add(currentQuestion.prompt);
     hintCount = 0;
     questionHadError = false;
   };
