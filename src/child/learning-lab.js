@@ -1,7 +1,7 @@
 import {el,button,screen,card,replaceApp} from "../ui.js";
 import {getState,recordAnswer,recordSession} from "../store.js";
 import {speak} from "../voice.js";
-import {cheer,gentleOops,successPraise} from "../audio.js";
+import {cheer,gentleOops,successPraise,sessionPraise} from "../audio.js";
 import {go} from "../router.js";
 
 const pick=(items,random=Math.random)=>items[Math.floor(random()*items.length)];
@@ -141,7 +141,7 @@ function launch(child,mode="default"){
   const buttons=[...document.querySelectorAll(".answer-grid button")];buttons.forEach(b=>b.disabled=true);
   const next=button(round===total-1?"Terminer":"Continuer",()=>{
    round++;
-   if(round>=total){recordSession(child);const done=card([el("div",{class:"prompt",text:isRose?"🌟 Bravo pour ton écoute !":"🔎 Enquête réussie !"}),el("p",{class:"lead",text:"Tu as pris le temps d’écouter, de réfléchir et d’essayer."}),el("p",{class:"small",text:"Tu peux recommencer plus tard ou choisir une autre activité."}),button("Rejouer",()=>launch(child),"button-primary"),button("⌂ Accueil",()=>go("home"),"button-soft")]);replaceApp(screen("Défi terminé",done,{home:()=>go("home")}));return;}
+   if(round>=total){recordSession(child);sessionPraise(child,getState().settings.voice);const done=card([el("div",{class:"prompt",text:isRose?"🌟 Bravo pour ton écoute !":"🔎 Enquête réussie !"}),el("p",{class:"lead",text:"Tu as pris le temps d’écouter, de réfléchir et d’essayer."}),el("p",{class:"small",text:"Tu peux recommencer plus tard ou choisir une autre activité."}),button("Rejouer",()=>launch(child),"button-primary"),button("⌂ Accueil",()=>go("home"),"button-soft")]);replaceApp(screen("Défi terminé",done,{home:()=>go("home")}));return;}
    generate();render();
   },"button-primary");
   feedback?.after(next);
