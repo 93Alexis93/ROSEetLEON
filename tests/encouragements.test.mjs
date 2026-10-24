@@ -78,14 +78,14 @@ test("La réussite lit le message affiché sans lancer une deuxième félicitati
 });
 
 
-test("Rose · les bonnes réponses utilisent les éléments de l’écran rendu", () => {
+test("Rose · les bonnes réponses utilisent les éléments de la carte active", () => {
  const rose = readFileSync(resolve(root, "src/child/rose-activities.js"), "utf8");
- assert.match(rose, /const feedback=document\.querySelector\("\.feedback"\);const answerGrid=document\.querySelector\("\.answer-grid"\);if\(!feedback\|\|!answerGrid\)return;/,
-  "Le traitement de la bonne réponse doit retrouver les éléments réellement affichés.");
+ assert.match(rose, /const feedback=activeCard\?\.querySelector\("\.feedback"\);const answerGrid=activeCard\?\.querySelector\("\.answer-grid"\);if\(!feedback\|\|!answerGrid\)/,
+  "Le traitement doit cibler la carte active du jeu, sans dépendre d’un sélecteur global.");
  assert.match(rose, /answerGrid\.querySelectorAll\("button"\)/,
   "Les choix de la question réussie doivent être désactivés sans variable hors portée.");
- assert.match(rose, /showGameNext\(next, feedback\)/,
-  "Le bouton de progression doit rester visible sans défilement.");
+ assert.match(rose, /activeCard\.insertBefore\(next,controls\)/,
+  "Le bouton suivant doit être inséré dans la carte active pour rester visible sur iPhone.");
 });
 
 test("Les félicitations vocales ordinaires sont limitées à une phrase courte", () => {
