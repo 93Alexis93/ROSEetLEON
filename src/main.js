@@ -17,95 +17,124 @@ function home() {
   const content = el("div", { class: "stack home-stack" });
   const welcome = el("section", { class: "home-hero", "aria-labelledby": "home-welcome" }, [
     el("div", { class: "home-sparkles", "aria-hidden": "true", text: "✨ ⭐ ✨" }),
-    el("p", { class: "home-kicker", text: "Bienvenue dans votre terrain de jeu !" }),
-    el("h2", { id: "home-welcome", class: "home-title", text: "À toi de jouer !" }),
+    el("p", { class: "home-kicker", text: "Le club des petits explorateurs" }),
+    el("h2", { id: "home-welcome", class: "home-title", text: "Prêts pour l’aventure ?" }),
     el("p", {
       class: "home-description",
-      text: "Des défis rigolos, des découvertes et plein de petites victoires. Choisis ton univers !"
+      text: "Deux univers, plein de surprises et des défis à relever à ton rythme !"
     }),
-    el("div", { class: "home-trail", "aria-hidden": "true", text: "🎈　🌈　🚀　🪄" })
+    el("div", { class: "home-trail", "aria-hidden": "true", text: "🌈　🚀　🪄　⭐" })
   ]);
   const choices = el("div", { class: "choices home-choices", "aria-label": "Choisis ton univers" });
   choices.append(
-    button("⚽\nLéon\nLes défis champions", () => {
+    button("⚽\nLÉON\nLes missions des champions\nMaths · logique · lecture", () => {
       unlockAudio();
       go("leon");
     }, "big-choice home-leon"),
-    button("🦄\nRose\nLes jeux enchantés", () => {
+    button("🦄\nROSE\nLe royaume enchanté\nCouleurs · lettres · découvertes", () => {
       unlockAudio();
       go("rose");
     }, "big-choice home-rose")
   );
   const promise = el("div", { class: "home-promise" }, [
     el("span", { class: "home-promise-icon", "aria-hidden": "true", text: "💛" }),
-    el("p", { text: "Ici, on essaie, on apprend et on recommence. Chaque petit progrès compte !" })
+    el("div", {}, [
+      el("strong", { text: "Ici, chacun progresse à son rythme" }),
+      el("p", { text: "On essaie, on découvre et on recommence. Pas de compétition !" })
+    ])
   ]);
   content.append(
     welcome,
     choices,
     promise,
     el("div", { class: "home-footer" }, [
-      el("span", { class: "small", text: "🌱 À ton rythme · Sans compétition" }),
+      el("span", { class: "small", text: "🌱 Chaque petit progrès compte" }),
       button("🔒 Espace parent", () => go("gate"), "icon-button")
     ])
   );
   replaceApp(screen("Rose & Léon", content, {
-    eyebrow: "Le club des petits explorateurs"
+    eyebrow: "Choisis ton aventure"
   }));
 }
 
 function childHome(child) {
   document.body.className = "theme-" + child;
   const rose = child === "rose";
-  const content = card([
-    el("p", {
-      class: "lead",
-      text: rose ? "Choisissons un jeu magique !" : "Prêt pour un petit défi ?"
-    }),
-    el("div", { class: "prompt", text: rose ? "🌈 🦄 ✨" : "⚽ 🥅 ⭐" }),
-    button(rose ? "Choisir un jeu" : "Choisir un défi", () => {
-      unlockAudio();
-      if (rose) roseMenu();
-      else startActivity(child);
-    }, "button-primary"),
-    ...(!rose ? [
-      button("📚 Lecture", () => {
+  const content = el("div", { class: "stack child-hub" });
+  const hero = el("section", { class: "child-hero child-hero-" + child }, [
+    el("div", { class: "child-hero-art", "aria-hidden": "true", text: rose ? "🦄 🌈 ✨" : "⚽ 🏆 ⭐" }),
+    el("p", { class: "child-hero-kicker", text: rose ? "Le royaume des merveilles" : "Le terrain des champions" }),
+    el("h2", { class: "child-hero-title", text: rose ? "Quelle magie vas-tu découvrir ?" : "Prêt pour ta prochaine mission ?" }),
+    el("p", { class: "child-hero-copy", text: rose
+      ? "Compte, observe, écoute et joue avec les lettres de ton prénom !"
+      : "Réfléchis, calcule, lis et marque des points… surtout dans ta tête !" })
+  ]);
+  const section = el("section", { class: "child-activities", "aria-label": rose ? "Jeux de Rose" : "Défis de Léon" }, [
+    el("div", { class: "child-section-heading" }, [
+      el("span", { class: "child-section-sticker", "aria-hidden": "true", text: rose ? "🎀" : "🚀" }),
+      el("div", {}, [
+        el("h3", { text: rose ? "Choisis un jeu magique" : "Choisis ta mission" }),
+        el("p", { class: "small", text: rose ? "Des petites découvertes, sans se presser." : "À toi de choisir ton prochain défi." })
+      ])
+    ])
+  ]);
+  const tiles = el("div", { class: "child-tile-grid" });
+  if (rose) {
+    tiles.append(
+      button("🦄\nJeux enchantés\nCompter, couleurs, formes et lettres", () => {
         unlockAudio();
-        readingMenu();
-      }, "button-soft"),
-      button("🔎 Nombre mystère", () => {
-        unlockAudio();
-        numberMystery();
-      }, "button-soft"),
-      button("⚖️ Le plus grand nombre", () => {
-        unlockAudio();
-        compareNumbers();
-      }, "button-soft"),
-      button("🧮 Calcul mental et problèmes", () => {
-        unlockAudio();
-        calculationMenu();
-      }, "button-soft")
-    ] : [
-      button("👏 Les syllabes", () => {
+        roseMenu();
+      }, "child-tile child-tile-main"),
+      button("👏\nSyllabes en rythme\nÉcoute les mots et frappe dans tes mains", () => {
         unlockAudio();
         syllableGame();
-      }, "button-soft")
-    ]),
+      }, "child-tile child-tile-alt")
+    );
+  } else {
+    tiles.append(
+      button("⚽\nDéfis de maths\nNombres, calculs et petits problèmes", () => {
+        unlockAudio();
+        startActivity(child);
+      }, "child-tile child-tile-main"),
+      button("📚\nJeux de lecture\nMots, phrases et petites histoires", () => {
+        unlockAudio();
+        readingMenu();
+      }, "child-tile child-tile-alt"),
+      button("🔎\nNombre mystère\nTrouve le nombre caché", () => {
+        unlockAudio();
+        numberMystery();
+      }, "child-tile child-tile-alt"),
+      button("⚖️\nLe plus grand nombre\nCompare et choisis le bon nombre", () => {
+        unlockAudio();
+        compareNumbers();
+      }, "child-tile child-tile-alt"),
+      button("🧮\nCalcul mental\nCalculs et problèmes à résoudre", () => {
+        unlockAudio();
+        calculationMenu();
+      }, "child-tile child-tile-alt")
+    );
+  }
+  section.append(tiles);
+  const gentle = el("div", { class: "child-gentle-note" }, [
+    el("span", { "aria-hidden": "true", text: "💛" }),
+    el("p", { text: rose ? "Tu peux prendre ton temps. Chaque essai est une découverte !" : "Pas besoin d’aller vite : réfléchir, essayer et recommencer, c’est déjà gagner !" })
+  ]);
+  const tools = el("div", { class: "child-bottom-actions" }, [
     button("🌿 Petite pause", () => guidedPause(child), "button-warm"),
     button("🔊 Réécouter", () => speak(
       rose
-        ? "Choisis un jeu : compter des images, découvrir les couleurs, les formes, les lettres ou les syllabes."
-        : "Choisis un défi de maths, le nombre mystère, le plus grand nombre, le calcul mental ou la lecture.",
+        ? "Choisis un jeu magique : compter, découvrir les couleurs, les formes, les lettres ou les syllabes."
+        : "Choisis une mission : les défis de maths, la lecture, le nombre mystère, le plus grand nombre ou le calcul mental.",
       getState().settings.voice
-    ), "button-soft"),
-    button("⌂ Accueil", () => go("home"), "icon-button")
+    ), "button-soft")
   ]);
+  content.append(hero, section, gentle, tools);
   replaceApp(screen(rose ? "Bonjour Rose !" : "Salut Léon !", content, {
-    eyebrow: rose ? "Univers magique" : "Univers ballon",
+    eyebrow: rose ? "Ton univers magique" : "Ton club de champions",
     home: () => go("home")
   }));
   speak(
-    rose ? "Bonjour Rose ! Choisis un petit jeu magique." : "Salut Léon ! Choisis un défi : tu peux faire des maths ou lire.",
+    rose ? "Bonjour Rose ! Quelle magie vas-tu découvrir aujourd’hui ?" : "Salut Léon ! Prêt pour ta prochaine mission ?",
     getState().settings.voice
   );
 }
