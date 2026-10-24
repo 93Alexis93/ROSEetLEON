@@ -93,7 +93,7 @@ function numeration(d, random) {
 }
 
 function multiplication(d, random) {
-  const tables = d === 1 ? [2, 5, 10] : [2, 3, 4, 5, 10];
+  const tables = d === 1 ? [2, 5, 10] : d === 2 ? [2, 3, 4, 5, 10] : [2, 3, 4, 5, 6, 7, 8, 9, 10];
   const a = tables[int(0, tables.length - 1, random)], b = int(2, d === 1 ? 5 : 10, random);
   const answer = a * b;
   return makeQuestion("multiplication", d, `${a} × ${b} = ?`, answer,
@@ -137,7 +137,7 @@ function measures(d, random) {
     return makeQuestion("measures", d, `Tu as ${euros} € et tu reçois encore ${coins} €. Combien as-tu ?`, `${answer} €`,
       [`${answer + 1} €`, `${euros} €`, `${Math.max(0, euros - coins)} €`], "Additionne les deux sommes d'argent.", `${euros} € + ${coins} € = ${answer} €.`, random);
   }
-  const hours = int(1, 10, random), half = random() < 0.5, minutes = half ? 30 : 0;
+  const hours = int(1, d === 1 ? 10 : 12, random), half = random() < 0.5, minutes = half ? 30 : 0;
   const answer = `${hours} h${minutes ? "30" : "00"}`;
   const nextHour = hours === 12 ? 1 : hours + 1;
   const previousHour = hours === 1 ? 12 : hours - 1;
