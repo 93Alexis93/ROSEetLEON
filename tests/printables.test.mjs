@@ -35,3 +35,31 @@ test("Impression · les ressources de fiche restent disponibles hors ligne", () 
   assert.ok(worker.includes("./src/parent/printables.js"));
   assert.ok(worker.includes("./assets/css/print.css"));
 });
+
+
+test("Impression · les corrigés correspondent aux exercices proposés", () => {
+  for (const fragment of [
+    "4 sachets", "3 billes", "4 × 3 = 12 billes",
+    "5 cartes", "4 de plus", "5 + 4 = 9 cartes",
+    "3 équipes de 4 enfants", "3 × 4 = 12 enfants"
+  ]) assert.ok(printables.includes(fragment), "Énoncé ou corrigé absent : " + fragment);
+  for (const fragment of [
+    "CAT", "chat", "SUN", "soleil", "BOOK", "livre",
+    "DOG", "chien", "BALL", "ballon"
+  ]) assert.ok(printables.includes(fragment), "Association anglais/français absente : " + fragment);
+});
+
+test("Impression · la fiche émotions ne transforme pas les ressentis en réponses à noter", () => {
+  assert.match(printables, /Plusieurs réponses sont possibles/);
+  assert.match(printables, /Tu peux aussi ne pas savoir, ou ressentir autre chose/);
+  assert.match(printables, /respecter son choix de ne pas répondre/);
+});
+
+test("Impression · chaque fiche proposée est reliée à un contenu imprimable et à un repère adulte", () => {
+  for (const id of ["rose-letters", "rose-shapes", "rose-paths", "rose-emotions", "leon-multiplication", "leon-problems", "leon-english", "leon-logic"]) {
+    assert.ok(printables.includes('id:"' + id + '"'), "Identifiant de fiche manquant : " + id);
+    assert.ok(printables.includes('answerKey(id)'), "Le parcours doit préparer un repère de correction.");
+  }
+  assert.match(printables, /function showWorksheet\(id\)/);
+  assert.match(printables, /const wrapper=el\("div",\{class:"print-workspace"\}\)/);
+});
