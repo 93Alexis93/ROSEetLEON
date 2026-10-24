@@ -305,3 +305,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Rose : banque du jeu des syllabes portée de 30 à 48 mots illustrés, avec des mots d’une, deux ou trois syllabes ; comptage étendu de 1 à 8 et consigne du menu mise à jour.
 - Tests renforcés pour vérifier une plus grande diversité des phrases et mini-textes et la plage complète du comptage. Cache PWA renouvelé à v60.
 - À vérifier après exécution CI : cohérence des questions, tests de génération et publication Pages. Les essais réels avec Rose et Léon restent nécessaires pour valider la difficulté et la prononciation.
+
+- Maths de Léon : le niveau avancé des tables couvre désormais les tables de 2 à 10, et les exercices d’horloge peuvent aller jusqu’à 12 h. Test dédié adapté ; cache PWA renouvelé à v61.
