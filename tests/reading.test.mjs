@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createReadingQuestion, READING_SYLLABLES, shuffleReadingItems } from "../src/child/reading.js";
 
-const modes = ["flash", "mystery", "sentence", "text"];
+const modes = ["flash", "mystery", "sentence", "text", "rhyme", "syllables"];
 
 test("les quatre formats de lecture sont générés", () => {
   for (const mode of modes) {
@@ -86,4 +86,23 @@ test("Lecture · le mélange conserve chaque choix et utilise un tirage borné",
   assert.deepEqual(shuffled, ["b", "c", "d", "a"]);
   assert.deepEqual(input, ["a", "b", "c", "d"]);
   assert.equal(new Set(shuffled).size, input.length);
+});
+
+test("les nouveaux jeux de sons proposent des réponses cohérentes", () => {
+  for (let i = 0; i < 300; i++) {
+    const rhyme = createReadingQuestion("rhyme");
+    assert.match(rhyme.prompt, /Quel mot rime avec/);
+    assert.equal(rhyme.choices.length, 4);
+    assert.equal(new Set(rhyme.choices).size, 4);
+    assert.ok(rhyme.choices.includes(rhyme.answer));
+    assert.ok(rhyme.explanation.includes(rhyme.answer));
+
+    const syllables = createReadingQuestion("syllables");
+    const match = syllables.prompt.match(/« ([^»]+) »/);
+    assert.ok(match, syllables.prompt);
+    assert.equal(Number(syllables.answer), READING_SYLLABLES[match[1]].split("-").length);
+    assert.equal(syllables.choices.length, 4);
+    assert.equal(new Set(syllables.choices).size, 4);
+    assert.ok(syllables.choices.includes(syllables.answer));
+  }
 });
