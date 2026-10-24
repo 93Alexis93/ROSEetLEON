@@ -149,3 +149,10 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 - Les tests automatiques utilisent un groupe de concurrence par référence et annulent les exécutions précédentes du même groupe lorsqu’un nouveau commit arrive ; cela évite de gaspiller des runners sur des validations obsolètes sans prétendre résoudre une indisponibilité générale des runners.
 
 - Les jeux de Rose proposent désormais huit couleurs et sept formes, tout en conservant les grandes cibles tactiles et les consignes orales simples.
+
+
+## Accueil enfant — 24 octobre 2026
+- L’accueil doit donner envie d’explorer en quelques secondes : une invitation courte, deux choix visuellement distincts et de grandes cibles tactiles.
+- La décoration soutient la compréhension des univers (ballon pour Léon, magie pour Rose) sans ajouter de dépendance réseau ni d’image lourde.
+- Garder un message de progression bienveillant ; aucune comparaison, pression temporelle ou promesse de récompense n’est ajoutée.
+- Le CSS est ajouté à la feuille locale déjà chargée pour préserver le fonctionnement hors ligne.
