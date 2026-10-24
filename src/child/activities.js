@@ -248,7 +248,7 @@ export function startActivity(child, domain = null) {
       generate();
       render();
       const feedback = document.querySelector(".feedback");
-      if (feedback) feedback.textContent = "Oui ! Tu as persévéré, bravo !";
+      if (feedback) feedback.textContent = pick(["Oui, bien joué ! Tu as trouvé !", "Super réflexion ! Tu avances dans le défi.", "Bravo, tu as bien observé !", "Bien trouvé ! Une nouvelle étape est réussie.", "Youpi, tu as trouvé la bonne réponse !"]);
       return;
     }
 
@@ -256,9 +256,9 @@ export function startActivity(child, domain = null) {
     tries++;
     const feedback = document.querySelector(".feedback");
     if (feedback) {
-      feedback.textContent = tries % 2
-        ? "Presque ! Essayons ensemble."
-        : "Tu peux prendre ton temps. On réessaie !";
+      feedback.textContent = pick(tries % 2
+        ? ["Pas loin ! On regarde encore ensemble.", "Tu y es presque. Essaie une autre fois !", "Ce n’est pas la bonne réponse pour le moment. On réfléchit ensemble."]
+        : ["Prends ton temps, tu peux retenter.", "Chaque essai aide à apprendre. On recommence ?", "Pas de souci, on cherche encore tranquillement !"]);
     }
     if (tries >= 3) {
       const pause = button("Faire une petite pause", () => {
