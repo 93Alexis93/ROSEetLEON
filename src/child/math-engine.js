@@ -111,7 +111,9 @@ function problems(d, random) {
     "livres", "jetons", "crayons", "figurines", "fleurs", "pommes", "ballons",
     "cartes de foot", "perles", "dinosaures", "voitures miniatures", "pièces",
     "images", "coquilles", "tickets", "bonbons", "plumes", "gommettes",
-    "bracelets", "briques", "étoiles en papier", "photos"
+    "bracelets", "briques", "étoiles en papier", "photos",
+    "palets de rink hockey", "buts", "cartes de foot", "maillots",
+    "ballons de foot", "passes réussies", "vignettes de joueurs"
   ];
   const item = items[int(0, items.length - 1, random)];
   const templates = add
