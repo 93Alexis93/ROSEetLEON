@@ -4,7 +4,7 @@ import { createReadingQuestion, READING_SYLLABLES, shuffleReadingItems } from ".
 
 const modes = ["flash", "mystery", "sentence", "text", "rhyme", "syllables"];
 
-test("les quatre formats de lecture sont générés", () => {
+test("les six formats de lecture sont générés", () => {
   for (const mode of modes) {
     const question = createReadingQuestion(mode);
     assert.equal(question.mode, mode);
