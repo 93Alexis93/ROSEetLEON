@@ -91,7 +91,7 @@ test("Accueil · les deux univers enfant sont mis en avant avec des appels au je
 test("PWA · le service worker est enregistré en HTTPS et l’échec ne bloque pas l’application",()=>{
   const main=readFileSync(resolve(root,"src/main.js"),"utf8");
   assert.match(main, /"serviceWorker" in navigator/);
-  assert.match(main, /location.protocol.startsWith("http")/);
+  assert.ok(main.includes('location.protocol.startsWith("http")'));
   assert.ok(main.includes('serviceWorker.register("./service-worker.js").catch(() => {})'));
 });
 
@@ -99,7 +99,7 @@ test("Rose · les visuels de base ne dépendent pas d’images distantes",()=>{
   const rose=readFileSync(resolve(root,"src/child/rose-activities.js"),"utf8");
   assert.match(rose, /const COLORS=/);
   assert.match(rose, /const SHAPES=/);
-  assert.match(rose, /sequence:"🔴 🔵 🔴 🔵 ?"/);
+  assert.ok(rose.includes('sequence:"🔴 🔵 🔴 🔵 ?"'));
   assert.equal(rose.includes("http://") || rose.includes("https://") || rose.includes("<img"), false,
     "Les visuels de ces activités doivent rester disponibles sans requête d’image distante.");
 });
