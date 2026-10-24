@@ -393,7 +393,7 @@ export function startReading(mode) {
         if (round >= 5) finish();
         else { generate(); render(); }
       }, "button-primary");
-      feedback?.parentElement?.append(next);
+      next.classList.add("game-next"); feedback?.parentElement?.insertBefore(next, feedback);
     } else {
       gentleOops(getState().settings.sounds);
       questionHadError = true;
