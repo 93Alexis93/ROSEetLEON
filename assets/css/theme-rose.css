@@ -1,1 +1,8 @@
 body.theme-rose{background:#fff2fa;--accent:#81539c}body.theme-rose .big-choice,body.theme-rose .card{border-color:#f0cce6}body.theme-rose .button-primary{background:#81539c}body.theme-rose .progress-fill{background:#df9dc9}body.theme-rose button{min-height:72px}
+body.theme-rose .child-hero{background:linear-gradient(145deg,#ffe2f2 0%,#f9e5ff 55%,#e9e3ff 100%);color:#713e7c;border-color:#fff}
+body.theme-rose .child-hero-kicker{color:#8a5596}
+body.theme-rose .child-section-sticker{background:#fff0fa}
+body.theme-rose .child-tile{background:linear-gradient(145deg,#fff,#fff4fb);color:#754276;border-color:#f5d8ee}
+body.theme-rose .child-tile-main{background:linear-gradient(145deg,#ffe1f2,#f3e2ff);border-color:#efc8e7}
+body.theme-rose .child-tile-alt{background:linear-gradient(145deg,#fff,#f9efff)}
+body.theme-rose .child-gentle-note{background:#fffaff;border-color:#e9cbe8}
