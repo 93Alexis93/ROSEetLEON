@@ -409,3 +409,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Accueil enfant : ajout d’un petit compteur de trophées et de réussites, avec des mots adaptés à Rose ou Léon (cache v92).
 
 - Ordre des propositions désormais mélangé dans la géométrie, l’aventure de football et l’aventure magique, pour éviter que la bonne réponse soit toujours au même endroit (cache v93).
+
+- Aide vocale après deux erreurs dans la géométrie, l’aventure de football et l’aventure magique : la réponse est également lue à voix haute si la voix est activée (cache v94).
