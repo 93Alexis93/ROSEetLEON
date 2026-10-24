@@ -95,7 +95,7 @@ const EXERCISES = [
   {child:"rose",name:"Couleurs magiques",keywords:"couleurs rouge bleu jaune vert",stars:1,description:"Reconnaître les couleurs.",run:()=>startRoseActivity("colors")},
   {child:"rose",name:"Formes à retrouver",keywords:"formes cercle carré triangle géométrie",stars:2,description:"Observer et reconnaître les formes.",run:()=>startRoseActivity("shapes")},
   {child:"rose",name:"Lettres de Rose",keywords:"lettres alphabet prénom majuscule",stars:1,description:"Retrouver R, O, S et E.",run:()=>startRoseActivity("letters")},
-  {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>startRoseActivity("letter-pairs")},
+  {child:"rose",name:"Les sons des lettres",keywords:"sons lettres écouter alphabet phonologie",stars:1,description:"Écoute le nom d’une lettre et retrouve-la parmi les bulles.",run:()=>startRoseActivity("letter-sounds")},\n  {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>startRoseActivity("letter-pairs")},
   {child:"rose",name:"Syllabes en rythme",keywords:"syllabes écouter mots taper mains",stars:2,description:"Écouter les morceaux des mots.",run:()=>syllableGame()},
   {child:"leon",name:"Défis de maths",keywords:"maths problèmes nombres calcul",stars:2,description:"Résoudre des questions de maths variées.",run:()=>startActivity("leon")},
   {child:"leon",name:"Nombre mystère",keywords:"numération indices nombre caché",stars:2,description:"Trouver un nombre grâce aux indices.",run:()=>numberMystery()},
