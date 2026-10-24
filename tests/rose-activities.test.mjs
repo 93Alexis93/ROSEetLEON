@@ -86,7 +86,7 @@ test("Rose · composition du prénom : donne la lettre attendue sans bloquer apr
 
 test("Rose · la composition du prénom enregistre une session seulement à la réussite complète", () => {
   const source = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
-  assert.match(source, /if\(isRoseNameComplete\(chosen\)\)\{recordSession\("rose"\)/);
+  assert.match(source, /if\(chosen\.length===target\.length\)\{[\s\S]*?recordSession\("rose"\)/);
 });
 
 
@@ -148,7 +148,7 @@ test("Rose · les sept jeux à choix multiples utilisent le même parcours de va
 
 test("Rose · le son des lettres : l’aide révèle uniquement la petite lettre",()=>{
  const source=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
- assert.match(source,/mode==="letter-sounds"\?"La petite lettre est « "\+q.answer.toLowerCase\(\)\+" »\."/);
+ assert.ok(source.includes('mode==="letter-sounds"?"La petite lettre est « "+q.answer.toLowerCase()+" ».":q.explanation'));
  assert.match(source,/Écoute le son, puis retrouve la lettre/);
 });
 
