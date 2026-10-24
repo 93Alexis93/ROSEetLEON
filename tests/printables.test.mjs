@@ -11,7 +11,7 @@ const worker = readFileSync(resolve(root, "service-worker.js"), "utf8");
 
 test("Impression · les huit fiches proposées disposent d’un corrigé ou d’un repère adulte", () => {
   for (const id of ["rose-letters", "rose-shapes", "rose-paths", "rose-emotions", "leon-multiplication", "leon-problems", "leon-english", "leon-logic"]) {
-    assert.ok(printables.includes('id: "' + id + '"'), "Fiche absente : " + id);
+    assert.ok(printables.includes('id:"' + id + '"'), "Fiche absente : " + id);
     assert.ok(printables.includes('answerKey(id)'), "Le parcours de préparation doit fournir un repère de correction.");
   }
   assert.match(printables, /Il n’y a pas un seul ressenti attendu|Il n’y a pas une seule bonne réponse/);
