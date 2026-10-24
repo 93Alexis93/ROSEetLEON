@@ -2,8 +2,8 @@ import { el, button, screen, card, replaceApp, chooseExercise } from "./ui.js";
 import { setRenderer, startRouter, go, lockParent, canAccessRoute } from "./router.js";
 import { getState } from "./store.js";
 import { startActivity } from "./child/activities.js";
-import { readingMenu } from "./child/reading.js";
-import { roseMenu } from "./child/rose-activities.js";
+import { readingMenu, startReading } from "./child/reading.js";
+import { roseMenu, startRoseActivity } from "./child/rose-activities.js";
 import { parentGate, parentDashboard, crisis } from "./parent/parent.js";
 import { printComingSoon } from "./parent/printables.js";
 import { speak } from "./voice.js";
@@ -91,21 +91,21 @@ function guidedChoice(child) {
 
 const EXERCISES = [
   {child:"rose",name:"Compter les objets",keywords:"compter nombres collections",stars:1,description:"Dénombrer de petites collections.",run:()=>startActivity("rose")},
-  {child:"rose",name:"Couleurs magiques",keywords:"couleurs rouge bleu jaune vert",stars:1,description:"Reconnaître les couleurs.",run:()=>roseMenu()},
-  {child:"rose",name:"Formes à retrouver",keywords:"formes cercle carré triangle géométrie",stars:2,description:"Observer et reconnaître les formes.",run:()=>roseMenu()},
-  {child:"rose",name:"Lettres de Rose",keywords:"lettres alphabet prénom majuscule",stars:1,description:"Retrouver R, O, S et E.",run:()=>roseMenu()},
-  {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>roseMenu()},
+  {child:"rose",name:"Couleurs magiques",keywords:"couleurs rouge bleu jaune vert",stars:1,description:"Reconnaître les couleurs.",run:()=>startRoseActivity("colors")},
+  {child:"rose",name:"Formes à retrouver",keywords:"formes cercle carré triangle géométrie",stars:2,description:"Observer et reconnaître les formes.",run:()=>startRoseActivity("shapes")},
+  {child:"rose",name:"Lettres de Rose",keywords:"lettres alphabet prénom majuscule",stars:1,description:"Retrouver R, O, S et E.",run:()=>startRoseActivity("letters")},
+  {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>startRoseActivity("letter-pairs")},
   {child:"rose",name:"Syllabes en rythme",keywords:"syllabes écouter mots taper mains",stars:2,description:"Écouter les morceaux des mots.",run:()=>syllableGame()},
   {child:"leon",name:"Défis de maths",keywords:"maths problèmes nombres calcul",stars:2,description:"Résoudre des questions de maths variées.",run:()=>startActivity("leon")},
   {child:"leon",name:"Nombre mystère",keywords:"numération indices nombre caché",stars:2,description:"Trouver un nombre grâce aux indices.",run:()=>numberMystery()},
   {child:"leon",name:"Comparer les nombres",keywords:"plus grand petit comparer centaines dizaines",stars:2,description:"Comparer des nombres à deux ou trois chiffres.",run:()=>compareNumbers()},
   {child:"leon",name:"Calcul mental",keywords:"calcul additions soustractions compléments problèmes",stars:2,description:"Calculer et résoudre des petits problèmes.",run:()=>calculationMenu()},
-  {child:"leon",name:"Mots-éclairs",keywords:"lecture mots reconnaître rapidement",stars:1,description:"Reconnaître des mots familiers.",run:()=>readingMenu()},
-  {child:"leon",name:"Mots-mystères",keywords:"lecture syllabes assembler déchiffrer",stars:2,description:"Assembler des syllabes pour lire.",run:()=>readingMenu()},
-  {child:"leon",name:"Phrases à comprendre",keywords:"lecture compréhension phrase",stars:2,description:"Lire une phrase et retrouver l’information.",run:()=>readingMenu()},
-  {child:"leon",name:"Mini-textes",keywords:"lecture histoire texte compréhension",stars:3,description:"Lire quelques lignes et comprendre.",run:()=>readingMenu()},
-  {child:"leon",name:"Chasse aux rimes",keywords:"sons rimes phonologie écouter",stars:2,description:"Repérer les sons à la fin des mots.",run:()=>readingMenu()},
-  {child:"leon",name:"Syllabes en rythme",keywords:"lecture syllabes oral découper mots",stars:1,description:"Découper des mots à l’oral.",run:()=>readingMenu()}
+  {child:"leon",name:"Mots-éclairs",keywords:"lecture mots reconnaître rapidement",stars:1,description:"Reconnaître des mots familiers.",run:()=>startReading("flash")},
+  {child:"leon",name:"Mots-mystères",keywords:"lecture syllabes assembler déchiffrer",stars:2,description:"Assembler des syllabes pour lire.",run:()=>startReading("mystery")},
+  {child:"leon",name:"Phrases à comprendre",keywords:"lecture compréhension phrase",stars:2,description:"Lire une phrase et retrouver l’information.",run:()=>startReading("sentence")},
+  {child:"leon",name:"Mini-textes",keywords:"lecture histoire texte compréhension",stars:3,description:"Lire quelques lignes et comprendre.",run:()=>startReading("text")},
+  {child:"leon",name:"Chasse aux rimes",keywords:"sons rimes phonologie écouter",stars:2,description:"Repérer les sons à la fin des mots.",run:()=>startReading("rhyme")},
+  {child:"leon",name:"Syllabes en rythme",keywords:"lecture syllabes oral découper mots",stars:1,description:"Découper des mots à l’oral.",run:()=>startReading("syllables")}
 ];
 function starLabel(level){return "★".repeat(level)+"☆".repeat(3-level);}
 function exerciseSearch(child){
