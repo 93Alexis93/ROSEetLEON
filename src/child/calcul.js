@@ -42,8 +42,15 @@ export function startCalculation(kind) {
     const answer = el("input", { type: "number", inputmode: "numeric", min: "0", max: "200", "aria-label": "Ta réponse" });
     answer.className = "answer-input";
     const feedback = el("p", { class: "feedback", role: "status", "aria-live": "polite" });
+    const clear = button("🧹 Effacer", () => {
+      answer.value = "";
+      feedback.textContent = "C’est effacé ! Tu peux écrire une nouvelle réponse.";
+      answer.focus();
+    }, "button-soft answer-clear");
+    clear.setAttribute("aria-label", "Effacer la réponse");
+    const answerRow = el("div", { class: "answer-input-row" }, [answer, clear]);
     const validate = button("Vérifier", check, "button-primary");
-    content.append(answer, validate, feedback,
+    content.append(answerRow, validate, feedback,
       button("💡 Petit indice", () => { feedback.textContent = question.hint; }, "button-soft"),
       button("🔊 Réécouter", () => speak(question.prompt, getState().settings.voice), "button-soft"),
       button("⌂ Accueil", () => go("home"), "icon-button"));
