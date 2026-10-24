@@ -201,6 +201,14 @@ function childHome(child) {
     );
   }
   section.append(tiles);
+  const profile = getState().profiles[child];
+  const progressCard = el("div", { class: "child-gentle-note child-progress-note" }, [
+    el("span", { "aria-hidden": "true", text: rose ? "🌟" : "🏅" }),
+    el("div", {}, [
+      el("strong", { text: rose ? "Tes étoiles magiques" : "Tes médailles de champion" }),
+      el("p", { text: profile.stickers + (profile.stickers > 1 ? " petits trophées gagnés" : " petit trophée gagné") + " · " + profile.correct + " réussites depuis le début. Chaque essai compte !" })
+    ])
+  ]);
   const gentle = el("div", { class: "child-gentle-note" }, [
     el("span", { "aria-hidden": "true", text: "💛" }),
     el("p", { text: rose ? "Tu peux prendre ton temps. Chaque essai est une découverte !" : "Pas besoin d’aller vite : réfléchir, essayer et recommencer, c’est déjà gagner !" })
@@ -215,7 +223,7 @@ function childHome(child) {
       getState().settings.voice
     ), "button-soft")
   ]);
-  content.append(hero, section, exerciseSearch(child), gentle, tools);
+  content.append(hero, section, progressCard, exerciseSearch(child), gentle, tools);
   replaceApp(screen(rose ? "Bonjour Rose !" : "Salut Léon !", content, {
     eyebrow: rose ? "Ton univers magique" : "Ton club de champions",
     home: () => go("home")
