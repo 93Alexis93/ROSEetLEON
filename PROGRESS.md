@@ -424,3 +424,4 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 - Fins de partie : ajout d’une phrase de célébration surprise choisie au hasard selon le jeu, pour varier les encouragements sans modifier les scores (cache v100).
 - 24 octobre 2026 — Suites logiques de Léon : variations des formulations, absence de répétition d’une même suite pendant une partie, et lecture vocale de la suite, des indices, des explications et des retours après réponse. Cache PWA : `rose-leon-v101`.
+- 24 octobre 2026 — Défis de maths et comptage : les indices sont maintenant lus à voix haute, les encouragements après erreur varient et sont vocalisés, et la réussite annonce aussi le résultat. Vérification du cas Rose sans explication dédiée pour éviter une annonce vocale « undefined ». Cache PWA : `rose-leon-v102`.
