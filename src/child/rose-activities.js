@@ -17,7 +17,7 @@ export function isRoseNameComplete(letters){return Array.isArray(letters)&&lette
 export function getNextRoseLetter(letters){return Array.isArray(letters)&&letters.length<4?"ROSE"[letters.length]:null;}
 export function createRoseQuestion(mode,random=Math.random){
  if(mode==="colors"){const t=pick(COLORS,random);const prompt=pick(["Touche le cercle "+t[0].toLowerCase()+".","Peux-tu trouver le cercle "+t[0].toLowerCase()+" ?","Montre-moi la couleur "+t[0].toLowerCase()+".","Où est le cercle "+t[0].toLowerCase()+" ?"],random);return {mode,answer:t[0],prompt,speakText:prompt,choices:threeChoices(COLORS.map(x=>x[0]),t[0],random),hint:"Regarde la couleur du cercle.",explanation:"Le cercle recherché est "+t[0].toLowerCase()+" "+t[1]};}
- if(mode==="shapes"){const t=pick(SHAPES,random);const prompt=pick(["Trouve la forme : "+t[1],"Peux-tu toucher "+t[0].toLowerCase()+" ?","Montre-moi "+(t[0]==="Étoile"?"l’étoile":"le "+t[0].toLowerCase())+".","Quelle est la forme "+t[0].toLowerCase()+" ?"],random);return {mode,answer:t[0],prompt,speakText:prompt,choices:threeChoices(SHAPES.map(x=>x[0]),t[0],random),hint:t[2],explanation:"C’est "+(t[0]==="Étoile"?"l"+String.fromCharCode(8217):"le ")+t[0].toLowerCase()+" "+t[1]};}
+ if(mode==="shapes"){const t=pick(SHAPES,random);const prompt=pick(["Trouve la forme : "+t[1],"Peux-tu toucher le "+t[0].toLowerCase()+" ?","Montre-moi le "+t[0].toLowerCase()+".","Quelle forme vois-tu ?"],random);return {mode,answer:t[0],prompt,speakText:prompt,choices:threeChoices(SHAPES.map(x=>x[0]),t[0],random),hint:t[2],explanation:"C’est "+(t[0]==="Étoile"?"l"+String.fromCharCode(8217):"le ")+t[0].toLowerCase()+" "+t[1]};}
  if(mode==="letters"){const t=pick(LETTERS,random);const prompt=pick(["Touche la lettre "+t[0]+".","Peux-tu trouver la lettre "+t[0]+" ?","Montre-moi "+t[0]+".","Où se cache la lettre "+t[0]+" ?","Choisis la lettre "+t[0]+"."],random);return {mode,answer:t[0],prompt,speakText:prompt,choices:threeChoices(LETTERS.map(x=>x[0]),t[0],random),hint:"Regarde bien la forme de chaque lettre.",explanation:t[1]};}
  if(mode==="letter-sounds"){const t=pick(LETTERS,random);const sound=LETTER_SOUNDS[t[0]];const prompt="Écoute le son, puis retrouve la lettre qui le fait.";return {mode,answer:t[0],prompt,speakText:"Écoute bien. "+sound+".",choices:threeChoices(LETTERS.map(x=>x[0]),t[0],random),hint:"Écoute encore le son, puis regarde les lettres proposées.",explanation:"C’est le son de la lettre "+t[0]+". "+t[1]};}
  if(mode==="patterns"){
@@ -62,7 +62,8 @@ export function startRoseActivity(mode){
  generate();render();
 }
 
-const FAMILY_WORDS=["ROSE","LÉON","PAPA","MAMAN","ALEXIS","PAULINE","MAMI"];
+export const FAMILY_WORDS=["ROSE","LÉON","PAPA","MAMAN","ALEXIS","PAULINE","MAMI"];
+export function shuffleFamilyLetters(word,random=Math.random){return shuffle([...word].map((letter,id)=>({letter,id})),random);}
 function startRoseWritingActivity(){
  document.body.className="theme-rose";
  const wordOrder=shuffle([...FAMILY_WORDS],Math.random);
@@ -72,7 +73,7 @@ function startRoseWritingActivity(){
  const status=el("p",{class:"feedback",role:"status","aria-live":"polite",text:"Choisis la première lettre."});
  const sequence=el("div",{class:"answer-grid","aria-label":"Lettres choisies"});
  const choices=el("div",{class:"answer-grid","aria-label":"Lettres à choisir"});
- const resetWord=()=>{target=wordOrder[wordIndex];chosen=[];tokens=[...target].map((letter,id)=>({letter,id}));tokens=shuffle(tokens,Math.random);model.textContent=target.split("").join(" ");model.setAttribute("aria-label","Mot à reconstituer");status.textContent="Choisis la première lettre.";draw();};
+ const resetWord=()=>{target=wordOrder[wordIndex];chosen=[];tokens=shuffleFamilyLetters(target);model.textContent=target.split("").join(" ");model.setAttribute("aria-label","Mot à reconstituer");status.textContent="Choisis la première lettre.";draw();};
  const draw=()=>{
   sequence.replaceChildren();
   sequence.append(...Array.from({length:target.length},(_,i)=>el("div",{class:"prompt",text:chosen[i]||"·","aria-label":chosen[i]||"Case vide"})));
@@ -101,7 +102,7 @@ function startRoseWritingActivity(){
    }else{status.textContent="Bien joué ! Quelle lettre vient ensuite ?";successPraise("rose",getState().settings.voice,status.textContent);draw();}
   },"button-soft")));
   content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour reconstituer le mot."}),model,sequence,choices,status,
-   button("↩ Réessayer (mélanger les lettres)",()=>{chosen=[];tokens=shuffle([...target].map((letter,id)=>({letter,id})),Math.random);status.textContent="Les lettres ont changé de place. À toi de jouer !";draw();},"button-soft"),
+   button("↩ Réessayer (mélanger les lettres)",()=>{chosen=[];tokens=shuffleFamilyLetters(target);status.textContent="Les lettres ont changé de place. À toi de jouer !";draw();},"button-soft"),
    button("Autres jeux",roseMenu,"button-soft"),
    button("⌂ Accueil",()=>go("home"),"icon-button"));
  };
