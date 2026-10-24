@@ -11,20 +11,33 @@ export function createNumberMysteryQuestion(random=Math.random){
  const kind=pick(["decompose","next","previous"],random);
  let answer,prompt,hint,explanation;
  if(kind==="decompose"){
-  const tens=1+Math.floor(random()*8),units=Math.floor(random()*10);
-  answer=tens*10+units;prompt="Je suis "+tens+" dizaine"+(tens>1?"s":"")+" et "+units+" unité"+(units>1?"s":"")+". Qui suis-je ?";
-  hint="Une dizaine vaut 10. Additionne les dizaines et les unités.";
-  explanation=tens+" dizaines font "+(tens*10)+", puis "+units+" unité"+(units>1?"s":"")+" : "+answer+".";
+  const hundreds=1+Math.floor(random()*8),tens=Math.floor(random()*10),units=Math.floor(random()*10);
+  answer=hundreds*100+tens*10+units;
+  prompt="Je suis "+hundreds+" centaine"+(hundreds>1?"s":"")+", "+tens+" dizaine"+(tens>1?"s":"")+" et "+units+" unité"+(units>1?"s":"")+". Qui suis-je ?";
+  hint="Une centaine vaut 100 et une dizaine vaut 10. Assemble les trois parties.";
+  explanation=hundreds+" centaines font "+(hundreds*100)+", "+tens+" dizaines font "+(tens*10)+", puis "+units+" unité"+(units>1?"s":"")+" : "+answer+".";
  }else{
-  const base=10+Math.floor(random()*89);
-  if(kind==="next"){answer=base+1;prompt="Quel nombre vient juste après "+base+" ?";hint="Avance d’un pas sur la file des nombres.";explanation="Après "+base+", on dit "+answer+".";}
-  else{answer=base-1;prompt="Quel nombre vient juste avant "+base+" ?";hint="Recule d’un pas sur la file des nombres.";explanation="Avant "+base+", on dit "+answer+".";}
+  const step=pick([1,10,100],random);
+  const base=step===100?100+Math.floor(random()*800):step===10?100+Math.floor(random()*890):100+Math.floor(random()*899);
+  if(kind==="next"){
+   answer=base+step;
+   prompt=step===1?"Quel nombre vient juste après "+base+" ?":"Quel nombre vient "+step+" après "+base+" ?";
+   hint=step===1?"Avance d’un pas. Attention au changement de dizaine ou de centaine.":"Ajoute "+step+" en surveillant les dizaines et les centaines.";
+   explanation="En ajoutant "+step+" à "+base+", on obtient "+answer+".";
+  }else{
+   answer=base-step;
+   prompt=step===1?"Quel nombre vient juste avant "+base+" ?":"Quel nombre vient "+step+" avant "+base+" ?";
+   hint=step===1?"Recule d’un pas. Attention au changement de dizaine ou de centaine.":"Retire "+step+" en surveillant les dizaines et les centaines.";
+   explanation="En retirant "+step+" à "+base+", on obtient "+answer+".";
+  }
  }
- const choices=shuffle([answer,...new Set([answer-2,answer-1,answer+1,answer+2].filter(n=>n>=0&&n<=99&&n!==answer))].slice(0,3),random);
- while(choices.length<4){const n=Math.floor(random()*100);if(!choices.includes(n))choices.push(n);}
+ const distractors=shuffle([answer-100,answer-10,answer-2,answer-1,answer+1,answer+2,answer+10,answer+100],random)
+  .filter(n=>n>=0&&n<=999&&n!==answer);
+ const choices=[answer];
+ for(const n of distractors){if(choices.length===4)break;if(!choices.includes(n))choices.push(n);}
+ while(choices.length<4){const n=Math.floor(random()*1000);if(!choices.includes(n))choices.push(n);}
  return {prompt,answer,choices:shuffle(choices,random),hint,explanation};
 }
-
 export function createCompareQuestion(random=Math.random){
  const first=10+Math.floor(random()*90);
  const rawSecond=10+Math.floor(random()*89);
