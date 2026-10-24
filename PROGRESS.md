@@ -420,6 +420,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 - Suites logiques de Léon : le bouton d’indice devient progressif ; un second appui révèle l’explication complète, pour accompagner sans donner immédiatement toute la réponse (cache v98).
 
-- Comptage de Rose : cinq thèmes visuels ajoutés (couronnes, lunes, coquillages, chatons magiques et étoiles filantes) pour renouveler les collections à compter (cache v99).
+- Comptage de Rose : cinq thèmes visuels ajoutés (couronnes, lunes, coquillages, chatons magiques et éclairs étoilés) pour renouveler les collections à compter (cache v99).
 
 - Fins de partie : ajout d’une phrase de célébration surprise choisie au hasard selon le jeu, pour varier les encouragements sans modifier les scores (cache v100).
