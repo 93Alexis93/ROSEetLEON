@@ -427,3 +427,12 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - 24 octobre 2026 — Défis de maths et comptage : les indices sont maintenant lus à voix haute, les encouragements après erreur varient et sont vocalisés, et la réussite annonce aussi le résultat. Vérification du cas Rose sans explication dédiée pour éviter une annonce vocale « undefined ». Cache PWA : `rose-leon-v102`.
 - 24 octobre 2026 — Accueil enfant : parcours rendu plus lisible avec le nombre de parties terminées, les réussites, les essais et une jauge de réussite calculée à partir des données locales existantes. Aucun score n’est inventé ni ajouté. Cache PWA : `rose-leon-v103`.
 - 24 octobre 2026 — Vérification complémentaire du jeu de suites : le générateur évite désormais de reproposer une suite identique dans la même partie ; consignes, indices, explications et retours après erreur sont lus à voix haute. Cache PWA mis à jour après cette correction : `rose-leon-v104`.
+
+## Lot de 5 GO — fiabilité, accessibilité et impression — 24 octobre 2026
+- [x] Réparé le test des imports JavaScript précachés : l’expression régulière reconnaît réellement les imports relatifs et normalise les séparateurs de chemin, au lieu de laisser passer silencieusement les dépendances.
+- [x] Aligné l’assertion de version du cache sur `rose-leon-v105`, sans supprimer le contrôle de cohérence.
+- [x] Ajouté des vérifications d’accessibilité de la progression enfant : rôle de jauge, valeurs, données de profil réelles et message initial.
+- [x] Ajouté des tests structurels des huit fiches imprimables, des commandes fiche seule/fiche + corrigé, du format A4 et du précache hors ligne.
+- [x] La jauge de progression annonce désormais son pourcentage aux lecteurs d’écran ; la formulation du nombre de parties est correcte pour zéro, une ou plusieurs parties.
+- [ ] Tests automatisés à exécuter sur GitHub Actions via une PR brouillon ; aucune vérification Safari/hors ligne réelle n’est déduite de ces tests.
+- Cache PWA : `rose-leon-v105`.
