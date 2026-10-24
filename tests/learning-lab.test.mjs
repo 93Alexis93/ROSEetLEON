@@ -11,10 +11,10 @@ test("Nombre mystère · les questions ont quatre choix distincts et une répons
  for(let i=0;i<600;i++){
   const q=createNumberMysteryQuestion();
   assert.ok(q.prompt.length>0);
-  assert.ok(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<=99);
+  assert.ok(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<=999);
   assert.equal(q.choices.length,4);
   assert.equal(new Set(q.choices).size,4);
-  assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=0&&n<=99));
+  assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=0&&n<=999));
   assert.ok(q.choices.includes(q.answer));
   assert.ok(q.hint.length>0&&q.explanation.length>0);
  }
@@ -23,12 +23,17 @@ test("Nombre mystère · les questions ont quatre choix distincts et une répons
 test("Nombre mystère · la réponse correspond exactement à l’indice",()=>{
  for(let i=0;i<1200;i++){
   const q=createNumberMysteryQuestion();
-  const decomposition=q.prompt.match(/^Je suis (\d+) dizaines? et (\d+) unités?\. Qui suis-je \?$/);
-  const next=q.prompt.match(/^Quel nombre vient juste après (\d+) \?$/);
-  const previous=q.prompt.match(/^Quel nombre vient juste avant (\d+) \?$/);
-  if(decomposition) assert.equal(q.answer,Number(decomposition[1])*10+Number(decomposition[2]),q.prompt);
+  const decomposition=q.prompt.match(/^Je suis (\\d+) centaines?, (\\d+) dizaines? et (\\d+) unités?\\. Qui suis-je \\?$/);
+  const next=q.prompt.match(/^Quel nombre vient juste après (\\d+) \\?$/);
+  const previous=q.prompt.match(/^Quel nombre vient juste avant (\\d+) \\?$/);
+  const jump=q.prompt.match(/^Quel nombre vient (\\d+) (après|avant) (\\d+) \\?$/);
+  if(decomposition) assert.equal(q.answer,Number(decomposition[1])*100+Number(decomposition[2])*10+Number(decomposition[3]),q.prompt);
   else if(next) assert.equal(q.answer,Number(next[1])+1,q.prompt);
-  else { assert.ok(previous,q.prompt); assert.equal(q.answer,Number(previous[1])-1,q.prompt); }
+  else if(previous) assert.equal(q.answer,Number(previous[1])-1,q.prompt);
+  else {
+   assert.ok(jump,q.prompt);
+   assert.equal(q.answer,Number(jump[3])+(jump[2]==="après"?1:-1)*Number(jump[1]),q.prompt);
+  }
  }
 });
 test("Syllabes · chaque question possède une consigne et une réponse entre une et trois syllabes",()=>{
