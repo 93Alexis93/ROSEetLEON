@@ -202,11 +202,16 @@ function childHome(child) {
   }
   section.append(tiles);
   const profile = getState().profiles[child];
+  const successRate = profile.attempts ? Math.round(profile.correct / profile.attempts * 100) : 0;
   const progressCard = el("div", { class: "child-gentle-note child-progress-note" }, [
     el("span", { "aria-hidden": "true", text: rose ? "🌟" : "🏅" }),
     el("div", {}, [
-      el("strong", { text: rose ? "Tes étoiles magiques" : "Tes médailles de champion" }),
-      el("p", { text: profile.stickers + (profile.stickers > 1 ? " petits trophées gagnés" : " petit trophée gagné") + " · " + profile.correct + " réussites depuis le début. Chaque essai compte !" })
+      el("strong", { text: rose ? "Ton chemin magique" : "Ton parcours de champion" }),
+      el("p", { text: profile.stickers + (profile.stickers > 1 ? " petits trophées gagnés" : " petit trophée gagné") + " · " + profile.correct + " réussites · " + profile.sessions + (profile.sessions > 1 ? " parties terminées." : " partie terminée.") }),
+      el("div", { class: "progress-track", role: "progressbar", "aria-label": "Réponses réussies", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(successRate) },
+        el("div", { class: "progress-fill", style: "width:" + successRate + "%" })
+      ),
+      el("p", { class: "small", text: profile.attempts ? successRate + " % de réponses réussies sur " + profile.attempts + " essais. Chaque essai compte !" : "Ton aventure commence ici : chaque essai fera grandir ton parcours !" })
     ])
   ]);
   const gentle = el("div", { class: "child-gentle-note" }, [
