@@ -6,12 +6,20 @@ const voice=readFileSync(new URL("../src/voice.js",import.meta.url),"utf8");
 const sources=[
  readFileSync(new URL("../src/child/activities.js",import.meta.url),"utf8"),
  readFileSync(new URL("../src/child/reading.js",import.meta.url),"utf8"),
- readFileSync(new URL("../src/child/learning-lab.js",import.meta.url),"utf8")
+ readFileSync(new URL("../src/child/learning-lab.js",import.meta.url),"utf8"),
+ readFileSync(new URL("../src/child/calcul.js",import.meta.url),"utf8"),
+ readFileSync(new URL("../src/child/rose-activities.js",import.meta.url),"utf8"),
+ readFileSync(new URL("../src/child/sentence-builder.js",import.meta.url),"utf8")
 ];
-test("Navigation · les boutons de progression sont ajoutés au conteneur du jeu",()=>{
- const all=sources.join("\n");
- assert.doesNotMatch(all,/feedback\?\.after\((?:next|button\(round===total-1\?)/);
- assert.ok((all.match(/feedback\?\.parentElement\?\.append\((?:next|button\(round===total-1\?)/g)||[]).length>=8);
+test("Navigation · chaque jeu expose un bouton suivant visible sans défilement",()=>{
+ const all=sources.join("\\n");
+ assert.doesNotMatch(all,/feedback\\?\\.after\\((?:next|reveal)\\)/);
+ assert.doesNotMatch(all,/feedback\\?\\.parentElement\\?\\.append\\(/);
+ assert.ok((all.match(/game-next/g)||[]).length>=15,"Chaque parcours de jeu doit marquer son bouton de progression.");
+ const css=readFileSync(new URL("../assets/css/base.css",import.meta.url),"utf8");
+ assert.match(css,/\\.game-next\\{[^}]*position:fixed!important/);
+ assert.match(css,/\\.game-next\\{[^}]*bottom:calc\\(12px \\+ env\\(safe-area-inset-bottom\\)\\)/);
+ assert.match(css,/\\.game-next\\{[^}]*width:min\\(620px,calc\\(100vw - 28px\\)\\)/);
 });
 test("Voix · chaque action et chaque changement d’écran arrêtent la parole précédente",()=>{
  assert.match(ui,/import \{ speak, stopSpeaking \} from "\.\/voice\.js"/);
