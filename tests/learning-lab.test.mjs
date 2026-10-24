@@ -128,3 +128,15 @@ test("Syllabes · toute la banque est cohérente, illustrée et sans doublons", 
   assert.equal(item.syllables, expected[item.word], "Nombre de syllabes incorrect pour " + item.word);
  }
 });
+
+
+test("Syllabes · les consignes et aides parlent de syllabes, pas de morceaux", () => {
+ const main=readFileSync(resolve(root,"src/main.js"),"utf8");
+ const reading=readFileSync(resolve(root,"src/child/reading.js"),"utf8");
+ const lab=readFileSync(resolve(root,"src/child/learning-lab.js"),"utf8");
+ assert.match(main,/description:"Écouter les syllabes des mots\."/);
+ assert.match(main,/compter les syllabes/);
+ assert.match(reading,/à chaque syllabe entendue/);
+ assert.match(reading,/Découper les mots en syllabes à l’oral/);
+ assert.match(lab,/On cherche ensemble les syllabes du mot/);
+});
