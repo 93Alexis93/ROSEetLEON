@@ -84,8 +84,8 @@ test("Rose · les bonnes réponses utilisent les éléments de l’écran rendu"
   "Le traitement de la bonne réponse doit retrouver les éléments réellement affichés.");
  assert.match(rose, /answerGrid\.querySelectorAll\("button"\)/,
   "Les choix de la question réussie doivent être désactivés sans variable hors portée.");
- assert.match(rose, /feedback\.after\(next\)/,
-  "Le bouton de progression doit être ajouté au feedback courant.");
+ assert.match(rose, /next\.classList\.add\("game-next"\);feedback\.parentElement\.insertBefore\(next,feedback\)/,
+  "Le bouton de progression doit rester visible sans défilement.");
 });
 
 test("Les félicitations vocales ordinaires sont limitées à une phrase courte", () => {
