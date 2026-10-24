@@ -7,7 +7,7 @@ import {startActivity} from "./activities.js";
 import {syllableGame} from "./learning-lab.js";
 
 const COLORS=[["Rouge","🔴"],["Bleu","🔵"],["Jaune","🟡"],["Vert","🟢"],["Violet","🟣"],["Orange","🟠"],["Rose","🩷"],["Marron","🟤"]];
-const SHAPES=[["Cercle","●","Le cercle est rond et n’a pas de coin."],["Carré","■","Le carré a quatre côtés."],["Triangle","▲","Le triangle a trois côtés et trois coins."],["Rectangle","▰","Le rectangle a quatre côtés, avec deux côtés longs et deux côtés courts."],["Ovale","⬭","L’ovale est allongé et arrondi."],["Losange","◆","Le losange ressemble à un carré penché."],["Étoile","★","L’étoile a plusieurs pointes."]];
+const SHAPES=[["Carré","■","Le carré a quatre côtés égaux."],["Rond","●","Le rond est tout rond et n’a pas de coin."],["Triangle","▲","Le triangle a trois côtés et trois coins."],["Rectangle","▰","Le rectangle a quatre côtés : deux longs et deux courts."]];
 const LETTERS=[["R","La lettre R commence le prénom Rose."],["O","La lettre O est ronde."],["S","La lettre S fait comme un petit serpent."],["E","La lettre E a trois petits traits."]];
 const LETTER_SOUNDS={R:"rrrrrrrr",O:"oooooo",S:"ssssssss",E:"eeeuuhh"};
 const pick=(a,r=Math.random)=>a[Math.floor(r()*a.length)];
@@ -41,12 +41,12 @@ export function roseMenu(){
   card([el("h2",{text:"🦄 Compter les licornes"}),el("p",{class:"small",text:"Compter jusqu’à huit, en prenant son temps."}),button("Jouer",chooseExercise("Compte les objets magiques et choisis le bon nombre.",()=>startActivity("rose")),"button-primary")]),
   card([el("h2",{text:"🪄 Les suites magiques"}),el("p",{class:"small",text:"Observer les répétitions et deviner quelle image vient après."}),button("Jouer",chooseExercise("Observe les images et trouve ce qui vient ensuite.",()=>startRoseActivity("patterns")),"button-primary")]),
   card([el("h2",{text:"🌈 Les couleurs magiques"}),el("p",{class:"small",text:"Reconnaître huit couleurs."}),button("Jouer",chooseExercise("Écoute la consigne puis retrouve la bonne couleur.",()=>startRoseActivity("colors")),"button-primary")]),
-  card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître sept formes."}),button("Jouer",chooseExercise("Observe les formes et retrouve celle qui est demandée.",()=>startRoseActivity("shapes")),"button-primary")]),
+  card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître quatre formes faciles : carré, rond, triangle et rectangle."}),button("Jouer",chooseExercise("Observe les formes et retrouve celle qui est demandée.",()=>startRoseActivity("shapes")),"button-primary")]),
   card([el("h2",{text:"🔤 Les lettres de Rose"}),el("p",{class:"small",text:"Retrouver les lettres R, O, S et E."}),button("Jouer",chooseExercise("Retrouve les lettres R, O, S et E.",()=>startRoseActivity("letters")),"button-primary")]),
   card([el("h2",{text:"🔡 Grandes et petites lettres"}),el("p",{class:"small",text:"Associer R, O, S, E aux lettres r, o, s, e."}),button("Jouer",chooseExercise("Associe chaque grande lettre à sa petite lettre.",()=>startRoseActivity("letter-pairs")),"button-primary")]),
   card([el("h2",{text:"🔊 Le son des lettres"}),el("p",{class:"small",text:"Écouter un son étiré et retrouver la lettre correspondante."}),button("Jouer",chooseExercise("Écoute le son puis touche la lettre correspondante.",()=>startRoseActivity("letter-sounds")),"button-primary")]),
   card([el("h2",{text:"👏 Les syllabes"}),el("p",{class:"small",text:"Écouter un mot et compter ses syllabes."}),button("Jouer",chooseExercise("Écoute les mots et frappe dans tes mains pour compter les syllabes.",syllableGame),"button-primary")]),
-  card([el("h2",{text:"✍️ Je compose mon prénom"}),el("p",{class:"small",text:"Choisir les lettres pour écrire ROSE dans le bon ordre."}),button("Composer mon prénom",chooseExercise("Choisis les lettres dans le bon ordre pour écrire ROSE.",startRoseWritingActivity),"button-primary")]),
+  card([el("h2",{text:"✍️ Reconstitue les prénoms"}),el("p",{class:"small",text:"Mélanger puis remettre les lettres des mots de la famille dans le bon ordre."}),button("Reconstituer",chooseExercise("Remets les lettres dans le bon ordre pour reconstituer les prénoms et les mots de la famille.",startRoseWritingActivity),"button-primary")]),
   button("⌂ Accueil",()=>go("home"),"icon-button"));
  replaceApp(screen("Bonjour Rose !",content,{eyebrow:"Univers licorne",home:()=>go("home")}));
  speak("Bonjour Rose ! Choisis un petit jeu.",getState().settings.voice);
@@ -62,38 +62,50 @@ export function startRoseActivity(mode){
  generate();render();
 }
 
+const FAMILY_WORDS=["ROSE","LÉON","PAPA","MAMAN","ALEXIS","PAULINE","MAMI"];
 function startRoseWritingActivity(){
  document.body.className="theme-rose";
- const model=el("div",{class:"prompt","aria-label":"Modèle du prénom Rose",text:"R O S E"});
- const chosen=[];
- const letters=["S","E","R","O"];
- const content=card([el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour composer ton prénom."}),model]);
+ const wordOrder=shuffle([...FAMILY_WORDS],Math.random);
+ let wordIndex=0,target=wordOrder[wordIndex],chosen=[],tokens=[];
+ const model=el("div",{class:"prompt","aria-label":"Mot à reconstituer",text:target.split("").join(" ")});
+ const content=card([]);
  const status=el("p",{class:"feedback",role:"status","aria-live":"polite",text:"Choisis la première lettre."});
  const sequence=el("div",{class:"answer-grid","aria-label":"Lettres choisies"});
  const choices=el("div",{class:"answer-grid","aria-label":"Lettres à choisir"});
+ const resetWord=()=>{target=wordOrder[wordIndex];chosen=[];tokens=[...target].map((letter,id)=>({letter,id}));tokens=shuffle(tokens,Math.random);model.textContent=target.split("").join(" ");model.setAttribute("aria-label","Mot à reconstituer");status.textContent="Choisis la première lettre.";draw();};
  const draw=()=>{
   sequence.replaceChildren();
-  sequence.append(...Array.from({length:4},(_,i)=>el("div",{class:"prompt",text:chosen[i]||"·","aria-label":chosen[i]||"Case vide"})));
+  sequence.append(...Array.from({length:target.length},(_,i)=>el("div",{class:"prompt",text:chosen[i]||"·","aria-label":chosen[i]||"Case vide"})));
   choices.replaceChildren();
-  letters.filter(letter=>!chosen.includes(letter)).forEach(letter=>choices.append(button(letter,()=>{
-   if(letter!==getNextRoseLetter(chosen)){
+  tokens=shuffle(tokens,Math.random);
+  tokens.filter(token=>!chosen.includes(token.id)).forEach(token=>choices.append(button(token.letter,()=>{
+   const expected=target[chosen.length];
+   if(token.letter!==expected){
     gentleOops(getState().settings.sounds);
-    status.textContent="Regarde le modèle : quelle lettre vient maintenant ? Tu peux essayer une autre lettre.";speak(status.textContent,getState().settings.voice);
-    return;
+    status.textContent="Bien essayé ! Regarde le modèle et cherche la bonne lettre. Les lettres changent de place.";
+    speak(status.textContent,getState().settings.voice);
+    tokens=shuffle(tokens,Math.random);draw();return;
    }
-   chosen.push(letter);
-   if(chosen.length===4){
-    if(isRoseNameComplete(chosen)){recordSession("rose");cheer(getState().settings.sounds);status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";successPraise("rose",getState().settings.voice,status.textContent);}
-    else {status.textContent="Bien essayé ! Regarde le modèle. Tu peux effacer et recommencer tranquillement.";speak(status.textContent,getState().settings.voice);}
-   }else {cheer(getState().settings.sounds);status.textContent="Bien joué ! Quelle lettre vient ensuite ?";successPraise("rose",getState().settings.voice,status.textContent);}
-   draw();
+   chosen.push(token.id);cheer(getState().settings.sounds);
+   const composed=chosen.map(id=>tokens.find(t=>t.id===id)?.letter);
+   // Rebuild the displayed sequence from the selected token IDs, independent of the shuffled choices.
+   const lettersById=new Map([...target].map((letter,id)=>[id,letter]));
+   sequence.replaceChildren();
+   sequence.append(...Array.from({length:target.length},(_,i)=>el("div",{class:"prompt",text:i<chosen.length?lettersById.get(chosen[i]):"·","aria-label":i<chosen.length?lettersById.get(chosen[i]):"Case vide"})));
+   if(chosen.length===target.length){
+    recordSession("rose");
+    status.textContent="🌟 Bravo ! Tu as reconstitué "+target+" !";
+    successPraise("rose",getState().settings.voice,status.textContent);
+    if(wordIndex<wordOrder.length-1){const next=button("Mot suivant ➜",()=>{wordIndex++;resetWord();},"button-primary");next.classList.add("rose-question-next");content.append(next);}
+    else status.textContent+=" Tu as retrouvé tous les mots de la famille !";
+   }else{status.textContent="Bien joué ! Quelle lettre vient ensuite ?";successPraise("rose",getState().settings.voice,status.textContent);draw();}
   },"button-soft")));
-  content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour composer ton prénom."}),model,sequence,choices,status,
-   button("↩ Effacer et recommencer",()=>{chosen.splice(0);status.textContent="Choisis la première lettre.";draw();},"button-soft"),
+  content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour reconstituer le mot."}),model,sequence,choices,status,
+   button("↩ Réessayer (mélanger les lettres)",()=>{chosen=[];tokens=shuffle([...target].map((letter,id)=>({letter,id})),Math.random);status.textContent="Les lettres ont changé de place. À toi de jouer !";draw();},"button-soft"),
    button("Autres jeux",roseMenu,"button-soft"),
    button("⌂ Accueil",()=>go("home"),"icon-button"));
  };
- draw();
- replaceApp(screen("Je compose mon prénom",content,{eyebrow:"Écriture en jouant",home:()=>go("home")}));
- speak("Regarde le modèle : R O S E. Choisis les lettres dans le bon ordre.",getState().settings.voice);
+ resetWord();
+ replaceApp(screen("Reconstitue les prénoms",content,{eyebrow:"Les mots de la famille",home:()=>go("home")}));
+ speak("Reconstitue les prénoms et les mots de la famille. Regarde le modèle et cherche les lettres dans le bon ordre.",getState().settings.voice);
 }
