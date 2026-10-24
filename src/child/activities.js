@@ -30,7 +30,12 @@ const ROSE_COUNTING_THEMES = [
   { singular: "petit dinosaure", plural: "petits dinosaures", symbol: "🦕" },
   { singular: "chat magique", plural: "chats magiques", symbol: "🐈‍⬛" },
   { singular: "patin à roulettes", plural: "patins à roulettes", symbol: "🛼" },
-  { singular: "arc-en-ciel", plural: "arcs-en-ciel", symbol: "🌈" }
+  { singular: "arc-en-ciel", plural: "arcs-en-ciel", symbol: "🌈" },
+  { singular: "couronne", plural: "couronnes", symbol: "👑" },
+  { singular: "lune", plural: "lunes", symbol: "🌙" },
+  { singular: "coquillage", plural: "coquillages", symbol: "🐚" },
+  { singular: "chaton magique", plural: "chatons magiques", symbol: "🐈‍⬛" },
+  { singular: "éclair étoilé", plural: "éclairs étoilés", symbol: "🌠" }
 ];
 
 export function createCountingQuestion(random = Math.random, maxCount = 8) {
