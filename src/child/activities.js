@@ -33,10 +33,11 @@ const ROSE_COUNTING_THEMES = [
   { singular: "arc-en-ciel", plural: "arcs-en-ciel", symbol: "🌈" }
 ];
 
-export function createCountingQuestion(random = Math.random) {
-  const count = 1 + Math.floor(random() * 8);
+export function createCountingQuestion(random = Math.random, maxCount = 8) {
+  const limit = Math.max(2, Math.min(10, Math.floor(maxCount)));
+  const count = 1 + Math.floor(random() * limit);
   const theme = ROSE_COUNTING_THEMES[Math.floor(random() * ROSE_COUNTING_THEMES.length)];
-  const alternatives = shuffle([1, 2, 3, 4, 5, 6, 7, 8].filter(n => n !== count), random).slice(0, 2);
+  const alternatives = shuffle(Array.from({ length: limit }, (_, i) => i + 1).filter(n => n !== count), random).slice(0, 2);
   return {
     text: "Combien de " + theme.plural + " ?",
     answer: count,
@@ -136,7 +137,7 @@ export function startActivity(child, domain = null) {
         const progress = getState().profiles.leon.mathProgress?.[domain];
         candidate = createMathQuestion(domain, progress?.difficulty || 1);
       } else {
-        candidate = createCountingQuestion();
+        candidate = createCountingQuestion(Math.random, round < 2 ? 5 : round < 4 ? 8 : 10);
       }
       attempts++;
     } while (seenQuestions.has(child === "leon" ? candidate.prompt : candidate.text + "|" + candidate.count + "|" + candidate.symbol) && attempts < 100);
