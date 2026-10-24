@@ -149,7 +149,7 @@ test("Rose · les sept jeux à choix multiples utilisent le même parcours de va
 
 test("Rose · le son des lettres : l’aide révèle uniquement la petite lettre",()=>{
  const source=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
- assert.ok(source.includes('mode==="letter-sounds"?"La petite lettre est « "+q.answer.toLowerCase()+" ».":q.explanation'));
+ assert.ok(source.includes('mode==="letter-sounds"?"La petite lettre est « "+q.answer.toLowerCase()+" ».":(hintCount===1?q.hint:q.explanation)'));
  assert.match(source,/Écoute le son, puis retrouve la lettre/);
 });
 
