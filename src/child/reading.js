@@ -387,6 +387,7 @@ export function startReading(mode) {
       if (!questionHadError) score++;
       const feedbackText = ["Bravo, tu as pris le temps de réfléchir !", "Oui, tu as bien compris !", "Super lecture, tu as trouvé !", "Bien joué, tu progresses à chaque question !", "Exactement, c’est la bonne réponse !"][Math.floor(Math.random() * 5)];
       if (feedback) feedback.textContent = feedbackText;
+      speak(feedbackText, getState().settings.voice);
       document.querySelectorAll(".answer-grid button").forEach(item => { item.disabled = true; });
       const next = button(round + 1 >= 5 ? "Terminer" : "Question suivante", () => {
         round++;
@@ -399,6 +400,7 @@ export function startReading(mode) {
       questionHadError = true;
       if (feedback) {
         feedback.textContent = ["Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.", "Bien tenté ! Relis le texte et cherche un petit indice.", "Pas encore, mais tu peux réfléchir et réessayer.", "On reprend calmement : la réponse se cache dans ce que tu as lu.", "Tu peux écouter ou demander un indice avant de retenter."][Math.floor(Math.random() * 5)];
+        speak(feedback.textContent, getState().settings.voice);
       }
     }
   };
