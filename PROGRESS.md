@@ -434,5 +434,11 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Ajouté des vérifications d’accessibilité de la progression enfant : rôle de jauge, valeurs, données de profil réelles et message initial.
 - [x] Ajouté des tests structurels des huit fiches imprimables, des commandes fiche seule/fiche + corrigé, du format A4 et du précache hors ligne.
 - [x] La jauge de progression annonce désormais son pourcentage aux lecteurs d’écran ; la formulation du nombre de parties est correcte pour zéro, une ou plusieurs parties.
-- [ ] Tests automatisés à exécuter sur GitHub Actions via une PR brouillon ; aucune vérification Safari/hors ligne réelle n’est déduite de ces tests.
+- [x] Tests automatisés GitHub Actions réussis sur le SHA `4b025cc7dd6497779415fa1803f548d879499ad8` ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40093222451)). Les essais Safari iPhone, impression A4 réelle et hors ligne restent à faire.
 - Cache PWA : `rose-leon-v105`.
+
+
+## Référence Git — 24 octobre 2026
+- La référence effective de travail est le `main` actuel au commit `0e038184eb42e8ed3c91c8f3c9c007777cdfb966`.
+- La branche `refonte-ux-ui-impro-lab` est basée directement sur cette référence, sans commit de retard ; les anciens identifiants `6eef26ef` et `a1c13d2f` ne sont pas présents dans l’historique accessible du dépôt.
+- Le travail reste dans la branche et la PR brouillon #1. Aucun changement n’a été fusionné dans `main` ni redéployé dans cette étape.
