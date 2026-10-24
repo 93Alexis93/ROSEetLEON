@@ -1,7 +1,7 @@
-import {el,button,screen,card,replaceApp} from "../ui.js";
+import {el,button,screen,card,replaceApp,chooseExercise} from "../ui.js";
 import {getState,recordAnswer,recordSession} from "../store.js";
 import {speak} from "../voice.js";
-import {cheer,gentleOops} from "../audio.js";
+import {cheer,gentleOops,successPraise} from "../audio.js";
 import {go} from "../router.js";
 import {startActivity} from "./activities.js";
 import {syllableGame} from "./learning-lab.js";
@@ -25,13 +25,13 @@ export function roseMenu(){
  document.body.className="theme-rose";const content=el("div",{class:"stack"});
  content.append(el("p",{class:"lead",text:"Choisis un petit jeu. On peut s’arrêter dès qu’on en a envie !"}));
  content.append(
-  card([el("h2",{text:"🦄 Compter les licornes"}),el("p",{class:"small",text:"Compter jusqu’à huit, en prenant son temps."}),button("Jouer",()=>startActivity("rose"),"button-primary")]),
-  card([el("h2",{text:"🌈 Les couleurs magiques"}),el("p",{class:"small",text:"Reconnaître huit couleurs."}),button("Jouer",()=>startRoseActivity("colors"),"button-primary")]),
-  card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître sept formes."}),button("Jouer",()=>startRoseActivity("shapes"),"button-primary")]),
-  card([el("h2",{text:"🔤 Les lettres de Rose"}),el("p",{class:"small",text:"Retrouver les lettres R, O, S et E."}),button("Jouer",()=>startRoseActivity("letters"),"button-primary")]),
-  card([el("h2",{text:"🔡 Grandes et petites lettres"}),el("p",{class:"small",text:"Associer R, O, S, E aux lettres r, o, s, e."}),button("Jouer",()=>startRoseActivity("letter-pairs"),"button-primary")]),
-  card([el("h2",{text:"👏 Les syllabes"}),el("p",{class:"small",text:"Écouter un mot et compter ses syllabes."}),button("Jouer",syllableGame,"button-primary")]),
-  card([el("h2",{text:"✍️ Je compose mon prénom"}),el("p",{class:"small",text:"Choisir les lettres pour écrire ROSE dans le bon ordre."}),button("Composer mon prénom",startRoseWritingActivity,"button-primary")]),
+  card([el("h2",{text:"🦄 Compter les licornes"}),el("p",{class:"small",text:"Compter jusqu’à huit, en prenant son temps."}),button("Jouer",chooseExercise("Compte les objets magiques et choisis le bon nombre.",()=>startActivity("rose")),"button-primary")]),
+  card([el("h2",{text:"🌈 Les couleurs magiques"}),el("p",{class:"small",text:"Reconnaître huit couleurs."}),button("Jouer",chooseExercise("Écoute la consigne puis retrouve la bonne couleur.",()=>startRoseActivity("colors")),"button-primary")]),
+  card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître sept formes."}),button("Jouer",chooseExercise("Observe les formes et retrouve celle qui est demandée.",()=>startRoseActivity("shapes")),"button-primary")]),
+  card([el("h2",{text:"🔤 Les lettres de Rose"}),el("p",{class:"small",text:"Retrouver les lettres R, O, S et E."}),button("Jouer",chooseExercise("Retrouve les lettres R, O, S et E.",()=>startRoseActivity("letters")),"button-primary")]),
+  card([el("h2",{text:"🔡 Grandes et petites lettres"}),el("p",{class:"small",text:"Associer R, O, S, E aux lettres r, o, s, e."}),button("Jouer",chooseExercise("Associe chaque grande lettre à sa petite lettre.",()=>startRoseActivity("letter-pairs")),"button-primary")]),
+  card([el("h2",{text:"👏 Les syllabes"}),el("p",{class:"small",text:"Écouter un mot et compter ses syllabes."}),button("Jouer",chooseExercise("Écoute les mots et frappe dans tes mains pour compter les syllabes.",syllableGame),"button-primary")]),
+  card([el("h2",{text:"✍️ Je compose mon prénom"}),el("p",{class:"small",text:"Choisir les lettres pour écrire ROSE dans le bon ordre."}),button("Composer mon prénom",chooseExercise("Choisis les lettres dans le bon ordre pour écrire ROSE.",startRoseWritingActivity),"button-primary")]),
   button("⌂ Accueil",()=>go("home"),"icon-button"));
  replaceApp(screen("Bonjour Rose !",content,{eyebrow:"Univers licorne",home:()=>go("home")}));
  speak("Bonjour Rose ! Choisis un petit jeu.",getState().settings.voice);
@@ -43,7 +43,7 @@ function startRoseActivity(mode){
  const render=()=>{const c=card([]);c.append(el("p",{class:"small",text:"Petit jeu "+(round+1)+" sur 5"}),el("div",{class:"progress-track",role:"progressbar","aria-label":"Progression du jeu","aria-valuemin":"0","aria-valuemax":"5","aria-valuenow":String(round)},el("div",{class:"progress-fill",style:"width:"+(round/5*100)+"%"})),el("p",{class:"lead",text:"Regarde bien, puis touche une réponse."}),el("div",{class:"prompt",text:q.prompt}));
   const answers=el("div",{class:"answer-grid"});q.choices.forEach(choice=>{const item=mode==="colors"?COLORS.find(x=>x[0]===choice):mode==="shapes"?SHAPES.find(x=>x[0]===choice):[choice];answers.append(button(mode==="letters"||mode==="letter-pairs"?choice:item[1]+" "+choice,()=>answer(choice),"button-soft"));});
   const f=el("p",{class:"feedback",role:"status","aria-live":"polite"});c.append(answers,f,el("div",{class:"button-row"},[button("🔊 Réécouter",()=>speak(q.speakText,getState().settings.voice),"button-soft"),button("💡 Petit indice",()=>{hintCount++;f.textContent=hintCount===1?q.hint:q.explanation;},"button-soft")]),button("↩ Autres jeux",roseMenu,"button-soft"),button("⌂ Accueil",()=>go("home"),"icon-button"));replaceApp(screen(title,c,{eyebrow:"On apprend en jouant",home:()=>go("home")}));speak(q.speakText,getState().settings.voice);};
- const answer=choice=>{const ok=choice===q.answer;recordAnswer("rose",ok);if(!ok){gentleOops(getState().settings.sounds);tries++;const f=document.querySelector(".feedback");if(f)f.textContent=tries===1?pick(["Presque ! Regarde encore et essaie tranquillement.","Bien essayé ! Observe les choix une nouvelle fois.","Pas encore, mais tu peux y arriver. Regarde bien !","On prend notre temps et on retente."]):pick(["Ce n’est pas grave, on peut chercher ensemble.","Chaque essai nous apprend quelque chose !","On observe encore une fois, tout doucement.","Tu peux essayer une autre réponse."]);return;}cheer(getState().settings.sounds);const praise=pick(["Oui, bravo d’avoir regardé attentivement !","Youpi ! Tu as trouvé la bonne réponse !","Super observation !","Bien joué, tu progresses !","Exactement, quelle bonne découverte !"]);f.textContent=praise;answers.querySelectorAll("button").forEach(item=>{item.disabled=true;});const next=button(round+1>=5?"Terminer":"Question suivante",()=>{round++;if(round>=5)finish();else{generate();render();}},"button-primary");f.after(next);};
+ const answer=choice=>{const ok=choice===q.answer;recordAnswer("rose",ok);if(!ok){gentleOops(getState().settings.sounds);tries++;const f=document.querySelector(".feedback");if(f)f.textContent=tries===1?pick(["Presque ! Regarde encore et essaie tranquillement.","Bien essayé ! Observe les choix une nouvelle fois.","Pas encore, mais tu peux y arriver. Regarde bien !","On prend notre temps et on retente."]):pick(["Ce n’est pas grave, on peut chercher ensemble.","Chaque essai nous apprend quelque chose !","On observe encore une fois, tout doucement.","Tu peux essayer une autre réponse."]);return;}cheer(getState().settings.sounds);successPraise("rose",getState().settings.voice);const praise=pick(["Oui, bravo d’avoir regardé attentivement !","Youpi ! Tu as trouvé la bonne réponse !","Super observation !","Bien joué, tu progresses !","Exactement, quelle bonne découverte !"]);f.textContent=praise;answers.querySelectorAll("button").forEach(item=>{item.disabled=true;});const next=button(round+1>=5?"Terminer":"Question suivante",()=>{round++;if(round>=5)finish();else{generate();render();}},"button-primary");f.after(next);};
  generate();render();
 }
 
@@ -68,9 +68,9 @@ function startRoseWritingActivity(){
    }
    chosen.push(letter);
    if(chosen.length===4){
-    if(isRoseNameComplete(chosen)){recordSession("rose");cheer(getState().settings.sounds);status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";speak("Bravo ! Tu as écrit Rose.",getState().settings.voice);}
+    if(isRoseNameComplete(chosen)){recordSession("rose");cheer(getState().settings.sounds);successPraise("rose",getState().settings.voice);status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";speak("Bravo ! Tu as écrit Rose.",getState().settings.voice);}
     else {status.textContent="Bien essayé ! Regarde le modèle. Tu peux effacer et recommencer tranquillement.";}
-   }else {cheer(getState().settings.sounds);status.textContent="Bien joué ! Quelle lettre vient ensuite ?";}
+   }else {cheer(getState().settings.sounds);successPraise("rose",getState().settings.voice);status.textContent="Bien joué ! Quelle lettre vient ensuite ?";}
    draw();
   },"button-soft")));
   content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour composer ton prénom."}),model,sequence,choices,status,
