@@ -119,6 +119,7 @@ export function startActivity(child, domain = null) {
   let hint = 0;
   let question;
   let progressRecorded = false;
+  const seenQuestions = new Set();
   const target = 5;
   const initialState = getState();
   document.body.className = "theme-" + child;
@@ -127,12 +128,18 @@ export function startActivity(child, domain = null) {
     tries = 0;
     hint = 0;
     progressRecorded = false;
-    if (child === "leon") {
-      const progress = getState().profiles.leon.mathProgress?.[domain];
-      question = createMathQuestion(domain, progress?.difficulty || 1);
-    } else {
-      question = createCountingQuestion();
-    }
+    let candidate, attempts = 0;
+    do {
+      if (child === "leon") {
+        const progress = getState().profiles.leon.mathProgress?.[domain];
+        candidate = createMathQuestion(domain, progress?.difficulty || 1);
+      } else {
+        candidate = createCountingQuestion();
+      }
+      attempts++;
+    } while (seenQuestions.has(child === "leon" ? candidate.prompt : candidate.text + "|" + candidate.count + "|" + candidate.symbol) && attempts < 100);
+    question = candidate;
+    seenQuestions.add(child === "leon" ? question.prompt : question.text + "|" + question.count + "|" + question.symbol);
   };
 
   generate();
