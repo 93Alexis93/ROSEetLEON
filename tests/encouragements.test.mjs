@@ -76,3 +76,21 @@ test("La réussite lit le message affiché sans lancer une deuxième félicitati
  assert.match(activities, /successPraise\(child, getState\(\)\.settings\.voice, feedback\?\.textContent/);
  assert.doesNotMatch(activities, /successPraise\(child,getState\(\)\.settings\.voice\);[\s\S]{0,500}speak\(feedback/);
 });
+
+
+test("Rose · les bonnes réponses utilisent les éléments de l’écran rendu", () => {
+ const rose = readFileSync(resolve(root, "src/child/rose-activities.js"), "utf8");
+ assert.match(rose, /const feedback=document\.querySelector\("\.feedback"\);const answerGrid=document\.querySelector\("\.answer-grid"\);if\(!feedback\|\|!answerGrid\)return;/,
+  "Le traitement de la bonne réponse doit retrouver les éléments réellement affichés.");
+ assert.match(rose, /answerGrid\.querySelectorAll\("button"\)/,
+  "Les choix de la question réussie doivent être désactivés sans variable hors portée.");
+ assert.match(rose, /feedback\.after\(next\)/,
+  "Le bouton de progression doit être ajouté au feedback courant.");
+});
+
+test("Les félicitations vocales ordinaires sont limitées à une phrase courte", () => {
+ const audio = readFileSync(resolve(root, "src/audio.js"), "utf8");
+ assert.match(audio, /const brief=message\.split\(/);
+ assert.match(audio, /words\.length>9\?words\.slice\(0,9\)/,
+  "La voix doit raccourcir les messages ordinaires ; la récompense finale reste distincte.");
+});
