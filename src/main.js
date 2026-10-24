@@ -57,6 +57,38 @@ function home() {
   }));
 }
 
+function guidedChoice(child) {
+  const rose = child === "rose";
+  document.body.className = "theme-" + child;
+  const content = el("div", { class: "stack" });
+  const intro = rose
+    ? "Bonjour Rose ! Qu’est-ce qui te ferait plaisir ? Tu peux choisir de compter, découvrir un jeu magique, ou écouter les syllabes."
+    : "Salut Léon ! De quoi as-tu envie aujourd’hui ? Tu peux résoudre des défis de maths, lire, ou faire du calcul mental.";
+  content.append(el("p", { class: "lead", text: rose
+    ? "Choisis ce qui te donne envie. Je peux te lire les choix et tu peux changer d’avis."
+    : "Choisis selon ton envie du moment. Pas besoin de tout faire : un seul défi suffit !" }));
+  const options = rose ? [
+    ["🦄 Je veux compter", "Compter les collections", () => startActivity("rose")],
+    ["🌈 Je veux découvrir", "Couleurs, formes et lettres", () => roseMenu()],
+    ["👏 Je veux écouter", "Les syllabes en rythme", () => syllableGame()]
+  ] : [
+    ["⚽ Je veux réfléchir", "Défis de maths", () => startActivity("leon")],
+    ["📚 Je veux lire", "Mots, phrases et histoires", () => readingMenu()],
+    ["🧮 Je veux calculer", "Calcul mental et petits problèmes", () => calculationMenu()]
+  ];
+  options.forEach(([label, description, action]) => content.append(card([
+    el("h2", { text: label }),
+    el("p", { class: "small", text: description }),
+    button("Je choisis ce jeu", action, "button-primary")
+  ])));
+  content.append(button("🔊 Répéter les choix", () => speak(intro, getState().settings.voice), "button-soft"));
+  content.append(button("↩ Retour", () => childHome(child), "button-soft"));
+  replaceApp(screen(rose ? "Quel jeu te ferait plaisir ?" : "Quelle mission te tente ?", content, {
+    eyebrow: "Le guide des aventures", home: () => go("home")
+  }));
+  speak(intro, getState().settings.voice);
+}
+
 function childHome(child) {
   document.body.className = "theme-" + child;
   const rose = child === "rose";
@@ -120,6 +152,7 @@ function childHome(child) {
     el("p", { text: rose ? "Tu peux prendre ton temps. Chaque essai est une découverte !" : "Pas besoin d’aller vite : réfléchir, essayer et recommencer, c’est déjà gagner !" })
   ]);
   const tools = el("div", { class: "child-bottom-actions" }, [
+    button("🎙️ Aide-moi à choisir", () => guidedChoice(child), "button-primary"),
     button("🌿 Petite pause", () => guidedPause(child), "button-warm"),
     button("🔊 Réécouter", () => speak(
       rose
