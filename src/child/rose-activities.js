@@ -25,7 +25,7 @@ export function roseMenu(){
  document.body.className="theme-rose";const content=el("div",{class:"stack"});
  content.append(el("p",{class:"lead",text:"Choisis un petit jeu. On peut s’arrêter dès qu’on en a envie !"}));
  content.append(
-  card([el("h2",{text:"🦄 Compter les licornes"}),el("p",{class:"small",text:"Compter jusqu’à cinq."}),button("Jouer",()=>startActivity("rose"),"button-primary")]),
+  card([el("h2",{text:"🦄 Compter les licornes"}),el("p",{class:"small",text:"Compter jusqu’à huit, en prenant son temps."}),button("Jouer",()=>startActivity("rose"),"button-primary")]),
   card([el("h2",{text:"🌈 Les couleurs magiques"}),el("p",{class:"small",text:"Reconnaître huit couleurs."}),button("Jouer",()=>startRoseActivity("colors"),"button-primary")]),
   card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître sept formes."}),button("Jouer",()=>startRoseActivity("shapes"),"button-primary")]),
   card([el("h2",{text:"🔤 Les lettres de Rose"}),el("p",{class:"small",text:"Retrouver les lettres R, O, S et E."}),button("Jouer",()=>startRoseActivity("letters"),"button-primary")]),
