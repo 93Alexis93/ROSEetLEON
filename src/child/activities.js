@@ -119,6 +119,7 @@ export function startActivity(child, domain = null) {
   let hint = 0;
   let question;
   let progressRecorded = false;
+  let locked = false;
   const seenQuestions = new Set();
   const target = 5;
   const initialState = getState();
@@ -128,6 +129,7 @@ export function startActivity(child, domain = null) {
     tries = 0;
     hint = 0;
     progressRecorded = false;
+    locked = false;
     let candidate, attempts = 0;
     do {
       if (child === "leon") {
@@ -237,6 +239,7 @@ export function startActivity(child, domain = null) {
   }
 
   function answer(choice) {
+    if (locked) return;
     const ok = String(choice) === String(question.answer);
     recordAnswer(child, ok);
     if (child === "leon" && !progressRecorded) {
@@ -245,17 +248,18 @@ export function startActivity(child, domain = null) {
     }
 
     if (ok) {
+      locked = true;
       score++;
       cheer(getState().settings.sounds);
-      round++;
-      if (round >= target) {
-        finish(child, score, target);
-        return;
-      }
-      generate();
-      render();
       const feedback = document.querySelector(".feedback");
       if (feedback) feedback.textContent = pick(["Oui, bien joué ! Tu as trouvé !", "Super réflexion ! Tu avances dans le défi.", "Bravo, tu as bien observé !", "Bien trouvé ! Une nouvelle étape est réussie.", "Youpi, tu as trouvé la bonne réponse !"]);
+      document.querySelectorAll(".answer-grid button").forEach(item => { item.disabled = true; });
+      const next = button(round + 1 >= target ? "Terminer" : "Question suivante", () => {
+        round++;
+        if (round >= target) finish(child, score, target);
+        else { generate(); render(); }
+      }, "button-primary");
+      feedback?.after(next);
       return;
     }
 
