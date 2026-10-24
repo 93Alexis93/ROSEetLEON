@@ -58,7 +58,15 @@ export const SYLLABLE_WORDS=[
  {word:"chapeau",picture:"👒",syllables:2}, {word:"canapé",picture:"🛋️",syllables:3},
  {word:"fourmi",picture:"🐜",syllables:2}, {word:"hibou",picture:"🦉",syllables:2},
  {word:"chaussette",picture:"🧦",syllables:2}, {word:"rivière",picture:"🏞️",syllables:2},
- {word:"poussin",picture:"🐥",syllables:2}, {word:"bonnet",picture:"🧢",syllables:2}
+ {word:"poussin",picture:"🐥",syllables:2}, {word:"bonnet",picture:"🧢",syllables:2},
+ {word:"abeille",picture:"🐝",syllables:2}, {word:"cerise",picture:"🍒",syllables:2},
+ {word:"fraise",picture:"🍓",syllables:1}, {word:"ballon",picture:"⚽",syllables:2},
+ {word:"fusée",picture:"🚀",syllables:2}, {word:"musique",picture:"🎵",syllables:2},
+ {word:"koala",picture:"🐨",syllables:3}, {word:"kangourou",picture:"🦘",syllables:3},
+ {word:"escargot",picture:"🐌",syllables:3}, {word:"cheval",picture:"🐴",syllables:2},
+ {word:"voiture",picture:"🚗",syllables:2}, {word:"piano",picture:"🎹",syllables:2},
+ {word:"marmite",picture:"🍲",syllables:2}, {word:"girafe",picture:"🦒",syllables:2},
+ {word:"poisson",picture:"🐟",syllables:2}, {word:"parapluie",picture:"☂️",syllables:3}
 ];
 export function createSyllableQuestion(random=Math.random){
  const item=pick(SYLLABLE_WORDS,random);
