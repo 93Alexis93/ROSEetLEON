@@ -29,7 +29,7 @@ test("PWA · les fiches et leurs styles sont préchargés",()=>{
 });
 
 test("PWA · le cache est renouvelé pour les dernières corrections de contenu",()=>{
-  assert.match(worker,/const CACHE="rose-leon-v62"/,"Le cache doit accompagner les derniers enrichissements de contenus.");
+  assert.match(worker,/const CACHE="rose-leon-v65"/,"Le cache doit accompagner les derniers enrichissements de contenus.");
 });
 
 test("PWA · les nouveaux modules de calcul sont préchargés hors ligne",()=>{
@@ -84,5 +84,5 @@ test("Accueil · les deux univers enfant sont mis en avant avec des appels au je
     assert.ok(main.includes(token)||css.includes(token),"Style ou structure d’accueil manquant : "+token);
   }
   assert.match(main,/aria-label.*Choisis ton univers/);
-  assert.match(main,/Sans compétition/);
+  assert.match(main,/Pas de compétition/);
 });
