@@ -228,6 +228,7 @@ export function startActivity(child, domain = null) {
             if (item.textContent === String(question.answer)) item.className = "button-warm";
           });
         }
+        speak(feedback.textContent, getState().settings.voice);
       }, "button-soft")
     ]));
 
@@ -259,7 +260,8 @@ export function startActivity(child, domain = null) {
       score++;
       cheer(getState().settings.sounds);successPraise(child,getState().settings.voice);
       const feedback = document.querySelector(".feedback");
-      if (feedback) feedback.textContent = pick(["Oui, bien joué ! Tu as trouvé !", "Super réflexion ! Tu avances dans le défi.", "Bravo, tu as bien observé !", "Bien trouvé ! Une nouvelle étape est réussie.", "Youpi, tu as trouvé la bonne réponse !"]);
+      if (feedback) feedback.textContent = pick(["Oui, bien joué ! Tu as trouvé !", "Super réflexion ! Tu avances dans le défi.", "Bravo, tu as bien observé !", "Bien trouvé ! Une nouvelle étape est réussie.", "Youpi, tu as trouvé la bonne réponse !"]) + (child === "leon" ? " " + question.explanation : " " + question.answer + " !");
+      speak((feedback?.textContent || "Bravo, tu as trouvé !") + (child === "leon" ? "" : " " + question.explanation), getState().settings.voice);
       document.querySelectorAll(".answer-grid button").forEach(item => { item.disabled = true; });
       const next = button(round + 1 >= target ? "Terminer" : "Question suivante", () => {
         round++;
@@ -277,6 +279,7 @@ export function startActivity(child, domain = null) {
       feedback.textContent = pick(tries % 2
         ? ["Pas loin ! On regarde encore ensemble.", "Tu y es presque. Essaie une autre fois !", "Ce n’est pas la bonne réponse pour le moment. On réfléchit ensemble."]
         : ["Prends ton temps, tu peux retenter.", "Chaque essai aide à apprendre. On recommence ?", "Pas de souci, on cherche encore tranquillement !"]);
+      speak(feedback.textContent + (hint > 0 ? " " + question.hint : ""), getState().settings.voice);
     }
     if (tries >= 3) {
       const pause = button("Faire une petite pause", () => {
