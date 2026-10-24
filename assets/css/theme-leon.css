@@ -1,1 +1,7 @@
 body.theme-leon{background:#eef3ff;--accent:#243b73}body.theme-leon .big-choice,body.theme-leon .card{border-color:#cbd8f5}body.theme-leon .button-primary{background:#243b73}body.theme-leon .progress-fill{background:#d94c5c}
+body.theme-leon .child-hero{background:linear-gradient(145deg,#dff5ff 0%,#c9e7ff 54%,#e9edff 100%);color:#173d62;border-color:#fff}
+body.theme-leon .child-hero-kicker{color:#315f84}
+body.theme-leon .child-section-sticker{background:#e6f5ff}
+body.theme-leon .child-tile{background:linear-gradient(145deg,#fff,#f0f6ff);color:#203c68;border-color:#dce8ff}
+body.theme-leon .child-tile-main{background:linear-gradient(145deg,#cceeff,#e2f3ff);border-color:#b5def5}
+body.theme-leon .child-tile-alt{background:linear-gradient(145deg,#fff,#f1f4ff)}
