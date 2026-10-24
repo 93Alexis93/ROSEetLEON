@@ -13,6 +13,7 @@ function collectFeedback(node,set){
   node.querySelectorAll?.(".feedback").forEach(item=>set.add(item));
 }
 function announceFeedback(item){
+  if(!item.isConnected)return;
   const message=item.textContent?.trim();
   if(message)speak(message,getState().settings.voice);
 }
