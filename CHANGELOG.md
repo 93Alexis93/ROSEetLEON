@@ -1,3 +1,8 @@
+## Accueil ludique — 2026-10-24
+- Refonte de l’accueil en « club des petits explorateurs » avec une accroche joyeuse, des univers Léon/Rose bien différenciés et un message rassurant.
+- Boutons tactiles plus immersifs, styles adaptés aux petits écrans et respect de la réduction des animations.
+- Test de présence des éléments de l’accueil et cache PWA renouvelé à v62.
+
 # Journal des versions
 
 ## Maintenance — 2026-10-23
