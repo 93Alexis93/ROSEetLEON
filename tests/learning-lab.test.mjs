@@ -36,7 +36,7 @@ test("Nombre mystère · la réponse correspond exactement à l’indice",()=>{
   }
  }
 });
-test("Syllabes · chaque question possède une consigne et une réponse entre une et trois syllabes",()=>{
+test("Nombre mystère · les bonds de dix parlent d’unités placées après le nombre",()=>{\n for(let i=0;i<500;i++){const q=createNumberMysteryQuestion();if(q.prompt.includes("10 unités après")){const match=q.prompt.match(/^Quel nombre est placé 10 unités après (\\d+) \\?$/);assert.ok(match,q.prompt);assert.equal(q.answer,Number(match[1])+10,q.prompt);return;}}\n assert.fail("Aucune question de bond de dix générée.");\n});\n\ntest("Syllabes · chaque question possède une consigne et une réponse entre une et trois syllabes",()=>{
  for(let i=0;i<300;i++){
   const q=createSyllableQuestion();
   assert.ok(q.word.length>0&&q.picture.length>0);
