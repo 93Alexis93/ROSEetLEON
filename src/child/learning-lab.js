@@ -329,3 +329,65 @@ export function programmingGame(){
  }
  generate();render();
 }
+
+
+export const ENGLISH_WORDS = [
+ {word:"cat",meaning:"chat",picture:"🐱",hint:"Le mot anglais commence par le son « k »."},
+ {word:"dog",meaning:"chien",picture:"🐶",hint:"C’est un animal qui aime parfois rapporter la balle."},
+ {word:"sun",meaning:"soleil",picture:"☀️",hint:"Il brille dans le ciel pendant la journée."},
+ {word:"book",meaning:"livre",picture:"📘",hint:"On le lit pour découvrir une histoire."},
+ {word:"red",meaning:"rouge",picture:"🔴",hint:"C’est la couleur d’un coquelicot."},
+ {word:"blue",meaning:"bleu",picture:"🔵",hint:"C’est la couleur d’un ciel sans nuages."},
+ {word:"apple",meaning:"pomme",picture:"🍎",hint:"C’est un fruit que l’on peut croquer."},
+ {word:"house",meaning:"maison",picture:"🏠",hint:"C’est l’endroit où l’on peut habiter."},
+ {word:"ball",meaning:"ballon",picture:"⚽",hint:"On peut le lancer, le faire rebondir ou jouer au foot."},
+ {word:"star",meaning:"étoile",picture:"⭐",hint:"On peut en voir dans le ciel la nuit."}
+];
+export function createEnglishQuestion(random=Math.random,excluded=[]){
+ const available=ENGLISH_WORDS.filter(item=>!excluded.includes(item.word));
+ const word=available[Math.floor(random()*available.length)]||ENGLISH_WORDS[0];
+ const distractors=shuffle(ENGLISH_WORDS.filter(item=>item.meaning!==word.meaning),random).slice(0,2).map(item=>item.meaning);
+ return {word:word.word,meaning:word.meaning,picture:word.picture,hint:word.hint,prompt:"Écoute le mot anglais, puis trouve sa signification en français.",choices:shuffle([word.meaning,...distractors],random)};
+}
+export function englishGame(){
+ document.body.className="theme-leon";
+ let round=0,locked=false,attempts=0,question;
+ const total=5,seen=[];
+ function generate(){locked=false;attempts=0;question=createEnglishQuestion(Math.random,seen);seen.push(question.word);}
+ function render(){
+  const content=card([]);
+  content.append(el("p",{class:"small",text:"English · Mot "+(round+1)+" sur "+total+" · On écoute, on cherche et on recommence si besoin."}));
+  content.append(el("div",{class:"progress-track",role:"progressbar","aria-label":"Progression des mots anglais","aria-valuemin":"0","aria-valuemax":String(total),"aria-valuenow":String(round)},el("div",{class:"progress-fill",style:"width:"+(round/total*100)+"%"})));
+  content.append(el("div",{class:"prompt",text:question.picture,"aria-label":"Illustration du mot anglais"}),el("p",{class:"lead",text:question.prompt}));
+  const answers=el("div",{class:"answer-grid"});
+  question.choices.forEach(choice=>answers.append(button(choice,()=>answer(choice),"button-soft")));
+  const feedback=el("p",{class:"feedback",role:"status","aria-live":"polite"});
+  content.append(answers,feedback,button("🔊 Réécouter en anglais",()=>speak(question.word,getState().settings.voice,"en-GB"),"button-soft"),button("💡 Indice",()=>{feedback.textContent=question.hint;speak(question.hint,getState().settings.voice);},"button-soft"),button("⌂ Accueil",()=>go("home"),"icon-button"));
+  replaceApp(screen("Mes premiers mots en anglais",content,{eyebrow:"Écouter · comprendre · découvrir",home:()=>go("home")}));
+  speak(question.word,getState().settings.voice,"en-GB");
+ }
+ function answer(choice){
+  if(locked)return;
+  const feedback=document.querySelector(".feedback");
+  if(choice!==question.meaning){
+   recordAnswer("leon",false);attempts++;gentleOops(getState().settings.sounds);
+   if(feedback)feedback.textContent=attempts>=2?"« "+question.word+" » veut dire « "+question.meaning+" ». Choisis cette réponse pour continuer.":"Bien essayé ! Réécoute le mot anglais et cherche encore.";
+   speak(attempts>=2?question.word+" means "+question.meaning+". Choose "+question.meaning+".":"Bien essayé ! Réécoute le mot anglais.",getState().settings.voice,attempts>=2?"en-GB":"fr-FR");
+   return;
+  }
+  locked=true;recordAnswer("leon",true);cheer(getState().settings.sounds);
+  if(feedback)feedback.textContent="Bravo ! "+question.word+" veut dire « "+question.meaning+" ». 🇬🇧";
+  successPraise("leon",getState().settings.voice,feedback?.textContent||"Bravo ! Tu découvres l’anglais.");
+  document.querySelectorAll(".answer-grid button").forEach(b=>b.disabled=true);
+  feedback?.after(button(round===total-1?"Terminer les mots":"Mot suivant",()=>{
+   round++;
+   if(round>=total){
+    recordSession("leon");sessionPraise("leon",getState().settings.voice);
+    const done=card([el("div",{class:"prompt",text:"🇬🇧 ⭐ 🎉"}),el("h2",{text:"Well done !"}),el("p",{class:"lead",text:"Tu as écouté cinq mots anglais et découvert leur sens."}),button("Rejouer",()=>englishGame(),"button-primary"),button("⌂ Accueil",()=>go("home"),"button-soft")]);
+    replaceApp(screen("Bravo !",done,{home:()=>go("home")}));return;
+   }
+   generate();render();
+  },"button-primary"));
+ }
+ generate();render();
+}

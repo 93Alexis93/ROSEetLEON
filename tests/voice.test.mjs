@@ -62,3 +62,11 @@ test("Voix · l’arrêt explicite annule la lecture en cours", () => {
   stopSpeaking();
   assert.equal(calls.cancelled, 1);
 });
+
+
+test("Voix · une activité peut demander une prononciation anglaise",()=>{
+ const calls=installSpeech({voices:[{lang:"en-GB",name:"English voice"},{lang:"fr-FR",name:"Voix française"}]});
+ assert.equal(speak("apple",true,"en-GB"),true);
+ assert.equal(calls.spoken[0].lang,"en-GB");
+ assert.equal(calls.spoken[0].voice.name,"English voice");
+});

@@ -8,7 +8,7 @@ import { parentGate, parentDashboard, crisis } from "./parent/parent.js";
 import { printComingSoon } from "./parent/printables.js";
 import { speak } from "./voice.js";
 import { unlockAudio } from "./audio.js";
-import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame, footballAdventure, roseMagicAdventure, programmingGame } from "./child/learning-lab.js";
+import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame, footballAdventure, roseMagicAdventure, programmingGame, englishGame } from "./child/learning-lab.js";
 import { guidedPause } from "./child/pause.js";
 import { calculationMenu } from "./child/calcul.js";
 import { sentenceBuilder } from "./child/sentence-builder.js";
@@ -76,6 +76,7 @@ function guidedChoice(child) {
   ] : [
     ["⚽ Je veux réfléchir", "Défis de maths", () => startActivity("leon")],
     ["📚 Je veux lire", "Mots, phrases et histoires", () => readingMenu()],
+    ["🇬🇧 Je veux découvrir l’anglais", "Écouter cinq mots anglais", () => englishGame()],
     ["🧮 Je veux calculer", "Calcul mental et petits problèmes", () => calculationMenu()],
     ["🤖 Je veux programmer", "Guider un robot avec des flèches", () => programmingGame()]
   ];
@@ -107,6 +108,7 @@ const EXERCISES = [
   {child:"leon",name:"Suites logiques",keywords:"logique suite motif symbole nombres régularité",stars:2,description:"Repérer une règle et trouver le symbole ou le nombre suivant.",run:()=>sequenceGame()},
   {child:"leon",name:"Géométrie des champions",keywords:"géométrie formes côtés triangle carré cercle rectangle segment règle",stars:1,description:"Reconnaître les formes et découvrir comment tracer un segment.",run:()=>geometryGame()},
   {child:"leon",name:"Le petit robot programmeur",keywords:"programmation coder robot flèches commandes logique",stars:2,description:"Donner des instructions au robot pour atteindre une étoile.",run:()=>programmingGame()},
+  {child:"leon",name:"Mes premiers mots en anglais",keywords:"anglais oral écouter prononcer vocabulaire english",stars:1,description:"Écouter cinq mots anglais et retrouver leur sens en français.",run:()=>englishGame()},
   {child:"leon",name:"L’aventure du match",keywords:"football histoire lecture compréhension aventure équipe but",stars:2,description:"Lis une aventure de football et fais avancer l’histoire avec tes réponses.",run:()=>footballAdventure()},
   {child:"leon",name:"Phrases à reconstruire",keywords:"lecture mots phrase syntaxe remettre ordre",stars:2,description:"Remets les mots dans l’ordre pour former une phrase.",run:()=>sentenceBuilder()},
   {child:"leon",name:"Calcul mental",keywords:"calcul additions soustractions compléments problèmes",stars:2,description:"Calculer et résoudre des petits problèmes.",run:()=>calculationMenu()},
@@ -180,6 +182,7 @@ function childHome(child) {
         unlockAudio();
         startActivity(child);
       }), "child-tile child-tile-main"),
+      button("🇬🇧\nMes premiers mots en anglais\nÉcoute et découvre", chooseExercise("Léon, écoute un mot anglais et retrouve sa signification en français.", () => { unlockAudio(); englishGame(); }), "child-tile child-tile-alt"),
       button("📚\nJeux de lecture\nMots, phrases et petites histoires", chooseExercise("Léon, lis des mots, des phrases et de petites histoires, puis réponds aux questions.", () => {
         unlockAudio();
         readingMenu();

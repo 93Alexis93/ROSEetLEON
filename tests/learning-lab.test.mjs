@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createNumberMysteryQuestion,createCompareQuestion,createSyllableQuestion,SYLLABLE_WORDS,createProgrammingQuestion} from "../src/child/learning-lab.js";
+import {createNumberMysteryQuestion,createCompareQuestion,createSyllableQuestion,SYLLABLE_WORDS,createProgrammingQuestion,createEnglishQuestion,ENGLISH_WORDS} from "../src/child/learning-lab.js";
 import {readFileSync} from "node:fs";
 import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
@@ -182,4 +182,26 @@ test("Mini-programmation · jeu branché dans le menu de Léon et précaché hor
  assert.match(main,/Le petit robot programmeur/);
  assert.match(lab,/export function programmingGame/);
  assert.ok(worker.includes("./src/child/learning-lab.js"));
+});
+
+
+test("Anglais oral · les mots ont une traduction unique et trois choix distincts",()=>{
+ assert.ok(ENGLISH_WORDS.length>=10);
+ assert.equal(new Set(ENGLISH_WORDS.map(item=>item.word)).size,ENGLISH_WORDS.length);
+ for(let i=0;i<300;i++){
+  const q=createEnglishQuestion();
+  assert.ok(ENGLISH_WORDS.some(item=>item.word===q.word&&item.meaning===q.meaning));
+  assert.ok(q.picture&&q.hint&&q.prompt);
+  assert.equal(q.choices.length,3);
+  assert.equal(new Set(q.choices).size,3);
+  assert.ok(q.choices.includes(q.meaning));
+ }
+});
+test("Anglais oral · activité disponible dans les menus et voix anglaise paramétrable",()=>{
+ const main=readFileSync(resolve(root,"src/main.js"),"utf8");
+ const voice=readFileSync(resolve(root,"src/voice.js"),"utf8");
+ assert.match(main,/Mes premiers mots en anglais/);
+ assert.match(main,/englishGame/);
+ assert.match(voice,/language="fr-FR"/);
+ assert.match(voice,/u\.lang=language/);
 });

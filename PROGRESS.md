@@ -476,3 +476,10 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Cache PWA renouvelé en `rose-leon-v109`.
 - Les tests et le déploiement de cette livraison doivent être vérifiés sur le SHA produit avant de considérer la livraison automatisée terminée.
 - À faire impérativement sur iPhone : parcours réel des activités, voix/sons, persistance, mode avion après premier chargement HTTPS, impression A4 et rendu de l’icône ; voir [la checklist](docs/VALIDATION_IPHONE.md).
+
+
+## Lot complémentaire — anglais oral pour Léon (24 octobre 2026)
+- Ajout d’un jeu de cinq mots anglais courants, avec prononciation vocale anglaise, traduction française, trois choix, réécoute et indice.
+- La synthèse vocale accepte maintenant une langue demandée par l’activité, tout en conservant le français par défaut pour les activités existantes.
+- Tests ajoutés sur les dix traductions, la variété des choix, le branchement dans les menus et le choix de voix anglaise.
+- Cache PWA renouvelé en `rose-leon-v110`. Vérifier la CI et la publication Pages sur le SHA final.
