@@ -11,6 +11,7 @@ import { unlockAudio } from "./audio.js";
 import { numberMystery, compareNumbers, syllableGame } from "./child/learning-lab.js";
 import { guidedPause } from "./child/pause.js";
 import { calculationMenu } from "./child/calcul.js";
+import { sentenceBuilder } from "./child/sentence-builder.js";
 
 function home() {
   document.body.className = "";
@@ -99,6 +100,7 @@ const EXERCISES = [
   {child:"leon",name:"Défis de maths",keywords:"maths problèmes nombres calcul",stars:2,description:"Résoudre des questions de maths variées.",run:()=>startActivity("leon")},
   {child:"leon",name:"Nombre mystère",keywords:"numération indices nombre caché",stars:2,description:"Trouver un nombre grâce aux indices.",run:()=>numberMystery()},
   {child:"leon",name:"Comparer les nombres",keywords:"plus grand petit comparer centaines dizaines",stars:2,description:"Comparer des nombres à deux ou trois chiffres.",run:()=>compareNumbers()},
+  {child:"leon",name:"Phrases à reconstruire",keywords:"lecture mots phrase syntaxe remettre ordre",stars:2,description:"Remets les mots dans l’ordre pour former une phrase.",run:()=>sentenceBuilder()},
   {child:"leon",name:"Calcul mental",keywords:"calcul additions soustractions compléments problèmes",stars:2,description:"Calculer et résoudre des petits problèmes.",run:()=>calculationMenu()},
   {child:"leon",name:"Mots-éclairs",keywords:"lecture mots reconnaître rapidement",stars:1,description:"Reconnaître des mots familiers.",run:()=>startReading("flash")},
   {child:"leon",name:"Mots-mystères",keywords:"lecture syllabes assembler déchiffrer",stars:2,description:"Assembler des syllabes pour lire.",run:()=>startReading("mystery")},
@@ -182,6 +184,7 @@ function childHome(child) {
         unlockAudio();
         compareNumbers();
       }), "child-tile child-tile-alt"),
+      button("🧩\nPhrases à reconstruire\nRemets les mots dans le bon ordre", chooseExercise("Léon, remets les mots dans le bon ordre pour former une phrase.", () => { unlockAudio(); sentenceBuilder(); }), "child-tile child-tile-alt"),
       button("🧮\nCalcul mental\nCalculs et problèmes à résoudre", chooseExercise("Léon, fais les calculs dans ta tête et résous les petits problèmes.", () => {
         unlockAudio();
         calculationMenu();
