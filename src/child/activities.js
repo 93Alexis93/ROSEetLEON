@@ -15,13 +15,30 @@ const shuffle = (items, random = Math.random) => {
   return out;
 };
 
+const ROSE_COUNTING_THEMES = [
+  { singular: "licorne", plural: "licornes", symbol: "🦄" },
+  { singular: "cœur", plural: "cœurs", symbol: "💗" },
+  { singular: "papillon", plural: "papillons", symbol: "🦋" },
+  { singular: "fleur", plural: "fleurs", symbol: "🌼" },
+  { singular: "chat", plural: "chats", symbol: "🐱" },
+  { singular: "étoile", plural: "étoiles", symbol: "⭐" },
+  { singular: "pomme", plural: "pommes", symbol: "🍎" },
+  { singular: "ballon", plural: "ballons", symbol: "⚽" },
+  { singular: "poisson", plural: "poissons", symbol: "🐠" },
+  { singular: "coccinelle", plural: "coccinelles", symbol: "🐞" },
+  { singular: "glace", plural: "glaces", symbol: "🍦" },
+  { singular: "petit dinosaure", plural: "petits dinosaures", symbol: "🦕" }
+];
+
 export function createCountingQuestion(random = Math.random) {
   const count = 1 + Math.floor(random() * 8);
+  const theme = ROSE_COUNTING_THEMES[Math.floor(random() * ROSE_COUNTING_THEMES.length)];
   const alternatives = shuffle([1, 2, 3, 4, 5, 6, 7, 8].filter(n => n !== count), random).slice(0, 2);
   return {
-    text: "Combien de licornes ?",
+    text: "Combien de " + (count === 1 ? theme.singular : theme.plural) + " ?",
     answer: count,
     count,
+    symbol: theme.symbol,
     choices: shuffle([count, ...alternatives], random)
   };
 }
@@ -120,7 +137,7 @@ export function startActivity(child, domain = null) {
   function render() {
     const noun = child === "leon"
       ? (MATH_DOMAINS.find(item => item.id === domain)?.label || "Défi de maths")
-      : "Les licornes à compter";
+      : "Les collections à compter";
     const content = card([]);
     const progress = el("div", { class: "progress-track" },
       el("div", { class: "progress-fill", style: "width:" + round / target * 100 + "%" })
@@ -133,7 +150,7 @@ export function startActivity(child, domain = null) {
         class: "lead",
         text: child === "leon"
           ? "Choisis une réponse, puis prends ton temps pour réfléchir."
-          : "Regarde les licornes, puis touche le bon nombre."
+          : "Regarde les images, compte-les tranquillement, puis touche le bon nombre."
       }),
       el("div", { class: "prompt", text: child === "leon" ? question.prompt : question.text })
     );
@@ -141,8 +158,8 @@ export function startActivity(child, domain = null) {
     if (child === "rose") {
       const art = el("div", {
         class: "prompt",
-        text: "🦄 ".repeat(question.count),
-        "aria-label": question.count + " licornes"
+        text: (question.symbol + " ").repeat(question.count),
+        "aria-label": question.count + " " + question.text.replace("Combien de ", "").replace(" ?", "")
       });
       art.style.fontSize = "2.4rem";
       content.append(art);
@@ -157,7 +174,7 @@ export function startActivity(child, domain = null) {
     const feedback = el("div", { class: "feedback", role: "status", "aria-live": "polite" });
     content.append(feedback, el("div", { class: "button-row" }, [
       button("🔊 Réécouter", () => speak(
-        child === "leon" ? "Calcule " + question.prompt : "Compte les licornes et choisis le nombre.",
+        child === "leon" ? "Calcule " + question.prompt : "Compte les images et choisis le nombre.",
         getState().settings.voice
       ), "button-soft"),
       button("💡 Aide", () => {
@@ -204,7 +221,7 @@ export function startActivity(child, domain = null) {
     }));
 
     speak(
-      child === "leon" ? "Défi " + noun + ". " + question.prompt : "Combien de licornes vois-tu ? Compte-les puis choisis le nombre.",
+      child === "leon" ? "Défi " + noun + ". " + question.prompt : question.text + " Compte-les puis choisis le nombre.",
       initialState.settings.voice
     );
   }
