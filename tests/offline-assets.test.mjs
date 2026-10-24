@@ -86,3 +86,20 @@ test("Accueil · les deux univers enfant sont mis en avant avec des appels au je
   assert.match(main,/aria-label.*Choisis ton univers/);
   assert.match(main,/Pas de compétition/);
 });
+
+
+test("PWA · le service worker est enregistré en HTTPS et l’échec ne bloque pas l’application",()=>{
+  const main=readFileSync(resolve(root,"src/main.js"),"utf8");
+  assert.match(main, /"serviceWorker" in navigator/);
+  assert.match(main, /location.protocol.startsWith("http")/);
+  assert.match(main, /serviceWorker.register("./service-worker.js").catch(() => {})/);
+});
+
+test("Rose · les visuels de base ne dépendent pas d’images distantes",()=>{
+  const rose=readFileSync(resolve(root,"src/child/rose-activities.js"),"utf8");
+  assert.match(rose, /const COLORS=/);
+  assert.match(rose, /const SHAPES=/);
+  assert.match(rose, /sequence:"🔴 🔵 🔴 🔵 ?"/);
+  assert.doesNotMatch(rose, /https?://|<img\b/i,
+    "Les visuels de ces activités doivent rester disponibles sans requête d’image distante.");
+});
