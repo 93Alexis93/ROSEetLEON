@@ -167,7 +167,8 @@ export function createSequenceQuestion(level=1,random=Math.random){
  const start=level===3?pick([1,3,10,20],random):pick([2,5,11,20,30],random);
  const length=5;const sequence=Array.from({length},(_,i)=>start+step*i);const answer=start+step*length;
  const candidates=[answer-step,answer+step,answer+1,answer+10,answer+2*step];
- return {sequence,prompt:"Quel nombre vient ensuite ?",answer,choices:shuffleChoices(answer,candidates),hint:"Regarde de combien le nombre augmente à chaque étape.",explanation:"On ajoute "+step+" à chaque fois : le nombre suivant est "+answer+"."};
+ const prompt=pick(["Quel nombre vient ensuite ?","Quel est le prochain nombre de la suite ?","Continue la suite : quel nombre manque ?"],random);
+ return {sequence,prompt,answer,choices:shuffleChoices(answer,candidates),hint:"Regarde de combien le nombre augmente à chaque étape.",explanation:"On ajoute "+step+" à chaque fois : le nombre suivant est "+answer+"."};
 }
 export function sequenceGame(){
  document.body.className="theme-leon";let round=0,level=1,question,locked=false;const total=5;let streak=0,hadError=false,levelMessage="On commence tranquillement : observe le motif.";
