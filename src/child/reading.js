@@ -127,7 +127,17 @@ function question(mode) {
       { word: "sourire", rhyme: "rire", others: ["chat", "ballon", "pomme"] },
       { word: "couronne", rhyme: "personne", others: ["lapin", "soleil", "bateau"] },
       { word: "marron", rhyme: "ballon", others: ["fleur", "chat", "vélo"] },
-      { word: "éléphant", rhyme: "enfant", others: ["pomme", "lune", "bateau"] }
+      { word: "éléphant", rhyme: "enfant", others: ["pomme", "lune", "bateau"] },
+      { word: "maillot", rhyme: "soleil", others: ["lapin", "pomme", "bateau"] },
+      { word: "canari", rhyme: "souris", others: ["maison", "chat", "fleur"] },
+      { word: "chanson", rhyme: "poisson", others: ["vélo", "lune", "pomme"] },
+      { word: "lapin", rhyme: "matin", others: ["bateau", "fleur", "robot"] },
+      { word: "magie", rhyme: "souris", others: ["maison", "ballon", "chat"] },
+      { word: "cœur", rhyme: "fleur", others: ["vélo", "lapin", "bateau"] },
+      { word: "pirate", rhyme: "carte", others: ["pomme", "lune", "soleil"] },
+      { word: "dragon", rhyme: "bonbon", others: ["chat", "bateau", "fleur"] },
+      { word: "étoile", rhyme: "toile", others: ["lapin", "maison", "poisson"] },
+      { word: "château", rhyme: "gâteau", others: ["souris", "fleur", "lapin"] }
     ];
     const pair = pick(pairs);
     return {
