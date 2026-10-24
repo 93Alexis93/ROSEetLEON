@@ -6,7 +6,7 @@ import {dirname,resolve} from "node:path";
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const audio=readFileSync(resolve(root,"src/audio.js"),"utf8");
-const files=["src/child/activities.js","src/child/rose-activities.js","src/child/reading.js","src/child/learning-lab.js","src/child/calcul.js"];
+const files=["src/child/activities.js","src/child/rose-activities.js","src/child/reading.js","src/child/learning-lab.js","src/child/calcul.js","src/child/sentence-builder.js"];
 
 test("Les encouragements vocaux sont variés et personnalisés pour chaque enfant",()=>{
  const leon=audio.match(/const LEON_PRAISES=\[([\s\S]*?)\n\];/);
@@ -25,4 +25,29 @@ test("Chaque famille d'exercices annonce vocalement la fin de séance",()=>{
   const source=readFileSync(resolve(root,path),"utf8");
   assert.match(source,/sessionPraise\(/,path+" doit annoncer la fin de séance");
  }
+});
+
+
+test("Encouragements · chaque activité félicite les réussites et termine la séance", () => {
+ for (const path of files) {
+  const source = readFileSync(resolve(root, path), "utf8");
+  assert.match(source, /successPraise\(/, path + " doit féliciter une réussite.");
+  assert.match(source, /sessionPraise\(/, path + " doit annoncer la fin de séance.");
+ }
+});
+
+test("Encouragements · les messages sont distincts et restent bienveillants", () => {
+ for (const [name, block] of [["Léon", audio.match(/const LEON_PRAISES=\[([\s\S]*?)\n\];/)],
+                              ["Rose", audio.match(/const ROSE_PRAISES=\[([\s\S]*?)\n\];/)]]) {
+  assert.ok(block, "Banque d’encouragements manquante pour " + name);
+  const messages = [...block[1].matchAll(/"([^"]+)"/g)].map(match => match[1]);
+  assert.ok(messages.length >= 15, "La banque doit être suffisamment variée pour " + name);
+  assert.equal(new Set(messages).size, messages.length, "Message dupliqué dans la banque de " + name);
+  for (const message of messages) {
+   assert.doesNotMatch(message, /\b(nul|nulle|idiot|punition|honte)\b/i,
+    "Un encouragement ne doit pas humilier l’enfant : " + message);
+  }
+ }
+ assert.match(audio, /if\(list\.length>1&&index===last\[key\]\)/,
+  "Le même message ne doit pas se répéter immédiatement quand une alternative existe.");
 });
