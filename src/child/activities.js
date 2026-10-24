@@ -261,7 +261,7 @@ export function startActivity(child, domain = null) {
       cheer(getState().settings.sounds);successPraise(child,getState().settings.voice);
       const feedback = document.querySelector(".feedback");
       if (feedback) feedback.textContent = pick(["Oui, bien joué ! Tu as trouvé !", "Super réflexion ! Tu avances dans le défi.", "Bravo, tu as bien observé !", "Bien trouvé ! Une nouvelle étape est réussie.", "Youpi, tu as trouvé la bonne réponse !"]) + (child === "leon" ? " " + question.explanation : " " + question.answer + " !");
-      speak((feedback?.textContent || "Bravo, tu as trouvé !") + (child === "leon" ? "" : " " + question.explanation), getState().settings.voice);
+      speak(feedback?.textContent || "Bravo, tu as trouvé !", getState().settings.voice);
       document.querySelectorAll(".answer-grid button").forEach(item => { item.disabled = true; });
       const next = button(round + 1 >= target ? "Terminer" : "Question suivante", () => {
         round++;
