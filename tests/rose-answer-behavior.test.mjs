@@ -18,7 +18,7 @@ class FakeElement {
     this.disabled = false;
     this.classList = { add: name => { if (!this.className.split(/\s+/).includes(name)) this.className = (this.className + " " + name).trim(); } };
   }
-  set textContent(value) { this._text = String(value ?? ""); this.replaceChildren(); }
+  set textContent(value) { this.replaceChildren(); this._text = String(value ?? ""); }
   get textContent() { return this._text + this.children.map(child => child.textContent).join(""); }
   append(...nodes) { for (const node of nodes.flat()) { if (node == null) continue; if (node.parentNode) node.remove(); node.parentNode = this; this.children.push(node); } }
   replaceChildren(...nodes) { for (const child of this.children) child.parentNode = null; this.children = []; this._text = ""; this.append(...nodes); }
