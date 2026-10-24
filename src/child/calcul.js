@@ -1,7 +1,7 @@
 import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
-import { cheer, gentleOops, successPraise } from "../audio.js";
+import { cheer, gentleOops, successPraise, sessionPraise } from "../audio.js";
 import { go } from "../router.js";
 import { CALCULATION_MODES, createCalculationQuestion } from "./calcul-engine.js";
 
@@ -69,6 +69,7 @@ export function startCalculation(kind) {
         round++;
         if (round >= total) {
           recordSession("leon");
+          sessionPraise("leon",getState().settings.voice);
           const done = card([
             el("div", { class: "prompt", text: "⚽ Bravo !" }),
             el("p", { class: "lead", text: "Tu as pris le temps de réfléchir et d’essayer." }),
