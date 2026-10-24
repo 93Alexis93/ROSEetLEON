@@ -82,9 +82,9 @@ function startRoseWritingActivity(){
    }
    chosen.push(letter);
    if(chosen.length===4){
-    if(isRoseNameComplete(chosen)){recordSession("rose");cheer(getState().settings.sounds);successPraise("rose",getState().settings.voice);status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";speak(status.textContent,getState().settings.voice);}
+    if(isRoseNameComplete(chosen)){recordSession("rose");cheer(getState().settings.sounds);status.textContent="🌟 Tu as écrit ROSE ! Bravo, tu peux recommencer ou retourner aux jeux.";successPraise("rose",getState().settings.voice,status.textContent);}
     else {status.textContent="Bien essayé ! Regarde le modèle. Tu peux effacer et recommencer tranquillement.";speak(status.textContent,getState().settings.voice);}
-   }else {cheer(getState().settings.sounds);successPraise("rose",getState().settings.voice);status.textContent="Bien joué ! Quelle lettre vient ensuite ?";speak(status.textContent,getState().settings.voice);}
+   }else {cheer(getState().settings.sounds);status.textContent="Bien joué ! Quelle lettre vient ensuite ?";successPraise("rose",getState().settings.voice,status.textContent);}
    draw();
   },"button-soft")));
   content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour composer ton prénom."}),model,sequence,choices,status,
