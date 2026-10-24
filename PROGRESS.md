@@ -22,7 +22,7 @@ Mis à jour le 24 octobre 2026.
 - Tests Node natifs présents dans `tests/*.test.mjs`, notamment moteurs de maths, lecture, stockage et cohérence des ressources hors ligne.
 - Le workflow GitHub Actions `.github/workflows/tests.yml` vérifie la syntaxe JavaScript et exécute les tests Node.
 - Des tests couvrent notamment les sauvegardes, les questions générées, les menus et le service worker.
-- **Ne pas déclarer les tests verts sans consulter le résultat Actions correspondant au SHA exact.** Le statut du dernier commit n’a pas été vérifié pendant l’audit É0.
+- **Dernière validation automatisée confirmée le 24 octobre 2026 : 141 tests réussis, 0 échec**, sur le commit `c6a1d50fdfef5fc421fee4b03b2c8774fe4dd312` ([CI](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40096762075)). Le déploiement GitHub Pages est réussi sur ce même commit ([publication](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40096762172)).
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
@@ -441,7 +441,7 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 ## Référence Git — état corrigé au 24 octobre 2026
 - La PR #1 a été squash-fusionnée dans `main` au commit `c11868ce53e72c053220e0093ceaac349fe0cb07` ; les modifications de validation ultérieures sont aussi directement sur `main`.
 - Aucun nouveau travail n’est à faire dans une branche : la référence active est `main`.
-- Le déploiement Pages est confirmé au commit `9b5aab72faac2793bf6a3a631a4e70befc67e1fe` (run 643). Les validations manuelles sur iPhone restent séparées de la CI.
+- Le dernier déploiement Pages confirmé est le commit `c6a1d50fdfef5fc421fee4b03b2c8774fe4dd312` (run 40096762172). Les validations manuelles sur iPhone restent séparées de la CI.
 
 ## Voix des encouragements — 24 octobre 2026
 - La fonction de félicitations accepte maintenant le texte réellement affiché à l’enfant : la voix prononce le feedback visible au lieu d’ajouter une seconde phrase aléatoire.
@@ -474,7 +474,7 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Tests ajoutés pour vérifier sur des centaines de questions que le bon parcours atteint l’étoile, reste dans la grille et qu’aucun distracteur n’atteint aussi la cible.
 - README maintenu à 15 lignes maximum.
 - Cache PWA renouvelé en `rose-leon-v109`.
-- Les tests et le déploiement de cette livraison doivent être vérifiés sur le SHA produit avant de considérer la livraison automatisée terminée.
+- CI réussie : 141 tests, 141 réussis, 0 échec sur le SHA `c6a1d50fdfef5fc421fee4b03b2c8774fe4dd312` ([résultat](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40096762075)). Publication Pages réussie sur le même SHA ([déploiement](https://github.com/93Alexis93/ROSEetLEON/actions/runs/40096762172)).
 - À faire impérativement sur iPhone : parcours réel des activités, voix/sons, persistance, mode avion après premier chargement HTTPS, impression A4 et rendu de l’icône ; voir [la checklist](docs/VALIDATION_IPHONE.md).
 
 
@@ -482,4 +482,4 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Ajout d’un jeu de cinq mots anglais courants, avec prononciation vocale anglaise, traduction française, trois choix, réécoute et indice.
 - La synthèse vocale accepte maintenant une langue demandée par l’activité, tout en conservant le français par défaut pour les activités existantes.
 - Tests ajoutés sur les dix traductions, la variété des choix, le branchement dans les menus et le choix de voix anglaise.
-- Cache PWA renouvelé en `rose-leon-v110`. Vérifier la CI et la publication Pages sur le SHA final.
+- Cache PWA renouvelé en `rose-leon-v110`. CI réussie : 141 tests, 0 échec ; publication Pages réussie sur le SHA `c6a1d50fdfef5fc421fee4b03b2c8774fe4dd312` (runs 40096762075 et 40096762172).
