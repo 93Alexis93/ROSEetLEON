@@ -368,3 +368,12 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Les retours vocaux des éléments détachés de l’écran sont ignorés pour éviter qu’un ancien bravo soit annoncé après une nouvelle question.
 - [x] Cache PWA renouvelé en `rose-leon-v70`.
 - [ ] Résultat des tests GitHub Actions à confirmer ; essai audio réel sur Safari iPhone nécessaire pour vérifier le rythme et la voix.
+
+
+## Défi « Nombre mystère » de Léon — 24 octobre 2026
+- [x] Hausse du niveau : questions de numération jusqu’à 999, avec centaines, dizaines et unités.
+- [x] Le jeu « avant/après » inclut des pas de 1, 10 ou 100, avec des passages de dizaine et de centaine.
+- [x] Indices et explications adaptés aux calculs demandés ; quatre choix restent proposés et la séance reste courte.
+- [x] Tests mis à jour pour contrôler les réponses sur les nombres jusqu’à 999.
+- [x] Cache PWA renouvelé en `rose-leon-v71`.
+- [ ] Vérifier la fin des tests GitHub Actions et la publication Pages.
