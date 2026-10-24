@@ -454,4 +454,4 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Le traitement de réussite récupère maintenant les éléments réellement affichés, désactive les réponses et ajoute le bouton de progression à l’écran courant. La correction couvre couleurs, formes, lettres, sons, suites et lettres majuscules/minuscules.
 - Les félicitations ordinaires sont prononcées en une phrase courte (au plus 9 mots) ; le message de récompense finale reste inchangé. Les retours de syllabes de Rose sont raccourcis.
 - Cache PWA renouvelé en `rose-leon-v108` ; tests de régression ajoutés pour la portée des éléments et la durée des retours vocaux.
-- Audit de code effectué sur comptage, syllabes, lecture, calcul, construction de phrases et aventures. CI à confirmer sur le commit final ; test manuel sur Safari iPhone encore nécessaire.
+- Audit de code effectué sur comptage, syllabes, lecture, calcul, construction de phrases et aventures. GitHub Actions réussit sur le commit `a5db00b2db3378be2480348857c960b373f2c19c` : syntaxe vérifiée, 125 tests réussis, 0 échec. Le test manuel sur Safari iPhone reste nécessaire.
