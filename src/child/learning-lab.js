@@ -21,7 +21,7 @@ export function createNumberMysteryQuestion(random=Math.random){
   const base=step===100?100+Math.floor(random()*800):step===10?100+Math.floor(random()*890):100+Math.floor(random()*899);
   if(kind==="next"){
    answer=base+step;
-   prompt=step===1?"Quel nombre vient juste après "+base+" ?":"Quel nombre vient "+step+" après "+base+" ?";
+   prompt=step===1?"Quel nombre vient juste après "+base+" ?":"Quel nombre est placé "+step+" unités après "+base+" ?";
    hint=step===1?"Avance d’un pas. Attention au changement de dizaine ou de centaine.":"Ajoute "+step+" en surveillant les dizaines et les centaines.";
    explanation="En ajoutant "+step+" à "+base+", on obtient "+answer+".";
   }else{
