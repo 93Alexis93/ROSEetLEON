@@ -50,7 +50,7 @@ test("Les deux activités sont accessibles depuis les menus enfants et incluses 
  assert.match(main,/compareNumbers/);
  assert.match(main,/Le plus grand nombre/);
  assert.match(main,/Syllabes en rythme/);
- assert.match(main,/Choisir un défi/);
+ assert.match(main,/Défis de maths/);
  assert.doesNotMatch(main,/Défi penalty/);
  assert.ok(worker.includes("./src/child/learning-lab.js"));
 });
