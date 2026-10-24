@@ -58,3 +58,15 @@ test("Calcul mental · les réponses correspondent réellement aux opérations a
     }
   }
 });
+
+
+test("Compléments à 100 · la série comprend des nombres qui ne sont pas des dizaines", () => {
+  let sawUnits = false;
+  for (let i = 0; i < 200; i++) {
+    const q = createCalculationQuestion("complements100");
+    const start = Number(q.prompt.match(/ajouter à (\d+)/)?.[1]);
+    assert.equal(start + q.answer, 100, q.prompt);
+    if (start % 10 !== 0) sawUnits = true;
+  }
+  assert.ok(sawUnits, "Les compléments à 100 doivent inclure des nombres avec unités.");
+});
