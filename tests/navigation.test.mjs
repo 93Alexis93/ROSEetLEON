@@ -15,10 +15,10 @@ test("Navigation · chaque jeu expose un bouton suivant visible sans défilement
  const all=sources.join("\n");
  assert.doesNotMatch(all,/feedback\?\.after\((?:next|reveal)\)/);
  assert.doesNotMatch(all,/feedback\?\.parentElement\?\.append\(/);
- assert.ok((all.match(/showGameNext\\(next, feedback\\)/g)||[]).length>=14,"Chaque parcours doit utiliser le dock fixe global de progression.");
- for (const source of sources) assert.match(source,/showGameNext\\(next, feedback\\)/,"Chaque module de jeux doit utiliser le dock global de progression.");
- assert.match(ui,/export function showGameNext\\(next\\)[\\s\\S]*document\\.body\\.append\\(next\\)/);
- assert.match(ui,/export function replaceApp\\(node\\)\\{\\s*document\\.querySelectorAll\\("body > \\.game-next"\\)\\.forEach\\(item=>item\\.remove\\(\\)\\)/);
+ assert.ok((all.match(/showGameNext\(next, feedback\)/g)||[]).length>=14,"Chaque parcours doit utiliser le dock fixe global de progression.");
+ for (const source of sources) assert.match(source,/showGameNext\(next, feedback\)/,"Chaque module de jeux doit utiliser le dock global de progression.");
+ assert.match(ui,/export function showGameNext\(next\)[\s\S]*document\.body\.append\(next\)/);
+ assert.match(ui,/export function replaceApp\(node\)\{\s*document\.querySelectorAll\("body > \.game-next"\)\.forEach\(item=>item\.remove\(\)\)/);
  const css=readFileSync(new URL("../assets/css/base.css",import.meta.url),"utf8");
  assert.match(css, /\.game-next\{[^}]*position:fixed!important/);
  assert.match(css, /\.game-next\{[^}]*bottom:calc\(12px \+ env\(safe-area-inset-bottom\)\)/);
