@@ -25,14 +25,14 @@ test("une activité inconnue de Rose est signalée",()=>{
   assert.throws(()=>createRoseQuestion("inconnue"),/Activité de Rose inconnue/);
 });
 
-test("Rose · comptage : trois réponses distinctes de 1 à 5",()=>{
+test("Rose · comptage : trois réponses distinctes de 1 à 8",()=>{
   for(let i=0;i<200;i++){
     const q=createCountingQuestion();
     assert.equal(q.choices.length,3);
     assert.equal(new Set(q.choices).size,3);
     assert.ok(q.choices.includes(q.answer));
-    assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=1&&n<=5));
-    assert.ok(q.count>=1&&q.count<=5);
+    assert.ok(q.choices.every(n=>Number.isInteger(n)&&n>=1&&n<=8));
+    assert.ok(q.count>=1&&q.count<=8);
   }
 });
 
@@ -87,4 +87,11 @@ test("Rose · composition du prénom : donne la lettre attendue sans bloquer apr
 test("Rose · la composition du prénom enregistre une session seulement à la réussite complète", () => {
   const source = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
   assert.match(source, /if\(isRoseNameComplete\(chosen\)\)\{recordSession\("rose"\)/);
+});
+
+
+test("Rose · comptage : la banque de choix couvre bien huit quantités",()=>{
+ const seen=new Set();
+ for(let i=0;i<500;i++) seen.add(createCountingQuestion().answer);
+ assert.deepEqual([...seen].sort((a,b)=>a-b),[1,2,3,4,5,6,7,8]);
 });
