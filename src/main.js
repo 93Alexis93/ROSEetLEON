@@ -8,7 +8,7 @@ import { parentGate, parentDashboard, crisis } from "./parent/parent.js";
 import { printComingSoon } from "./parent/printables.js";
 import { speak } from "./voice.js";
 import { unlockAudio } from "./audio.js";
-import { numberMystery, compareNumbers, syllableGame, sequenceGame } from "./child/learning-lab.js";
+import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame } from "./child/learning-lab.js";
 import { guidedPause } from "./child/pause.js";
 import { calculationMenu } from "./child/calcul.js";
 import { sentenceBuilder } from "./child/sentence-builder.js";
@@ -103,6 +103,7 @@ const EXERCISES = [
   {child:"leon",name:"Nombre mystère",keywords:"numération indices nombre caché",stars:2,description:"Trouver un nombre grâce aux indices.",run:()=>numberMystery()},
   {child:"leon",name:"Comparer les nombres",keywords:"plus grand petit comparer centaines dizaines",stars:2,description:"Comparer des nombres à deux ou trois chiffres.",run:()=>compareNumbers()},
   {child:"leon",name:"Suites logiques",keywords:"logique suite motif symbole nombres régularité",stars:2,description:"Repérer une règle et trouver le symbole ou le nombre suivant.",run:()=>sequenceGame()},
+  {child:"leon",name:"Géométrie des champions",keywords:"géométrie formes côtés triangle carré cercle rectangle segment règle",stars:1,description:"Reconnaître les formes et découvrir comment tracer un segment.",run:()=>geometryGame()},
   {child:"leon",name:"Phrases à reconstruire",keywords:"lecture mots phrase syntaxe remettre ordre",stars:2,description:"Remets les mots dans l’ordre pour former une phrase.",run:()=>sentenceBuilder()},
   {child:"leon",name:"Calcul mental",keywords:"calcul additions soustractions compléments problèmes",stars:2,description:"Calculer et résoudre des petits problèmes.",run:()=>calculationMenu()},
   {child:"leon",name:"Mots-éclairs",keywords:"lecture mots reconnaître rapidement",stars:1,description:"Reconnaître des mots familiers.",run:()=>startReading("flash")},
@@ -188,6 +189,7 @@ function childHome(child) {
         compareNumbers();
       }), "child-tile child-tile-alt"),
       button("🔢\nSuites logiques\nTrouve le prochain symbole ou nombre", chooseExercise("Léon, observe les suites et trouve le prochain symbole ou nombre.", () => { unlockAudio(); sequenceGame(); }), "child-tile child-tile-alt"),
+      button("📐\nGéométrie des champions\nFormes, côtés et règle", chooseExercise("Léon, observe les formes, compte leurs côtés et découvre comment tracer un segment avec une règle.", () => { unlockAudio(); geometryGame(); }), "child-tile child-tile-alt"),
       button("🧩\nPhrases à reconstruire\nRemets les mots dans le bon ordre", chooseExercise("Léon, remets les mots dans le bon ordre pour former une phrase.", () => { unlockAudio(); sentenceBuilder(); }), "child-tile child-tile-alt"),
       button("🧮\nCalcul mental\nCalculs et problèmes à résoudre", chooseExercise("Léon, fais les calculs dans ta tête et résous les petits problèmes.", () => {
         unlockAudio();
