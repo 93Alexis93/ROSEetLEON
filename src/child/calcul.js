@@ -1,7 +1,7 @@
 import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
-import { cheer, gentleOops } from "../audio.js";
+import { cheer, gentleOops, successPraise } from "../audio.js";
 import { go } from "../router.js";
 import { CALCULATION_MODES, createCalculationQuestion } from "./calcul-engine.js";
 
@@ -61,7 +61,7 @@ export function startCalculation(kind) {
       }
       locked = true;
       recordAnswer("leon", true);
-      cheer(getState().settings.sounds);
+      cheer(getState().settings.sounds);successPraise("leon",getState().settings.voice);
       feedback.textContent = ["Bien trouvé ! ", "Exactement ! ", "Bravo pour ton raisonnement ! ", "Oui, c’est ça ! ", "Super, tu as réussi ! "][Math.floor(Math.random() * 5)] + question.explanation;
       answer.disabled = true;
       validate.disabled = true;
