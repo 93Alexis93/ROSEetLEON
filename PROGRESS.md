@@ -455,3 +455,14 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Les félicitations ordinaires sont prononcées en une phrase courte (au plus 9 mots) ; le message de récompense finale reste inchangé. Les retours de syllabes de Rose sont raccourcis.
 - Cache PWA renouvelé en `rose-leon-v108` ; tests de régression ajoutés pour la portée des éléments et la durée des retours vocaux.
 - Audit de code effectué sur comptage, syllabes, lecture, calcul, construction de phrases et aventures. GitHub Actions réussit sur le commit `a5db00b2db3378be2480348857c960b373f2c19c` : syntaxe vérifiée, 125 tests réussis, 0 échec. Le test manuel sur Safari iPhone reste nécessaire.
+
+
+## Fusion sur main et suite de validation — 24 octobre 2026
+- [x] PR #1 fusionnée dans `main` par squash : commit `c11868ce53e72c053220e0093ceaac349fe0cb07`.
+- [x] CI exécutée sur ce commit après fusion : workflow « Tests automatiques » terminé avec succès (run 641).
+- [x] Le parcours guidé de choix, les ambiances visuelles Rose/Léon, les réglages parentaux, les huit fiches imprimables, les annonces accessibles et les dépendances précachées sont présents dans le code et couverts par les tests disponibles.
+- [ ] Contrôle manuel Safari iPhone : images de Rose après chaque bonne réponse, progression jusqu’à la récompense finale, voix activée/coupée, navigation retour, et rendu sur petit écran.
+- [ ] Contrôle réel du mode hors ligne après premier chargement HTTPS et mise à jour du service worker.
+- [ ] Contrôle d’impression A4 depuis Safari : fiche seule, fiche + corrigé, marges et absence de pages blanches.
+- [ ] Ces vérifications nécessitent un navigateur/appareil réel ; la CI ne les simule pas et elles ne sont pas déclarées effectuées.
+- Liste pratique : `docs/VALIDATION_IPHONE.md`.
