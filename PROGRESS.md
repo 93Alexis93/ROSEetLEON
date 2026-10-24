@@ -399,3 +399,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Le jeu de rimes gagne dix nouvelles associations pour renouveler les parties et enrichir la conscience phonologique.
 - [x] Tests ajustés pour contrôler les comparaisons à trois chiffres et la présence de réponses distinctes.
 - [ ] Vérification finale des tests automatisés et de la publication GitHub Pages.
+
+- Add gentle two-error coaching to football adventure (cache v89); after two errors the game reveals the answer kindly and invites the child to select it, with attempts reset on the next question.
