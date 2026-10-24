@@ -415,3 +415,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Défis de Léon enrichis : davantage de motifs visuels possibles pour les suites logiques (sport, animaux, véhicules, fruits), sans changer les règles ni la durée courte de la séance (cache v95).
 
 - Aventure de Rose : deux formulations d’histoire possibles pour chacune des cinq étapes, choisies au lancement de chaque étape ; les lettres et les réponses attendues restent identiques (cache v96).
+
+- Écrans de fin enrichis dans cinq défis : badge symbolique adapté à l’activité (nombres, suites, géométrie, football, magie), sans prétendre ajouter un trophée permanent au profil (cache v97).
