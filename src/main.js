@@ -1,4 +1,4 @@
-import { el, button, screen, card, replaceApp } from "./ui.js";
+import { el, button, screen, card, replaceApp, chooseExercise } from "./ui.js";
 import { setRenderer, startRouter, go, lockParent, canAccessRoute } from "./router.js";
 import { getState } from "./store.js";
 import { startActivity } from "./child/activities.js";
@@ -113,37 +113,37 @@ function childHome(child) {
   const tiles = el("div", { class: "child-tile-grid" });
   if (rose) {
     tiles.append(
-      button("🦄\nJeux enchantés\nCompter, couleurs, formes et lettres", () => {
+      button("🦄\nJeux enchantés\nCompter, couleurs, formes et lettres", chooseExercise("Rose, dans les jeux enchantés, tu pourras compter, découvrir les couleurs, reconnaître les formes et jouer avec les lettres.", () => {
         unlockAudio();
         roseMenu();
-      }, "child-tile child-tile-main"),
-      button("👏\nSyllabes en rythme\nÉcoute les mots et frappe dans tes mains", () => {
+      }), "child-tile child-tile-main"),
+      button("👏\nSyllabes en rythme\nÉcoute les mots et frappe dans tes mains", chooseExercise("Rose, écoute un mot puis frappe dans tes mains pour compter ses morceaux, les syllabes.", () => {
         unlockAudio();
         syllableGame();
-      }, "child-tile child-tile-alt")
+      }), "child-tile child-tile-alt")
     );
   } else {
     tiles.append(
-      button("⚽\nDéfis de maths\nNombres, calculs et petits problèmes", () => {
+      button("⚽\nDéfis de maths\nNombres, calculs et petits problèmes", chooseExercise("Léon, résous des défis de maths, réfléchis aux nombres et trouve les bonnes réponses.", () => {
         unlockAudio();
         startActivity(child);
-      }, "child-tile child-tile-main"),
-      button("📚\nJeux de lecture\nMots, phrases et petites histoires", () => {
+      }), "child-tile child-tile-main"),
+      button("📚\nJeux de lecture\nMots, phrases et petites histoires", chooseExercise("Léon, lis des mots, des phrases et de petites histoires, puis réponds aux questions.", () => {
         unlockAudio();
         readingMenu();
-      }, "child-tile child-tile-alt"),
-      button("🔎\nNombre mystère\nTrouve le nombre caché", () => {
+      }), "child-tile child-tile-alt"),
+      button("🔎\nNombre mystère\nTrouve le nombre caché", chooseExercise("Léon, écoute les indices et trouve le nombre mystère.", () => {
         unlockAudio();
         numberMystery();
-      }, "child-tile child-tile-alt"),
-      button("⚖️\nLe plus grand nombre\nCompare et choisis le bon nombre", () => {
+      }), "child-tile child-tile-alt"),
+      button("⚖️\nLe plus grand nombre\nCompare et choisis le bon nombre", chooseExercise("Léon, compare les nombres et choisis celui qui est le plus grand.", () => {
         unlockAudio();
         compareNumbers();
-      }, "child-tile child-tile-alt"),
-      button("🧮\nCalcul mental\nCalculs et problèmes à résoudre", () => {
+      }), "child-tile child-tile-alt"),
+      button("🧮\nCalcul mental\nCalculs et problèmes à résoudre", chooseExercise("Léon, fais les calculs dans ta tête et résous les petits problèmes.", () => {
         unlockAudio();
         calculationMenu();
-      }, "child-tile child-tile-alt")
+      }), "child-tile child-tile-alt")
     );
   }
   section.append(tiles);
