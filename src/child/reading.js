@@ -393,7 +393,7 @@ export function startReading(mode) {
         if (round >= 5) finish();
         else { generate(); render(); }
       }, "button-primary");
-      feedback?.after(next);
+      feedback?.parentElement?.append(next);
     } else {
       gentleOops(getState().settings.sounds);
       questionHadError = true;

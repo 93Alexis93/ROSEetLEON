@@ -268,7 +268,7 @@ export function startActivity(child, domain = null) {
         if (round >= target) finish(child, score, target);
         else { generate(); render(); }
       }, "button-primary");
-      feedback?.after(next);
+      feedback?.parentElement?.append(next);
       return;
     }
 
