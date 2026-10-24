@@ -113,6 +113,28 @@ for (const mode of ["patterns", "letter-sounds"]) {
   });
 }
 
+
+test("Rose · le son des lettres : les sons sont étirés sans révéler la réponse dans la consigne", () => {
+  const expected = [
+    {letter:"R", sound:"rrrrrrrr"},
+    {letter:"O", sound:"oooooo"},
+    {letter:"S", sound:"ssssssss"},
+    {letter:"E", sound:"eeeuuhh"}
+  ];
+  for (let i = 0; i < expected.length; i++) {
+    const item = expected[i];
+    const q = createRoseQuestion("letter-sounds", () => (i + 0.1) / 4);
+    assert.equal(q.answer, item.letter);
+    assert.ok(q.speakText.includes(item.sound), "Le son de " + item.letter + " doit être étiré.");
+    assert.match(q.prompt, /Écoute le son, puis retrouve la lettre/);
+    assert.ok(!q.prompt.includes(item.letter), "La consigne ne doit pas donner la réponse.");
+    assert.match(q.hint, /Écoute encore le son/);
+  }
+  const source = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
+  assert.match(source, /mode==="letter-sounds"\?"Le son des lettres"/);
+  assert.match(source, /🔊 Le son des lettres/);
+});
+
 test("Rose · les sept jeux à choix multiples utilisent le même parcours de validation", () => {
   const source = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
   for (const mode of ["colors", "shapes", "letters", "letter-pairs", "letter-sounds", "patterns"]) {
