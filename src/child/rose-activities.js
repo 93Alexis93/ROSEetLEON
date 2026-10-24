@@ -90,12 +90,11 @@ function startRoseWritingActivity(){
    }
    chosen.push(token.id);cheer(getState().settings.sounds);draw();
    if(chosen.length===target.length){
-    recordSession("rose");
     choices.replaceChildren();
     status.textContent="🌟 Bravo ! Tu as reconstitué "+target+" !";
     successPraise("rose",getState().settings.voice,status.textContent);
     if(wordIndex<wordOrder.length-1){const next=button("Mot suivant ➜",()=>{wordIndex++;resetWord();},"button-primary");next.classList.add("rose-question-next");content.append(next);}
-    else status.textContent+=" Tu as retrouvé tous les mots de la famille !";
+    else {status.textContent+=" Tu as retrouvé tous les mots de la famille !";recordSession("rose");sessionPraise("rose",getState().settings.voice);}
    }else{status.textContent="Bien joué ! Quelle lettre vient ensuite ?";successPraise("rose",getState().settings.voice,status.textContent);}
   },"button-soft")));
   content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour reconstituer le mot."}),model,sequence,choices,status,
