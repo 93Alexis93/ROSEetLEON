@@ -40,3 +40,16 @@ export function replaceApp(node){
   app.replaceChildren(node);
   scrollTo({top:0,behavior:"auto"});
 }
+
+export function chooseExercise(instruction, action) {
+  let armed = false;
+  return () => {
+    if (!armed) {
+      armed = true;
+      speak(instruction, getState().settings.voice);
+      return;
+    }
+    armed = false;
+    action();
+  };
+}
