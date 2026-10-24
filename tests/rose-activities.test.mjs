@@ -166,3 +166,16 @@ test("Rose · reconstitue les prénoms : tous les mots familiaux sont disponible
  assert.match(source,/Réessayer \(mélanger les lettres\)/);
  assert.match(source,/tokens=shuffleFamilyLetters\(target\)/);
 });
+
+
+test("Rose · comptage : les images sont des boutons tactiles cochables et le titre décrit les éléments variés",()=>{
+ const source=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/activities.js"), "utf8");
+ assert.match(source,/Compte le nombre d’éléments/);
+ assert.match(source,/class: "counting-items"/);
+ assert.match(source,/classList\.toggle\("counting-item-checked", checked\)/);
+ assert.match(source,/setAttribute\("aria-pressed", String\(checked\)\)/);
+ assert.match(source,/Touche chaque image pour la cocher/);
+ const menu=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
+ assert.match(menu,/Compte le nombre d’éléments/);
+ assert.doesNotMatch(menu,/Compter les licornes/);
+});
