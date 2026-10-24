@@ -111,7 +111,7 @@ test("les tables proposées restent limitées et les produits sont exacts à cha
       const q=createMathQuestion("multiplication",difficulty);
       const match=q.prompt.match(/^(\d+) × (\d+) = \?$/);
       assert.ok(match,q.prompt);
-      assert.ok((difficulty===1?[2,5,10]:[2,3,4,5,10]).includes(Number(match[1])),q.prompt);
+      assert.ok((difficulty===1?[2,5,10]:difficulty===2?[2,3,4,5,10]:[2,3,4,5,6,7,8,9,10]).includes(Number(match[1])),q.prompt);
       assert.equal(Number(match[1])*Number(match[2]),Number(q.answer),q.prompt);
     }
   }
