@@ -377,12 +377,12 @@ function startReading(mode) {
       generate();
       render();
       const nextFeedback = document.querySelector(".feedback");
-      if (nextFeedback) nextFeedback.textContent = "Bravo, tu as pris le temps de réfléchir !";
+      if (nextFeedback) nextFeedback.textContent = ["Bravo, tu as pris le temps de réfléchir !", "Oui, tu as bien compris !", "Super lecture, tu as trouvé !", "Bien joué, tu progresses à chaque question !", "Exactement, c’est la bonne réponse !"][Math.floor(Math.random() * 5)];
     } else {
       gentleOops(getState().settings.sounds);
       questionHadError = true;
       if (feedback) {
-        feedback.textContent = "Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.";
+        feedback.textContent = ["Presque ! Relis tranquillement et essaie encore. Tu peux demander un indice.", "Bien tenté ! Relis le texte et cherche un petit indice.", "Pas encore, mais tu peux réfléchir et réessayer.", "On reprend calmement : la réponse se cache dans ce que tu as lu.", "Tu peux écouter ou demander un indice avant de retenter."][Math.floor(Math.random() * 5)];
       }
     }
   };
