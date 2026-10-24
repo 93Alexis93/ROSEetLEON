@@ -47,10 +47,11 @@ test("Rose · lettres : les réponses sont les lettres de son prénom",()=>{
   }
 });
 
-test("Rose · forme étoile : explication avec le bon article",()=>{
-  const q=createRoseQuestion("shapes",()=>0.99);
-  assert.equal(q.answer,"Étoile");
-  assert.ok(q.explanation.startsWith("C’est l’étoile"));
+test("Rose · formes : seulement les quatre formes simples demandées",()=>{
+  const expected=["Carré","Rond","Triangle","Rectangle"];
+  for(let i=0;i<200;i++){const q=createRoseQuestion("shapes");assert.ok(expected.includes(q.answer));assert.ok(q.choices.every(shape=>expected.includes(shape)));}
+  const source=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
+  assert.match(source,/Reconnaître quatre formes faciles/);
 });
 
 test("Rose · majuscules et minuscules : les trois choix sont des lettres minuscules distinctes",()=>{
