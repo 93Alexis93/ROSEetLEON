@@ -136,7 +136,7 @@ function launch(child,mode="default"){
   if(locked)return;
   const feedback=document.querySelector(".feedback");
   if(Number(choice)!==question.answer){recordAnswer(child,false);gentleOops(getState().settings.sounds);if(feedback)feedback.textContent=isRose?pick(["On réécoute et on découpe le mot doucement.", "Essaie de dire le mot en tapant dans tes mains.", "Pas grave ! Écoutons le mot une nouvelle fois.", "On cherche ensemble les syllabes du mot."]):pick(["Pas tout à fait. Regarde l’indice et essaie encore.", "Bien essayé ! Compare les nombres ou relis l’indice.", "Ce n’est pas encore ça. Tu peux retenter tranquillement.", "On réfléchit encore un peu : l’indice peut t’aider."]);return;}
-  locked=true;recordAnswer(child,true);cheer(getState().settings.sounds);if(feedback)feedback.textContent=isRose?pick(["Oui, bravo ! ", "Bien écouté ! ", "Super, tu as découpé le mot ! ", "Tu as trouvé ! "])+question.word+" : "+question.answer+" syllabe"+(question.answer>1?"s":"")+".":pick(["Bien trouvé ! ", "Exactement ! ", "Bravo pour ton observation ! ", "Oui, c’est le bon nombre ! "])+question.explanation;
+  locked=true;recordAnswer(child,true);cheer(getState().settings.sounds);if(feedback)feedback.textContent=isRose?pick(["Bravo ! ", "Bien écouté ! ", "Super ! ", "Tu as trouvé ! "])+question.answer+" syllabe"+(question.answer>1?"s":"")+" dans "+question.word+".":pick(["Bien trouvé ! ", "Exactement ! ", "Bravo ! ", "Oui, c’est ça ! "])+question.explanation;
   successPraise(child,getState().settings.voice,feedback?.textContent||"Bravo, tu as trouvé !");
   const buttons=[...document.querySelectorAll(".answer-grid button")];buttons.forEach(b=>b.disabled=true);
   const next=button(round===total-1?"Terminer":"Continuer",()=>{
