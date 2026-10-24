@@ -44,7 +44,7 @@ export function createCountingQuestion(random = Math.random, maxCount = 8) {
   const theme = ROSE_COUNTING_THEMES[Math.floor(random() * ROSE_COUNTING_THEMES.length)];
   const alternatives = shuffle(Array.from({ length: limit }, (_, i) => i + 1).filter(n => n !== count), random).slice(0, 2);
   return {
-    text: "Combien de " + theme.plural + " ?",
+    text: "Compte le nombre d’éléments : combien de " + theme.plural + " ? ",
     answer: count,
     count,
     symbol: theme.symbol,
@@ -156,7 +156,7 @@ export function startActivity(child, domain = null) {
   function render() {
     const noun = child === "leon"
       ? (MATH_DOMAINS.find(item => item.id === domain)?.label || "Défi de maths")
-      : "Les collections à compter";
+      : "Compte le nombre d’éléments";
     const content = card([]);
     const progress = el("div", { class: "progress-track" },
       el("div", { class: "progress-fill", style: "width:" + round / target * 100 + "%" })
@@ -169,19 +169,37 @@ export function startActivity(child, domain = null) {
         class: "lead",
         text: child === "leon"
           ? "Choisis une réponse, puis prends ton temps pour réfléchir."
-          : "Regarde les images, compte-les tranquillement, puis touche le bon nombre. Tu peux prendre ton temps, Rose !"
+          : "Touche chaque image pour la cocher pendant que tu comptes. Tu peux la retoucher pour enlever la coche. Puis choisis le bon nombre, Rose !"
       }),
       el("div", { class: "prompt", text: child === "leon" ? question.prompt : question.text })
     );
 
     if (child === "rose") {
       const art = el("div", {
-        class: "prompt",
-        text: (question.symbol + " ").repeat(question.count),
-        "aria-label": question.count + " " + question.text.replace("Combien de ", "").replace(" ?", "")
+        class: "counting-items",
+        role: "group",
+        "aria-label": question.count + " images à compter"
       });
-      art.style.fontSize = "2.4rem";
-      content.append(art);
+      const itemName = question.text
+        .replace("Compte le nombre d’éléments : combien de ", "")
+        .replace("Combien de ", "")
+        .replace(" ? ", "")
+        .replace(" ?", "");
+      for (let index = 0; index < question.count; index++) {
+        const item = button(question.symbol, () => {
+          const checked = item.getAttribute("aria-pressed") !== "true";
+          item.setAttribute("aria-pressed", String(checked));
+          item.setAttribute("aria-label", "Image " + (index + 1) + " sur " + question.count + ", " + (checked ? "cochée" : "non cochée"));
+          item.classList.toggle("counting-item-checked", checked);
+        }, "counting-item");
+        item.setAttribute("aria-label", "Image " + (index + 1) + " sur " + question.count + ", non cochée");
+        item.setAttribute("aria-pressed", "false");
+        art.append(item);
+      }
+      content.append(
+        el("p", { class: "small counting-help", text: "Touche chaque image pour la cocher. Retouche-la pour enlever la coche." }),
+        art
+      );
     }
 
     const answers = el("div", { class: "answer-grid" });
@@ -193,7 +211,7 @@ export function startActivity(child, domain = null) {
     const feedback = el("div", { class: "feedback", role: "status", "aria-live": "polite" });
     content.append(feedback, el("div", { class: "button-row" }, [
       button("🔊 Réécouter", () => speak(
-        child === "leon" ? "Calcule " + question.prompt : "Compte les images et choisis le nombre.",
+        child === "leon" ? "Calcule " + question.prompt : "Touche chaque image pour la cocher, puis choisis le nombre.",
         getState().settings.voice
       ), "button-soft"),
       button("💡 Aide", () => {
@@ -241,7 +259,7 @@ export function startActivity(child, domain = null) {
     }));
 
     speak(
-      child === "leon" ? "Défi " + noun + ". " + question.prompt : question.text + " Compte-les puis choisis le nombre.",
+      child === "leon" ? "Défi " + noun + ". " + question.prompt : question.text + " Touche chaque image pour la cocher, puis choisis le nombre.",
       initialState.settings.voice
     );
   }
