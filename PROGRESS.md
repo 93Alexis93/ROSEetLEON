@@ -419,3 +419,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Écrans de fin enrichis dans cinq défis : badge symbolique adapté à l’activité (nombres, suites, géométrie, football, magie), sans prétendre ajouter un trophée permanent au profil (cache v97).
 
 - Suites logiques de Léon : le bouton d’indice devient progressif ; un second appui révèle l’explication complète, pour accompagner sans donner immédiatement toute la réponse (cache v98).
+
+- Comptage de Rose : cinq thèmes visuels ajoutés (couronnes, lunes, coquillages, chatons magiques et étoiles filantes) pour renouveler les collections à compter (cache v99).
