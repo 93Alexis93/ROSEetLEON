@@ -17,7 +17,8 @@ test("Navigation · chaque jeu expose un bouton suivant visible sans défilement
  assert.doesNotMatch(all,/feedback\?\.parentElement\?\.append\(/);
  assert.ok((all.match(/showGameNext\(next, feedback\)/g)||[]).length>=13,"Les parcours existants doivent conserver leur dock global de progression.");
  for (const [index,source] of sources.entries()) if(index!==4) assert.match(source,/showGameNext\(next, feedback\)/,"Chaque module, hors jeu de Rose désormais corrigé en insertion locale, doit utiliser le dock global.");
- assert.match(sources[4],/activeCard\.insertBefore\(next,controls\)/,"Les jeux de Rose affichent la progression dans la carte active pour fiabiliser le toucher sur iPhone.");
+ assert.match(sources[4],/cardEl\.insertBefore\(next,controls\)/,"Les jeux de Rose affichent la progression dans la carte qui a posé la question.");
+ assert.match(sources[4],/\(\)=>answer\(choice,c,answers,f\)/,"Les boutons transmettent directement les éléments de la question à leur gestionnaire.");
  assert.match(ui,/export function showGameNext\(next\)[\s\S]*document\.body\.append\(next\)/);
  assert.match(ui,/export function replaceApp\(node\)\{\s*document\.querySelectorAll\("body > \.game-next"\)\.forEach\(item=>item\.remove\(\)\)/);
  const css=readFileSync(new URL("../assets/css/base.css",import.meta.url),"utf8");
