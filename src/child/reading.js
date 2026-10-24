@@ -1,7 +1,7 @@
 import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
-import { cheer, gentleOops, successPraise } from "../audio.js";
+import { cheer, gentleOops, successPraise, sessionPraise } from "../audio.js";
 import { go } from "../router.js";
 
 const BASE_WORDS = [
@@ -311,6 +311,7 @@ export function startReading(mode) {
 
   const finish = () => {
     recordSession("leon");
+    sessionPraise("leon",getState().settings.voice);
     const content = card([
       el("p", { class: "prompt", text: "🌟 Bravo pour tes efforts !" }),
       el("p", { class: "lead", text: "Tu as terminé ce petit moment de lecture." }),
