@@ -2,7 +2,7 @@ import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordMathAnswer, recordSession } from "../store.js";
 import { MATH_DOMAINS, createMathQuestion } from "./math-engine.js";
 import { speak } from "../voice.js";
-import { cheer, gentleOops } from "../audio.js";
+import { cheer, gentleOops, successPraise } from "../audio.js";
 import { go } from "../router.js";
 
 const pick = items => items[Math.floor(Math.random() * items.length)];
@@ -250,7 +250,7 @@ export function startActivity(child, domain = null) {
     if (ok) {
       locked = true;
       score++;
-      cheer(getState().settings.sounds);
+      cheer(getState().settings.sounds);successPraise(child,getState().settings.voice);
       const feedback = document.querySelector(".feedback");
       if (feedback) feedback.textContent = pick(["Oui, bien joué ! Tu as trouvé !", "Super réflexion ! Tu avances dans le défi.", "Bravo, tu as bien observé !", "Bien trouvé ! Une nouvelle étape est réussie.", "Youpi, tu as trouvé la bonne réponse !"]);
       document.querySelectorAll(".answer-grid button").forEach(item => { item.disabled = true; });
