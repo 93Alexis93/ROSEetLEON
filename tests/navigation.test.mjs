@@ -16,6 +16,6 @@ test("Navigation · les boutons de progression sont ajoutés au conteneur du jeu
 test("Voix · chaque action et chaque changement d’écran arrêtent la parole précédente",()=>{
  assert.match(ui,/import \{ speak, stopSpeaking \} from "\.\/voice\.js"/);
  assert.match(ui,/onclick:\(event\)=>\{try\{stopSpeaking\(\);\}catch\{\}fn\?\.\(event\);\}/);
- assert.match(ui,/stopSpeaking\(\);\s*app\.replaceChildren\(node\)/);
+ assert.match(ui,/try\{stopSpeaking\(\);\}catch\{\}\s*app\.replaceChildren\(node\)/);
  assert.match(voice,/export function stopSpeaking\(\)\{try\{if\(typeof window!=="undefined"&&"speechSynthesis"in window\)window\.speechSynthesis\.cancel\(\);\}catch\{return false;\}return true;\}/);
 });
