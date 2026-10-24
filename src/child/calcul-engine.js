@@ -6,7 +6,8 @@ export const CALCULATION_MODES = [
   { id: "doubles", label: "Doubles" },
   { id: "halves", label: "Moitiés" },
   { id: "numberLine", label: "Droite numérique" },
-  { id: "problems", label: "Petits problèmes" }
+  { id: "problems", label: "Petits problèmes" },
+  { id: "tables", label: "Tables de multiplication" }
 ];
 
 export function createCalculationQuestion(kind, random = Math.random) {
@@ -50,6 +51,16 @@ export function createCalculationQuestion(kind, random = Math.random) {
       hint = "Les graduations avancent de 10 en 10.";
       explanation = a + ", " + answer + ", " + b + " : on avance de 10 à chaque fois.";
       break;
+    case "tables": {
+      const tables = [2, 5, 10, 3, 4, 6, 7, 8, 9];
+      a = pick(tables, random);
+      b = 1 + Math.floor(random() * 10);
+      answer = a * b;
+      prompt = "Combien font " + a + " × " + b + " ?";
+      hint = "Tu peux additionner " + a + ", " + b + " fois, ou utiliser la table de " + a + ".";
+      explanation = a + " × " + b + " = " + answer + ".";
+      break;
+    }
     case "problems": {
       const type = pick(["compare", "complement", "groups"], random);
       if (type === "compare") {
