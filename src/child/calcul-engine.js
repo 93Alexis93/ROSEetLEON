@@ -18,12 +18,20 @@ export function createCalculationQuestion(kind, random = Math.random) {
       hint = "Pars de " + a + " et compte jusqu’à 10.";
       explanation = a + " + " + answer + " = 10.";
       break;
-    case "complements100":
-      a = Math.floor(random() * 10) * 10; answer = 100 - a;
+    case "complements100": {
+      // Mélange de nombres ronds et de nombres avec unités : calculs sans rester aux dizaines.
+      const useRoundNumber = random() < 0.28;
+      a = useRoundNumber
+        ? Math.floor(random() * 10) * 10
+        : 1 + Math.floor(random() * 98);
+      answer = 100 - a;
       prompt = "Combien faut-il ajouter à " + a + " pour faire 100 ?";
-      hint = "Combien de dizaines manque-t-il pour arriver à 10 dizaines ?";
+      hint = a % 10 === 0
+        ? "Complète d’abord jusqu’à la dizaine suivante, puis jusqu’à 100."
+        : "Complète d’abord jusqu’à la dizaine suivante, puis ajoute les dizaines qui manquent.";
       explanation = a + " + " + answer + " = 100.";
       break;
+    }
     case "doubles":
       a = 1 + Math.floor(random() * 20); answer = 2 * a;
       prompt = "Quel est le double de " + a + " ?";
