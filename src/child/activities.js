@@ -1,4 +1,4 @@
-import { el, button, screen, card, replaceApp } from "../ui.js";
+import { el, button, screen, card, replaceApp, showGameNext } from "../ui.js";
 import { getState, recordAnswer, recordMathAnswer, recordSession } from "../store.js";
 import { MATH_DOMAINS, createMathQuestion } from "./math-engine.js";
 import { speak } from "../voice.js";
@@ -268,7 +268,7 @@ export function startActivity(child, domain = null) {
         if (round >= target) finish(child, score, target);
         else { generate(); render(); }
       }, "button-primary");
-      next.classList.add("game-next"); feedback?.parentElement?.insertBefore(next, feedback);
+      showGameNext(next, feedback);
       return;
     }
 

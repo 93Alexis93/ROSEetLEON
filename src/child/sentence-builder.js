@@ -1,4 +1,4 @@
-import { el, button, screen, card, replaceApp } from "../ui.js";
+import { el, button, screen, card, replaceApp, showGameNext } from "../ui.js";
 import { getState, recordAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
 import { cheer, gentleOops, successPraise, sessionPraise } from "../audio.js";
@@ -59,7 +59,7 @@ export function sentenceBuilder() {
           feedback.textContent = "Bravo ! Ta phrase est bien construite : " + current.answer;
           successPraise("leon", getState().settings.voice, feedback.textContent);
           const next = button(round === 4 ? "Terminer" : "Phrase suivante", () => { round++; if (round >= 5) finish(); else { choose(); render(); } }, "button-primary");
-          next.classList.add("game-next"); feedback.parentElement.insertBefore(next, feedback);
+          showGameNext(next, feedback)
         } else {
           mistakes++; recordAnswer("leon", false); gentleOops(getState().settings.sounds);
           feedback.textContent = mistakes === 1 ? "Bien essayé ! Relis les mots et cherche qui fait l’action. Tu peux toucher un mot pour le déplacer." : "On regarde ensemble : " + current.answer + " Essaie encore avec la phrase suivante.";

@@ -1,4 +1,4 @@
-import { el, button, screen, card, replaceApp } from "../ui.js";
+import { el, button, screen, card, replaceApp, showGameNext } from "../ui.js";
 import { getState, recordAnswer, recordMathAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
 import { cheer, gentleOops, successPraise, sessionPraise } from "../audio.js";
@@ -86,7 +86,7 @@ export function startCalculation(kind) {
         generate();
         render();
       }, "button-primary");
-      next.classList.add("game-next"); feedback.parentElement.insertBefore(next, feedback);
+      showGameNext(next, feedback);
     }
   }
   generate();
@@ -133,7 +133,7 @@ export function startAdaptiveCalculation() {
         if (mistakes >= 2) {
           answers.querySelectorAll("button").forEach(b => { b.disabled = true; });
           const next = button(round === total - 1 ? "Terminer" : "Question suivante", () => { round++; if (round >= total) finish(); else { generate(); render(); } }, "button-primary");
-          next.classList.add("game-next"); feedback.parentElement.insertBefore(next, feedback);
+          showGameNext(next, feedback);
         }
         return;
       }
@@ -143,7 +143,7 @@ export function startAdaptiveCalculation() {
       successPraise("leon", getState().settings.voice, feedback.textContent);
       answers.querySelectorAll("button").forEach(b => { b.disabled = true; });
       const next = button(round === total - 1 ? "Terminer" : "Continuer", () => { round++; if (round >= total) finish(); else { generate(); render(); } }, "button-primary");
-      next.classList.add("game-next"); feedback.parentElement.insertBefore(next, feedback);
+      showGameNext(next, feedback);
     }, "button-soft")));
     content.append(answers, feedback,
       button("🔊 Réécouter", () => speak(question.prompt, getState().settings.voice), "button-soft"),

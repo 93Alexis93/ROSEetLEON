@@ -17,7 +17,16 @@ function announceFeedback(item){
   const message=item.textContent?.trim();
   if(message)speak(message,getState().settings.voice);
 }
+export function showGameNext(next){
+  if(!next)return null;
+  document.querySelectorAll("body > .game-next").forEach(item=>item.remove());
+  next.classList.add("game-next");
+  document.body.append(next);
+  return next;
+}
+
 export function replaceApp(node){
+  document.querySelectorAll("body > .game-next").forEach(item=>item.remove());
   const app=document.querySelector("#app");
   if(!app)return;
   if(!feedbackObserver && typeof MutationObserver!=="undefined"){

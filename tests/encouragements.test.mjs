@@ -84,7 +84,7 @@ test("Rose · les bonnes réponses utilisent les éléments de l’écran rendu"
   "Le traitement de la bonne réponse doit retrouver les éléments réellement affichés.");
  assert.match(rose, /answerGrid\.querySelectorAll\("button"\)/,
   "Les choix de la question réussie doivent être désactivés sans variable hors portée.");
- assert.match(rose, /next\.classList\.add\("game-next"\);\s*feedback\.parentElement\.insertBefore\(next,\s*feedback\)/,
+ assert.match(rose, /showGameNext\(next, feedback\)/,
   "Le bouton de progression doit rester visible sans défilement.");
 });
 

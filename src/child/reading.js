@@ -1,4 +1,4 @@
-import { el, button, screen, card, replaceApp } from "../ui.js";
+import { el, button, screen, card, replaceApp, showGameNext } from "../ui.js";
 import { getState, recordAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
 import { cheer, gentleOops, successPraise, sessionPraise } from "../audio.js";
@@ -393,7 +393,7 @@ export function startReading(mode) {
         if (round >= 5) finish();
         else { generate(); render(); }
       }, "button-primary");
-      next.classList.add("game-next"); feedback?.parentElement?.insertBefore(next, feedback);
+      showGameNext(next, feedback);
     } else {
       gentleOops(getState().settings.sounds);
       questionHadError = true;
