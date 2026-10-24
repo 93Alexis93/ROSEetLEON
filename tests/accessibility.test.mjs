@@ -43,7 +43,8 @@ const main = readFileSync(resolve(root, "src/main.js"), "utf8");
 test("Accessibilité · la progression de chaque enfant expose une jauge compréhensible", () => {
   assert.match(main, /class: "progress-track", role: "progressbar"/);
   assert.match(main, /"aria-label": "Réponses réussies"/);
-  assert.match(main, /"aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String\(successRate\)/);
+  assert.match(main, /"aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String\(successRate\), "aria-valuetext": successRate \+ " % de réponses réussies"/);
+  assert.match(main, /profile\.sessions === 1 \? " partie terminée\." : " parties terminées\."/);
   assert.match(main, /profile\.correct/);
   assert.match(main, /profile\.attempts/);
   assert.match(main, /profile\.sessions/);
