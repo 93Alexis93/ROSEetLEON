@@ -93,6 +93,7 @@ test("Problèmes · les six formulations donnent le bon résultat",()=>{
       const a=Number(matched.match[1]), b=Number(matched.match[2]);
       const expected=matched.pattern.kind==="add"?a+b:a-b;
       assert.equal(Number(q.answer),expected,q.prompt);
+      assert.ok(q.choices.every(choice => Number(choice) >= 0), "pas de résultat négatif dans un problème de collection");
       assert.ok(q.explanation.includes(String(expected)),q.explanation);
       assert.ok(q.hint.length>10);
     }
