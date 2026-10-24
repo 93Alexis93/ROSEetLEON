@@ -26,7 +26,7 @@ export function createNumberMysteryQuestion(random=Math.random){
    explanation="En ajoutant "+step+" à "+base+", on obtient "+answer+".";
   }else{
    answer=base-step;
-   prompt=step===1?"Quel nombre vient juste avant "+base+" ?":"Quel nombre vient "+step+" avant "+base+" ?";
+   prompt=step===1?"Quel nombre vient juste avant "+base+" ?":"Quel nombre est placé "+step+" unités avant "+base+" ?";
    hint=step===1?"Recule d’un pas. Attention au changement de dizaine ou de centaine.":"Retire "+step+" en surveillant les dizaines et les centaines.";
    explanation="En retirant "+step+" à "+base+", on obtient "+answer+".";
   }
