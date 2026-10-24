@@ -343,3 +343,11 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Cache hors ligne renouvelé en `rose-leon-v67`.
 - [ ] Vérifier le déploiement Pages puis supprimer l’ancienne icône de l’écran d’accueil si elle y est déjà installée et ajouter à nouveau l’application pour récupérer la nouvelle.
 - [ ] Rendu visuel iPhone non vérifié dans cette session ; le fichier PNG a été relu après publication dans GitHub et son en-tête confirme un PNG 512 × 512.
+
+
+## Audit vocal et diversité des retours — 24 octobre 2026
+- Les questions et consignes principales sont annoncées à l’ouverture des activités de maths, calcul mental, lecture, syllabes, comparaison/nombre mystère, jeux de Rose et pause guidée ; les boutons « Réécouter » restent disponibles là où ils existent.
+- Les indices, réponses, encouragements et messages d’erreur placés dans `.feedback` sont lus automatiquement par la logique vocale commune lorsque le réglage voix est activé.
+- Variété renforcée pour les retours de réussite et de nouvelle tentative dans les défis de Léon, le calcul mental, les jeux de lecture, le nombre mystère/comparaison/syllabes et les jeux de Rose. Le ton reste encourageant, sans sanction.
+- Cache PWA renouvelé en `rose-leon-v68` et test hors ligne synchronisé.
+- À vérifier sur Safari iPhone : absence de doublons vocaux, voix désactivée/activée, et retours après chaque type de réponse. Les tests automatisés ne remplacent pas cet essai réel.
