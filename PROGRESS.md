@@ -391,3 +391,11 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Les choix proposés restent dans la plage de nombres de la question ; le nombre de réponses reste limité à trois pour conserver une interaction simple sur iPhone.
 - [x] Tests de génération mis à jour pour les plafonds 5, 8 et 10.
 - [ ] Vérifier sur iPhone que l’affichage des collections jusqu’à dix objets reste lisible et confortable.
+
+
+## Étape 2/3 — approfondissement des défis de Léon
+- [x] Le jeu « Le plus grand nombre » mélange désormais des comparaisons à deux chiffres et des comparaisons à trois chiffres ; les choix sont adaptés à la plage de nombres.
+- [x] Les indices rappellent la stratégie de comparaison : dizaines/unités ou centaines/dizaines/unités.
+- [x] Le jeu de rimes gagne dix nouvelles associations pour renouveler les parties et enrichir la conscience phonologique.
+- [x] Tests ajustés pour contrôler les comparaisons à trois chiffres et la présence de réponses distinctes.
+- [ ] Vérification finale des tests automatisés et de la publication GitHub Pages.
