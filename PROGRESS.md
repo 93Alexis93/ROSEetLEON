@@ -403,3 +403,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Add gentle two-error coaching to football adventure (cache v89); after two errors the game reveals the answer kindly and invites the child to select it, with attempts reset on the next question.
 
 - Add gentle two-error magical support for Rose (cache v90); after two errors, the answer is revealed kindly and she can select it. Attempts reset on each new scene.
+
+- Add step-by-step support to geometry challenge (cache v91); after two errors, the answer is revealed with a calm explanation prompt. Attempts reset for each geometry question.
