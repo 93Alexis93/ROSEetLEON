@@ -36,7 +36,7 @@ export function roseMenu(){
  replaceApp(screen("Bonjour Rose !",content,{eyebrow:"Univers licorne",home:()=>go("home")}));
  speak("Bonjour Rose ! Choisis un petit jeu.",getState().settings.voice);
 }
-function startRoseActivity(mode){
+export function startRoseActivity(mode){
  let round=0,tries=0,hintCount=0,q;const seenQuestions=new Set();const title=mode==="colors"?"Les couleurs magiques":mode==="shapes"?"Les formes à retrouver":mode==="letter-pairs"?"Grandes et petites lettres":"Les lettres de Rose";
  const generate=()=>{let candidate,attempts=0;do{candidate=createRoseQuestion(mode);attempts++;}while(seenQuestions.has(candidate.prompt)&&attempts<100);q=candidate;seenQuestions.add(q.prompt);tries=0;hintCount=0;};
  const finish=()=>{recordSession("rose");const c=card([el("p",{class:"prompt",text:"🌟 Bravo pour tes efforts !"}),el("p",{class:"lead",text:"Chaque essai t’aide à apprendre. Tu peux faire une pause."}),button("Choisir un autre jeu",roseMenu,"button-primary"),button("⌂ Accueil",()=>go("home"),"icon-button")]);replaceApp(screen("Bravo Rose !",c,{eyebrow:"Petit jeu terminé",home:()=>go("home")}));};
