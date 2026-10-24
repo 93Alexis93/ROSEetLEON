@@ -8,9 +8,15 @@ const ROSE_PRAISES=[
 "Pouf pouf paillettes ! Une licorne vient de faire une pirouette pour toi !","La reine des licornes t’offre une couronne qui brille très fort !","Miaou magique ! Le chat enchanté ronronne devant ta bonne réponse !","Abracadabra, ton cerveau a lancé un sort de super réflexion !","Une pluie de paillettes tombe sur le royaume : tu as réussi !","Ta licorne fait trois petits bonds et un grand hennissement de joie !","La princesse Rose vient de gagner une étoile scintillante !","Même le dragon gentil fait une révérence devant ton cerveau magique !","Hop hop, baguette en l’air : voilà une réponse enchantée !","Un arc-en-ciel vient d’apparaître parce que tu as persévéré !","La licorne a mis ses lunettes : elle confirme, c’est brillant !","Le chat magique miaule : « Mrrr… quelle idée lumineuse ! »","Tadam ! La couronne des petites exploratrices est à toi !","Les étoiles font la danse de la joie au-dessus du château !","Une licorne en rollers fait une pirouette rien que pour toi !","Paillettes à gauche, paillettes à droite : bravo, petite magicienne !","Le royaume applaudit ton courage, même quand il faut réessayer !","Une fée vient de tamponner ton passeport de super exploratrice !","Ton cerveau a des ailes et ta licorne a des confettis !","Youpiii ! Le dragon souffle des bulles arc-en-ciel pour fêter ça !",
 "Tu as pris le temps de regarder les indices : la fée de la réflexion est fière de toi !","Même si la magie ne marche pas du premier coup, tu peux essayer un autre sort !","Tu as recommencé avec courage : une étoile bonus pour ta persévérance !","Ta licorne adore quand tu réfléchis avant de choisir : quelle bonne stratégie !","Chaque essai fait pousser une nouvelle fleur dans le jardin des idées !","Tu as cherché, observé et essayé : voilà une vraie aventure magique !","Le chat enchanté dit : « On apprend aussi quand on se trompe, ronron ! »","Tu as changé d’idée pour avancer : abracadabra, quelle astuce !","Pas besoin d’être parfaite : ton courage fait déjà scintiller le royaume !","La fée applaudit tes efforts, pas seulement les bonnes réponses !"
 ];
-const praiseIndexes={leon:0,rose:0};
-const sessionIndexes={leon:0,rose:0};
-export function successPraise(child,enabled=true){const key=child==="rose"?"rose":"leon";const list=key==="rose"?ROSE_PRAISES:LEON_PRAISES;const message=list[praiseIndexes[key]++%list.length];speak(message,enabled);return message;}
+const lastPraise={leon:-1,rose:-1};
+const lastSessionPraise={leon:-1,rose:-1};
+function chooseFreshPraise(list,last,key){
+ let index=Math.floor(Math.random()*list.length);
+ if(list.length>1&&index===last[key])index=(index+1+Math.floor(Math.random()*(list.length-1)))%list.length;
+ last[key]=index;
+ return list[index];
+}
+export function successPraise(child,enabled=true){const key=child==="rose"?"rose":"leon";const list=key==="rose"?ROSE_PRAISES:LEON_PRAISES;const message=chooseFreshPraise(list,lastPraise,key);speak(message,enabled);return message;}
 const LEON_SESSION_PRAISES=[
 "Bien joué, Léon ! Fin du match : tu as entraîné ton cerveau comme un champion. Le plus important, c’est d’avoir cherché !",
 "Le coach est fier de toi : tu as testé des idées et gardé le cap jusqu’au coup de sifflet final !",
@@ -23,4 +29,4 @@ const ROSE_SESSION_PRAISES=[
 "Quelle exploratrice courageuse ! Chaque essai a ajouté une paillette à ton étoile magique !",
 "Le royaume te remercie d’avoir persévéré : tu as fait grandir tes idées comme des fleurs enchantées !"
 ];
-export function sessionPraise(child,enabled=true){const key=child==="rose"?"rose":"leon";const list=key==="rose"?ROSE_SESSION_PRAISES:LEON_SESSION_PRAISES;const message=list[sessionIndexes[key]++%list.length];speak(message,enabled);return message;}
+export function sessionPraise(child,enabled=true){const key=child==="rose"?"rose":"leon";const list=key==="rose"?ROSE_SESSION_PRAISES:LEON_SESSION_PRAISES;const message=chooseFreshPraise(list,lastSessionPraise,key);speak(message,enabled);return message;}
