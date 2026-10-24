@@ -68,3 +68,14 @@ test("Accessibilité · la recherche d’activités possède un libellé et anno
  assert.match(main, /class:"exercise-search-results","aria-live":"polite"/);
  assert.match(main, /Aucun jeu trouvé\. Essaie un autre mot\./);
 });
+
+const calculation = readFileSync(resolve(root, "src/child/calcul.js"), "utf8");
+
+test("Saisie · chaque exercice à réponse écrite propose un bouton Effacer accessible", () => {
+  assert.match(calculation, /button\("🧹 Effacer"/);
+  assert.match(calculation, /answer\.value = ""/);
+  assert.match(calculation, /answer\.focus\(\)/);
+  assert.match(calculation, /aria-label", "Effacer la réponse"/);
+  assert.match(calculation, /class: "answer-input-row"/);
+  assert.match(base, /\.answer-input-row/);
+});
