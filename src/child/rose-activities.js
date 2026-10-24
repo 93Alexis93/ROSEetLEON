@@ -1,7 +1,7 @@
 import {el,button,screen,card,replaceApp,chooseExercise} from "../ui.js";
 import {getState,recordAnswer,recordSession} from "../store.js";
 import {speak} from "../voice.js";
-import {cheer,gentleOops,successPraise} from "../audio.js";
+import {cheer,gentleOops,successPraise,sessionPraise} from "../audio.js";
 import {go} from "../router.js";
 import {startActivity} from "./activities.js";
 import {syllableGame} from "./learning-lab.js";
@@ -39,7 +39,7 @@ export function roseMenu(){
 export function startRoseActivity(mode){
  let round=0,tries=0,hintCount=0,q;const seenQuestions=new Set();const title=mode==="colors"?"Les couleurs magiques":mode==="shapes"?"Les formes à retrouver":mode==="letter-pairs"?"Grandes et petites lettres":"Les lettres de Rose";
  const generate=()=>{let candidate,attempts=0;do{candidate=createRoseQuestion(mode);attempts++;}while(seenQuestions.has(candidate.prompt)&&attempts<100);q=candidate;seenQuestions.add(q.prompt);tries=0;hintCount=0;};
- const finish=()=>{recordSession("rose");const c=card([el("p",{class:"prompt",text:"🌟 Bravo pour tes efforts !"}),el("p",{class:"lead",text:"Chaque essai t’aide à apprendre. Tu peux faire une pause."}),button("Choisir un autre jeu",roseMenu,"button-primary"),button("⌂ Accueil",()=>go("home"),"icon-button")]);replaceApp(screen("Bravo Rose !",c,{eyebrow:"Petit jeu terminé",home:()=>go("home")}));};
+ const finish=()=>{recordSession("rose");sessionPraise("rose",getState().settings.voice);const c=card([el("p",{class:"prompt",text:"🌟 Bravo pour tes efforts !"}),el("p",{class:"lead",text:"Chaque essai t’aide à apprendre. Tu peux faire une pause."}),button("Choisir un autre jeu",roseMenu,"button-primary"),button("⌂ Accueil",()=>go("home"),"icon-button")]);replaceApp(screen("Bravo Rose !",c,{eyebrow:"Petit jeu terminé",home:()=>go("home")}));};
  const render=()=>{const c=card([]);c.append(el("p",{class:"small",text:"Petit jeu "+(round+1)+" sur 5"}),el("div",{class:"progress-track",role:"progressbar","aria-label":"Progression du jeu","aria-valuemin":"0","aria-valuemax":"5","aria-valuenow":String(round)},el("div",{class:"progress-fill",style:"width:"+(round/5*100)+"%"})),el("p",{class:"lead",text:"Regarde bien, puis touche une réponse."}),el("div",{class:"prompt",text:q.prompt}));
   const answers=el("div",{class:"answer-grid"});q.choices.forEach(choice=>{const item=mode==="colors"?COLORS.find(x=>x[0]===choice):mode==="shapes"?SHAPES.find(x=>x[0]===choice):[choice];answers.append(button(mode==="letters"||mode==="letter-pairs"?choice:item[1]+" "+choice,()=>answer(choice),"button-soft"));});
   const f=el("p",{class:"feedback",role:"status","aria-live":"polite"});c.append(answers,f,el("div",{class:"button-row"},[button("🔊 Réécouter",()=>speak(q.speakText,getState().settings.voice),"button-soft"),button("💡 Petit indice",()=>{hintCount++;f.textContent=hintCount===1?q.hint:q.explanation;},"button-soft")]),button("↩ Autres jeux",roseMenu,"button-soft"),button("⌂ Accueil",()=>go("home"),"icon-button"));replaceApp(screen(title,c,{eyebrow:"On apprend en jouant",home:()=>go("home")}));speak(q.speakText,getState().settings.voice);};
