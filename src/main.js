@@ -207,8 +207,8 @@ function childHome(child) {
     el("span", { "aria-hidden": "true", text: rose ? "🌟" : "🏅" }),
     el("div", {}, [
       el("strong", { text: rose ? "Ton chemin magique" : "Ton parcours de champion" }),
-      el("p", { text: profile.stickers + (profile.stickers > 1 ? " petits trophées gagnés" : " petit trophée gagné") + " · " + profile.correct + " réussites · " + profile.sessions + (profile.sessions > 1 ? " parties terminées." : " partie terminée.") }),
-      el("div", { class: "progress-track", role: "progressbar", "aria-label": "Réponses réussies", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(successRate) },
+      el("p", { text: profile.stickers + (profile.stickers > 1 ? " petits trophées gagnés" : " petit trophée gagné") + " · " + profile.correct + " réussites · " + profile.sessions + (profile.sessions === 1 ? " partie terminée." : " parties terminées.") }),
+      el("div", { class: "progress-track", role: "progressbar", "aria-label": "Réponses réussies", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(successRate), "aria-valuetext": successRate + " % de réponses réussies" },
         el("div", { class: "progress-fill", style: "width:" + successRate + "%" })
       ),
       el("p", { class: "small", text: profile.attempts ? successRate + " % de réponses réussies sur " + profile.attempts + " essais. Chaque essai compte !" : "Ton aventure commence ici : chaque essai fera grandir ton parcours !" })
