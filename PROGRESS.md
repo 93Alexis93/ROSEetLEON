@@ -1,5 +1,5 @@
 # Avancement — ROSEetLEON
-Mis à jour le 23 octobre 2026.
+Mis à jour le 24 octobre 2026.
 
 ## État actuel
 
@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v62` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
+- Le service worker source utilise actuellement le cache `rose-leon-v64` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -315,3 +315,13 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Message pédagogique positif conservé : essayer, apprendre et recommencer, sans compétition.
 - [x] Styles ajoutés au CSS déjà chargé ; cache PWA renouvelé à v62 et test source ajouté.
 - [ ] Vérifier le rendu réel sur Safari iPhone, notamment le retour à la ligne des intitulés et la hauteur à l’écran.
+
+
+## Étape UI — accueil et univers enfants (24 octobre 2026)
+- [x] Accueil principal : accroche plus vivante, présentation plus claire des deux univers et descriptifs des activités.
+- [x] Pages Rose et Léon : grands bandeaux illustrés, titres de mission, tuiles d’activités tactiles et message rassurant sans compétition.
+- [x] Couleurs et ambiances distinctes : pastel magique pour Rose ; sport et aventure pour Léon.
+- [x] Navigation et fonctions existantes conservées ; aucune donnée ni règle de progression modifiée.
+- [x] Cache hors ligne renouvelé en `rose-leon-v64` ; les feuilles CSS et `src/main.js` sont déjà dans la liste des ressources précachées.
+- [ ] À vérifier visuellement sur Safari iPhone, notamment les tailles de texte, le retour à l’accueil et l’affichage en petit écran.
+- [ ] Les tests automatisés doivent être confirmés dans GitHub Actions pour le SHA de cette livraison.
