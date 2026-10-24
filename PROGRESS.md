@@ -351,3 +351,11 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Variété renforcée pour les retours de réussite et de nouvelle tentative dans les défis de Léon, le calcul mental, les jeux de lecture, le nombre mystère/comparaison/syllabes et les jeux de Rose. Le ton reste encourageant, sans sanction.
 - Cache PWA renouvelé en `rose-leon-v68` et test hors ligne synchronisé.
 - À vérifier sur Safari iPhone : absence de doublons vocaux, voix désactivée/activée, et retours après chaque type de réponse. Les tests automatisés ne remplacent pas cet essai réel.
+
+
+## Questions uniques et compléments à 100 — 24 octobre 2026
+- Chaque série de jeu conserve les questions déjà posées et tente d’en générer une nouvelle avant de l’afficher : calcul mental, maths de Léon, comptage de Rose, jeux de lecture, syllabes, nombre mystère et comparaison.
+- Les activités de couleurs, formes et lettres de Rose disposent de formulations alternatives pour éviter les répétitions exactes sur une série de cinq questions.
+- Les compléments à 100 mélangent désormais nombres ronds et nombres avec unités (par exemple 37, 64 ou 82), avec un indice adapté pour passer par la dizaine suivante.
+- L’unicité est garantie au niveau d’une série de jeu, pas entre toutes les sessions futures ni sur tous les appareils.
+- Icône iPhone : la photo exacte approuvée précédemment n’est pas disponible comme fichier source récupérable. Le PNG vectoriel actuel n’est donc pas garanti identique à cette photo ; demander à l’utilisateur de renvoyer l’image avant de prétendre à une correspondance exacte.
