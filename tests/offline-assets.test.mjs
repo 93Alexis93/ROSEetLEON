@@ -92,7 +92,7 @@ test("PWA · le service worker est enregistré en HTTPS et l’échec ne bloque 
   const main=readFileSync(resolve(root,"src/main.js"),"utf8");
   assert.match(main, /"serviceWorker" in navigator/);
   assert.match(main, /location.protocol.startsWith("http")/);
-  assert.match(main, /serviceWorker.register("./service-worker.js").catch(() => {})/);
+  assert.ok(main.includes('serviceWorker.register("./service-worker.js").catch(() => {})'));
 });
 
 test("Rose · les visuels de base ne dépendent pas d’images distantes",()=>{
