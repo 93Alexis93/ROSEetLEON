@@ -407,3 +407,5 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Add step-by-step support to geometry challenge (cache v91); after two errors, the answer is revealed with a calm explanation prompt. Attempts reset for each geometry question.
 
 - Accueil enfant : ajout d’un petit compteur de trophées et de réussites, avec des mots adaptés à Rose ou Léon (cache v92).
+
+- Ordre des propositions désormais mélangé dans la géométrie, l’aventure de football et l’aventure magique, pour éviter que la bonne réponse soit toujours au même endroit (cache v93).
