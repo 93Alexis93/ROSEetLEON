@@ -377,3 +377,9 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Tests mis à jour pour contrôler les réponses sur les nombres jusqu’à 999.
 - [x] Cache PWA renouvelé en `rose-leon-v71`.
 - [ ] Vérifier la fin des tests GitHub Actions et la publication Pages.
+
+
+## Félicitations vocales et lancement en deux temps (2026-10-24)
+- Ajout de dix messages de réussite pour Léon (références football) et dix pour Rose (licornes, princesses et magie), alternés après les bonnes réponses.
+- Dans les menus d’activités, le premier appui lit la consigne et le second démarre le jeu.
+- Cache hors ligne incrémenté en v72.
