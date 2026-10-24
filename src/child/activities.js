@@ -38,7 +38,7 @@ export function createCountingQuestion(random = Math.random) {
   const theme = ROSE_COUNTING_THEMES[Math.floor(random() * ROSE_COUNTING_THEMES.length)];
   const alternatives = shuffle([1, 2, 3, 4, 5, 6, 7, 8].filter(n => n !== count), random).slice(0, 2);
   return {
-    text: "Combien de " + (count === 1 ? theme.singular : theme.plural) + " ?",
+    text: "Combien de " + theme.plural + " ?",
     answer: count,
     count,
     symbol: theme.symbol,
