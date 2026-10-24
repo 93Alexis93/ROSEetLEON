@@ -9,7 +9,7 @@ import {syllableGame} from "./learning-lab.js";
 const COLORS=[["Rouge","🔴"],["Bleu","🔵"],["Jaune","🟡"],["Vert","🟢"],["Violet","🟣"],["Orange","🟠"],["Rose","🩷"],["Marron","🟤"]];
 const SHAPES=[["Cercle","●","Le cercle est rond et n’a pas de coin."],["Carré","■","Le carré a quatre côtés."],["Triangle","▲","Le triangle a trois côtés et trois coins."],["Rectangle","▰","Le rectangle a quatre côtés, avec deux côtés longs et deux côtés courts."],["Ovale","⬭","L’ovale est allongé et arrondi."],["Losange","◆","Le losange ressemble à un carré penché."],["Étoile","★","L’étoile a plusieurs pointes."]];
 const LETTERS=[["R","La lettre R commence le prénom Rose."],["O","La lettre O est ronde."],["S","La lettre S fait comme un petit serpent."],["E","La lettre E a trois petits traits."]];
-const pick=(a,r)=>a[Math.floor(r()*a.length)];
+const pick=(a,r=Math.random)=>a[Math.floor(r()*a.length)];
 function shuffle(a,r){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function threeChoices(items,target,random){return shuffle([target,...shuffle(items.filter(x=>x!==target),random).slice(0,2)],random);}
 export function isRoseNameComplete(letters){return Array.isArray(letters)&&letters.join("")==="ROSE";}
