@@ -110,7 +110,7 @@ const EXERCISES = [
 function starLabel(level){return "★".repeat(level)+"☆".repeat(3-level);}
 function exerciseSearch(child){
  const section=el("section",{class:"exercise-search", "aria-label":"Rechercher un exercice"});
- section.append(el("h3",{text:"🔎 Trouve ton jeu"}),el("p",{class:"small",text:"Tape un mot : maths, lettres, lecture, syllabes…"}));
+ section.append(el("h3",{text:"🔎 Trouve ton jeu"}),el("p",{class:"small",text:"Tape un mot : maths, lettres, lecture, syllabes…"}),el("p",{class:"small",text:"★ Découverte · ★★ Je réfléchis · ★★★ Défi plus exigeant. Les étoiles donnent un repère, chacun avance à son rythme."}));
  const input=el("input",{type:"search",placeholder:"Rechercher un exercice…","aria-label":"Rechercher un exercice"});
  input.className="exercise-search-input";
  const results=el("div",{class:"exercise-search-results","aria-live":"polite"});
