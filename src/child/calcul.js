@@ -21,8 +21,16 @@ export function startCalculation(kind) {
   const mode = CALCULATION_MODES.find(item => item.id === kind);
   if (!mode) return calculationMenu();
   let round = 0, locked = false, question;
+  const seenQuestions = new Set();
   const total = 5;
-  const generate = () => { question = createCalculationQuestion(kind); locked = false; };
+  const generate = () => {
+    locked = false;
+    let candidate, attempts = 0;
+    do { candidate = createCalculationQuestion(kind); attempts++; }
+    while (seenQuestions.has(candidate.prompt) && attempts < 100);
+    question = candidate;
+    seenQuestions.add(question.prompt);
+  };
   function render() {
     const content = card([]);
     content.append(
