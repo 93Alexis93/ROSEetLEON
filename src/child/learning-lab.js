@@ -83,7 +83,21 @@ export const SYLLABLE_WORDS=[
  {word:"escargot",picture:"🐌",syllables:3}, {word:"cheval",picture:"🐴",syllables:2},
  {word:"voiture",picture:"🚗",syllables:2}, {word:"piano",picture:"🎹",syllables:2},
  {word:"marmite",picture:"🍲",syllables:2}, {word:"girafe",picture:"🦒",syllables:2},
- {word:"poisson",picture:"🐟",syllables:2}, {word:"parapluie",picture:"☂️",syllables:3}
+ {word:"poisson",picture:"🐟",syllables:2}, {word:"parapluie",picture:"☂️",syllables:3},
+ {word:"licorne",picture:"🦄",syllables:2},
+ {word:"princesse",picture:"👸",syllables:2},
+ {word:"couronne",picture:"👑",syllables:2},
+ {word:"magique",picture:"✨",syllables:2},
+ {word:"château",picture:"🏰",syllables:2},
+ {word:"dragon",picture:"🐉",syllables:2},
+ {word:"bonbon",picture:"🍬",syllables:2},
+ {word:"cadeau",picture:"🎁",syllables:2},
+ {word:"poulet",picture:"🐔",syllables:2},
+ {word:"serpent",picture:"🐍",syllables:2},
+ {word:"grenouille",picture:"🐸",syllables:2},
+ {word:"pantalon",picture:"👖",syllables:3},
+ {word:"biberon",picture:"🍼",syllables:3},
+ {word:"arc-en-ciel",picture:"🌈",syllables:3}
 ];
 export function createSyllableQuestion(random=Math.random){
  const item=pick(SYLLABLE_WORDS,random);
