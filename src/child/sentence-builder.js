@@ -59,12 +59,12 @@ export function sentenceBuilder() {
           feedback.textContent = "Bravo ! Ta phrase est bien construite : " + current.answer;
           successPraise("leon", getState().settings.voice, feedback.textContent);
           const next = button(round === 4 ? "Terminer" : "Phrase suivante", () => { round++; if (round >= 5) finish(); else { choose(); render(); } }, "button-primary");
-          feedback.after(next);
+          next.classList.add("game-next"); feedback.parentElement.insertBefore(next, feedback);
         } else {
           mistakes++; recordAnswer("leon", false); gentleOops(getState().settings.sounds);
           feedback.textContent = mistakes === 1 ? "Bien essayé ! Relis les mots et cherche qui fait l’action. Tu peux toucher un mot pour le déplacer." : "On regarde ensemble : " + current.answer + " Essaie encore avec la phrase suivante.";
           speak(feedback.textContent, getState().settings.voice);
-          if (mistakes >= 2) { const reveal = button("Voir la solution et continuer", () => { round++; if (round >= 5) finish(); else { choose(); render(); } }, "button-primary"); feedback.after(reveal); }
+          if (mistakes >= 2) { const reveal = button("Voir la solution et continuer", () => { round++; if (round >= 5) finish(); else { choose(); render(); } }, "button-primary"); reveal.classList.add("game-next"); feedback.parentElement.insertBefore(reveal, feedback); }
         }
       }
     };
