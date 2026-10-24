@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-const { speak, stopSpeaking } = await import("../src/voice.js?voice-tests");
+const { speak, stopSpeaking, prepareSpeechText } = await import("../src/voice.js?voice-tests");
 
 function installSpeech({ supported = true, voices = [{ lang: "fr-FR", name: "Voix française" }] } = {}) {
   const calls = { cancelled: 0, spoken: [], voices };
@@ -69,4 +69,10 @@ test("Voix · une activité peut demander une prononciation anglaise",()=>{
  assert.equal(speak("apple",true,"en-GB"),true);
  assert.equal(calls.spoken[0].lang,"en-GB");
  assert.equal(calls.spoken[0].voice.name,"English voice");
+});
+
+test("Voix · les liaisons françaises sont préparées pour la synthèse vocale",()=>{
+ assert.equal(prepareSpeechText("Faut-il continuer ?"),"fautile continuer ?");
+ assert.equal(prepareSpeechText("Peut-il répondre ?"),"peutil répondre ?");
+ assert.equal(prepareSpeechText("Faut-il continuer ?","en-GB"),"Faut-il continuer ?");
 });
