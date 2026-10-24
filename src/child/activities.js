@@ -27,7 +27,10 @@ const ROSE_COUNTING_THEMES = [
   { singular: "poisson", plural: "poissons", symbol: "🐠" },
   { singular: "coccinelle", plural: "coccinelles", symbol: "🐞" },
   { singular: "glace", plural: "glaces", symbol: "🍦" },
-  { singular: "petit dinosaure", plural: "petits dinosaures", symbol: "🦕" }
+  { singular: "petit dinosaure", plural: "petits dinosaures", symbol: "🦕" },
+  { singular: "chat magique", plural: "chats magiques", symbol: "🐈‍⬛" },
+  { singular: "patin à roulettes", plural: "patins à roulettes", symbol: "🛼" },
+  { singular: "arc-en-ciel", plural: "arcs-en-ciel", symbol: "🌈" }
 ];
 
 export function createCountingQuestion(random = Math.random) {
@@ -150,7 +153,7 @@ export function startActivity(child, domain = null) {
         class: "lead",
         text: child === "leon"
           ? "Choisis une réponse, puis prends ton temps pour réfléchir."
-          : "Regarde les images, compte-les tranquillement, puis touche le bon nombre."
+          : "Regarde les images, compte-les tranquillement, puis touche le bon nombre. Tu peux prendre ton temps, Rose !"
       }),
       el("div", { class: "prompt", text: child === "leon" ? question.prompt : question.text })
     );
@@ -198,9 +201,9 @@ export function startActivity(child, domain = null) {
           }
         } else {
           feedback.textContent = hint === 1
-            ? "Presque ! Regarde bien et compte tranquillement."
+            ? "Presque ! Regarde bien et compte tranquillement. Tu peux y arriver !"
             : hint === 2
-              ? "Compte chaque licorne une seule fois."
+              ? "Touche chaque image une seule fois en comptant doucement."
               : "La bonne réponse est " + question.answer + ". Essaie de la toucher.";
         }
 
@@ -216,7 +219,7 @@ export function startActivity(child, domain = null) {
     if (child === "leon") content.append(button("↩ Autres défis", () => mathMenu(), "button-soft"));
 
     replaceApp(screen(noun, content, {
-      eyebrow: child === "leon" ? "Univers ballon" : "Univers licorne",
+      eyebrow: child === "leon" ? "Univers ballon" : "Univers magique",
       home: () => go("home")
     }));
 
