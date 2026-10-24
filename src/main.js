@@ -94,18 +94,18 @@ function childHome(child) {
     button("🌿 Petite pause", () => guidedPause(child), "button-warm"),
     button("🔊 Réécouter", () => speak(
       rose
-        ? "Choisis un jeu : compter les licornes, les couleurs magiques, les formes, les lettres ou les syllabes."
+        ? "Choisis un jeu : compter des images, découvrir les couleurs, les formes, les lettres ou les syllabes."
         : "Choisis un défi de maths, le nombre mystère, le plus grand nombre, le calcul mental ou la lecture.",
       getState().settings.voice
     ), "button-soft"),
     button("⌂ Accueil", () => go("home"), "icon-button")
   ]);
   replaceApp(screen(rose ? "Bonjour Rose !" : "Salut Léon !", content, {
-    eyebrow: rose ? "Univers licorne" : "Univers ballon",
+    eyebrow: rose ? "Univers magique" : "Univers ballon",
     home: () => go("home")
   }));
   speak(
-    rose ? "Bonjour Rose ! Choisis un petit jeu." : "Salut Léon ! Choisis un défi : tu peux faire des maths ou lire.",
+    rose ? "Bonjour Rose ! Choisis un petit jeu magique." : "Salut Léon ! Choisis un défi : tu peux faire des maths ou lire.",
     getState().settings.voice
   );
 }
