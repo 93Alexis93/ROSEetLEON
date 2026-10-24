@@ -152,7 +152,7 @@ export function numberMystery(){launch("leon");}
 export function compareNumbers(){launch("leon","compare");}
 export function syllableGame(){launch("rose");}
 
-const SEQUENCE_SYMBOLS=[["⚽","🏆"],["🔵","🟡"],["🐱","🐶","🐸"],["⭐","🌙","☀️"],["🚲","🛴","🛼"]];
+const SEQUENCE_SYMBOLS=[["⚽","🏆"],["🔵","🟡"],["🐱","🐶","🐸"],["⭐","🌙","☀️"],["🚲","🛴","🛼"],["🥅","⚽","🥅"],["🍎","🍐","🍌"],["🚒","🚓","🚑"],["🐢","🐰","🦊"],["🎾","🏒","⚽"]];
 export function createSequenceQuestion(level=1,random=Math.random){
  const shuffleChoices=(answer,candidates)=>shuffle([...new Set([answer,...candidates])].filter(v=>v!==undefined).slice(0,4),random);
  if(level<=2){
