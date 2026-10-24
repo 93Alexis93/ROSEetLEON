@@ -204,3 +204,9 @@
 - Tests de diversité et de comptage étendus ; cache PWA renouvelé à v60.
 
 - Maths de Léon : extension du niveau avancé aux tables de 2 à 10 et des heures proposées jusqu’à 12 h ; test dédié et cache PWA v61.
+
+
+## 2026-10-24 — Fusion sur main
+- Fusion squash des lots de fiabilité, pédagogie, accessibilité, accueil et impression (PR #1).
+- Correctif de progression des jeux de Rose et encouragements vocaux courts ; cache PWA v108.
+- Tests automatiques exécutés avec succès sur le commit de fusion. La validation Safari iPhone, hors ligne réel et impression A4 reste manuelle.
