@@ -191,3 +191,9 @@
 
 ## Maintenance — 2026-10-24 (suite 6)
 - Le workflow de tests utilise un groupe de concurrence par référence et annule les exécutions obsolètes lors d’un nouveau commit pour réduire l’accumulation de jobs en attente.
+
+
+## Contenus enrichis — 2026-10-24
+- Lecture : 10 nouvelles phrases et 10 nouveaux mini-textes de compréhension.
+- Rose : 18 mots illustrés supplémentaires pour le jeu des syllabes et comptage jusqu’à huit.
+- Tests de diversité et de comptage étendus ; cache PWA renouvelé à v60.
