@@ -106,6 +106,56 @@ function question(mode) {
     };
   }
 
+  if (mode === "rhyme") {
+    const pairs = [
+      { word: "chat", rhyme: "rat", others: ["lune", "vélo", "pomme"] },
+      { word: "maison", rhyme: "ballon", others: ["chat", "fleur", "bateau"] },
+      { word: "bateau", rhyme: "chapeau", others: ["lapin", "soleil", "pomme"] },
+      { word: "souris", rhyme: "fourmi", others: ["maison", "bateau", "chat"] },
+      { word: "lapin", rhyme: "sapin", others: ["ballon", "lune", "fleur"] },
+      { word: "gâteau", rhyme: "râteau", others: ["chat", "vélo", "nuage"] },
+      { word: "poule", rhyme: "boule", others: ["soleil", "bateau", "lapin"] },
+      { word: "mouton", rhyme: "bouton", others: ["fleur", "maison", "chat"] },
+      { word: "camion", rhyme: "avion", others: ["pomme", "lune", "lapin"] },
+      { word: "tortue", rhyme: "rue", others: ["bateau", "soleil", "maison"] },
+      { word: "chocolat", rhyme: "chat", others: ["pomme", "bateau", "lune"] },
+      { word: "fleur", rhyme: "cœur", others: ["lapin", "vélo", "maison"] },
+      { word: "poisson", rhyme: "maison", others: ["chat", "lune", "pomme"] },
+      { word: "moto", rhyme: "photo", others: ["lapin", "fleur", "soleil"] },
+      { word: "canard", rhyme: "placard", others: ["bateau", "chat", "pomme"] },
+      { word: "fourmi", rhyme: "ami", others: ["lune", "maison", "vélo"] },
+      { word: "sourire", rhyme: "rire", others: ["chat", "ballon", "pomme"] },
+      { word: "couronne", rhyme: "personne", others: ["lapin", "soleil", "bateau"] },
+      { word: "marron", rhyme: "ballon", others: ["fleur", "chat", "vélo"] },
+      { word: "éléphant", rhyme: "enfant", others: ["pomme", "lune", "bateau"] }
+    ];
+    const pair = pick(pairs);
+    return {
+      mode,
+      prompt: "Quel mot rime avec « " + pair.word + " » ?",
+      answer: pair.rhyme,
+      choices: shuffle([pair.rhyme, ...pair.others]),
+      hint: "Écoute la fin des deux mots : est-ce qu’elle sonne pareil ?",
+      explanation: "« " + pair.word + " » rime avec « " + pair.rhyme + " » : leurs fins se ressemblent."
+    };
+  }
+
+  if (mode === "syllables") {
+    const words = Object.keys(READING_SYLLABLES);
+    const word = pick(words);
+    const count = READING_SYLLABLES[word].split("-").length;
+    const alternatives = shuffle(["1", "2", "3", "4"].filter(value => Number(value) !== count)).slice(0, 3);
+    return {
+      mode,
+      prompt: "Combien de syllabes entends-tu dans « " + word + " » ?",
+      speakText: word,
+      answer: String(count),
+      choices: shuffle([String(count), ...alternatives]),
+      hint: "Dis le mot lentement et frappe doucement dans tes mains à chaque morceau entendu.",
+      explanation: "« " + word + " » se découpe ainsi : " + READING_SYLLABLES[word] + " (" + count + " syllabe(s))."
+    };
+  }
+
   if (mode === "sentence") {
     const sentences = [
       { text: "Le lapin saute dans le jardin.", q: "De qui parle la phrase ?", answer: "Le lapin", choices: ["Le lapin", "Le bateau", "Le gâteau", "La forêt"] },
@@ -202,7 +252,9 @@ export function readingMenu() {
     ["flash", "⚡ Mots-éclairs", "Reconnaître un mot rapidement"],
     ["mystery", "🔎 Mots-mystères", "Assembler les syllabes"],
     ["sentence", "💬 Phrases à comprendre", "Lire une phrase et trouver l’information"],
-    ["text", "📖 Mini-textes", "Lire quelques lignes et comprendre"]
+    ["text", "📖 Mini-textes", "Lire quelques lignes et comprendre"],
+    ["rhyme", "🎵 Chasse aux rimes", "Écouter les sons à la fin des mots"],
+    ["syllables", "👏 Syllabes en rythme", "Découper les mots en morceaux à l’oral"]
   ];
   modes.forEach(([id, label, description]) => {
     content.append(card([
@@ -231,7 +283,9 @@ function startReading(mode) {
     flash: "Mots-éclairs",
     mystery: "Mots-mystères",
     sentence: "Phrases à comprendre",
-    text: "Mini-textes"
+    text: "Mini-textes",
+    rhyme: "Chasse aux rimes",
+    syllables: "Syllabes en rythme"
   };
 
   const generate = () => {
