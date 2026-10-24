@@ -189,7 +189,6 @@ function childHome(child) {
     );
   }
   section.append(tiles);
-  content.append(exerciseSearch(child));
   const gentle = el("div", { class: "child-gentle-note" }, [
     el("span", { "aria-hidden": "true", text: "💛" }),
     el("p", { text: rose ? "Tu peux prendre ton temps. Chaque essai est une découverte !" : "Pas besoin d’aller vite : réfléchir, essayer et recommencer, c’est déjà gagner !" })
@@ -204,7 +203,7 @@ function childHome(child) {
       getState().settings.voice
     ), "button-soft")
   ]);
-  content.append(hero, section, gentle, tools);
+  content.append(hero, section, exerciseSearch(child), gentle, tools);
   replaceApp(screen(rose ? "Bonjour Rose !" : "Salut Léon !", content, {
     eyebrow: rose ? "Ton univers magique" : "Ton club de champions",
     home: () => go("home")
