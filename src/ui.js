@@ -7,31 +7,32 @@ export function screen(title,content,{eyebrow="Rose & Léon",home}={}){const s=e
 export const card=(children,cls="card")=>el("section",{class:cls},children);
 
 let feedbackObserver;
-function announceFeedback(node){
+function collectFeedback(node,set){
   if(!node || node.nodeType!==1)return;
-  const candidates=[];
-  if(node.matches?.(".feedback"))candidates.push(node);
-  candidates.push(...(node.querySelectorAll?.(".feedback")||[]));
-  for(const item of candidates){
-    const message=item.textContent?.trim();
-    if(message) speak(message,getState().settings.voice);
-  }
+  if(node.matches?.(".feedback"))set.add(node);
+  node.querySelectorAll?.(".feedback").forEach(item=>set.add(item));
+}
+function announceFeedback(item){
+  const message=item.textContent?.trim();
+  if(message)speak(message,getState().settings.voice);
 }
 export function replaceApp(node){
   const app=document.querySelector("#app");
   if(!app)return;
   if(!feedbackObserver && typeof MutationObserver!=="undefined"){
     feedbackObserver=new MutationObserver(mutations=>{
+      const changed=new Set();
       for(const mutation of mutations){
         if(mutation.type==="characterData"){
-          announceFeedback(mutation.target.parentElement);
+          const feedback=mutation.target.parentElement?.closest(".feedback");
+          if(feedback)changed.add(feedback);
         }else if(mutation.type==="childList"){
-          if(mutation.target.nodeType===1 && mutation.target.closest?.(".feedback")){
-            announceFeedback(mutation.target.closest(".feedback"));
-          }
-          mutation.addedNodes.forEach(announceFeedback);
+          const feedback=mutation.target.nodeType===1?mutation.target.closest?.(".feedback"):null;
+          if(feedback)changed.add(feedback);
+          mutation.addedNodes.forEach(node=>collectFeedback(node,changed));
         }
       }
+      changed.forEach(announceFeedback);
     });
     feedbackObserver.observe(app,{subtree:true,childList:true,characterData:true});
   }
