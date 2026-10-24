@@ -447,3 +447,11 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - La fonction de félicitations accepte maintenant le texte réellement affiché à l’enfant : la voix prononce le feedback visible au lieu d’ajouter une seconde phrase aléatoire.
 - Correction appliquée aux réussites de comptage, lecture, calcul mental et construction de phrases ; cache PWA renouvelé en `rose-leon-v107`.
 - Tests automatisés adaptés pour vérifier ce comportement. Résultat GitHub Actions et essai Safari iPhone à confirmer avant de déclarer la correction validée.
+
+
+## Correctif prioritaire — progression des jeux de Rose et durée vocale (24 octobre 2026)
+- Correction d’un défaut de portée dans `startRoseActivity` : après une bonne réponse, le code utilisait `f` et `answers`, déclarés localement dans `render()`. L’erreur pouvait empêcher l’ajout du bouton « Question suivante » et bloquer le nouvel affichage, dont l’image.
+- Le traitement de réussite récupère maintenant les éléments réellement affichés, désactive les réponses et ajoute le bouton de progression à l’écran courant. La correction couvre couleurs, formes, lettres, sons, suites et lettres majuscules/minuscules.
+- Les félicitations ordinaires sont prononcées en une phrase courte (au plus 9 mots) ; le message de récompense finale reste inchangé. Les retours de syllabes de Rose sont raccourcis.
+- Cache PWA renouvelé en `rose-leon-v108` ; tests de régression ajoutés pour la portée des éléments et la durée des retours vocaux.
+- Audit de code effectué sur comptage, syllabes, lecture, calcul, construction de phrases et aventures. CI à confirmer sur le commit final ; test manuel sur Safari iPhone encore nécessaire.
