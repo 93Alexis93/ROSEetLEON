@@ -66,3 +66,6 @@
 .exercise-stars{flex:none;color:#d18a00;font-size:1.1rem;letter-spacing:.08em;white-space:nowrap}
 .exercise-search-results .small{margin:7px 0 12px}
 .exercise-search-results button{min-height:48px;width:100%}
+
+/* Le bouton de progression reste visible dès qu'une réponse est validée. */
+.game-next{position:fixed!important;z-index:1000;left:50%;right:auto;bottom:calc(12px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(620px,calc(100vw - 28px));min-height:60px;padding:14px 20px;border:3px solid #fff;border-radius:18px;box-shadow:0 5px 0 #0002,0 12px 34px #20253640;font-size:1.08rem;font-weight:900;}
