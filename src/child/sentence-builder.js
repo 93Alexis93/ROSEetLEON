@@ -55,9 +55,9 @@ export function sentenceBuilder() {
       if (chosen.length === current.words.length) {
         const built = chosen.map(i => source[i]).join(" ").replace(" .", ".").replace(" ,", ",");
         if (built === current.answer) {
-          locked = true; recordAnswer("leon", true); cheer(getState().settings.sounds); successPraise("leon", getState().settings.voice);
+          locked = true; recordAnswer("leon", true); cheer(getState().settings.sounds);
           feedback.textContent = "Bravo ! Ta phrase est bien construite : " + current.answer;
-          speak(feedback.textContent, getState().settings.voice);
+          successPraise("leon", getState().settings.voice, feedback.textContent);
           const next = button(round === 4 ? "Terminer" : "Phrase suivante", () => { round++; if (round >= 5) finish(); else { choose(); render(); } }, "button-primary");
           feedback.after(next);
         } else {
