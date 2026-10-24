@@ -89,6 +89,48 @@ function guidedChoice(child) {
   speak(intro, getState().settings.voice);
 }
 
+const EXERCISES = [
+  {child:"rose",name:"Compter les objets",keywords:"compter nombres collections",stars:1,description:"Dénombrer de petites collections.",run:()=>startActivity("rose")},
+  {child:"rose",name:"Couleurs magiques",keywords:"couleurs rouge bleu jaune vert",stars:1,description:"Reconnaître les couleurs.",run:()=>roseMenu()},
+  {child:"rose",name:"Formes à retrouver",keywords:"formes cercle carré triangle géométrie",stars:2,description:"Observer et reconnaître les formes.",run:()=>roseMenu()},
+  {child:"rose",name:"Lettres de Rose",keywords:"lettres alphabet prénom majuscule",stars:1,description:"Retrouver R, O, S et E.",run:()=>roseMenu()},
+  {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>roseMenu()},
+  {child:"rose",name:"Syllabes en rythme",keywords:"syllabes écouter mots taper mains",stars:2,description:"Écouter les morceaux des mots.",run:()=>syllableGame()},
+  {child:"leon",name:"Défis de maths",keywords:"maths problèmes nombres calcul",stars:2,description:"Résoudre des questions de maths variées.",run:()=>startActivity("leon")},
+  {child:"leon",name:"Nombre mystère",keywords:"numération indices nombre caché",stars:2,description:"Trouver un nombre grâce aux indices.",run:()=>numberMystery()},
+  {child:"leon",name:"Comparer les nombres",keywords:"plus grand petit comparer centaines dizaines",stars:2,description:"Comparer des nombres à deux ou trois chiffres.",run:()=>compareNumbers()},
+  {child:"leon",name:"Calcul mental",keywords:"calcul additions soustractions compléments problèmes",stars:2,description:"Calculer et résoudre des petits problèmes.",run:()=>calculationMenu()},
+  {child:"leon",name:"Mots-éclairs",keywords:"lecture mots reconnaître rapidement",stars:1,description:"Reconnaître des mots familiers.",run:()=>readingMenu()},
+  {child:"leon",name:"Mots-mystères",keywords:"lecture syllabes assembler déchiffrer",stars:2,description:"Assembler des syllabes pour lire.",run:()=>readingMenu()},
+  {child:"leon",name:"Phrases à comprendre",keywords:"lecture compréhension phrase",stars:2,description:"Lire une phrase et retrouver l’information.",run:()=>readingMenu()},
+  {child:"leon",name:"Mini-textes",keywords:"lecture histoire texte compréhension",stars:3,description:"Lire quelques lignes et comprendre.",run:()=>readingMenu()},
+  {child:"leon",name:"Chasse aux rimes",keywords:"sons rimes phonologie écouter",stars:2,description:"Repérer les sons à la fin des mots.",run:()=>readingMenu()},
+  {child:"leon",name:"Syllabes en rythme",keywords:"lecture syllabes oral découper mots",stars:1,description:"Découper des mots à l’oral.",run:()=>readingMenu()}
+];
+function starLabel(level){return "★".repeat(level)+"☆".repeat(3-level);}
+function exerciseSearch(child){
+ const section=el("section",{class:"exercise-search", "aria-label":"Rechercher un exercice"});
+ section.append(el("h3",{text:"🔎 Trouve ton jeu"}),el("p",{class:"small",text:"Tape un mot : maths, lettres, lecture, syllabes…"}));
+ const input=el("input",{type:"search",placeholder:"Rechercher un exercice…","aria-label":"Rechercher un exercice"});
+ input.className="exercise-search-input";
+ const results=el("div",{class:"exercise-search-results","aria-live":"polite"});
+ const draw=()=>{
+  const query=input.value.trim().toLocaleLowerCase("fr");
+  const matches=EXERCISES.filter(item=>item.child===child&&(!query||(item.name+" "+item.keywords+" "+item.description).toLocaleLowerCase("fr").includes(query)));
+  results.replaceChildren();
+  if(!matches.length){results.append(el("p",{class:"small",text:"Aucun jeu trouvé. Essaie un autre mot."}));return;}
+  matches.forEach(item=>results.append(card([
+   el("div",{class:"exercise-result-heading"},[el("strong",{text:item.name}),el("span",{class:"exercise-stars","aria-label":item.stars+" étoile"+(item.stars>1?"s":"")+" sur 3",text:starLabel(item.stars)})]),
+   el("p",{class:"small",text:item.description}),
+   button("Jouer",()=>{unlockAudio();item.run();},"button-primary")
+  ])));
+ };
+ input.addEventListener("input",draw);
+ section.append(input,results);
+ draw();
+ return section;
+}
+
 function childHome(child) {
   document.body.className = "theme-" + child;
   const rose = child === "rose";
@@ -147,6 +189,7 @@ function childHome(child) {
     );
   }
   section.append(tiles);
+  content.append(exerciseSearch(child));
   const gentle = el("div", { class: "child-gentle-note" }, [
     el("span", { "aria-hidden": "true", text: "💛" }),
     el("p", { text: rose ? "Tu peux prendre ton temps. Chaque essai est une découverte !" : "Pas besoin d’aller vite : réfléchir, essayer et recommencer, c’est déjà gagner !" })
