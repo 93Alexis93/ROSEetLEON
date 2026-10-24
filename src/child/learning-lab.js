@@ -77,9 +77,9 @@ function launch(child,mode="default"){
  const isRose=child==="rose";
  const isCompare=mode==="compare";
  document.body.className="theme-"+child;
- let round=0,question,locked=false,hintUsed=false;
+ let round=0,question,locked=false,hintUsed=false;const seenQuestions=new Set();
  const total=5;
- const generate=()=>{question=isRose?createSyllableQuestion():(isCompare?createCompareQuestion():createNumberMysteryQuestion());locked=false;hintUsed=false;};
+ const generate=()=>{let candidate,attempts=0;do{candidate=isRose?createSyllableQuestion():(isCompare?createCompareQuestion():createNumberMysteryQuestion());attempts++;}while(seenQuestions.has(isRose?candidate.word:candidate.prompt)&&attempts<100);question=candidate;seenQuestions.add(isRose?question.word:question.prompt);locked=false;hintUsed=false;};
  generate();
  function render(){
   const content=card([]);
