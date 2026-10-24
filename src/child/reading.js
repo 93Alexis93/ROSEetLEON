@@ -374,15 +374,15 @@ function startReading(mode) {
     if (correct) {
       cheer(getState().settings.sounds);
       if (!questionHadError) score++;
-      round++;
-      if (round >= 5) {
-        finish();
-        return;
-      }
-      generate();
-      render();
-      const nextFeedback = document.querySelector(".feedback");
-      if (nextFeedback) nextFeedback.textContent = ["Bravo, tu as pris le temps de réfléchir !", "Oui, tu as bien compris !", "Super lecture, tu as trouvé !", "Bien joué, tu progresses à chaque question !", "Exactement, c’est la bonne réponse !"][Math.floor(Math.random() * 5)];
+      const feedbackText = ["Bravo, tu as pris le temps de réfléchir !", "Oui, tu as bien compris !", "Super lecture, tu as trouvé !", "Bien joué, tu progresses à chaque question !", "Exactement, c’est la bonne réponse !"][Math.floor(Math.random() * 5)];
+      if (feedback) feedback.textContent = feedbackText;
+      document.querySelectorAll(".answer-grid button").forEach(item => { item.disabled = true; });
+      const next = button(round + 1 >= 5 ? "Terminer" : "Question suivante", () => {
+        round++;
+        if (round >= 5) finish();
+        else { generate(); render(); }
+      }, "button-primary");
+      feedback?.after(next);
     } else {
       gentleOops(getState().settings.sounds);
       questionHadError = true;
