@@ -37,7 +37,7 @@ test("Nombre mystère · la réponse correspond exactement à l’indice",()=>{
  }
 });
 test("Nombre mystère · les bonds de dix parlent d’unités placées après le nombre",()=>{
- for(let i=0;i<500;i++){const q=createNumberMysteryQuestion();if(q.prompt.includes("10 unités après")){const match=q.prompt.match(/^Quel nombre est placé 10 unités après (\\d+) \\?$/);assert.ok(match,q.prompt);assert.equal(q.answer,Number(match[1])+10,q.prompt);return;}}
+ for(let i=0;i<500;i++){const q=createNumberMysteryQuestion();if(q.prompt.includes("10 unités après")){const match=q.prompt.match(/^Quel nombre est placé 10 unités après (\d+) \?$/);assert.ok(match,q.prompt);assert.equal(q.answer,Number(match[1])+10,q.prompt);return;}}
  assert.fail("Aucune question de bond de dix générée.");
 });
 
