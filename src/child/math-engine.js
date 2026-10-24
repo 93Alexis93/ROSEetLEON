@@ -106,13 +106,46 @@ function problems(d, random) {
   let b = int(d === 1 ? 2 : 5, d === 1 ? 9 : 27, random);
   if (!add && b > a) b = int(2, a, random);
   const answer = add ? a + b : a - b;
-  const items = ["vignettes", "billes", "cartes", "points", "coquillages", "autocollants", "livres", "jetons", "crayons", "figurines", "fleurs", "pommes"];
+  const items = [
+    "vignettes", "billes", "cartes", "points", "coquillages", "autocollants",
+    "livres", "jetons", "crayons", "figurines", "fleurs", "pommes", "ballons",
+    "cartes de foot", "perles", "dinosaures", "voitures miniatures", "pièces",
+    "images", "coquilles", "tickets", "bonbons", "plumes", "gommettes",
+    "bracelets", "briques", "étoiles en papier", "photos"
+  ];
   const item = items[int(0, items.length - 1, random)];
-  const prompt = add
-    ? `Léon a ${a} ${item}. Il en gagne ${b}. Combien en a-t-il maintenant ?`
-    : `Léon a ${a} ${item}. Il en donne ${b}. Combien lui en reste-t-il ?`;
-  return makeQuestion("problems", d, prompt, answer,
-    [answer + b, Math.abs(a - b), answer + 1], add ? "La quantité augmente : représente les objets puis ajoute." : "La quantité diminue : imagine que tu enlèves les objets donnés.", `Il faut ${add ? "ajouter" : "enlever"} ${b} à/de ${a} : il reste ${answer}.`, random);
+  const templates = add
+    ? [
+        () => `Léon a ${a} ${item}. Il en gagne ${b}. Combien en a-t-il maintenant ?`,
+        () => `Léon possède ${a} ${item}. On lui en donne ${b} de plus. Combien en a-t-il maintenant ?`,
+        () => `Dans une boîte, il y a ${a} ${item}. On en ajoute ${b}. Combien y en a-t-il maintenant ?`
+      ]
+    : [
+        () => `Léon a ${a} ${item}. Il en donne ${b}. Combien lui en reste-t-il ?`,
+        () => `Léon possède ${a} ${item}. Il en offre ${b}. Combien lui en reste-t-il ?`,
+        () => `Dans un panier, il y a ${a} ${item}. On en retire ${b}. Combien en reste-t-il ?`
+      ];
+  const prompt = templates[int(0, templates.length - 1, random)]();
+  const distractors = unique([
+    add ? a - b : a + b,
+    add ? a + b + b : a - b - b,
+    add ? a + 1 : Math.max(0, a - b + 1),
+    add ? answer + 1 : Math.max(0, answer - 1)
+  ]).filter(value => Number(value) !== answer);
+  return makeQuestion(
+    "problems",
+    d,
+    prompt,
+    answer,
+    distractors,
+    add
+      ? "La quantité augmente. Imagine les objets déjà présents, puis ceux qui arrivent."
+      : "La quantité diminue. Imagine les objets qui partent et ceux qui restent.",
+    add
+      ? `${a} + ${b} = ${answer}. On ajoute ${b} à ${a}.`
+      : `${a} − ${b} = ${answer}. On retire ${b} à ${a}.`,
+    random
+  );
 }
 
 function logic(d, random) {
