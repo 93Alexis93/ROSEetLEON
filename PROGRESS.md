@@ -25,7 +25,7 @@ Mis à jour le 24 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v66` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
+- Le service worker source utilise actuellement le cache `rose-leon-v67` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -322,7 +322,7 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Pages Rose et Léon : grands bandeaux illustrés, titres de mission, tuiles d’activités tactiles et message rassurant sans compétition.
 - [x] Couleurs et ambiances distinctes : pastel magique pour Rose ; sport et aventure pour Léon.
 - [x] Navigation et fonctions existantes conservées ; aucune donnée ni règle de progression modifiée.
-- [x] Cache hors ligne renouvelé en `rose-leon-v66` ; les feuilles CSS et `src/main.js` sont déjà dans la liste des ressources précachées.
+- [x] Cache hors ligne renouvelé en `rose-leon-v67` ; les feuilles CSS et `src/main.js` sont déjà dans la liste des ressources précachées.
 - [ ] À vérifier visuellement sur Safari iPhone, notamment les tailles de texte, le retour à l’accueil et l’affichage en petit écran.
 - [ ] Les tests automatisés doivent être confirmés dans GitHub Actions pour le SHA de cette livraison.
 
@@ -331,7 +331,7 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Les éléments affichés avec la classe `.feedback` sont désormais lus automatiquement à voix haute lorsque la voix est activée : réponses, encouragements, erreurs, indices et explications dans les activités qui les utilisent.
 - L’annonce passe par la voix française `fr-FR` existante, avec contrôle par le réglage vocal de l’espace parent.
 - Les sons distincts de réussite (`cheer`) et de nouvelle tentative (`gentleOops`) déjà présents dans les jeux sont conservés ; ils restent contrôlés par le réglage des sons.
-- Le cache hors ligne passe à `rose-leon-v66` pour charger la nouvelle logique commune.
+- Le cache hors ligne passe à `rose-leon-v67` pour charger la nouvelle logique commune.
 - À valider sur iPhone Safari : annonces vocales après une réponse, absence de doublons, réglages voix/sons activés ou coupés, et fonctionnement hors ligne après mise à jour.
 - Les tests et le rendu réel ne sont pas déclarés validés tant que le résultat GitHub Actions et l’essai Safari correspondant ne sont pas consultés.
 
@@ -340,6 +340,6 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - [x] Nouvelle illustration SVG carrée : licorne blanche à crinière arc-en-ciel, ballon de football et fond pastel.
 - [x] Remplacement de l’icône PNG 512 × 512 utilisée par l’écran d’accueil iPhone et par le manifeste PWA.
 - [x] Lien `apple-touch-icon` déjà présent dans `index.html`, et icônes déclarées dans `manifest.webmanifest` ; leurs chemins sont conservés.
-- [x] Cache hors ligne renouvelé en `rose-leon-v66`.
+- [x] Cache hors ligne renouvelé en `rose-leon-v67`.
 - [ ] Vérifier le déploiement Pages puis supprimer l’ancienne icône de l’écran d’accueil si elle y est déjà installée et ajouter à nouveau l’application pour récupérer la nouvelle.
-- [ ] Rendu visuel iPhone non vérifié dans cette session.
+- [ ] Rendu visuel iPhone non vérifié dans cette session ; le fichier PNG a été relu après publication dans GitHub et son en-tête confirme un PNG 512 × 512.
