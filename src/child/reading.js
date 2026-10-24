@@ -1,7 +1,7 @@
 import { el, button, screen, card, replaceApp } from "../ui.js";
 import { getState, recordAnswer, recordSession } from "../store.js";
 import { speak } from "../voice.js";
-import { cheer, gentleOops } from "../audio.js";
+import { cheer, gentleOops, successPraise } from "../audio.js";
 import { go } from "../router.js";
 
 const BASE_WORDS = [
@@ -372,7 +372,7 @@ function startReading(mode) {
     recordAnswer("leon", correct);
     const feedback = document.querySelector(".feedback");
     if (correct) {
-      cheer(getState().settings.sounds);
+      cheer(getState().settings.sounds);successPraise(child,getState().settings.voice);
       if (!questionHadError) score++;
       const feedbackText = ["Bravo, tu as pris le temps de réfléchir !", "Oui, tu as bien compris !", "Super lecture, tu as trouvé !", "Bien joué, tu progresses à chaque question !", "Exactement, c’est la bonne réponse !"][Math.floor(Math.random() * 5)];
       if (feedback) feedback.textContent = feedbackText;
