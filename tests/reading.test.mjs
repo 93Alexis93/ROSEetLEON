@@ -34,7 +34,7 @@ test("les banques de phrases et de mini-textes proposent des situations variées
   for (const mode of ["sentence", "text"]) {
     const prompts = new Set();
     for (let i = 0; i < 100; i++) prompts.add(createReadingQuestion(mode).prompt);
-    assert.ok(prompts.size >= 11, mode + " doit proposer au moins onze contenus distincts");
+    assert.ok(prompts.size >= 20, mode + " doit proposer au moins vingt contenus distincts");
   }
 });
 
