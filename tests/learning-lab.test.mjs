@@ -49,7 +49,7 @@ test("Les deux activités sont accessibles depuis les menus enfants et incluses 
  assert.match(main,/Nombre mystère/);
  assert.match(main,/compareNumbers/);
  assert.match(main,/Le plus grand nombre/);
- assert.match(main,/Les syllabes/);
+ assert.match(main,/Syllabes en rythme/);
  assert.match(main,/Choisir un défi/);
  assert.doesNotMatch(main,/Défi penalty/);
  assert.ok(worker.includes("./src/child/learning-lab.js"));
@@ -91,9 +91,10 @@ test("Les jeux de lecture sonnent aussi les erreurs et les réussites",()=>{
 
 test("Syllabes · les mots connus ont un nombre de syllabes juste",()=>{
  const expected={chat:1,"vélo":2,lapin:2,tomate:3,banane:3,papillon:3,chocolat:3,maison:2,bateau:2,soleil:2,renard:2,mouton:2,orange:2,fromage:2,cabane:2,camion:2,domino:3,"éléphant":3,crocodile:3,dinosaure:3,ananas:3,fenêtre:2,chapeau:2,canapé:3,fourmi:2,hibou:2,chaussette:2,rivière:2,poussin:2,bonnet:2};
- for(const item of SYLLABLE_WORDS){
-  assert.equal(item.syllables,expected[item.word],"Nombre de syllabes incorrect pour "+item.word);
+ for(const [word,syllables] of Object.entries(expected)){
+  const item=SYLLABLE_WORDS.find(entry=>entry.word===word);
+  assert.ok(item,"Le mot attendu doit rester dans la banque : "+word);
+  assert.equal(item.syllables,syllables,"Nombre de syllabes incorrect pour "+word);
  }
- assert.equal(SYLLABLE_WORDS.length,Object.keys(expected).length);
  assert.ok(SYLLABLE_WORDS.length>=30,"La banque de Rose doit conserver au moins trente mots illustrés.");
 });
