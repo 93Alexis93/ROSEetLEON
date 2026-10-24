@@ -38,7 +38,7 @@ export function roseMenu(){
  document.body.className="theme-rose";const content=el("div",{class:"stack"});
  content.append(el("p",{class:"lead",text:"Choisis un petit jeu. On peut s’arrêter dès qu’on en a envie !"}));
  content.append(
-  card([el("h2",{text:"🦄 Compter les licornes"}),el("p",{class:"small",text:"Compter jusqu’à huit, en prenant son temps."}),button("Jouer",chooseExercise("Compte les objets magiques et choisis le bon nombre.",()=>startActivity("rose")),"button-primary")]),
+  card([el("h2",{text:"🔢 Compte le nombre d’éléments"}),el("p",{class:"small",text:"Compter des licornes, des fleurs, des animaux et plein d’autres images."}),button("Jouer",chooseExercise("Compte le nombre d’éléments en touchant chaque image pour la cocher.",()=>startActivity("rose")),"button-primary")]),
   card([el("h2",{text:"🪄 Les suites magiques"}),el("p",{class:"small",text:"Observer les répétitions et deviner quelle image vient après."}),button("Jouer",chooseExercise("Observe les images et trouve ce qui vient ensuite.",()=>startRoseActivity("patterns")),"button-primary")]),
   card([el("h2",{text:"🌈 Les couleurs magiques"}),el("p",{class:"small",text:"Reconnaître huit couleurs."}),button("Jouer",chooseExercise("Écoute la consigne puis retrouve la bonne couleur.",()=>startRoseActivity("colors")),"button-primary")]),
   card([el("h2",{text:"⭐ Les formes à retrouver"}),el("p",{class:"small",text:"Reconnaître quatre formes faciles : carré, rond, triangle et rectangle."}),button("Jouer",chooseExercise("Observe les formes et retrouve celle qui est demandée.",()=>startRoseActivity("shapes")),"button-primary")]),
