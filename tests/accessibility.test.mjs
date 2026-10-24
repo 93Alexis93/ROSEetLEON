@@ -37,3 +37,34 @@ test("Accessibilité · chaque étape de la pause est annoncée aux lecteurs d�
   assert.match(pause, /Étape /);
   assert.match(pause, /Tu peux arrêter cette pause quand tu veux/);
 });
+
+const main = readFileSync(resolve(root, "src/main.js"), "utf8");
+
+test("Accessibilité · la progression de chaque enfant expose une jauge compréhensible", () => {
+  assert.match(main, /class: "progress-track", role: "progressbar"/);
+  assert.match(main, /"aria-label": "Réponses réussies"/);
+  assert.match(main, /"aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String\(successRate\), "aria-valuetext": successRate \+ " % de réponses réussies"/);
+  assert.match(main, /profile\.sessions === 1 \? " partie terminée\." : " parties terminées\."/);
+  assert.match(main, /profile\.correct/);
+  assert.match(main, /profile\.attempts/);
+  assert.match(main, /profile\.sessions/);
+  assert.match(main, /Ton aventure commence ici : chaque essai fera grandir ton parcours !/);
+});
+
+
+test("Accessibilité · les questions des défis annoncent les retours et leur progression", () => {
+ const lab = readFileSync(resolve(root, "src/child/learning-lab.js"), "utf8");
+ assert.match(lab, /role:"progressbar"/);
+ assert.match(lab, /"aria-valuemin":"0","aria-valuemax":String\(total\),"aria-valuenow":String\(round\)/);
+ assert.match(lab, /role:"status","aria-live":"polite"/);
+ assert.match(lab, /buttons\.forEach\(b=>b\.disabled=true\)/);
+ assert.match(lab, /round===total-1\?"Terminer":"Continuer"/);
+});
+
+test("Accessibilité · la recherche d’activités possède un libellé et annonce ses résultats", () => {
+ const main = readFileSync(resolve(root, "src/main.js"), "utf8");
+ assert.match(main, /class:"exercise-search", "aria-label":"Rechercher un exercice"/);
+ assert.match(main, /placeholder:"Rechercher un exercice…","aria-label":"Rechercher un exercice"/);
+ assert.match(main, /class:"exercise-search-results","aria-live":"polite"/);
+ assert.match(main, /Aucun jeu trouvé\. Essaie un autre mot\./);
+});

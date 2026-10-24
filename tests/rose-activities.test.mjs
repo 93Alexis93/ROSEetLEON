@@ -95,3 +95,31 @@ test("Rose · comptage : la banque de choix couvre bien huit quantités",()=>{
  for(let i=0;i<500;i++) seen.add(createCountingQuestion().answer);
  assert.deepEqual([...seen].sort((a,b)=>a-b),[1,2,3,4,5,6,7,8]);
 });
+
+
+for (const mode of ["patterns", "letter-sounds"]) {
+  test("Rose · " + mode + " : question complète, réponse présente et choix sans doublons", () => {
+    for (let i = 0; i < 200; i++) {
+      const q = createRoseQuestion(mode);
+      assert.equal(q.mode, mode);
+      assert.ok(q.prompt.length > 0);
+      assert.ok(q.speakText.length > 0);
+      assert.ok(q.hint.length > 0);
+      assert.ok(q.explanation.length > 0);
+      assert.equal(q.choices.length, 3);
+      assert.equal(new Set(q.choices).size, 3);
+      assert.ok(q.choices.includes(q.answer));
+    }
+  });
+}
+
+test("Rose · les sept jeux à choix multiples utilisent le même parcours de validation", () => {
+  const source = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../src/child/rose-activities.js"), "utf8");
+  for (const mode of ["colors", "shapes", "letters", "letter-pairs", "letter-sounds", "patterns"]) {
+    assert.ok(source.includes('startRoseActivity("' + mode + '")') || source.includes('mode === "' + mode + '"') || source.includes('mode==="'+mode+'"'),
+      "Le mode " + mode + " doit être relié à son parcours de jeu.");
+  }
+  assert.match(source, /const answer=choice=>/);
+  assert.match(source, /const next=button\(round\+1>=5\?"Terminer":"Question suivante"/);
+  assert.match(source, /generate\(\);render\(\)/);
+});

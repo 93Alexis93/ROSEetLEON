@@ -29,7 +29,7 @@ test("PWA · les fiches et leurs styles sont préchargés",()=>{
 });
 
 test("PWA · le cache est renouvelé pour les dernières corrections de contenu",()=>{
-  assert.match(worker,/const CACHE="rose-leon-v77"/,"Le cache doit accompagner les derniers enrichissements de contenus.");
+  assert.match(worker,/const CACHE="rose-leon-v108"/,"Le cache doit accompagner les derniers enrichissements de contenus.");
 });
 
 test("PWA · les nouveaux modules de calcul sont préchargés hors ligne",()=>{
@@ -68,9 +68,9 @@ test("PWA · icône PNG déclarée, valide et précachée",()=>{
 test("PWA · les imports JavaScript des ressources précachées sont eux aussi précachés",()=>{
   for(const asset of assets.filter(path=>path.endsWith(".js"))){
     const source=readFileSync(resolve(root,asset.slice(2)),"utf8");
-    const imports=[...source.matchAll(/(?:from\\s*|import\\s*)["'](\\.[^"']+)["']/g)];
+    const imports=[...source.matchAll(/(?:from\s*|import\s*)["'](\.[^"']+)["']/g)];
     for(const match of imports){
-      const target="./"+relative(root,resolve(dirname(resolve(root,asset.slice(2))),match[1])).replaceAll("\\\\","/");
+      const target="./"+relative(root,resolve(dirname(resolve(root,asset.slice(2))),match[1])).replaceAll("\\","/");
       assert.ok(existsSync(resolve(root,target.slice(2))),"Import local absent : "+asset+" → "+match[1]);
       assert.ok(assets.includes(target),"Import local absent du cache hors ligne : "+asset+" → "+target);
     }

@@ -59,12 +59,14 @@ export function startCalculation(kind) {
         recordAnswer("leon", false);
         gentleOops(getState().settings.sounds);
         feedback.textContent = ["Pas tout à fait. Tu peux utiliser l’indice et réessayer.", "Ce calcul résiste encore un peu : regarde l’indice, puis retente.", "Bien essayé ! On reprend étape par étape.", "Tu peux te tromper, réfléchir et recommencer. Essaie encore !"][Math.floor(Math.random() * 4)];
+        speak(feedback.textContent, getState().settings.voice);
         return;
       }
       locked = true;
       recordAnswer("leon", true);
-      cheer(getState().settings.sounds);successPraise("leon",getState().settings.voice);
+      cheer(getState().settings.sounds);
       feedback.textContent = ["Bien trouvé ! ", "Exactement ! ", "Bravo pour ton raisonnement ! ", "Oui, c’est ça ! ", "Super, tu as réussi ! "][Math.floor(Math.random() * 5)] + question.explanation;
+      successPraise("leon", getState().settings.voice, feedback.textContent);
       answer.disabled = true;
       validate.disabled = true;
       const next = button(round === total - 1 ? "Terminer" : "Continuer", () => {
@@ -136,8 +138,9 @@ export function startAdaptiveCalculation() {
         return;
       }
       locked = true;
-      recordAnswer("leon", true); cheer(getState().settings.sounds); successPraise("leon", getState().settings.voice);
+      recordAnswer("leon", true); cheer(getState().settings.sounds);
       feedback.textContent = "Bien joué ! " + question.explanation;
+      successPraise("leon", getState().settings.voice, feedback.textContent);
       answers.querySelectorAll("button").forEach(b => { b.disabled = true; });
       const next = button(round === total - 1 ? "Terminer" : "Continuer", () => { round++; if (round >= total) finish(); else { generate(); render(); } }, "button-primary");
       feedback.after(next);

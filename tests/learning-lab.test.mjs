@@ -103,3 +103,40 @@ test("Syllabes · les mots connus ont un nombre de syllabes juste",()=>{
  }
  assert.ok(SYLLABLE_WORDS.length>=30,"La banque de Rose doit conserver au moins trente mots illustrés.");
 });
+
+
+test("Syllabes · toute la banque est cohérente, illustrée et sans doublons", () => {
+ const expected = {
+  chat:1, "vélo":2, lapin:2, tomate:3, banane:3, papillon:3, chocolat:3,
+  maison:2, bateau:2, soleil:2, renard:2, mouton:2, orange:2, fromage:2,
+  cabane:2, camion:2, domino:3, "éléphant":3, crocodile:3, dinosaure:3,
+  ananas:3, fenêtre:2, chapeau:2, canapé:3, fourmi:2, hibou:2, chaussette:2,
+  rivière:2, poussin:2, bonnet:2, abeille:2, cerise:2, fraise:1, ballon:2,
+  fusée:2, musique:2, koala:3, kangourou:3, escargot:3, cheval:2, voiture:2,
+  piano:2, marmite:2, girafe:2, poisson:2, parapluie:3, licorne:2,
+  princesse:2, couronne:2, magique:2, château:2, dragon:2, bonbon:2,
+  cadeau:2, poulet:2, serpent:2, grenouille:2, pantalon:3, biberon:3,
+  "arc-en-ciel":3
+ };
+ assert.equal(SYLLABLE_WORDS.length, Object.keys(expected).length,
+  "La banque et son audit doivent rester synchronisés.");
+ assert.equal(new Set(SYLLABLE_WORDS.map(item => item.word)).size, SYLLABLE_WORDS.length,
+  "Un mot ne doit apparaître qu'une fois dans la banque.");
+ for (const item of SYLLABLE_WORDS) {
+  assert.ok(item.picture, "Illustration manquante pour " + item.word);
+  assert.ok(Object.hasOwn(expected, item.word), "Mot non audité : " + item.word);
+  assert.equal(item.syllables, expected[item.word], "Nombre de syllabes incorrect pour " + item.word);
+ }
+});
+
+
+test("Syllabes · les consignes et aides parlent de syllabes, pas de morceaux", () => {
+ const main=readFileSync(resolve(root,"src/main.js"),"utf8");
+ const reading=readFileSync(resolve(root,"src/child/reading.js"),"utf8");
+ const lab=readFileSync(resolve(root,"src/child/learning-lab.js"),"utf8");
+ assert.match(main,/description:"Écouter les syllabes des mots\."/);
+ assert.match(main,/compter les syllabes/);
+ assert.match(reading,/à chaque syllabe entendue/);
+ assert.match(reading,/Découper les mots en syllabes à l’oral/);
+ assert.match(lab,/On cherche ensemble les syllabes du mot/);
+});

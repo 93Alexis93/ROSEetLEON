@@ -99,7 +99,7 @@ const EXERCISES = [
   {child:"rose",name:"Lettres de Rose",keywords:"lettres alphabet prénom majuscule",stars:1,description:"Retrouver R, O, S et E.",run:()=>startRoseActivity("letters")},
   {child:"rose",name:"Les sons des lettres",keywords:"sons lettres écouter alphabet phonologie",stars:1,description:"Écoute le nom d’une lettre et retrouve-la parmi les bulles.",run:()=>startRoseActivity("letter-sounds")},
   {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>startRoseActivity("letter-pairs")},
-  {child:"rose",name:"Syllabes en rythme",keywords:"syllabes écouter mots taper mains",stars:2,description:"Écouter les morceaux des mots.",run:()=>syllableGame()},
+  {child:"rose",name:"Syllabes en rythme",keywords:"syllabes écouter mots taper mains",stars:2,description:"Écouter les syllabes des mots.",run:()=>syllableGame()},
   {child:"leon",name:"Défis de maths",keywords:"maths problèmes nombres calcul",stars:2,description:"Résoudre des questions de maths variées.",run:()=>startActivity("leon")},
   {child:"leon",name:"Nombre mystère",keywords:"numération indices nombre caché",stars:2,description:"Trouver un nombre grâce aux indices.",run:()=>numberMystery()},
   {child:"leon",name:"Comparer les nombres",keywords:"plus grand petit comparer centaines dizaines",stars:2,description:"Comparer des nombres à deux ou trois chiffres.",run:()=>compareNumbers()},
@@ -167,7 +167,7 @@ function childHome(child) {
         unlockAudio();
         roseMenu();
       }), "child-tile child-tile-main"),
-      button("👏\nSyllabes en rythme\nÉcoute les mots et frappe dans tes mains", chooseExercise("Rose, écoute un mot puis frappe dans tes mains pour compter ses morceaux, les syllabes.", () => {
+      button("👏\nSyllabes en rythme\nÉcoute les mots et frappe dans tes mains", chooseExercise("Rose, écoute un mot puis frappe dans tes mains pour compter les syllabes.", () => {
         unlockAudio();
         syllableGame();
       }), "child-tile child-tile-alt")
@@ -207,8 +207,8 @@ function childHome(child) {
     el("span", { "aria-hidden": "true", text: rose ? "🌟" : "🏅" }),
     el("div", {}, [
       el("strong", { text: rose ? "Ton chemin magique" : "Ton parcours de champion" }),
-      el("p", { text: profile.stickers + (profile.stickers > 1 ? " petits trophées gagnés" : " petit trophée gagné") + " · " + profile.correct + " réussites · " + profile.sessions + (profile.sessions > 1 ? " parties terminées." : " partie terminée.") }),
-      el("div", { class: "progress-track", role: "progressbar", "aria-label": "Réponses réussies", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(successRate) },
+      el("p", { text: profile.stickers + (profile.stickers > 1 ? " petits trophées gagnés" : " petit trophée gagné") + " · " + profile.correct + " réussites · " + profile.sessions + (profile.sessions === 1 ? " partie terminée." : " parties terminées.") }),
+      el("div", { class: "progress-track", role: "progressbar", "aria-label": "Réponses réussies", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(successRate), "aria-valuetext": successRate + " % de réponses réussies" },
         el("div", { class: "progress-fill", style: "width:" + successRate + "%" })
       ),
       el("p", { class: "small", text: profile.attempts ? successRate + " % de réponses réussies sur " + profile.attempts + " essais. Chaque essai compte !" : "Ton aventure commence ici : chaque essai fera grandir ton parcours !" })
