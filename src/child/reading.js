@@ -283,7 +283,7 @@ export function readingMenu() {
   }));
 }
 
-function startReading(mode) {
+export function startReading(mode) {
   let round = 0;
   let score = 0;
   let hintCount = 0;
