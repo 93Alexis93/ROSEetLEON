@@ -78,14 +78,17 @@ test("La réussite lit le message affiché sans lancer une deuxième félicitati
 });
 
 
-test("Rose · les bonnes réponses utilisent les éléments de la carte active", () => {
+test("Rose · chaque réponse agit sur les éléments de la question qui l’a créée", () => {
  const rose = readFileSync(resolve(root, "src/child/rose-activities.js"), "utf8");
- assert.match(rose, /const feedback=activeCard\?\.querySelector\("\.feedback"\);const answerGrid=activeCard\?\.querySelector\("\.answer-grid"\);if\(!feedback\|\|!answerGrid\)/,
-  "Le traitement doit cibler la carte active du jeu, sans dépendre d’un sélecteur global.");
+ assert.match(rose, /button\([^\n]*\(\)=>answer\(choice,c,answers,f\)/,
+  "Chaque bouton transmet sa carte, sa grille et son retour à la fonction de réponse.");
+ assert.match(rose, /const answer=\(choice,cardEl,answerGrid,feedback\)=>\{const ok=choice===q\.answer;recordAnswer\("rose",ok\)/,
+  "La réponse doit être traitée directement, sans garde isConnected silencieuse.");
+ assert.doesNotMatch(rose, /if\(!activeCard\?\.isConnected\)return/);
  assert.match(rose, /answerGrid\.querySelectorAll\("button"\)/,
-  "Les choix de la question réussie doivent être désactivés sans variable hors portée.");
- assert.match(rose, /activeCard\.insertBefore\(next,controls\)/,
-  "Le bouton suivant doit être inséré dans la carte active pour rester visible sur iPhone.");
+  "Les choix de la question réussie doivent être désactivés dans la bonne grille.");
+ assert.match(rose, /cardEl\.insertBefore\(next,controls\)/,
+  "Le bouton suivant doit être inséré dans la carte qui a posé la question.");
 });
 
 test("Les félicitations vocales ordinaires sont limitées à une phrase courte", () => {
