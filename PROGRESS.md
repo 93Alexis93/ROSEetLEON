@@ -298,3 +298,10 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 
 ## Maintenance — 24 octobre 2026 (suite 6)
 - Le workflow de tests annule désormais les exécutions précédentes de la même branche lorsqu’un nouveau commit arrive, afin de limiter la file d’attente des validations devenues obsolètes. Aucun résultat de test n’est considéré comme acquis tant que GitHub ne l’a pas exécuté.
+
+
+## Étoffement des défis — 24 octobre 2026
+- Lecture de Léon : ajout de 10 phrases à comprendre et de 10 mini-textes originaux, avec questions et choix de réponse revus pour rester ancrés dans le texte.
+- Rose : banque du jeu des syllabes portée de 30 à 48 mots illustrés, avec des mots d’une, deux ou trois syllabes ; comptage étendu de 1 à 8 et consigne du menu mise à jour.
+- Tests renforcés pour vérifier une plus grande diversité des phrases et mini-textes et la plage complète du comptage. Cache PWA renouvelé à v60.
+- À vérifier après exécution CI : cohérence des questions, tests de génération et publication Pages. Les essais réels avec Rose et Léon restent nécessaires pour valider la difficulté et la prononciation.
