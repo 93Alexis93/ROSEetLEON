@@ -197,3 +197,5 @@
 - Lecture : 10 nouvelles phrases et 10 nouveaux mini-textes de compréhension.
 - Rose : 18 mots illustrés supplémentaires pour le jeu des syllabes et comptage jusqu’à huit.
 - Tests de diversité et de comptage étendus ; cache PWA renouvelé à v60.
+
+- Maths de Léon : extension du niveau avancé aux tables de 2 à 10 et des heures proposées jusqu’à 12 h ; test dédié et cache PWA v61.
