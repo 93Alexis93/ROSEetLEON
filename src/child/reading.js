@@ -383,11 +383,10 @@ export function startReading(mode) {
     recordAnswer("leon", correct);
     const feedback = document.querySelector(".feedback");
     if (correct) {
-      cheer(getState().settings.sounds);successPraise(child,getState().settings.voice);
-      if (!questionHadError) score++;
+      cheer(getState().settings.sounds);if (!questionHadError) score++;
       const feedbackText = ["Bravo, tu as pris le temps de réfléchir !", "Oui, tu as bien compris !", "Super lecture, tu as trouvé !", "Bien joué, tu progresses à chaque question !", "Exactement, c’est la bonne réponse !"][Math.floor(Math.random() * 5)];
       if (feedback) feedback.textContent = feedbackText;
-      speak(feedbackText, getState().settings.voice);
+      successPraise(child, getState().settings.voice, feedbackText);
       document.querySelectorAll(".answer-grid button").forEach(item => { item.disabled = true; });
       const next = button(round + 1 >= 5 ? "Terminer" : "Question suivante", () => {
         round++;
