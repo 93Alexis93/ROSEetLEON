@@ -100,6 +100,6 @@ test("Rose · les visuels de base ne dépendent pas d’images distantes",()=>{
   assert.match(rose, /const COLORS=/);
   assert.match(rose, /const SHAPES=/);
   assert.match(rose, /sequence:"🔴 🔵 🔴 🔵 ?"/);
-  assert.doesNotMatch(rose, /https?://|<img\b/i,
+  assert.equal(rose.includes("http://") || rose.includes("https://") || rose.includes("<img"), false,
     "Les visuels de ces activités doivent rester disponibles sans requête d’image distante.");
 });
