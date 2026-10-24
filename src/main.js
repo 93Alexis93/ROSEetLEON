@@ -8,7 +8,7 @@ import { parentGate, parentDashboard, crisis } from "./parent/parent.js";
 import { printComingSoon } from "./parent/printables.js";
 import { speak } from "./voice.js";
 import { unlockAudio } from "./audio.js";
-import { numberMystery, compareNumbers, syllableGame } from "./child/learning-lab.js";
+import { numberMystery, compareNumbers, syllableGame, sequenceGame } from "./child/learning-lab.js";
 import { guidedPause } from "./child/pause.js";
 import { calculationMenu } from "./child/calcul.js";
 import { sentenceBuilder } from "./child/sentence-builder.js";
@@ -96,11 +96,13 @@ const EXERCISES = [
   {child:"rose",name:"Suites magiques",keywords:"logique motifs répétitions images suite",stars:2,description:"Observer un motif et trouver l’image suivante.",run:()=>startRoseActivity("patterns")},
   {child:"rose",name:"Formes à retrouver",keywords:"formes cercle carré triangle géométrie",stars:2,description:"Observer et reconnaître les formes.",run:()=>startRoseActivity("shapes")},
   {child:"rose",name:"Lettres de Rose",keywords:"lettres alphabet prénom majuscule",stars:1,description:"Retrouver R, O, S et E.",run:()=>startRoseActivity("letters")},
-  {child:"rose",name:"Les sons des lettres",keywords:"sons lettres écouter alphabet phonologie",stars:1,description:"Écoute le nom d’une lettre et retrouve-la parmi les bulles.",run:()=>startRoseActivity("letter-sounds")},\n  {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>startRoseActivity("letter-pairs")},
+  {child:"rose",name:"Les sons des lettres",keywords:"sons lettres écouter alphabet phonologie",stars:1,description:"Écoute le nom d’une lettre et retrouve-la parmi les bulles.",run:()=>startRoseActivity("letter-sounds")},
+  {child:"rose",name:"Grandes et petites lettres",keywords:"alphabet minuscule majuscule associer",stars:2,description:"Associer les lettres majuscules et minuscules.",run:()=>startRoseActivity("letter-pairs")},
   {child:"rose",name:"Syllabes en rythme",keywords:"syllabes écouter mots taper mains",stars:2,description:"Écouter les morceaux des mots.",run:()=>syllableGame()},
   {child:"leon",name:"Défis de maths",keywords:"maths problèmes nombres calcul",stars:2,description:"Résoudre des questions de maths variées.",run:()=>startActivity("leon")},
   {child:"leon",name:"Nombre mystère",keywords:"numération indices nombre caché",stars:2,description:"Trouver un nombre grâce aux indices.",run:()=>numberMystery()},
   {child:"leon",name:"Comparer les nombres",keywords:"plus grand petit comparer centaines dizaines",stars:2,description:"Comparer des nombres à deux ou trois chiffres.",run:()=>compareNumbers()},
+  {child:"leon",name:"Suites logiques",keywords:"logique suite motif symbole nombres régularité",stars:2,description:"Repérer une règle et trouver le symbole ou le nombre suivant.",run:()=>sequenceGame()},
   {child:"leon",name:"Phrases à reconstruire",keywords:"lecture mots phrase syntaxe remettre ordre",stars:2,description:"Remets les mots dans l’ordre pour former une phrase.",run:()=>sentenceBuilder()},
   {child:"leon",name:"Calcul mental",keywords:"calcul additions soustractions compléments problèmes",stars:2,description:"Calculer et résoudre des petits problèmes.",run:()=>calculationMenu()},
   {child:"leon",name:"Mots-éclairs",keywords:"lecture mots reconnaître rapidement",stars:1,description:"Reconnaître des mots familiers.",run:()=>startReading("flash")},
@@ -185,6 +187,7 @@ function childHome(child) {
         unlockAudio();
         compareNumbers();
       }), "child-tile child-tile-alt"),
+      button("🔢\nSuites logiques\nTrouve le prochain symbole ou nombre", chooseExercise("Léon, observe les suites et trouve le prochain symbole ou nombre.", () => { unlockAudio(); sequenceGame(); }), "child-tile child-tile-alt"),
       button("🧩\nPhrases à reconstruire\nRemets les mots dans le bon ordre", chooseExercise("Léon, remets les mots dans le bon ordre pour former une phrase.", () => { unlockAudio(); sentenceBuilder(); }), "child-tile child-tile-alt"),
       button("🧮\nCalcul mental\nCalculs et problèmes à résoudre", chooseExercise("Léon, fais les calculs dans ta tête et résous les petits problèmes.", () => {
         unlockAudio();
