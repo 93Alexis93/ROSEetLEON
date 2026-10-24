@@ -3,7 +3,8 @@ Mis à jour le 24 octobre 2026.
 
 ## État actuel
 
-### Fonctionnalités présentes dans le dépôt\n- Accueil repensé comme un petit club d’explorateurs : grande accroche, univers Léon/Rose visuellement différenciés et message positif sans compétition.
+### Fonctionnalités présentes dans le dépôt
+- Accueil repensé comme un petit club d’explorateurs : grande accroche, univers Léon/Rose visuellement différenciés et message positif sans compétition.
 - Application web statique, mobile-first, publiée sur GitHub Pages ; modules JavaScript natifs, sans framework ni dépendance de build.
 - Navigation des profils Léon et Rose.
 - Léon : six défis de maths, quatre formats de lecture, « Nombre mystère » et « Le plus grand nombre ».
@@ -383,3 +384,10 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - Ajout de dix messages de réussite pour Léon (références football) et dix pour Rose (licornes, princesses et magie), alternés après les bonnes réponses.
 - Dans les menus d’activités, le premier appui lit la consigne et le second démarre le jeu.
 - Cache hors ligne incrémenté en v72.
+
+
+## Étape J1 — comptage progressif de Rose
+- [x] Le jeu de collections évolue dans une même courte séance : questions 1–2 jusqu’à 5 objets, questions 3–4 jusqu’à 8, dernière question jusqu’à 10.
+- [x] Les choix proposés restent dans la plage de nombres de la question ; le nombre de réponses reste limité à trois pour conserver une interaction simple sur iPhone.
+- [x] Tests de génération mis à jour pour les plafonds 5, 8 et 10.
+- [ ] Vérifier sur iPhone que l’affichage des collections jusqu’à dix objets reste lisible et confortable.
