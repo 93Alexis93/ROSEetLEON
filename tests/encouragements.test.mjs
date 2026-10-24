@@ -51,3 +51,20 @@ test("Encouragements · les messages sont distincts et restent bienveillants", (
  assert.match(audio, /if\(list\.length>1&&index===last\[key\]\)/,
   "Le même message ne doit pas se répéter immédiatement quand une alternative existe.");
 });
+
+test("Les encouragements affichés sont lus à voix haute", () => {
+ const rose = readFileSync(resolve(root, "src/child/rose-activities.js"), "utf8");
+ const reading = readFileSync(resolve(root, "src/child/reading.js"), "utf8");
+ const phrases = readFileSync(resolve(root, "src/child/sentence-builder.js"), "utf8");
+ const calcul = readFileSync(resolve(root, "src/child/calcul.js"), "utf8");
+ assert.match(rose, /speak\(f\.textContent,getState\(\)\.settings\.voice\)/,
+  "Les retours affichés dans les jeux de Rose doivent être prononcés");
+ assert.match(rose, /speak\(praise,getState\(\)\.settings\.voice\)/,
+  "La félicitation affichée à Rose doit être prononcée");
+ assert.match(reading, /speak\(feedbackText, getState\(\)\.settings\.voice\)/,
+  "Les encouragements de lecture doivent être prononcés");
+ assert.match(phrases, /speak\(feedback\.textContent, getState\(\)\.settings\.voice\)/,
+  "Les encouragements de phrases doivent être prononcés");
+ assert.match(calcul, /speak\(feedback\.textContent, getState\(\)\.settings\.voice\)/,
+  "Les encouragements de calcul doivent être prononcés");
+});
