@@ -44,7 +44,7 @@ export function createCountingQuestion(random = Math.random, maxCount = 8) {
   const theme = ROSE_COUNTING_THEMES[Math.floor(random() * ROSE_COUNTING_THEMES.length)];
   const alternatives = shuffle(Array.from({ length: limit }, (_, i) => i + 1).filter(n => n !== count), random).slice(0, 2);
   return {
-    text: "Compte le nombre d’éléments : combien de " + theme.plural + " ?",
+    text: "Combien de " + theme.plural + " ?",
     answer: count,
     count,
     symbol: theme.symbol,
