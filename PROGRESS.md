@@ -3,7 +3,7 @@ Mis à jour le 23 octobre 2026.
 
 ## État actuel
 
-### Fonctionnalités présentes dans le dépôt
+### Fonctionnalités présentes dans le dépôt\n- Accueil repensé comme un petit club d’explorateurs : grande accroche, univers Léon/Rose visuellement différenciés et message positif sans compétition.
 - Application web statique, mobile-first, publiée sur GitHub Pages ; modules JavaScript natifs, sans framework ni dépendance de build.
 - Navigation des profils Léon et Rose.
 - Léon : six défis de maths, quatre formats de lecture, « Nombre mystère » et « Le plus grand nombre ».
@@ -25,7 +25,7 @@ Mis à jour le 23 octobre 2026.
 - Les tests automatisés ne remplacent pas les essais dans Safari iPhone.
 
 ## Service worker et publication
-- Le service worker source utilise actuellement le cache `rose-leon-v59` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
+- Le service worker source utilise actuellement le cache `rose-leon-v62` (dernier renouvellement pour les exercices d’horloge ; les étapes de tests E22–E24 n’ont pas modifié les ressources de l’application).
 - La suppression à l’activation est limitée aux caches préfixés `rose-leon-` afin de préserver les autres applications éventuellement hébergées sur la même origine.
 - Le contenu public du service worker et la fin du déploiement Pages doivent être vérifiés après chaque changement de ressource précachée.
 - Pour toute nouvelle ressource hors ligne : l’ajouter à `ASSETS` et incrémenter `CACHE` dans le même changement, sauf stratégie de mise à jour explicitement validée et testée.
@@ -307,3 +307,11 @@ E31 — Cache PWA incrémenté en v50 après correction du module de lecture, af
 - À vérifier après exécution CI : cohérence des questions, tests de génération et publication Pages. Les essais réels avec Rose et Léon restent nécessaires pour valider la difficulté et la prononciation.
 
 - Maths de Léon : le niveau avancé des tables couvre désormais les tables de 2 à 10, et les exercices d’horloge peuvent aller jusqu’à 12 h. Test dédié adapté ; cache PWA renouvelé à v61.
+
+
+## Accueil ludique — 24 octobre 2026
+- [x] Nouvelle zone d’accueil avec accroche enfant, éléments festifs et invitation claire à choisir un univers.
+- [x] Boutons Léon et Rose différenciés par couleur, forme et intitulé, avec grandes cibles adaptées au tactile.
+- [x] Message pédagogique positif conservé : essayer, apprendre et recommencer, sans compétition.
+- [x] Styles ajoutés au CSS déjà chargé ; cache PWA renouvelé à v62 et test source ajouté.
+- [ ] Vérifier le rendu réel sur Safari iPhone, notamment le retour à la ligne des intitulés et la hauteur à l’écran.
