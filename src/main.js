@@ -8,7 +8,7 @@ import { parentGate, parentDashboard, crisis } from "./parent/parent.js";
 import { printComingSoon } from "./parent/printables.js";
 import { speak } from "./voice.js";
 import { unlockAudio } from "./audio.js";
-import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame, footballAdventure } from "./child/learning-lab.js";
+import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame, footballAdventure, roseMagicAdventure } from "./child/learning-lab.js";
 import { guidedPause } from "./child/pause.js";
 import { calculationMenu } from "./child/calcul.js";
 import { sentenceBuilder } from "./child/sentence-builder.js";
@@ -71,7 +71,8 @@ function guidedChoice(child) {
   const options = rose ? [
     ["🦄 Je veux compter", "Compter les collections", () => startActivity("rose")],
     ["🌈 Je veux découvrir", "Couleurs, formes et lettres", () => roseMenu()],
-    ["👏 Je veux écouter", "Les syllabes en rythme", () => syllableGame()]
+    ["👏 Je veux écouter", "Les syllabes en rythme", () => syllableGame()],
+    ["🦄 Je pars à l’aventure", "Une histoire magique avec des lettres", () => roseMagicAdventure()]
   ] : [
     ["⚽ Je veux réfléchir", "Défis de maths", () => startActivity("leon")],
     ["📚 Je veux lire", "Mots, phrases et histoires", () => readingMenu()],
