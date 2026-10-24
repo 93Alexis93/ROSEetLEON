@@ -76,9 +76,10 @@ function startRoseWritingActivity(){
  const resetWord=()=>{target=wordOrder[wordIndex];chosen=[];tokens=shuffleFamilyLetters(target);model.textContent=target.split("").join(" ");model.setAttribute("aria-label","Mot à reconstituer");status.textContent="Choisis la première lettre.";draw();};
  const draw=()=>{
   sequence.replaceChildren();
-  sequence.append(...Array.from({length:target.length},(_,i)=>el("div",{class:"prompt",text:chosen[i]||"·","aria-label":chosen[i]||"Case vide"})));
+  const targetLetters=[...target];
+  sequence.append(...Array.from({length:target.length},(_,i)=>{const letter=i<chosen.length?targetLetters[chosen[i]]:"·";return el("div",{class:"prompt",text:letter,"aria-label":letter==="·"?"Case vide":letter});}));
   choices.replaceChildren();
-  tokens=shuffle(tokens,Math.random);
+  const previousOrder=tokens.map(token=>token.id).join(",");let mixed=tokens;for(let attempt=0;attempt<8;attempt++){mixed=shuffleFamilyLetters(target);if(mixed.map(token=>token.id).join(",")!==previousOrder)break;}tokens=mixed;
   tokens.filter(token=>!chosen.includes(token.id)).forEach(token=>choices.append(button(token.letter,()=>{
    const expected=target[chosen.length];
    if(token.letter!==expected){
@@ -87,19 +88,15 @@ function startRoseWritingActivity(){
     speak(status.textContent,getState().settings.voice);
     tokens=shuffle(tokens,Math.random);draw();return;
    }
-   chosen.push(token.id);cheer(getState().settings.sounds);
-   const composed=chosen.map(id=>tokens.find(t=>t.id===id)?.letter);
-   // Rebuild the displayed sequence from the selected token IDs, independent of the shuffled choices.
-   const lettersById=new Map([...target].map((letter,id)=>[id,letter]));
-   sequence.replaceChildren();
-   sequence.append(...Array.from({length:target.length},(_,i)=>el("div",{class:"prompt",text:i<chosen.length?lettersById.get(chosen[i]):"·","aria-label":i<chosen.length?lettersById.get(chosen[i]):"Case vide"})));
+   chosen.push(token.id);cheer(getState().settings.sounds);draw();
    if(chosen.length===target.length){
     recordSession("rose");
+    choices.replaceChildren();
     status.textContent="🌟 Bravo ! Tu as reconstitué "+target+" !";
     successPraise("rose",getState().settings.voice,status.textContent);
     if(wordIndex<wordOrder.length-1){const next=button("Mot suivant ➜",()=>{wordIndex++;resetWord();},"button-primary");next.classList.add("rose-question-next");content.append(next);}
     else status.textContent+=" Tu as retrouvé tous les mots de la famille !";
-   }else{status.textContent="Bien joué ! Quelle lettre vient ensuite ?";successPraise("rose",getState().settings.voice,status.textContent);draw();}
+   }else{status.textContent="Bien joué ! Quelle lettre vient ensuite ?";successPraise("rose",getState().settings.voice,status.textContent);}
   },"button-soft")));
   content.replaceChildren(el("p",{class:"lead",text:"Regarde le modèle, puis touche les lettres pour reconstituer le mot."}),model,sequence,choices,status,
    button("↩ Réessayer (mélanger les lettres)",()=>{chosen=[];tokens=shuffleFamilyLetters(target);status.textContent="Les lettres ont changé de place. À toi de jouer !";draw();},"button-soft"),
