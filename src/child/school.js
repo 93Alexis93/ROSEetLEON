@@ -29,7 +29,9 @@ export function speechify(text) {
     .replace(/(\d) h\b/g, "$1 heures")
     .replace(/ cm²/g, " centimètres carrés")
     .replace(/[→]/g, " droite ").replace(/[←]/g, " gauche ").replace(/[↑]/g, " haut ").replace(/[↓]/g, " bas ")
-    .replace(/ ; /g, ", ");
+    .replace(/ ; /g, ", ")
+    .replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu, "") // les émojis ne sont pas lus
+    .replace(/\s+([:,])/g, "$1").replace(/\s{2,}/g, " ").trim();
 }
 
 /* ---------- Étoiles et progression ---------- */
@@ -175,7 +177,7 @@ export function practice(child, chapterId, skillIds, { quiz = false } = {}) {
     const stars = starsFor(firstTry, total);
     recordSchoolResult(child, resultId, stars);
     recordSession(child);
-    const message = sessionPraise(child, voiceOn());
+    const message = sessionPraise(child, false); // lu après l’affichage, pour ne pas être coupé
     const level = SCHOOL_LEVELS.find(l => l.chapters.includes(chapter));
     const index = level.chapters.indexOf(chapter);
     const body = card([
@@ -188,6 +190,7 @@ export function practice(child, chapterId, skillIds, { quiz = false } = {}) {
       index < level.chapters.length - 1 ? button("➜ Chapitre suivant : " + level.chapters[index + 1].title, () => chapterPage(child, level.chapters[index + 1].id), "button-soft") : null
     ].filter(Boolean));
     replaceApp(screen(quiz ? "Quiz terminé !" : "Entraînement terminé !", body, { eyebrow: chapter.title, home: () => go("home") }));
+    speak(message, voiceOn());
   };
 
   function render() {
@@ -268,7 +271,7 @@ export function practice(child, chapterId, skillIds, { quiz = false } = {}) {
       if (input) { input.disabled = true; validate.disabled = true; }
       const praise = mistakes === 0 ? pickOne(child === "rose" ? ["Oui, bravo ! ", "Youpi, tu as trouvé ! ", "Super ! "] : ["Exactement ! ", "Bien joué ! ", "Bravo pour ton raisonnement ! "]) : "Tu as persévéré, bravo ! ";
       feedback.textContent = praise + question.explanation;
-      successPraise(child, voiceOn(), feedback.textContent);
+      successPraise(child, false, feedback.textContent); // le message affiché est déjà lu par l’annonce du retour
       offerNext();
     }
     function revealAnswer() {

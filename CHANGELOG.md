@@ -1,3 +1,8 @@
+## Voix sur iPhone — 2026-10-28
+- Correctif : la voix pouvait rester muette après les premières phrases sur Safari iOS. Délai court après une annulation, relance d’un moteur en pause, longs textes découpés en phrases, énoncés gardés en mémoire jusqu’à leur fin.
+- École : plus de deux voix qui se coupent (félicitations et fin de partie lues une seule fois, après l’affichage) ; les émojis ne sont plus lus.
+- Tests de non-régression de la voix ; cache PWA v125.
+
 ## L’École de Rose & Léon — 2026-10-28
 - Nouveau parcours « niveau → chapitre → leçon courte → entraînements → quiz » de la maternelle au CM2 : 6 niveaux, 113 chapitres, 242 entraînements générés + 1 quiz par chapitre. Inspiré de l’organisation de commeunjeu.org ; contenus et exercices entièrement originaux.
 - Rose : « L’école enchantée » (maternelle puis CP), 3 grandes réponses, consignes lues, univers licornes/patinage/flocons.
