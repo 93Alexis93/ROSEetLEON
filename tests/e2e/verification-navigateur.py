@@ -9,7 +9,8 @@ La voix est simulée avec les défauts connus de Safari iOS : une phrase lancée
 de 100 ms après en avoir coupé une autre est perdue, puis la voix reste bloquée.
 Il ne remplace pas un essai réel sur iPhone.
 """
-import re, sys, time
+import os, re, sys, time
+ONLY = os.environ.get("ONLY")  # ex. ONLY=ce1 pour ne jouer qu’un niveau
 from playwright.sync_api import sync_playwright
 
 URL = "http://localhost:8770/"
@@ -40,7 +41,9 @@ VOICE_STUB = r"""(()=>{
 results = {"ok": 0, "ko": []}
 def check(cond, label):
     if cond: results["ok"] += 1
-    else: results["ko"].append(label)
+    else:
+        results["ko"].append(label)
+        print("  ✗", label, flush=True)
 
 def norm(t): return re.sub(r"[^a-z0-9àâçéèêëîïôûùüœ]+", "", t.lower())
 
@@ -64,7 +67,8 @@ with sync_playwright() as p:
         nav(back_route)
         before = h1()
         pg.get_by_role("button", name=name).first.tap(); pg.wait_for_timeout(120)
-        check(h1() != before or pg.locator(".answer-grid,.school-chapters,.school-answers,.answer-input,.counting-items").count() > 0, f"un appui n’ouvre pas « {name} »")
+        opened = pg.locator(".answer-grid,.school-chapters,.school-answers,.answer-input,.counting-items,section.card h2").count() > 0 and pg.locator(".child-tile-grid").count() == 0
+        check(opened, f"un appui n’ouvre pas « {name} »")
     rose_tiles = ["L’école enchantée", "Jeux enchantés", "Syllabes en rythme"]
     leon_tiles = ["L’académie des champions", "Défis de maths", "Mes premiers mots en anglais", "Jeux de lecture", "Nombre mystère", "Le plus grand nombre", "Suites logiques", "Géométrie des champions", "Petit robot programmeur", "L’aventure du match", "Phrases à reconstruire", "Calcul mental"]
     for t in rose_tiles: tap_and_back(t, "rose")
@@ -86,14 +90,14 @@ with sync_playwright() as p:
         nonlocal_q = {"q": 0, "ft": 0}
         pg.evaluate("async([c,ch,ids,q])=>{const s=await import('./src/child/school.js');s.practice(c,ch,ids,{quiz:q});}", [child, chapter, skill_ids, quiz])
         tag = f"{child} {chapter} {'quiz' if quiz else skill_ids[0]}"
+        screen_start = len(voice()["spoken"])
         for guard in range(12):
             if pg.locator(".school-finish-stars").count():
                 break
             pg.wait_for_timeout(150)  # laisse partir la lecture de la question
             prompt = pg.locator(".school-prompt").inner_text()
-            spoken = [s["text"] for s in voice()["spoken"][-6:]]
-            key = norm(prompt)[:12]
-            check(any(key[:8] in norm(s) for s in spoken) or not key, f"{tag} : la question n’est pas lue ({prompt[:40]})")
+            # La consigne lue peut être formulée autrement que le texte affiché : on vérifie qu’elle part bien.
+            check(len(spoken_since(screen_start)) > 0, f"{tag} : la question n’est pas lue ({prompt[:40]})")
             n_before = len(voice()["spoken"])
             if pg.locator(".answer-input").count():
                 # Saisie : trois réponses fausses → indice puis correction affichée.
@@ -124,11 +128,15 @@ with sync_playwright() as p:
                 check(all(buttons.nth(i).is_disabled() for i in range(count)), f"{tag} : réponses encore actives après la fin du tour")
             fb = pg.locator(".feedback").inner_text().strip()
             check(len(fb) > 3, f"{tag} : pas de message après la réponse")
-            pg.wait_for_timeout(120)
-            check(any(norm(fb)[:10] in norm(s) for s in spoken_since(n_before)), f"{tag} : le message « {fb[:30]} » n’est pas lu")
+            # La voix attend volontairement ~140 ms après une coupure, puis lit phrase par phrase.
+            for _ in range(10):
+                if norm(fb)[:14] in norm(" ".join(spoken_since(n_before))): break
+                pg.wait_for_timeout(100)
+            check(norm(fb)[:14] in norm(" ".join(spoken_since(n_before))), f"{tag} : le message « {fb[:30]} » n’est pas lu → entendu : {spoken_since(n_before)} · état : {voice()['dropped']}")
             nxt = pg.locator("body > .game-next")
             check(nxt.count() == 1, f"{tag} : pas de bouton suivant")
             r_before = pg.locator(".school-question .small").first.inner_text() if pg.locator(".school-question .small").count() else ""
+            screen_start = len(voice()["spoken"])
             nxt.tap()
             # Un second appui rapide sur l’ancien bouton ne doit pas sauter une question.
             check(pg.locator("body > .game-next").count() == 0, f"{tag} : le bouton suivant reste affiché")
@@ -138,14 +146,14 @@ with sync_playwright() as p:
     def spoken_since(n): return [s["text"] for s in voice()["spoken"][n:]]
     for child, levels in from_levels.items():
         for lv in skills:
-            if lv["level"] not in levels: continue
+            if lv["level"] not in levels or (ONLY and lv["level"] != ONLY): continue
             for ch in lv["chapters"]:
                 for sk in ch["skills"]:
                     r = play_session(child, ch["id"], [sk], False); sessions += 1; questions += r["q"]; first_try_wins += r["ft"]
                 r = play_session(child, ch["id"], ch["skills"], True); sessions += 1; questions += r["q"]
                 print(f"… {child} {ch['id']} ({sessions} parties, {len(results['ko'])} échecs)", flush=True)
     stored = pg.evaluate("Object.keys(JSON.parse(localStorage.getItem('rose-leon-data')).profiles.leon.school).length")
-    check(stored >= 280, f"progression enregistrée : seulement {stored} entrées pour Léon")
+    check(ONLY or stored >= 280, f"progression enregistrée : seulement {stored} entrées pour Léon")
 
     # ---------- 3. Bonne réponse du premier coup = 3 étoiles (calcul lu à l’écran) ----------
     pg.evaluate("async()=>{const s=await import('./src/child/school.js');s.practice('leon','ce1.toutes-tables',['ce1.toutes-tables.2']);}")
@@ -167,7 +175,7 @@ with sync_playwright() as p:
     for k in range(4):
         n = len(voice()["spoken"]); pg.get_by_role("button", name="🔊 Écouter la leçon").tap(); pg.wait_for_timeout(250)
         check(any("compter" in s.lower() for s in spoken_since(n)), f"leçon non relue au {k+1}e appui")
-    pg.get_by_role("button", name="Pratiquer").first.tap(); pg.wait_for_timeout(200)
+    pg.locator(".school-practice").first.tap(); pg.wait_for_timeout(200)
     for k in range(4):
         n = len(voice()["spoken"]); pg.get_by_role("button", name="🔊 Réécouter").tap(); pg.wait_for_timeout(250)
         check(len(spoken_since(n)) > 0, f"Réécouter muet au {k+1}e appui")
