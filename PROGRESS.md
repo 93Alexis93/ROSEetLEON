@@ -5,6 +5,7 @@ Mis à jour le 24 octobre 2026.
 
 ### Fonctionnalités présentes dans le dépôt
 - **28 octobre 2026 — École maternelle → CM2** : présente dans le code, tests automatiques et parcours navigateur (Chromium, format iPhone 13) réussis. **Reste à valider sur iPhone Safari** : voix, lisibilité des illustrations, saisie au clavier numérique, hors ligne.
+- **29 octobre 2026 — vérification navigateur** (`tests/e2e/verification-navigateur.py`, Chromium format iPhone 13, appuis tactiles, voix simulée avec les défauts de Safari) : toutes les tuiles et jeux s’ouvrent au premier appui ; 466 parties de l’École (Rose maternelle/CP, Léon CP → CM2, entraînements et quiz) sans échec ; une seule réponse juste par question ; erreurs ×3 → correction ; 5 bonnes réponses du premier coup → 3 étoiles ; leçon et « Réécouter » relus à chaque appui ; aucune phrase perdue ni voix bloquée. Exécuté en deux passes (la première a atteint la limite de 30 min après 404 parties sans échec, la seconde a couvert le CM2 et les contrôles finaux : 3 024 vérifications, 0 échec). Ne remplace pas l’essai avec la vraie voix de l’iPhone.
 
 - Accueil repensé comme un petit club d’explorateurs : grande accroche, univers Léon/Rose visuellement différenciés et message positif sans compétition.
 - Application web statique, mobile-first, publiée sur GitHub Pages ; modules JavaScript natifs, sans framework ni dépendance de build.
