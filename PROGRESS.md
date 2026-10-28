@@ -4,6 +4,8 @@ Mis à jour le 24 octobre 2026.
 ## État actuel
 
 ### Fonctionnalités présentes dans le dépôt
+- **28 octobre 2026 — École maternelle → CM2** : présente dans le code, tests automatiques et parcours navigateur (Chromium, format iPhone 13) réussis. **Reste à valider sur iPhone Safari** : voix, lisibilité des illustrations, saisie au clavier numérique, hors ligne.
+
 - Accueil repensé comme un petit club d’explorateurs : grande accroche, univers Léon/Rose visuellement différenciés et message positif sans compétition.
 - Application web statique, mobile-first, publiée sur GitHub Pages ; modules JavaScript natifs, sans framework ni dépendance de build.
 - Navigation des profils Léon et Rose.

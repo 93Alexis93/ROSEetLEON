@@ -4,6 +4,7 @@ import { go, unlockParent, getParentLockoutUntil, setParentLockoutUntil } from "
 import { MATH_DOMAINS } from "../child/math-engine.js";
 import { getLastBackupAt, markBackupCompleted, shouldRemindBackup } from "./backup.js";
 import { summarizeDashboard } from "./dashboard-stats.js";
+import { schoolSummary } from "../child/school.js";
 
 let failures = 0;
 let problem = null;
@@ -160,6 +161,17 @@ export function parentDashboard() {
     });
   }));
 
+  const schoolRows = ["leon", "rose"].flatMap(child => {
+    const rows = schoolSummary(child);
+    const name = child === "leon" ? "Léon" : "Rose";
+    if (!rows.length) return [el("p", { class: "small", text: name + " · pas encore d’exercice de l’École." })];
+    return rows.map(row => el("p", { class: "small", text: name + " · " + row.label + " · " + row.played + " exercice(s) joué(s) sur " + row.total + " · " + row.stars + " étoile(s) sur " + row.max }));
+  });
+  const schoolStats = section("L’École (leçons et exercices)", [
+    el("p", { class: "small", text: "Les étoiles reflètent les réponses trouvées du premier coup ; chaque enfant garde sa meilleure partie. Aucune comparaison entre eux." }),
+    ...schoolRows
+  ]);
+
   const wordInput = el("input", {
     type: "text",
     maxlength: "24",
@@ -292,6 +304,7 @@ export function parentDashboard() {
   content.append(
     stats,
     mathStats,
+    schoolStats,
     customWords,
     tools,
     backup,

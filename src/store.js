@@ -26,8 +26,27 @@ const profile = () => ({
   correct: 0,
   attempts: 0,
   stickers: 0,
-  mathProgress: {}
+  mathProgress: {},
+  school: {}
 });
+
+// Progression de l’École : une entrée par compétence ou quiz de chapitre.
+// Champ ajouté sans changer de schéma : une sauvegarde qui ne l’a pas obtient {}.
+const SCHOOL_ID = /^[a-z0-9]+(?:[.-][a-z0-9]+){1,4}$/;
+const MAX_SCHOOL_ENTRIES = 800;
+function sanitizeSchool(value) {
+  if (!isRecord(value)) return {};
+  const school = {};
+  for (const [id, entry] of Object.entries(value)) {
+    if (!SCHOOL_ID.test(id) || id.length > 80 || !isRecord(entry)) continue;
+    school[id] = {
+      stars: integerInRange(entry.stars, 0, 3, 0),
+      plays: integerInRange(entry.plays, 0, 1000000, 0)
+    };
+    if (Object.keys(school).length >= MAX_SCHOOL_ENTRIES) break;
+  }
+  return school;
+}
 
 const initial = () => ({
   schemaVersion: SCHEMA_VERSION,
@@ -90,7 +109,8 @@ function sanitizeProfile(value) {
     correct,
     attempts,
     stickers,
-    mathProgress: sanitizeMathProgress(source.mathProgress)
+    mathProgress: sanitizeMathProgress(source.mathProgress),
+    school: sanitizeSchool(source.school)
   };
 }
 
@@ -250,6 +270,18 @@ export function recordMathAnswer(domain, ok, options = {}) {
       helped: options.helped === true,
       firstTry: true
     });
+  });
+}
+
+/** Enregistre une partie de l’École : on garde le meilleur nombre d’étoiles obtenu. */
+export function recordSchoolResult(child, id, stars) {
+  assertChild(child);
+  if (typeof id !== "string" || !SCHOOL_ID.test(id) || id.length > 80) throw Error("Identifiant d’exercice invalide.");
+  if (!Number.isInteger(stars) || stars < 0 || stars > 3) throw Error("Le nombre d’étoiles doit être compris entre 0 et 3.");
+  update(data => {
+    const school = data.profiles[child].school || (data.profiles[child].school = {});
+    const previous = school[id] || { stars: 0, plays: 0 };
+    school[id] = { stars: Math.max(previous.stars, stars), plays: previous.plays + 1 };
   });
 }
 

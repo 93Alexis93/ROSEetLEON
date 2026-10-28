@@ -156,3 +156,14 @@ E31 — Toute modification d’un module précaché doit s’accompagner d’une
 - La décoration soutient la compréhension des univers (ballon pour Léon, magie pour Rose) sans ajouter de dépendance réseau ni d’image lourde.
 - Garder un message de progression bienveillant ; aucune comparaison, pression temporelle ou promesse de récompense n’est ajoutée.
 - Le CSS est ajouté à la feuille locale déjà chargée pour préserver le fonctionnement hors ligne.
+
+
+## École (maternelle → CM2) — 28 octobre 2026
+- Structure reprise de commeunjeu.org (niveaux, chapitres, leçon, compétences, quiz). Leurs CGU protègent leçons, exercices et illustrations : aucun contenu n’est copié. Les thèmes suivent les programmes officiels ; leçons, exemples et générateurs sont originaux.
+- Exercices générés localement (fonctions pures dans `school-engine.js`), sans réseau. Les tests recalculent indépendamment les calculs affichés, les suites, les trajets du robot, les illustrations (comptage, monnaie, périmètres, aires, diagrammes).
+- Nombres en lettres en orthographe rectifiée de 1990 (traits d’union partout), référence des programmes.
+- Progression stockée dans `profiles.<enfant>.school` ({stars, plays}) sans changement de version de schéma : champ additif, une ancienne sauvegarde obtient `{}`, valeurs invalides ignorées (testé).
+- Étoiles : 3 si tout est trouvé du premier coup sans indice, 2 à partir de 60 %, 1 sinon. Une réponse après indice ou deuxième essai compte comme persévérance, pas comme échec. Le meilleur résultat est conservé, jamais diminué.
+- Erreurs : 1er essai raté → encouragement ; 2e → indice ; 3e → explication et bonne réponse montrée, sans pénalité.
+- `chooseExercise` lance désormais le jeu au premier appui (cause du bug « trois jeux de Rose ne répondent pas »). Chaque jeu lit sa consigne en s’ouvrant.
+- Les jeux existants sont tous conservés ; l’École devient la tuile principale des deux univers.

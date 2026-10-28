@@ -12,6 +12,7 @@ import { numberMystery, compareNumbers, syllableGame, sequenceGame, geometryGame
 import { guidedPause } from "./child/pause.js";
 import { calculationMenu } from "./child/calcul.js";
 import { sentenceBuilder } from "./child/sentence-builder.js";
+import { schoolHome } from "./child/school.js";
 
 function home() {
   document.body.className = "";
@@ -69,11 +70,13 @@ function guidedChoice(child) {
     ? "Choisis ce qui te donne envie. Je peux te lire les choix et tu peux changer d’avis."
     : "Choisis selon ton envie du moment. Pas besoin de tout faire : un seul défi suffit !" }));
   const options = rose ? [
+    ["🏰 Je veux aller à l’école enchantée", "Petites leçons et jeux de maternelle", () => schoolHome("rose")],
     ["🦄 Je veux compter", "Compter les collections", () => startActivity("rose")],
     ["🌈 Je veux découvrir", "Couleurs, formes et lettres", () => roseMenu()],
     ["👏 Je veux écouter", "Les syllabes en rythme", () => syllableGame()],
     ["🦄 Je pars à l’aventure", "Une histoire magique avec des lettres", () => roseMagicAdventure()]
   ] : [
+    ["🏟️ Je veux une leçon", "L’académie des champions : chapitres du CP au CM2", () => schoolHome("leon")],
     ["⚽ Je veux réfléchir", "Défis de maths", () => startActivity("leon")],
     ["📚 Je veux lire", "Mots, phrases et histoires", () => readingMenu()],
     ["🇬🇧 Je veux découvrir l’anglais", "Écouter cinq mots anglais", () => englishGame()],
@@ -94,6 +97,8 @@ function guidedChoice(child) {
 }
 
 const EXERCISES = [
+  {child:"rose",name:"L’école enchantée",keywords:"école leçons maternelle nombres formes motifs temps espace longueurs masses",stars:1,description:"Douze chapitres de maternelle : une petite leçon, des jeux et un quiz.",run:()=>schoolHome("rose")},
+  {child:"leon",name:"L’académie des champions",keywords:"école leçons chapitres cp ce1 ce2 cm1 cm2 fractions heure monnaie géométrie problèmes tables quiz",stars:2,description:"Tous les chapitres du CP au CM2 : leçon courte, entraînements et quiz.",run:()=>schoolHome("leon")},
   {child:"rose",name:"Compter les objets",keywords:"compter nombres collections",stars:1,description:"Dénombrer de petites collections.",run:()=>startActivity("rose")},
   {child:"rose",name:"Couleurs magiques",keywords:"couleurs rouge bleu jaune vert",stars:1,description:"Reconnaître les couleurs.",run:()=>startRoseActivity("colors")},
   {child:"rose",name:"Suites magiques",keywords:"logique motifs répétitions images suite",stars:2,description:"Observer un motif et trouver l’image suivante.",run:()=>startRoseActivity("patterns")},
@@ -167,10 +172,14 @@ function childHome(child) {
   const tiles = el("div", { class: "child-tile-grid" });
   if (rose) {
     tiles.append(
+      button("🏰\nL’école enchantée\nPetites leçons, jeux et quiz de maternelle", () => {
+        unlockAudio();
+        schoolHome("rose");
+      }, "child-tile child-tile-main"),
       button("🦄\nJeux enchantés\nCompter, couleurs, formes et lettres", chooseExercise("Rose, dans les jeux enchantés, tu pourras compter, découvrir les couleurs, reconnaître les formes et jouer avec les lettres.", () => {
         unlockAudio();
         roseMenu();
-      }), "child-tile child-tile-main"),
+      }), "child-tile child-tile-alt"),
       button("👏\nSyllabes en rythme\nÉcoute les mots et frappe dans tes mains", chooseExercise("Rose, écoute un mot puis frappe dans tes mains pour compter les syllabes.", () => {
         unlockAudio();
         syllableGame();
@@ -178,10 +187,14 @@ function childHome(child) {
     );
   } else {
     tiles.append(
+      button("🏟️\nL’académie des champions\nLeçons, entraînements et quiz du CP au CM2", () => {
+        unlockAudio();
+        schoolHome("leon");
+      }, "child-tile child-tile-main"),
       button("⚽\nDéfis de maths\nNombres, calculs et petits problèmes", chooseExercise("Léon, résous des défis de maths, réfléchis aux nombres et trouve les bonnes réponses.", () => {
         unlockAudio();
         startActivity(child);
-      }), "child-tile child-tile-main"),
+      }), "child-tile child-tile-alt"),
       button("🇬🇧\nMes premiers mots en anglais\nÉcoute et découvre", chooseExercise("Léon, écoute un mot anglais et retrouve sa signification en français.", () => { unlockAudio(); englishGame(); }), "child-tile child-tile-alt"),
       button("📚\nJeux de lecture\nMots, phrases et petites histoires", chooseExercise("Léon, lis des mots, des phrases et de petites histoires, puis réponds aux questions.", () => {
         unlockAudio();
@@ -229,8 +242,8 @@ function childHome(child) {
     button("🌿 Petite pause", () => guidedPause(child), "button-warm"),
     button("🔊 Réécouter", () => speak(
       rose
-        ? "Choisis un jeu magique : compter, découvrir les couleurs, les formes, les lettres ou les syllabes."
-        : "Choisis une mission : les défis de maths, la lecture, le nombre mystère, le plus grand nombre ou le calcul mental.",
+        ? "Choisis un jeu magique : l’école enchantée, compter, découvrir les couleurs, les formes, les lettres ou les syllabes."
+        : "Choisis une mission : l’académie des champions, les défis de maths, la lecture, le nombre mystère, le plus grand nombre ou le calcul mental.",
       getState().settings.voice
     ), "button-soft")
   ]);

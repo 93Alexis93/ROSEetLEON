@@ -306,3 +306,32 @@ test("Sauvegarde · la limite de taille tient compte des octets UTF-8", () => {
   assert.ok(oversized.length < 2 * 1024 * 1024, "la longueur UTF-16 seule reste sous la limite");
   assert.throws(() => store.importData(oversized), /trop volumineux ou invalide/);
 });
+
+test("École · le meilleur nombre d’étoiles est conservé et sauvegardé", () => {
+  store.resetData();
+  store.recordSchoolResult("leon", "ce1.fractions.1", 2);
+  store.recordSchoolResult("leon", "ce1.fractions.1", 1);
+  store.recordSchoolResult("rose", "maternelle.nombres-5.quiz", 3);
+  const state = store.getState();
+  assert.deepEqual(state.profiles.leon.school["ce1.fractions.1"], { stars: 2, plays: 2 });
+  assert.equal(state.profiles.rose.school["maternelle.nombres-5.quiz"].stars, 3);
+  const backup = store.exportData();
+  store.resetData();
+  store.importData(backup);
+  assert.equal(store.getState().profiles.leon.school["ce1.fractions.1"].stars, 2);
+});
+
+test("École · une ancienne sauvegarde sans progression d’École reste importable", () => {
+  store.resetData();
+  store.importData(JSON.stringify({ schemaVersion: 3, profiles: { leon: { sessions: 2 }, rose: {} }, settings: {} }));
+  assert.deepEqual(store.getState().profiles.leon.school, {});
+});
+
+test("École · valeurs invalides refusées sans modifier les données", () => {
+  store.resetData();
+  assert.throws(() => store.recordSchoolResult("leon", "ce1.fractions.1", 4));
+  assert.throws(() => store.recordSchoolResult("papa", "ce1.fractions.1", 1));
+  assert.throws(() => store.recordSchoolResult("leon", "<script>", 1));
+  store.importData(JSON.stringify({ schemaVersion: 3, profiles: { leon: { school: { "ce1.x.1": { stars: 99, plays: -3 }, "mauvais id!": { stars: 1 } } } }, settings: {} }));
+  assert.deepEqual(store.getState().profiles.leon.school, { "ce1.x.1": { stars: 3, plays: 0 } });
+});

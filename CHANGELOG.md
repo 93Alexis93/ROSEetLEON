@@ -1,3 +1,12 @@
+## L’École de Rose & Léon — 2026-10-28
+- Nouveau parcours « niveau → chapitre → leçon courte → entraînements → quiz » de la maternelle au CM2 : 6 niveaux, 113 chapitres, 242 entraînements générés + 1 quiz par chapitre. Inspiré de l’organisation de commeunjeu.org ; contenus et exercices entièrement originaux.
+- Rose : « L’école enchantée » (maternelle puis CP), 3 grandes réponses, consignes lues, univers licornes/patinage/flocons.
+- Léon : « L’académie des champions » (CE1 par défaut, CP à CM2 accessibles), problèmes foot/rink hockey, saisie au clavier avec bouton Effacer et « Voir des propositions ».
+- Illustrations SVG locales : dé, doigts, boîte de dix, horloge, règle, monnaie, fractions (vraies barres de fraction), quadrillages, diagrammes, angles, figures.
+- Progression : étoiles par entraînement et par quiz (meilleur score conservé), incluses dans la sauvegarde JSON ; résumé dans l’espace parent.
+- Correctif : les jeux de Rose (suites, couleurs, formes…) s’ouvrent au premier appui ; auparavant le premier appui ne faisait que lire la consigne.
+- Nouveaux tests (moteur, stockage, navigation) ; cache PWA v124.
+
 ## Accueil ludique — 2026-10-24
 - Refonte de l’accueil en « club des petits explorateurs » avec une accroche joyeuse, des univers Léon/Rose bien différenciés et un message rassurant.
 - Boutons tactiles plus immersifs, styles adaptés aux petits écrans et respect de la réduction des animations.

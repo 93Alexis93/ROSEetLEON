@@ -51,15 +51,11 @@ export function replaceApp(node){
   scrollTo({top:0,behavior:"auto"});
 }
 
+// Un seul appui lance le jeu : auparavant, le premier appui lisait seulement la consigne,
+// ce qui donnait l’impression que les jeux de Rose ne répondaient pas. Chaque jeu lit
+// lui-même sa consigne en s’ouvrant ; la description reste disponible pour l’accessibilité.
 export function chooseExercise(instruction, action) {
-  let armed = false;
-  return () => {
-    if (!armed) {
-      armed = true;
-      speak(instruction, getState().settings.voice);
-      return;
-    }
-    armed = false;
-    action();
-  };
+  const launch = () => action();
+  launch.instruction = instruction;
+  return launch;
 }

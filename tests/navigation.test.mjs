@@ -32,3 +32,8 @@ test("Voix · chaque action et chaque changement d’écran arrêtent la parole 
  assert.match(ui,/try\{stopSpeaking\(\);\}catch\{\}\s*app\.replaceChildren\(node\)/);
  assert.match(voice,/export function stopSpeaking\(\)\{try\{if\(typeof window!=="undefined"&&"speechSynthesis"in window\)window\.speechSynthesis\.cancel\(\);\}catch\{return false;\}return true;\}/);
 });
+
+test("Jeux de Rose · un seul appui lance le jeu (correctif « les jeux ne répondent pas »)",()=>{
+ assert.match(ui,/export function chooseExercise\(instruction, action\) \{\s*const launch = \(\) => action\(\);/);
+ assert.doesNotMatch(ui,/armed/);
+});
